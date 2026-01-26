@@ -7,211 +7,59 @@ import {
   Text,
   StyleSheet,
   Animated,
-  Dimensions,
   TouchableOpacity,
   Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 
-const { width, height } = Dimensions.get('window');
-
-// Animal silhouettes for background animation
-const JUNGLE_ANIMALS = ['🦁', '🐯', '🦊', '🦉', '🐢', '🦥', '🐆', '🐻', '🐵'];
-
 interface Props {
   onNext: () => void;
 }
 
 const WelcomeScreen: React.FC<Props> = ({ onNext }) => {
-  // Animation values
-  const logoFade = useRef(new Animated.Value(0)).current;
-  const logoScale = useRef(new Animated.Value(0.5)).current;
-  const titleFade = useRef(new Animated.Value(0)).current;
-  const titleSlide = useRef(new Animated.Value(30)).current;
-  const subtitleFade = useRef(new Animated.Value(0)).current;
-  const buttonFade = useRef(new Animated.Value(0)).current;
-  const buttonSlide = useRef(new Animated.Value(50)).current;
-  const glowPulse = useRef(new Animated.Value(0.3)).current;
-
-  // Background animal animations
-  const animalPositions = useRef(
-    JUNGLE_ANIMALS.map(() => ({
-      x: new Animated.Value(Math.random() * width),
-      y: new Animated.Value(Math.random() * height),
-      opacity: new Animated.Value(0),
-      scale: new Animated.Value(0.5 + Math.random() * 0.5),
-    }))
-  ).current;
+  // Simple fade animation
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Staggered entrance animations
-    Animated.sequence([
-      // Logo appears first
-      Animated.parallel([
-        Animated.timing(logoFade, {
-          toValue: 1,
-          duration: 800,
-          useNativeDriver: true,
-        }),
-        Animated.spring(logoScale, {
-          toValue: 1,
-          friction: 8,
-          tension: 40,
-          useNativeDriver: true,
-        }),
-      ]),
-      // Title slides in
-      Animated.parallel([
-        Animated.timing(titleFade, {
-          toValue: 1,
-          duration: 600,
-          useNativeDriver: true,
-        }),
-        Animated.timing(titleSlide, {
-          toValue: 0,
-          duration: 600,
-          useNativeDriver: true,
-        }),
-      ]),
-      // Subtitle fades in
-      Animated.timing(subtitleFade, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      // Button slides up
-      Animated.parallel([
-        Animated.timing(buttonFade, {
-          toValue: 1,
-          duration: 500,
-          useNativeDriver: true,
-        }),
-        Animated.spring(buttonSlide, {
-          toValue: 0,
-          friction: 8,
-          tension: 40,
-          useNativeDriver: true,
-        }),
-      ]),
-    ]).start();
-
-    // Continuous glow pulse
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(glowPulse, {
-          toValue: 0.6,
-          duration: 2000,
-          useNativeDriver: true,
-        }),
-        Animated.timing(glowPulse, {
-          toValue: 0.3,
-          duration: 2000,
-          useNativeDriver: true,
-        }),
-      ])
-    ).start();
-
-    // Animate background animals
-    animalPositions.forEach((animal, index) => {
-      // Fade in with delay
-      Animated.timing(animal.opacity, {
-        toValue: 0.15,
-        duration: 1000,
-        delay: index * 200,
-        useNativeDriver: true,
-      }).start();
-
-      // Gentle floating animation
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(animal.y, {
-            toValue: (animal.y as any)._value - 20,
-            duration: 3000 + Math.random() * 2000,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animal.y, {
-            toValue: (animal.y as any)._value + 20,
-            duration: 3000 + Math.random() * 2000,
-            useNativeDriver: true,
-          }),
-        ])
-      ).start();
-    });
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 800,
+      useNativeDriver: true,
+    }).start();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Background floating animals */}
-      <View style={styles.backgroundAnimals}>
-        {JUNGLE_ANIMALS.map((emoji, index) => (
-          <Animated.Text
-            key={index}
-            style={[
-              styles.backgroundEmoji,
-              {
-                opacity: animalPositions[index].opacity,
-                transform: [
-                  { translateX: animalPositions[index].x },
-                  { translateY: animalPositions[index].y },
-                  { scale: animalPositions[index].scale },
-                ],
-              },
-            ]}
-          >
-            {emoji}
-          </Animated.Text>
-        ))}
-      </View>
-
-      {/* Main content */}
-      <View style={styles.content}>
+      <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
         {/* Logo Section */}
-        <Animated.View
-          style={[
-            styles.logoContainer,
-            {
-              opacity: logoFade,
-              transform: [{ scale: logoScale }],
-            },
-          ]}
-        >
-          <Animated.View
-            style={[
-              styles.logoGlow,
-              { opacity: glowPulse },
-            ]}
-          />
-          <View style={styles.logoInner}>
-            <Text style={styles.logoEmoji}>🦁</Text>
+        <View style={styles.lionGlowRing}>
+          <View style={styles.lionContainer}>
+            <Image
+              source={require('../../../assets/lion.png')}
+              style={styles.lionImage}
+              resizeMode="cover"
+            />
           </View>
-        </Animated.View>
+        </View>
 
         {/* Title Section */}
-        <Animated.View
-          style={[
-            styles.titleContainer,
-            {
-              opacity: titleFade,
-              transform: [{ translateY: titleSlide }],
-            },
-          ]}
-        >
+        <View style={styles.titleContainer}>
           <Text style={styles.welcomeText}>Welcome to</Text>
           <Text style={[styles.brandName, shadows.neonGreenSubtle]}>
             Wall Street Wildlife
           </Text>
           <Text style={styles.tagline}>Options University</Text>
-        </Animated.View>
+        </View>
 
         {/* Subtitle */}
-        <Animated.Text style={[styles.subtitle, { opacity: subtitleFade }]}>
+        <Text style={styles.subtitle}>
           Master options trading through the wisdom of the jungle.
           Learn at your own pace, track your progress, and evolve into a confident trader.
-        </Animated.Text>
+        </Text>
 
         {/* Features preview */}
-        <Animated.View style={[styles.featuresRow, { opacity: subtitleFade }]}>
+        <View style={styles.featuresRow}>
           <View style={styles.featureChip}>
             <Text style={styles.featureEmoji}>📚</Text>
             <Text style={styles.featureText}>11 Tiers</Text>
@@ -224,19 +72,11 @@ const WelcomeScreen: React.FC<Props> = ({ onNext }) => {
             <Text style={styles.featureEmoji}>📝</Text>
             <Text style={styles.featureText}>Practice</Text>
           </View>
-        </Animated.View>
-      </View>
+        </View>
+      </Animated.View>
 
       {/* Bottom CTA */}
-      <Animated.View
-        style={[
-          styles.bottomSection,
-          {
-            opacity: buttonFade,
-            transform: [{ translateY: buttonSlide }],
-          },
-        ]}
-      >
+      <View style={styles.bottomSection}>
         <TouchableOpacity
           style={styles.startButton}
           onPress={onNext}
@@ -249,7 +89,7 @@ const WelcomeScreen: React.FC<Props> = ({ onNext }) => {
         <Text style={styles.footerText}>
           Join thousands of traders learning the Wall Street way
         </Text>
-      </Animated.View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -259,47 +99,36 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background.primary,
   },
-  backgroundAnimals: {
-    ...StyleSheet.absoluteFillObject,
-    overflow: 'hidden',
-  },
-  backgroundEmoji: {
-    position: 'absolute',
-    fontSize: 40,
-  },
   content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: spacing.xl,
   },
-  logoContainer: {
-    width: 140,
-    height: 140,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: spacing.xl,
-  },
-  logoGlow: {
-    position: 'absolute',
-    width: 160,
-    height: 160,
-    borderRadius: 80,
-    backgroundColor: colors.neon.green,
-  },
-  logoInner: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: colors.background.secondary,
+  lionGlowRing: {
+    width: 146,
+    height: 146,
+    borderRadius: 73,
     borderWidth: 3,
     borderColor: colors.neon.green,
     alignItems: 'center',
     justifyContent: 'center',
-    ...shadows.neonGreen,
+    marginBottom: spacing.xl,
+    shadowColor: colors.neon.green,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.6,
+    shadowRadius: 20,
+    elevation: 15,
   },
-  logoEmoji: {
-    fontSize: 60,
+  lionContainer: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    overflow: 'hidden',
+  },
+  lionImage: {
+    width: '100%',
+    height: '100%',
   },
   titleContainer: {
     alignItems: 'center',
@@ -335,7 +164,7 @@ const styles = StyleSheet.create({
   },
   featuresRow: {
     flexDirection: 'row',
-    gap: spacing.sm,
+    justifyContent: 'center',
   },
   featureChip: {
     flexDirection: 'row',
@@ -344,10 +173,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     borderRadius: borderRadius.full,
-    gap: spacing.xs,
+    marginHorizontal: spacing.xs,
   },
   featureEmoji: {
     fontSize: 16,
+    marginRight: spacing.xs,
   },
   featureText: {
     ...typography.styles.caption,
