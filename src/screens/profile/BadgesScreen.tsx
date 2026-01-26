@@ -25,6 +25,7 @@ import {
   RARITY_COLORS,
   getVisibleBadges,
 } from '../../data/jungleBadges';
+import { EVENT_HORIZONS_BADGES } from '../../data/eventHorizonsBadges';
 
 const { width } = Dimensions.get('window');
 const BADGE_SIZE = (width - spacing.md * 2 - spacing.sm * 2) / 3;
@@ -32,22 +33,47 @@ const BADGE_SIZE = (width - spacing.md * 2 - spacing.sm * 2) / 3;
 type NavigationProp = NativeStackNavigationProp<ProfileStackParamList>;
 
 // Mock earned badges
-const earnedBadgeIds = ['first-steps', 'on-fire', 'risk-profiled', 'sharp-shooter', 'quiz-master'];
+const earnedBadgeIds = ['first-steps', 'on-fire', 'risk-profiled', 'sharp-shooter', 'quiz-master', 'two-jungles', 'gap-hunter'];
 
+type ModuleFilter = 'all' | 'jungle' | 'event-horizons';
 type CategoryFilter = 'all' | BadgeCategory;
+
+// Combine all badges with source tag
+const getAllBadgesWithSource = (): (JungleBadge & { source: 'jungle' | 'event-horizons' })[] => {
+  const jungleBadges = getVisibleBadges().map(b => ({ ...b, source: 'jungle' as const }));
+  const ehBadges = EVENT_HORIZONS_BADGES.map(b => ({ ...b, source: 'event-horizons' as const }));
+  return [...jungleBadges, ...ehBadges];
+};
 
 const BadgesScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
+  const [selectedModule, setSelectedModule] = useState<ModuleFilter>('all');
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('all');
   const [selectedBadge, setSelectedBadge] = useState<JungleBadge | null>(null);
 
-  const visibleBadges = getVisibleBadges();
+  const allBadges = getAllBadgesWithSource();
+
+  // Filter by module first
+  const moduleFilteredBadges = selectedModule === 'all'
+    ? allBadges
+    : allBadges.filter(b => b.source === selectedModule);
+
+  // Then filter by category
   const filteredBadges = selectedCategory === 'all'
-    ? visibleBadges
-    : visibleBadges.filter(b => b.category === selectedCategory);
+    ? moduleFilteredBadges
+    : moduleFilteredBadges.filter(b => b.category === selectedCategory);
 
   const earnedCount = earnedBadgeIds.length;
-  const totalCount = visibleBadges.length;
+  const totalCount = allBadges.length;
+  const ehEarnedCount = earnedBadgeIds.filter(id =>
+    EVENT_HORIZONS_BADGES.some(b => b.id === id)
+  ).length;
+
+  const modules: { id: ModuleFilter; label: string; icon: string }[] = [
+    { id: 'all', label: 'All', icon: '🏆' },
+    { id: 'jungle', label: 'Academy', icon: '🌴' },
+    { id: 'event-horizons', label: 'Event Horizons', icon: '🦎' },
+  ];
 
   const categories: { id: CategoryFilter; label: string }[] = [
     { id: 'all', label: 'All' },
@@ -104,6 +130,30 @@ const BadgesScreen: React.FC = () => {
             />
           </View>
         </GlassCard>
+
+        {/* Module Filter (Jungle vs Event Horizons) */}
+        <View style={styles.moduleFilter}>
+          {modules.map((mod) => (
+            <TouchableOpacity
+              key={mod.id}
+              style={[
+                styles.moduleChip,
+                selectedModule === mod.id && styles.moduleChipActive,
+                selectedModule === mod.id && mod.id === 'event-horizons' && styles.moduleChipEH,
+              ]}
+              onPress={() => setSelectedModule(mod.id)}
+            >
+              <Text style={styles.moduleIcon}>{mod.icon}</Text>
+              <Text style={[
+                styles.moduleText,
+                selectedModule === mod.id && styles.moduleTextActive,
+                selectedModule === mod.id && mod.id === 'event-horizons' && styles.moduleTextEH,
+              ]}>
+                {mod.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
         {/* Category Filter */}
         <ScrollView
@@ -334,6 +384,46 @@ const styles = StyleSheet.create({
   progressFill: {
     height: '100%',
     borderRadius: borderRadius.full,
+  },
+  moduleFilter: {
+    flexDirection: 'row',
+    paddingHorizontal: spacing.md,
+    marginBottom: spacing.md,
+    gap: spacing.sm,
+  },
+  moduleChip: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.lg,
+    backgroundColor: colors.overlay.light,
+    borderWidth: 1,
+    borderColor: colors.glass.border,
+  },
+  moduleChipActive: {
+    backgroundColor: 'rgba(57, 255, 20, 0.15)',
+    borderColor: colors.neon.green,
+  },
+  moduleChipEH: {
+    backgroundColor: 'rgba(139, 92, 246, 0.15)',
+    borderColor: '#8b5cf6',
+  },
+  moduleIcon: {
+    fontSize: 16,
+  },
+  moduleText: {
+    fontFamily: typography.fonts.medium,
+    fontSize: typography.sizes.sm,
+    color: colors.text.muted,
+  },
+  moduleTextActive: {
+    color: colors.neon.green,
+  },
+  moduleTextEH: {
+    color: '#8b5cf6',
   },
   categoryScroll: {
     marginBottom: spacing.md,

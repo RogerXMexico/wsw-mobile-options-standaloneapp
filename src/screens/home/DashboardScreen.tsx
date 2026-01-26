@@ -1,5 +1,5 @@
 // Dashboard Screen for Wall Street Wildlife Mobile
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,30 +7,58 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { TIER_INFO, getLevelFromXP, MASCOTS } from '../../data/constants';
 import { useAuth } from '../../contexts';
 import { GlassCard, GlowButton, GradientText } from '../../components/ui';
+
+// Spirit animal images
+const SPIRIT_ANIMAL_IMAGES: Record<string, any> = {
+  turtle: require('../../../assets/animals/Turtle WSW.png'),
+  sloth: require('../../../assets/animals/Sloth WSW.png'),
+  owl: require('../../../assets/animals/Owl WSW.png'),
+  fox: require('../../../assets/animals/Fox WSW.png'),
+  cheetah: require('../../../assets/animals/Cheetah WSW.png'),
+};
 
 const { width } = Dimensions.get('window');
 
 const DashboardScreen: React.FC = () => {
   const navigation = useNavigation();
   const { user } = useAuth();
+  const [spiritAnimal, setSpiritAnimal] = useState<string | null>(null);
+
+  // Load spirit animal from AsyncStorage
+  useEffect(() => {
+    const loadSpiritAnimal = async () => {
+      try {
+        const animal = await AsyncStorage.getItem('userSpiritAnimal');
+        if (animal) {
+          setSpiritAnimal(animal);
+        }
+      } catch (error) {
+        console.error('Error loading spirit animal:', error);
+      }
+    };
+    loadSpiritAnimal();
+  }, []);
 
   // Mock data for demonstration
   const progress = user?.progress || {
-    xp: 450,
-    streak: 5,
-    completedStrategies: ['course-goals', 'what-are-options'],
+    xp: 0,
+    streak: 0,
+    completedStrategies: [],
     currentTier: 0,
   };
 
   const levelInfo = getLevelFromXP(progress.xp);
   const mascot = MASCOTS.find(m => m.id === (user?.avatarAnimal || 'monkey'));
+  const animalImage = spiritAnimal ? SPIRIT_ANIMAL_IMAGES[spiritAnimal] : null;
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -48,12 +76,20 @@ const DashboardScreen: React.FC = () => {
             </GradientText>
           </View>
           <TouchableOpacity style={styles.avatarContainer}>
-            <Text style={styles.avatarEmoji}>
-              {mascot?.id === 'monkey' ? '' :
-               mascot?.id === 'owl' ? '' :
-               mascot?.id === 'bull' ? '' :
-               mascot?.id === 'bear' ? '' : ''}
-            </Text>
+            {animalImage ? (
+              <Image
+                source={animalImage}
+                style={styles.avatarImage}
+                resizeMode="cover"
+              />
+            ) : (
+              <Text style={styles.avatarEmoji}>
+                {mascot?.id === 'monkey' ? '🐵' :
+                 mascot?.id === 'owl' ? '🦉' :
+                 mascot?.id === 'bull' ? '🐂' :
+                 mascot?.id === 'bear' ? '🐻' : '🐵'}
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
 
@@ -229,15 +265,20 @@ const styles = StyleSheet.create({
     ...typography.styles.h3,
   },
   avatarContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: borderRadius.full,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     backgroundColor: colors.glass.background,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
     borderColor: colors.neon.yellow,
+    overflow: 'hidden',
     ...shadows.neonGreenSubtle,
+  },
+  avatarImage: {
+    width: '100%',
+    height: '100%',
   },
   avatarEmoji: {
     fontSize: 24,

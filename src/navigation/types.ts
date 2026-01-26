@@ -50,6 +50,7 @@ export type LearnStackParamList = {
   EventHorizonsHub: undefined;
   EventHorizonsLessons: undefined;
   LessonDetail: { lessonId: string };
+  EventHorizonsQuiz: { lessonId: string };
   PredictionScanner: undefined;
   GapAnalyzer: undefined;
   EventReplay: { eventId?: string };
@@ -65,6 +66,7 @@ export type EventHorizonsStackParamList = {
   EventHorizonsHub: undefined;
   EventHorizonsLessons: undefined;
   LessonDetail: { lessonId: string };
+  EventHorizonsQuiz: { lessonId: string };
   PredictionScanner: undefined;
   GapAnalyzer: undefined;
   EventReplay: { eventId?: string };

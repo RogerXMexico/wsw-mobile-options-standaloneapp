@@ -18,41 +18,84 @@ export interface OptionLeg {
   action: 'buy' | 'sell';
   strikeOffset?: number; // relative to stock price 100. e.g. 10 = 110 strike
   quantity: number;
+  expirationOffset?: number; // days difference for calendar/diagonal spreads
+}
+
+// Trade scenario path for Discovery Mode walkthrough
+export interface TradeDay {
+  day: number;
+  stockPrice: number;
+  optionValue: number;
+  pnlPercent: number;
+  pnlDollar: number;
+  narrative: string;
+}
+
+export interface TradePath {
+  id: string;
+  name: string;           // "The Rocket", "The Slow Bleed"
+  description: string;    // What happens in this scenario
+  days: TradeDay[];
+  outcome: 'win' | 'loss' | 'breakeven';
+  keyLesson: string;
+}
+
+// Extended strategy with educational content
+export interface StrategyEducation {
+  whatItDoes: string;           // Core concept explanation
+  realWorldExample?: {
+    ticker: string;
+    stockPrice: number;
+    strikePrice: number;
+    premium: number;
+    expiration: string;
+  };
+  tradePaths?: TradePath[];     // 3-4 scenarios for trade walkthrough
+  keyLessons: string[];         // What you learn
+  greekInsights?: {
+    delta: string;
+    theta: string;
+    vega: string;
+    gamma: string;
+  };
 }
 
 export interface Strategy {
   id: string;
   name: string;
   tier: number;
-  category: 'basic' | 'income' | 'directional' | 'volatility' | 'hedging';
+  tierName?: string;
+  category?: 'basic' | 'income' | 'directional' | 'volatility' | 'hedging' | 'educational' | 'tools';
   outlook: string;
-  riskLevel: 'defined' | 'reduced' | 'undefined';
-  maxProfit: string;
-  maxLoss: string;
-  breakeven: string;
+  objective?: string;
+  riskLevel?: 'defined' | 'reduced' | 'undefined' | 'significant' | 'unlimited';
+  risk?: string;
+  maxProfit?: string;
+  maxLoss?: string;
+  breakeven?: string;
   description: string;
-  whenToUse: string;
-  advantages: string[];
-  disadvantages: string[];
-  greeks: {
+  whenToUse?: string;
+  advantages?: string[];
+  disadvantages?: string[];
+  greeks?: {
     delta: string;
     gamma: string;
     theta: string;
     vega: string;
   };
   isPremium: boolean;
-  // Optional legacy fields
-  tierName?: string;
-  objective?: string;
-  risk?: string;
+  // Strategy legs for payoff charts
   legs?: OptionLeg[];
-  analysis?: string;
+  // Rich educational content
+  education?: StrategyEducation;
   analogy?: string;
   nuance?: string;
   example?: string;
   bestUsedWhen?: string;
+  // Display controls
   hideSimulator?: boolean;
   hideAnalyst?: boolean;
+  hidePayoffChart?: boolean;
   estimatedReadTime?: number;
 }
 

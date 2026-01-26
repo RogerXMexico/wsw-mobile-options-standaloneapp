@@ -66,6 +66,7 @@ import {
   EarningsCalendarScreen,
   OptionsChainViewerScreen,
 } from '../screens/eventHorizons';
+import EventHorizonsQuizScreen from '../screens/eventHorizons/EventHorizonsQuizScreen';
 
 // Create stack navigators for each tab
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
@@ -106,6 +107,7 @@ const LearnStackNavigator: React.FC = () => (
     <LearnStack.Screen name="EventHorizonsHub" component={EventHorizonsHubScreen} />
     <LearnStack.Screen name="EventHorizonsLessons" component={EventHorizonsLessonsScreen} />
     <LearnStack.Screen name="LessonDetail" component={LessonDetailScreen} />
+    <LearnStack.Screen name="EventHorizonsQuiz" component={EventHorizonsQuizScreen} />
     <LearnStack.Screen name="PredictionScanner" component={PredictionScannerScreen} />
     <LearnStack.Screen name="GapAnalyzer" component={GapAnalyzerScreen} />
     <LearnStack.Screen name="EventReplay" component={EventReplayScreen} />

@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { LearnStackScreenProps } from '../../navigation/types';
 import { colors, typography, spacing, borderRadius, shadows, getOutlookColor } from '../../theme';
 import { TIER_INFO } from '../../data/constants';
-import { strategies } from '../../data/strategies';
+import { strategies, strategyCounts } from '../../data/strategies';
 import { useAuth } from '../../contexts';
 import { GlassCard, GlowButton, GradientText, PremiumModal } from '../../components/ui';
 
@@ -55,7 +55,7 @@ const StrategiesScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <GradientText style={styles.headerTitle}>Learn</GradientText>
-        <Text style={styles.headerSubtitle}>Master 44+ options strategies</Text>
+        <Text style={styles.headerSubtitle}>Master {strategyCounts.total}+ options strategies</Text>
       </View>
 
       {/* Search */}
@@ -317,7 +317,7 @@ const StrategiesScreen: React.FC = () => {
             <Text style={styles.upgradeBannerEmoji}></Text>
             <Text style={styles.upgradeBannerTitle}>Unlock All Strategies</Text>
             <Text style={styles.upgradeBannerText}>
-              Get access to all 44+ strategies, quizzes, and tools
+              Get access to all {strategyCounts.total}+ strategies, quizzes, and tools
             </Text>
             <GlowButton
               title="Go Premium"

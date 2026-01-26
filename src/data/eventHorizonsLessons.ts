@@ -16,6 +16,7 @@ export interface EventHorizonsLesson {
 }
 
 export const EVENT_HORIZONS_LESSONS: EventHorizonsLesson[] = [
+  // ============ LESSON 1 ============
   {
     id: 'eh-lesson-1',
     number: 1,
@@ -34,167 +35,138 @@ export const EVENT_HORIZONS_LESSONS: EventHorizonsLesson[] = [
     hasSimulation: false,
     hasTool: false,
   },
+  // ============ LESSON 2 ============
   {
     id: 'eh-lesson-2',
     number: 2,
-    title: 'Reading the Gap',
-    subtitle: 'Understanding probability vs implied volatility',
-    mentor: 'chameleon',
+    title: 'The Earnings Arena',
+    subtitle: 'Mastering earnings events with dual-market analysis',
+    mentor: 'cheetah',
     estimatedMinutes: 20,
     objectives: [
-      'Calculate the gap between prediction probability and IV',
-      'Identify long-vol and short-vol opportunity zones',
-      'Understand when markets are mispricing uncertainty',
-      'Learn to use the Gap Analyzer tool effectively',
+      'Understand how earnings events work on Polymarket',
+      'Learn to read beat/miss probability signals',
+      'Compare prediction confidence to options IV',
+      'Execute your first earnings gap analysis',
     ],
-    caseStudyIds: ['tsla-earnings-2024', 'meta-q3-2024'],
+    caseStudyIds: ['nvda-q4-2024', 'tsla-q3-2024', 'meta-q2-2024'],
     hasQuiz: true,
-    hasSimulation: false,
-    hasTool: true,
+    hasSimulation: true,
+    hasTool: false,
   },
+  // ============ LESSON 3 ============
   {
     id: 'eh-lesson-3',
     number: 3,
-    title: 'Event Types & Their Signatures',
-    subtitle: 'Earnings, FDA, Fed, and corporate events',
-    mentor: 'owl',
-    estimatedMinutes: 25,
+    title: 'Binary Catalysts',
+    subtitle: 'FDA and regulatory binary outcome strategies',
+    mentor: 'chameleon',
+    estimatedMinutes: 18,
     objectives: [
-      'Categorize different types of market-moving events',
-      'Understand typical IV patterns for each event type',
-      'Learn how prediction markets price different event types',
-      'Recognize the unique signature of each event category',
+      'Understand binary event characteristics',
+      'Learn FDA PDUFA date dynamics',
+      'Recognize extreme IV environments',
+      'Apply defined-risk strategies to binary outcomes',
     ],
-    caseStudyIds: ['mrna-fda-2024', 'fed-rate-sept-2024'],
+    caseStudyIds: ['biotech-fda-approval-2024', 'biotech-fda-rejection-2024', 'advisory-committee-shift'],
     hasQuiz: true,
-    hasSimulation: false,
+    hasSimulation: true,
     hasTool: false,
   },
+  // ============ LESSON 4 ============
   {
     id: 'eh-lesson-4',
     number: 4,
-    title: 'The Chameleon Strategy',
-    subtitle: 'Adapting your approach based on market conditions',
-    mentor: 'chameleon',
-    estimatedMinutes: 20,
+    title: 'Macro Currents',
+    subtitle: 'Fed decisions and economic events',
+    mentor: 'owl',
+    estimatedMinutes: 18,
     objectives: [
-      'Learn when to buy volatility (straddles, strangles)',
-      'Learn when to sell volatility (iron condors, butterflies)',
-      'Understand how to size positions based on edge',
-      'Develop a framework for trade selection',
+      'Understand macro event characteristics',
+      'Learn Fed decision prediction dynamics',
+      'Apply index options for macro plays',
+      'Recognize "good news is bad news" scenarios',
     ],
-    caseStudyIds: ['googl-earnings-2024', 'amzn-q4-2024'],
+    caseStudyIds: ['fed-rate-hold-sept-2024', 'cpi-surprise-oct-2024', 'jobs-report-miss-2024'],
     hasQuiz: true,
-    hasSimulation: true,
+    hasSimulation: false,
     hasTool: false,
   },
+  // ============ LESSON 5 ============
   {
     id: 'eh-lesson-5',
     number: 5,
-    title: 'IV Crush Mechanics',
-    subtitle: 'What happens to options after events resolve',
-    mentor: 'cheetah',
-    estimatedMinutes: 18,
-    objectives: [
-      'Understand why IV collapses after events',
-      'Calculate expected IV crush magnitude',
-      'Learn to profit from (or avoid) IV crush',
-      'Compare pre-event vs post-event option values',
-    ],
-    caseStudyIds: ['nflx-earnings-2024', 'coin-earnings-2024'],
-    hasQuiz: true,
-    hasSimulation: false,
-    hasTool: true,
-  },
-  {
-    id: 'eh-lesson-6',
-    number: 6,
-    title: 'Paper Trading Predictions',
-    subtitle: 'Practice with real market scenarios',
+    title: 'Corporate Tectonic Shifts',
+    subtitle: 'M&A, leadership changes, and product launches',
     mentor: 'chameleon',
-    estimatedMinutes: 30,
+    estimatedMinutes: 15,
     objectives: [
-      'Execute paper trades on historical events',
-      'Track your prediction accuracy over time',
-      'Build confidence before trading real money',
-      'Learn from both wins and losses',
+      'Understand corporate event characteristics',
+      'Learn M&A completion probability dynamics',
+      'Recognize events without prediction markets',
+      'Apply strategies to surprise announcements',
     ],
-    caseStudyIds: ['spy-fomc-2024', 'qqq-cpi-2024'],
-    hasQuiz: false,
-    hasSimulation: true,
-    hasTool: true,
-  },
-  {
-    id: 'eh-lesson-7',
-    number: 7,
-    title: 'Advanced Gap Analysis',
-    subtitle: 'Multi-factor edge identification',
-    mentor: 'owl',
-    estimatedMinutes: 25,
-    objectives: [
-      'Combine multiple signals for stronger conviction',
-      'Understand historical gap resolution patterns',
-      'Learn to weight different factors appropriately',
-      'Build a systematic approach to opportunity scanning',
-    ],
-    caseStudyIds: ['msft-build-2024', 'aapl-wwdc-2024'],
-    hasQuiz: true,
-    hasSimulation: false,
-    hasTool: true,
-  },
-  {
-    id: 'eh-lesson-8',
-    number: 8,
-    title: 'Risk Management for Events',
-    subtitle: 'Position sizing and portfolio considerations',
-    mentor: 'owl',
-    estimatedMinutes: 22,
-    objectives: [
-      'Size event trades appropriately for your portfolio',
-      'Understand maximum loss scenarios',
-      'Learn when NOT to trade an event',
-      'Build a diversified event trading portfolio',
-    ],
-    caseStudyIds: ['vix-spike-2024', 'market-crash-2024'],
+    caseStudyIds: ['mega-tech-acquisition-2024', 'ceo-transition-2024', 'product-launch-2024'],
     hasQuiz: true,
     hasSimulation: false,
     hasTool: false,
   },
+  // ============ LESSON 6 ============
   {
-    id: 'eh-lesson-9',
-    number: 9,
-    title: 'AI-Assisted Analysis',
-    subtitle: 'Using the Signal Synthesizer effectively',
-    mentor: 'chameleon',
+    id: 'eh-lesson-6',
+    number: 6,
+    title: "The Gap Hunter's Toolkit",
+    subtitle: 'Finding IV-probability discrepancies',
+    mentor: 'owl',
     estimatedMinutes: 20,
     objectives: [
-      'Understand how the AI analyzes market gaps',
-      'Interpret AI-generated trading signals',
-      'Combine AI insights with your own analysis',
-      'Know the limitations of AI recommendations',
+      'Master the Gap Score calculation',
+      'Use the Gap Analyzer tool effectively',
+      'Identify high-probability opportunities',
+      'Avoid false positives and low-edge setups',
     ],
-    caseStudyIds: ['ai-signal-example-1', 'ai-signal-example-2'],
+    caseStudyIds: ['nvda-q4-2024', 'googl-q4-2024'],
     hasQuiz: true,
     hasSimulation: false,
     hasTool: true,
   },
+  // ============ LESSON 7 ============
   {
-    id: 'eh-lesson-10',
-    number: 10,
-    title: 'Putting It All Together',
-    subtitle: 'Building your Event Horizons workflow',
+    id: 'eh-lesson-7',
+    number: 7,
+    title: 'Resolution & The Crush',
+    subtitle: 'Timing entries and exits around event resolution',
+    mentor: 'cheetah',
+    estimatedMinutes: 18,
+    objectives: [
+      'Master event resolution timing',
+      'Understand IV crush patterns',
+      'Learn entry and exit strategies',
+      'Avoid common timing mistakes',
+    ],
+    caseStudyIds: ['nvda-q4-2024', 'tsla-q3-2024', 'meta-q2-2024'],
+    hasQuiz: true,
+    hasSimulation: true,
+    hasTool: false,
+  },
+  // ============ LESSON 8: CAPSTONE ============
+  {
+    id: 'eh-lesson-8',
+    number: 8,
+    title: 'Event Horizons Mastery',
+    subtitle: 'Assessment and paper trading challenge',
     mentor: 'chameleon',
     estimatedMinutes: 25,
     objectives: [
-      'Create a daily scanning routine',
-      'Build your personal event watchlist',
-      'Develop a trade journaling system',
-      'Graduate to live trading with confidence',
+      'Synthesize all Event Horizons concepts',
+      'Complete the mastery assessment',
+      'Execute paper trades across event types',
+      'Earn the Chameleon Apprentice badge',
     ],
     caseStudyIds: [],
     hasQuiz: true,
     hasSimulation: true,
-    hasTool: false,
+    hasTool: true,
   },
 ];
 
@@ -286,7 +258,7 @@ export interface QuizQuestion {
 }
 
 export const EVENT_HORIZONS_QUIZ_QUESTIONS: QuizQuestion[] = [
-  // Lesson 1 Quiz
+  // Lesson 1 Quiz: Two Jungles, One Hunter
   {
     id: 'eh-q1-1',
     lessonId: 'eh-lesson-1',
@@ -313,32 +285,163 @@ export const EVENT_HORIZONS_QUIZ_QUESTIONS: QuizQuestion[] = [
     correctIndex: 2,
     explanation: 'Market disagreements often create trading opportunities. The Chameleon strategy is built on finding and exploiting these gaps.',
   },
-  // Lesson 2 Quiz
+  // Lesson 2 Quiz: The Earnings Arena
   {
     id: 'eh-q2-1',
     lessonId: 'eh-lesson-2',
-    question: 'A "long-vol" opportunity zone exists when:',
+    question: 'What does Polymarket predict for earnings events?',
     options: [
-      'Both probability and IV are high',
-      'Probability suggests uncertainty but IV is low',
-      'IV is extremely high regardless of probability',
-      'The market is trending strongly',
+      'The exact stock price after earnings',
+      'Whether the company will beat earnings estimates',
+      'How much IV will crush',
+      'The direction the stock will move',
     ],
     correctIndex: 1,
-    explanation: 'Long-vol opportunities exist when prediction markets show uncertainty (probability near 50%) but options are cheap (low IV). The market may be underpricing the expected move.',
+    explanation: 'Polymarket predicts whether a company will beat earnings estimates (EPS vs consensus), NOT the stock direction. A company can beat and still drop.',
   },
-  // Lesson 5 Quiz
+  {
+    id: 'eh-q2-2',
+    lessonId: 'eh-lesson-2',
+    question: 'High uncertainty (near 50%) + Low IV suggests:',
+    options: [
+      'Short volatility opportunity',
+      'No trade opportunity',
+      'Long volatility opportunity',
+      'Directional trade only',
+    ],
+    correctIndex: 2,
+    explanation: 'When the crowd is uncertain but options are cheap, volatility may be underpriced. This is a long vol opportunity (straddles, strangles).',
+  },
+  // Lesson 3 Quiz: Binary Catalysts
+  {
+    id: 'eh-q3-1',
+    lessonId: 'eh-lesson-3',
+    question: 'What makes FDA events different from earnings?',
+    options: [
+      'They have lower IV',
+      'They are purely binary (approved/rejected)',
+      'They never affect stock prices',
+      'Prediction markets don\'t cover them',
+    ],
+    correctIndex: 1,
+    explanation: 'FDA decisions are purely binary - approved or rejected. There\'s no "beat by 2%" like earnings. This creates extreme IV and asymmetric payoffs.',
+  },
+  {
+    id: 'eh-q3-2',
+    lessonId: 'eh-lesson-3',
+    question: 'What should you NEVER do on FDA binary events?',
+    options: [
+      'Buy straddles',
+      'Use defined-risk spreads',
+      'Sell naked premium',
+      'Watch advisory committee meetings',
+    ],
+    correctIndex: 2,
+    explanation: 'Never sell naked premium on FDA events. A 28% probability of -65% move can wipe out years of premium. Use defined-risk strategies only.',
+  },
+  // Lesson 4 Quiz: Macro Currents
+  {
+    id: 'eh-q4-1',
+    lessonId: 'eh-lesson-4',
+    question: 'Why might stocks drop on a strong jobs report?',
+    options: [
+      'Strong jobs are always bad for stocks',
+      'Strong economy means Fed keeps rates high',
+      'Traders panic on any news',
+      'Jobs data is always priced in',
+    ],
+    correctIndex: 1,
+    explanation: 'Strong economy → Fed keeps rates high → Higher rates hurt stocks. In macro events, "good news" can be bad for stocks if it means tighter Fed policy.',
+  },
+  // Lesson 5 Quiz: Corporate Tectonic Shifts
   {
     id: 'eh-q5-1',
     lessonId: 'eh-lesson-5',
-    question: 'IV crush occurs because:',
+    question: 'When a CEO suddenly departs, IV typically:',
     options: [
-      'The stock price dropped',
-      'Event uncertainty has been resolved',
-      'Option sellers closed their positions',
-      'The market is bearish',
+      'Stays the same',
+      'Crushes immediately',
+      'Spikes higher',
+      'Becomes irrelevant',
     ],
-    correctIndex: 1,
-    explanation: 'IV crush happens when event uncertainty resolves. Options were priced for potential large moves; once the event passes, that premium evaporates.',
+    correctIndex: 2,
+    explanation: 'Surprise events cause IV to SPIKE, not crush. Unlike scheduled events, the uncertainty increases after surprise announcements.',
+  },
+  // Lesson 6 Quiz: The Gap Hunter\'s Toolkit
+  {
+    id: 'eh-q6-1',
+    lessonId: 'eh-lesson-6',
+    question: 'A Gap Score above 0.7 indicates:',
+    options: [
+      'Markets are aligned, no opportunity',
+      'Moderate disagreement, needs monitoring',
+      'Strong disagreement, potential opportunity',
+      'The event has already passed',
+    ],
+    correctIndex: 2,
+    explanation: 'Gap Score 0.7+ indicates strong disagreement between prediction markets and options pricing - this is where opportunities live.',
+  },
+  // Lesson 7 Quiz: Resolution & The Crush
+  {
+    id: 'eh-q7-1',
+    lessonId: 'eh-lesson-7',
+    question: 'When should you enter long volatility positions?',
+    options: [
+      'Right before the event (T-1)',
+      'After the event (T+1)',
+      'Early, before IV peaks (T-7 to T-5)',
+      'It doesn\'t matter when',
+    ],
+    correctIndex: 2,
+    explanation: 'Enter long vol early (T-7 to T-5) before IV peaks. Buying at peak IV means you pay max premium and IV crush hurts even if direction is right.',
+  },
+  {
+    id: 'eh-q7-2',
+    lessonId: 'eh-lesson-7',
+    question: 'IV crush is largest when pre-event IV is:',
+    options: [
+      'Low (30-50%)',
+      'Medium (60-90%)',
+      'High (100%+)',
+      'IV crush is always the same',
+    ],
+    correctIndex: 2,
+    explanation: 'Higher pre-event IV = larger crush. High IV (100%+) can see crush of -50% to -75% after the event resolves.',
+  },
+  // Lesson 8 Quiz: Event Horizons Mastery (Capstone)
+  {
+    id: 'eh-q8-1',
+    lessonId: 'eh-lesson-8',
+    question: 'The Chameleon\'s core advantage is:',
+    options: [
+      'Trading more frequently than others',
+      'Using the highest leverage possible',
+      'Seeing both prediction markets AND options',
+      'Ignoring prediction markets entirely',
+    ],
+    correctIndex: 2,
+    explanation: 'The Chameleon watches BOTH markets - prediction markets for probability, options for volatility. When they disagree, opportunity exists.',
   },
 ];
+
+// ============ Helper Functions ============
+
+export const getLessonById = (id: string): EventHorizonsLesson | undefined => {
+  return EVENT_HORIZONS_LESSONS.find((lesson) => lesson.id === id);
+};
+
+export const getLessonByNumber = (num: number): EventHorizonsLesson | undefined => {
+  return EVENT_HORIZONS_LESSONS.find((lesson) => lesson.number === num);
+};
+
+export const getLessonsByMentor = (mentor: 'chameleon' | 'cheetah' | 'owl'): EventHorizonsLesson[] => {
+  return EVENT_HORIZONS_LESSONS.filter((lesson) => lesson.mentor === mentor);
+};
+
+export const getTotalEstimatedTime = (): number => {
+  return EVENT_HORIZONS_LESSONS.reduce((total, lesson) => total + lesson.estimatedMinutes, 0);
+};
+
+export const getQuizQuestionsForLesson = (lessonId: string): QuizQuestion[] => {
+  return EVENT_HORIZONS_QUIZ_QUESTIONS.filter((q) => q.lessonId === lessonId);
+};

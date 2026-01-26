@@ -17,6 +17,7 @@ import { colors, typography, spacing } from '../../theme';
 import { GlowButton } from '../../components/ui';
 import { EventHorizonsStackParamList } from '../../navigation/types';
 import { EVENT_HORIZONS_LESSONS, EVENT_HORIZONS_QUIZ_QUESTIONS } from '../../data/eventHorizonsLessons';
+import { getQuizByLessonId } from '../../data/eventHorizonsQuizzes';
 
 const { width } = Dimensions.get('window');
 
@@ -36,63 +37,297 @@ const getMentorInfo = (mentor: string) => {
   }
 };
 
-// Lesson content sections (simplified from HTML)
+// Lesson content sections (ported from desktop HTML to mobile format)
 const LESSON_CONTENT: Record<string, { sections: { title: string; content: string; icon?: string }[] }> = {
   'eh-lesson-1': {
     sections: [
       {
-        title: 'The Two Markets',
+        title: 'Two Markets, One Hunter',
         icon: '🌐',
-        content: 'Most options traders only watch one market. The Chameleon watches two—and sees opportunities others miss entirely.',
+        content: 'Most options traders only watch one market. The Chameleon watches two—and sees opportunities others miss entirely.\n\n"The jungle whispers before it roars. Prediction markets are those whispers. Options prices are the roar everyone hears. The Chameleon listens to both."',
       },
       {
         title: 'The Options Jungle',
         icon: '📊',
-        content: 'Options prices tell you how much the market expects a stock to move. High IV means traders expect big moves. Low IV means calm seas ahead.\n\nOptions tell you: "We expect NVDA to move ±12% around earnings."',
+        content: 'Options prices tell you how much the market expects a stock to move. High IV means traders expect big moves. Low IV means calm seas ahead.\n\nOptions tell you: "We expect NVDA to move ±12% around earnings."\n\nThis is what you already know as an options trader.',
       },
       {
         title: 'The Prediction Jungle',
         icon: '🔮',
-        content: 'Prediction markets tell you the probability of specific outcomes. Not how much something will move—but which direction and how likely.\n\nPolymarket tells you: "There\'s a 78% chance NVDA beats earnings expectations."',
+        content: 'Prediction markets tell you the probability of specific outcomes. Not how much something will move—but which direction and how likely.\n\nPolymarket tells you: "There\'s a 78% chance NVDA beats earnings expectations."\n\nThis is what most traders ignore.',
       },
       {
         title: 'The Chameleon\'s Insight',
         icon: '💡',
-        content: 'Options tell you volatility expectations.\nPrediction markets tell you probability estimates.\n\nWhen these two markets disagree, that\'s where opportunity lives.',
+        content: 'Options tell you VOLATILITY expectations.\nPrediction markets tell you PROBABILITY estimates.\n\nWhen these two markets DISAGREE, that\'s where opportunity lives.',
       },
       {
         title: 'What is Polymarket?',
         icon: '🏛️',
-        content: 'Polymarket is a prediction market where people bet real money on the outcomes of future events. The crowd\'s collective bets create a probability estimate.\n\n• Earnings: "Will TSLA beat Q4 estimates?"\n• FDA Decisions: "Will Drug X get approved?"\n• Fed Decisions: "Will the Fed cut rates?"',
+        content: 'Polymarket is a prediction market where people bet real money on the outcomes of future events. The crowd\'s collective bets create a probability estimate.\n\n📈 Earnings: "Will TSLA beat Q4 estimates?"\n💊 FDA Decisions: "Will Drug X get approved?"\n🏛️ Fed Decisions: "Will the Fed cut rates?"',
       },
       {
         title: 'Finding the Gap',
         icon: '🎯',
-        content: 'The magic happens when these two markets tell different stories.\n\n↑ Long Vol Opportunity:\nPolymarket: 55% beat probability (high uncertainty)\nOptions: IV Rank 35% (low volatility pricing)\nTranslation: The crowd is uncertain, but options are cheap. Consider buying volatility.\n\n↓ Short Vol Opportunity:\nPolymarket: 85% beat probability (high confidence)\nOptions: IV Rank 92% (very expensive)\nTranslation: Everyone expects a beat, but options are pricing a huge move. Consider selling volatility.',
+        content: 'The magic happens when these two markets tell different stories:\n\n↑ LONG VOL OPPORTUNITY:\n• Polymarket: 55% beat (high uncertainty)\n• Options: IV Rank 35% (cheap)\n• Translation: Buy volatility\n\n↓ SHORT VOL OPPORTUNITY:\n• Polymarket: 85% beat (high confidence)\n• Options: IV Rank 92% (expensive)\n• Translation: Sell volatility',
+      },
+      {
+        title: 'Key Takeaways',
+        icon: '✓',
+        content: '1. Options measure expected volatility (how much will it move?)\n\n2. Prediction markets measure outcome probability (what will happen?)\n\n3. When they disagree, opportunity exists\n\n4. The Chameleon reads both markets to find edge',
       },
     ],
   },
   'eh-lesson-2': {
     sections: [
       {
-        title: 'Understanding the Gap',
-        icon: '📏',
-        content: 'The "gap" is the difference between what prediction markets expect and what options are pricing. A large gap suggests one market may be wrong.',
-      },
-      {
-        title: 'Calculating Gap Score',
-        icon: '🧮',
-        content: 'Gap Score = Prediction Uncertainty - IV Rank\n\nPositive gap: Options may be underpriced\nNegative gap: Options may be overpriced\n\nUncertainty is highest when probability is near 50%, lowest when near 0% or 100%.',
-      },
-      {
-        title: 'The Gap Zones',
-        icon: '🗺️',
-        content: 'Long Vol Zone (Upper Left):\n• High uncertainty, low IV\n• Buy straddles, strangles\n\nShort Vol Zone (Lower Right):\n• Low uncertainty, high IV\n• Sell iron condors, butterflies\n\nFair Value Zone (Diagonal):\n• Markets agree\n• No clear edge',
-      },
-      {
-        title: 'Using the Gap Analyzer',
+        title: 'The Earnings Arena',
         icon: '📊',
-        content: 'The Gap Analyzer tool plots events on a probability vs IV chart. Events far from the diagonal line represent the biggest disagreements between markets.',
+        content: 'Earnings season is the jungle\'s most exciting hunt. Every quarter, companies reveal their numbers—and fortunes are made or lost in minutes.\n\n"Speed kills—hesitation kills faster. But the fastest cheetah still scouts the prey before the sprint." — Chase the Cheetah',
+      },
+      {
+        title: 'Earnings on Polymarket',
+        icon: '🎯',
+        content: 'Polymarket creates markets for major earnings:\n\n"Will NVIDIA beat Q4 2024 earnings expectations?"\n\n✓ YES (Beat): 78%\n✗ NO (Miss): 22%\n\nIMPORTANT: "Beat expectations" means EPS exceeds Wall Street consensus. It does NOT predict stock direction.',
+      },
+      {
+        title: 'The Three Scenarios',
+        icon: '📋',
+        content: '✓ HIGH CONFIDENCE BEAT:\nPolymarket 75%+ YES, Company beats\nStock moves in expected direction, magnitude depends on beat size.\n\n✗ CONFIDENT BUT WRONG:\nPolymarket 75%+ YES, Company misses\nMaximum surprise = Maximum move. Put buyers feast.\n\n? THE TOSS-UP:\nPolymarket 45-55%\nTrue uncertainty. Long volatility shines here.',
+      },
+      {
+        title: 'The Gap Framework',
+        icon: '📐',
+        content: 'Near 50% + Low IV (<40%) = Long Vol\n→ Straddles, Strangles\n\nHigh confidence (75%+) + Very High IV (>80%) = Short Vol\n→ Iron Condor, Put Spread\n\nModerate + Moderate = Neutral\n→ No clear edge\n\nHigh confidence + Low IV = Directional\n→ Debit spread in direction',
+      },
+      {
+        title: 'Beat ≠ Stock Goes Up',
+        icon: '⚠️',
+        content: 'CRITICAL WARNING:\n\nPolymarket predicts the reported number vs estimates. It does NOT predict stock direction.\n\n• Beat and DROP: Bad guidance, "priced in" (META Q2 2024: beat but -5%)\n\n• Miss and RISE: Low expectations, good guidance',
+      },
+      {
+        title: 'IV Crush: The Certainty',
+        icon: '💥',
+        content: 'One thing is ALWAYS certain: IV crushes after the event. Once news is out, uncertainty disappears—option prices collapse.\n\nExample:\n92% IV Day Before → 45% IV Day After\n\nFactor this into every earnings play.',
+      },
+      {
+        title: 'Key Takeaways',
+        icon: '✓',
+        content: '1. Polymarket shows beat/miss probability, not stock direction\n\n2. High uncertainty + Low IV = Long volatility opportunity\n\n3. High confidence + High IV = Short volatility opportunity\n\n4. IV crush is GUARANTEED—factor it into every play',
+      },
+    ],
+  },
+  'eh-lesson-3': {
+    sections: [
+      {
+        title: 'Binary Catalysts',
+        icon: '💊',
+        content: 'FDA decisions are the jungle\'s most dangerous game. One word—"approved" or "rejected"—can move a stock 50% or more. There is no middle ground.',
+      },
+      {
+        title: 'The Binary Difference',
+        icon: '⚖️',
+        content: 'Earnings have shades of gray. FDA decisions are PURELY BINARY:\n\n✓ APPROVED\nStock gaps up 30-100%\nThe drug can be sold\n\n✗ REJECTED\nStock crashes 40-80%\nYears of R&D wasted',
+      },
+      {
+        title: 'Extreme IV Territory',
+        icon: '🔥',
+        content: 'Biotech FDA events have the HIGHEST IV in the market:\n\n250%+ IV Before Event\n±45% Expected Move\n70%+ IV Crush After\n\nThe IV is high for a reason.',
+      },
+      {
+        title: 'Polymarket\'s Role',
+        icon: '📊',
+        content: 'Polymarket shows approval probability based on:\n\n📋 Phase 3 Data: Did the trial hit endpoints?\n🗳️ Advisory Committee: How did AdCom vote?\n📜 Complete Response Letters: Prior FDA feedback?\n\nKey: 72% approval still means 28% chance of total loss.',
+      },
+      {
+        title: 'The Asymmetry Problem',
+        icon: '📉',
+        content: 'FDA events are ASYMMETRIC—downside is often worse than upside is good:\n\nIf Approved: +40%\nIf Rejected: -65%\n\nWhy? Approval is partially priced in. Rejection erases years of expected revenue.',
+      },
+      {
+        title: 'Strategy Rules',
+        icon: '🚫',
+        content: '🚫 NEVER Sell Naked Premium on FDA Events\nA 28% probability of -65% move can wipe out years of premium.\n\n✓ Use Defined-Risk Structures:\n• Bull Call Spread\n• Bear Put Spread\n• Collar\n• Long Straddle',
+      },
+      {
+        title: 'Key Takeaways',
+        icon: '✓',
+        content: '1. FDA events are purely binary—approved or rejected\n\n2. IV is extreme (200%+) and IV crush is massive (70%+)\n\n3. NEVER sell naked premium on binary biotech events\n\n4. Use defined-risk spreads and watch AdCom meetings live',
+      },
+    ],
+  },
+  'eh-lesson-4': {
+    sections: [
+      {
+        title: 'Macro Currents',
+        icon: '🏛️',
+        content: 'The Fed speaks, and markets listen. Economic data drops, and billions move. Macro events are the ocean currents that lift or sink all boats.\n\n"Knowledge is the ultimate edge. The data speaks clearly—but the market\'s interpretation is what matters." — Oliver the Owl',
+      },
+      {
+        title: 'Macro vs Single Stock',
+        icon: '📊',
+        content: 'SINGLE STOCK EVENTS:\n• Affect one company\n• High IV (50-150%)\n• Large expected moves (5-15%)\n\nMACRO EVENTS:\n• Affect ALL markets\n• Lower IV (15-30%)\n• Smaller expected moves (1-3%)\n• Use index options (SPY, QQQ)',
+      },
+      {
+        title: 'Key Macro Events',
+        icon: '📅',
+        content: '🏛️ FOMC Decisions\n"Will the Fed cut rates by 25bp or 50bp?"\n\n📈 CPI/Inflation Data\n"Will CPI come in under 3%?"\n\n💼 Jobs Reports\n"Will jobs come in above 180k?"\n\n🏠 Housing Data\n"Will housing starts exceed estimates?"',
+      },
+      {
+        title: 'Good News Is Bad News',
+        icon: '🔄',
+        content: 'THE PARADOX:\n\n📉 Strong jobs = Stocks DOWN?\nStrong economy → Fed keeps rates high → Higher rates hurt stocks\n\n📈 Weak jobs = Stocks UP?\nWeak economy → Fed cuts rates → Lower rates help stocks\n\nKey: What matters is what it means for FED POLICY.',
+      },
+      {
+        title: 'Index Options for Macro',
+        icon: '📈',
+        content: 'Since macro events affect all stocks, use index options:\n\nSPY - S&P 500 ETF (broad market)\nQQQ - Nasdaq 100 ETF (tech-heavy)\nIWM - Russell 2000 ETF (small cap)\n\nWatch for last-minute probability shifts—Fed Sept 2024 shifted from 85% to 65% for 25bp in final 24 hours.',
+      },
+      {
+        title: 'Key Takeaways',
+        icon: '✓',
+        content: '1. Macro events affect ALL markets—use index options\n\n2. IV is lower but still crushes after events\n\n3. "Good news" can be bad for stocks if it means tighter Fed policy\n\n4. Watch last-minute probability shifts for early signals',
+      },
+    ],
+  },
+  'eh-lesson-5': {
+    sections: [
+      {
+        title: 'Corporate Tectonic Shifts',
+        icon: '🏢',
+        content: 'Not all events are scheduled. Acquisitions, leadership changes, and product launches reshape companies—and create unique trading opportunities.',
+      },
+      {
+        title: 'Types of Corporate Events',
+        icon: '📋',
+        content: '🤝 M&A EVENTS\nMergers, acquisitions, divestitures\nPolymarket: "Will the deal close?"\n\n👔 LEADERSHIP CHANGES\nCEO/CFO departures, appointments\nOften no prediction market (surprise events)\n\n📱 PRODUCT LAUNCHES\nNew products, services, features\nSometimes indirect markets',
+      },
+      {
+        title: 'M&A Dynamics',
+        icon: '🤝',
+        content: 'TARGET COMPANY (Being Acquired):\n• Stock trades near deal price\n• "Merger arb" spread = risk premium\n• Options have capped upside\n\nACQUIRER (Doing the Buying):\n• Often DROPS on deal announcement\n• "Sell the news" on deal close\n• Dilution concerns hurt stock',
+      },
+      {
+        title: 'No Prediction Market?',
+        icon: '🦎',
+        content: 'When there\'s no Polymarket data (surprise announcements, CEO departures):\n\n📈 IV SPIKE (Not Crush)\nSurprise news causes IV to INCREASE\n\n⏳ EXTENDED UNCERTAINTY\nUnlike earnings, uncertainty persists for days/weeks\n\nIV-only analysis still works.',
+      },
+      {
+        title: 'Product Launch Pattern',
+        icon: '📱',
+        content: 'Scheduled product events follow a pattern:\n\nPRE-EVENT: IV builds on anticipation\n↓\nEVENT DAY: Peak IV, high attention\n↓\nPOST-EVENT: IV crush if "as expected"',
+      },
+      {
+        title: 'Key Takeaways',
+        icon: '✓',
+        content: '1. M&A prediction markets focus on deal completion, not stock direction\n\n2. Acquirer stocks often DROP on deal close\n\n3. Surprise events cause IV spikes, not crush\n\n4. When no prediction market exists, IV-only analysis still works',
+      },
+    ],
+  },
+  'eh-lesson-6': {
+    sections: [
+      {
+        title: 'The Gap Hunter\'s Toolkit',
+        icon: '🎯',
+        content: 'You\'ve learned the theory. Now it\'s time to master the tools. The Gap Analyzer shows you exactly where prediction markets and options disagree.\n\n"Knowledge is the ultimate edge." — Oliver the Owl',
+      },
+      {
+        title: 'Understanding Gap Score',
+        icon: '📊',
+        content: 'Gap Score (0-1) measures disagreement:\n\n🔴 0.7+ HIGH GAP\nStrong disagreement = potential opportunity\n\n🟡 0.4-0.7 MODERATE GAP\nWorth monitoring, needs more analysis\n\n⚪ <0.4 LOW GAP\nMarkets aligned = limited edge',
+      },
+      {
+        title: 'Long Volatility Zone',
+        icon: '↑',
+        content: 'CONDITION:\nHigh uncertainty (Polymarket near 50%) + Low IV\n\nSIGNAL:\nOptions may be underpricing the potential move\n\nSTRATEGIES:\nStraddles, Strangles, Long Calls/Puts\n\n"The crowd doesn\'t know what will happen, but options are cheap. Buy volatility."',
+      },
+      {
+        title: 'Short Volatility Zone',
+        icon: '↓',
+        content: 'CONDITION:\nHigh confidence (near 0% or 100%) + High IV\n\nSIGNAL:\nOptions may be overpricing the expected move\n\nSTRATEGIES:\nIron Condors, Credit Spreads, Butterflies\n\n"The crowd is confident, but options are expensive. Sell volatility."',
+      },
+      {
+        title: 'Reading the Chart',
+        icon: '📈',
+        content: 'X-AXIS: Polymarket Probability\n0% = confident miss\n50% = uncertain\n100% = confident beat\n\nY-AXIS: IV Rank\n0% = cheap options\n100% = expensive options\n\nClick any point for full case study.',
+      },
+      {
+        title: 'The No Edge Zone',
+        icon: '—',
+        content: 'When Gap Score < 0.4, markets are aligned:\n\n• Options are fairly priced\n• Neither long nor short vol has clear edge\n• Sometimes the best trade is NO TRADE\n\nExample: GOOGL Q4 2024 — 65% beat, IV rank 52%. Markets agreed. Actual move was within expected range.',
+      },
+      {
+        title: 'Key Takeaways',
+        icon: '✓',
+        content: '1. Gap Score 0.7+ = significant opportunity\n\n2. Uncertainty + Low IV = Long vol zone\n\n3. Confidence + High IV = Short vol zone\n\n4. Low Gap Score = no clear edge, consider sitting out',
+      },
+    ],
+  },
+  'eh-lesson-7': {
+    sections: [
+      {
+        title: 'Resolution & The Crush',
+        icon: '⏱️',
+        content: 'You\'ve found the gap. You know your strategy. Now the critical question: when exactly do you enter, and when do you exit?\n\n"The cheetah doesn\'t chase all day. It waits, stalks, and strikes at exactly the right moment." — Chase the Cheetah',
+      },
+      {
+        title: 'The Event Timeline',
+        icon: '📅',
+        content: '1️⃣ T-7 to T-3: BUILD PHASE\nIV starts building. Polymarket stable. Good time for long vol entries.\n\n2️⃣ T-2 to T-1: PEAK IV\nIV reaches maximum. Last chance for short vol. Watch for probability shifts.\n\n3️⃣ EVENT DAY: RESOLUTION\nNews breaks. Stock gaps. IV crushes. Polymarket resolves.\n\n4️⃣ T+1: POST-EVENT\nIV continues falling. Time to close and assess.',
+      },
+      {
+        title: 'Entry Timing',
+        icon: '🎯',
+        content: 'LONG VOLATILITY (Straddles, Strangles):\n• Enter: T-7 to T-5 (before IV peak)\n• Why: Buy before IV spikes to max\n• Exit: Within first hour after event\n\nSHORT VOLATILITY (Iron Condors, Spreads):\n• Enter: T-2 to T-1 (at peak IV)\n• Why: Maximize premium collected\n• Exit: Let IV crush work, close T+1',
+      },
+      {
+        title: 'IV Crush Magnitude',
+        icon: '💥',
+        content: 'Higher pre-event IV = larger crush:\n\nLow IV (30-50%): -15 to -25%\nMedium IV (60-90%): -35 to -50%\nHigh IV (100%+): -50 to -75%\n\nIV crush is immediate and significant.',
+      },
+      {
+        title: 'Common Mistakes',
+        icon: '✗',
+        content: '✗ Buying straddles at peak IV\nYou pay max premium. IV crush hurts even if direction is right.\n\n✗ Holding through event without a plan\nKnow your exit before you enter. Set price alerts.\n\n✗ Ignoring after-hours moves\nMany earnings happen AMC. Stock gaps before you can trade options.',
+      },
+      {
+        title: 'Key Takeaways',
+        icon: '✓',
+        content: '1. Enter long vol EARLY (T-7 to T-5) before IV peaks\n\n2. Enter short vol LATE (T-2 to T-1) at peak IV\n\n3. IV crush is immediate and significant—plan exits accordingly\n\n4. Have your exit plan BEFORE the event, not during',
+      },
+    ],
+  },
+  'eh-lesson-8': {
+    sections: [
+      {
+        title: 'Event Horizons Mastery',
+        icon: '🏆',
+        content: 'You\'ve learned to see two markets. You\'ve studied the patterns. Now prove your mastery and earn your place among the Chameleon\'s hunters.',
+      },
+      {
+        title: 'Your Journey',
+        icon: '📚',
+        content: 'What you\'ve learned:\n\n🦎 Two Markets: Probability + Volatility\n📊 4 Event Types: Earnings, FDA, Macro, Corporate\n🎯 Gap Analysis: Finding opportunity zones\n⏱️ Timing: Entry, exit, IV crush',
+      },
+      {
+        title: 'The Mastery Challenge',
+        icon: '🎯',
+        content: 'To earn the CHAMELEON APPRENTICE badge:\n\n1️⃣ Pass the Assessment Quiz\nAnswer 8/10 questions correctly\n\n2️⃣ Identify 3 Gaps\nFind events with Gap Score > 0.5\n\n3️⃣ Complete 3 Event Replays\nStep through earnings, FDA, and macro events\n\n4️⃣ Paper Trade 3 Events\nUse the simulator to execute trades',
+      },
+      {
+        title: 'Cameron\'s Final Words',
+        icon: '🦎',
+        content: '"You came to the jungle seeing one market. Now you see two. That\'s not just knowledge—it\'s an edge. The crowd watches options OR prediction markets. You watch both. Use this power wisely, young hunter."\n\n— Cameron the Chameleon',
+      },
+      {
+        title: 'The Chameleon\'s Rules',
+        icon: '📜',
+        content: '1. Never trade events blind—check both markets\n\n2. Respect the crowd\'s wisdom, but verify with options\n\n3. IV crush is certain; direction is not\n\n4. Resolution timing is everything',
+      },
+      {
+        title: 'Chameleon Apprentice',
+        icon: '🦎',
+        content: 'Complete all challenges to unlock the Chameleon Apprentice badge!\n\nThis badge recognizes your mastery of dual-market analysis and event-based trading strategies.\n\nYou are now ready to hunt in both jungles.',
       },
     ],
   },
@@ -113,6 +348,9 @@ const LessonDetailScreen: React.FC = () => {
     [lessonId]
   );
 
+  // Get new quiz data
+  const lessonQuiz = useMemo(() => getQuizByLessonId(lessonId), [lessonId]);
+
   const content = LESSON_CONTENT[lessonId] || { sections: [] };
   const [currentSection, setCurrentSection] = useState(0);
 
@@ -130,13 +368,13 @@ const LessonDetailScreen: React.FC = () => {
   const mentor = getMentorInfo(lesson.mentor);
   const totalSections = content.sections.length;
   const isLastSection = currentSection === totalSections - 1;
-  const hasQuiz = quizQuestions.length > 0;
+  const hasQuiz = !!lessonQuiz || quizQuestions.length > 0;
 
   const handleNext = () => {
     if (isLastSection) {
       if (hasQuiz) {
         // Navigate to quiz
-        navigation.navigate('EventHorizonsLessons');
+        navigation.navigate('EventHorizonsQuiz', { lessonId });
       } else {
         navigation.goBack();
       }

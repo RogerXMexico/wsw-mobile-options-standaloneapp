@@ -1,14 +1,18 @@
 // Main App Navigator for Wall Street Wildlife Mobile
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootStackParamList } from './types';
 import { colors, typography, shadows } from '../theme';
 
 // Import navigators
 import AuthNavigator from './AuthNavigator';
 import MainTabNavigator from './MainTabNavigator';
+
+// Import onboarding
+import SpiritAnimalScreen from '../screens/onboarding/SpiritAnimalScreen';
 
 // Import hooks
 import { useAuth } from '../contexts';
@@ -64,29 +68,69 @@ const loadingStyles = StyleSheet.create({
   },
 });
 
+// Wrapper component for onboarding screen
+const OnboardingWrapper: React.FC<{ onComplete: (animalId: string, level: string) => void }> = ({ onComplete }) => {
+  return <SpiritAnimalScreen onComplete={onComplete} />;
+};
+
 export const AppNavigator: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth();
+  const [onboardingComplete, setOnboardingComplete] = useState<boolean | null>(null);
+  const [checkingOnboarding, setCheckingOnboarding] = useState(true);
 
-  // Show loading screen while checking auth state
-  if (isLoading) {
+  // Check onboarding status on mount
+  useEffect(() => {
+    const checkOnboarding = async () => {
+      try {
+        const status = await AsyncStorage.getItem('onboardingComplete');
+        setOnboardingComplete(status === 'true');
+      } catch (error) {
+        console.error('Error checking onboarding status:', error);
+        setOnboardingComplete(false);
+      } finally {
+        setCheckingOnboarding(false);
+      }
+    };
+
+    if (isAuthenticated) {
+      checkOnboarding();
+    } else {
+      setCheckingOnboarding(false);
+    }
+  }, [isAuthenticated]);
+
+  // Handle onboarding completion
+  const handleOnboardingComplete = async (animalId: string, experienceLevel: string) => {
+    setOnboardingComplete(true);
+  };
+
+  // Show loading screen while checking auth or onboarding state
+  if (isLoading || (isAuthenticated && checkingOnboarding)) {
     return <LoadingScreen />;
   }
 
+  // Determine which screen to show
+  const showOnboarding = isAuthenticated && onboardingComplete === false;
+
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: colors.background.primary },
-          animation: 'fade',
-        }}
-      >
-        {isAuthenticated ? (
-          <Stack.Screen name="Main" component={MainTabNavigator} />
-        ) : (
-          <Stack.Screen name="Auth" component={AuthNavigator} />
-        )}
-      </Stack.Navigator>
+      {showOnboarding ? (
+        <OnboardingWrapper onComplete={handleOnboardingComplete} />
+      ) : (
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: colors.background.primary },
+            animation: 'fade',
+          }}
+        >
+          {isAuthenticated ? (
+            <Stack.Screen name="Main" component={MainTabNavigator} />
+          ) : (
+            <Stack.Screen name="Auth" component={AuthNavigator} />
+          )}
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 };

@@ -17,6 +17,7 @@ import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlassCard } from '../../components/ui';
 import { ProfileStackParamList } from '../../navigation/types';
 import { DAILY_MISSIONS, DailyMission } from '../../data/jungleBadges';
+import { EVENT_HORIZONS_MISSIONS, EventHorizonsMission } from '../../data/eventHorizonsBadges';
 
 type NavigationProp = NativeStackNavigationProp<ProfileStackParamList>;
 
@@ -34,6 +35,27 @@ const getMockMissionProgress = (): (DailyMission & { progress: number; completed
     ...mission,
     progress: progressMap[mission.id] || 0,
     completed: (progressMap[mission.id] || 0) >= mission.target,
+  }));
+};
+
+// Mock Event Horizons mission progress
+const getEHMissionProgress = (): (EventHorizonsMission & { progress: number; completed: boolean })[] => {
+  const progressMap: Record<string, number> = {
+    'daily-lesson': 1,
+    'scanner-check': 1,
+    'case-study-view': 0,
+    'gap-analysis': 1,
+    'paper-trade': 0,
+    'replay-complete': 0,
+  };
+
+  // Get 3 missions for today (1 easy, 1 medium, 1 hard)
+  const todaysMissions = EVENT_HORIZONS_MISSIONS.filter((_, index) => index < 3);
+
+  return todaysMissions.map((mission) => ({
+    ...mission,
+    progress: progressMap[mission.id] || 0,
+    completed: (progressMap[mission.id] || 0) >= mission.requirement.count,
   }));
 };
 
@@ -78,6 +100,12 @@ const DailyMissionsScreen: React.FC = () => {
 
   const completedWeekly = WEEKLY_MISSIONS.filter(m => m.progress >= m.target).length;
   const totalWeeklyXP = WEEKLY_MISSIONS.reduce((sum, m) => sum + (m.progress >= m.target ? m.xpReward : 0), 0);
+
+  // Event Horizons missions
+  const ehMissions = getEHMissionProgress();
+  const completedEH = ehMissions.filter(m => m.completed).length;
+  const totalEHXP = ehMissions.reduce((sum, m) => sum + (m.completed ? m.xpReward : 0), 0);
+  const potentialEHXP = ehMissions.reduce((sum, m) => sum + m.xpReward, 0);
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -238,6 +266,69 @@ const DailyMissionsScreen: React.FC = () => {
           })}
         </View>
 
+        {/* Event Horizons Missions */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <View style={styles.sectionTitleRow}>
+              <Text style={styles.ehEmoji}>🦎</Text>
+              <View>
+                <Text style={[styles.sectionTitle, styles.ehTitle]}>Event Horizons</Text>
+                <Text style={styles.sectionSubtitle}>Prediction market challenges</Text>
+              </View>
+            </View>
+            <View style={[styles.xpBadge, styles.ehXpBadge]}>
+              <Text style={[styles.xpBadgeText, styles.ehXpBadgeText]}>
+                {totalEHXP}/{potentialEHXP} XP
+              </Text>
+            </View>
+          </View>
+
+          {ehMissions.map((mission) => (
+            <View
+              key={mission.id}
+              style={[styles.missionCard, styles.ehMissionCard, mission.completed && styles.missionCardCompleted]}
+            >
+              <View style={[
+                styles.missionIconContainer,
+                styles.ehIconContainer,
+                mission.completed && styles.missionIconCompleted
+              ]}>
+                <Text style={styles.missionIcon}>
+                  {mission.completed ? '✓' : mission.icon}
+                </Text>
+              </View>
+              <View style={styles.missionContent}>
+                <Text style={[styles.missionTitle, mission.completed && styles.missionTitleCompleted]}>
+                  {mission.title}
+                </Text>
+                <Text style={styles.missionDescription}>{mission.description}</Text>
+                <View style={styles.progressContainer}>
+                  <View style={styles.progressBarBg}>
+                    <View
+                      style={[
+                        styles.progressBarFill,
+                        {
+                          width: `${Math.min(100, (mission.progress / mission.requirement.count) * 100)}%`,
+                          backgroundColor: mission.completed ? colors.success : '#8b5cf6',
+                        },
+                      ]}
+                    />
+                  </View>
+                  <Text style={styles.progressText}>
+                    {mission.progress}/{mission.requirement.count}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.missionReward}>
+                <Text style={[styles.missionXP, mission.completed && styles.missionXPCompleted]}>
+                  +{mission.xpReward}
+                </Text>
+                <Text style={styles.missionXPLabel}>XP</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+
         {/* Mission Streak Bonus */}
         <GlassCard style={styles.streakCard}>
           <View style={styles.streakContent}>
@@ -358,10 +449,33 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     marginBottom: spacing.md,
   },
+  sectionTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
   sectionTitle: {
     fontFamily: typography.fonts.bold,
     fontSize: typography.sizes.lg,
     color: colors.text.primary,
+  },
+  ehEmoji: {
+    fontSize: 28,
+  },
+  ehTitle: {
+    color: '#8b5cf6',
+  },
+  ehXpBadge: {
+    backgroundColor: 'rgba(139, 92, 246, 0.15)',
+  },
+  ehXpBadgeText: {
+    color: '#8b5cf6',
+  },
+  ehMissionCard: {
+    borderColor: 'rgba(139, 92, 246, 0.3)',
+  },
+  ehIconContainer: {
+    backgroundColor: 'rgba(139, 92, 246, 0.15)',
   },
   sectionSubtitle: {
     fontFamily: typography.fonts.regular,

@@ -1,5 +1,5 @@
 // Strategy Detail Screen for Wall Street Wildlife Mobile
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,9 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
+  Image,
+  Animated,
+  Easing,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -15,6 +18,32 @@ import { colors, typography, spacing, borderRadius, createNeonGlow, getTierColor
 import { TIER_INFO } from '../../data/constants';
 import { getStrategyById, getStrategyConfig } from '../../data/strategies';
 import { PayoffChart } from '../../components/charts/PayoffChart';
+import { TradeWalkthrough } from '../../components/learn/TradeWalkthrough';
+import { getMentorForStrategy } from '../../data/jungleAnimals';
+import { getQuotesForStrategy, getRandomQuote, getCourseQuotes } from '../../data/quotes';
+
+// Animal avatar images
+const ANIMAL_IMAGES: Record<string, any> = {
+  turtle: require('../../../assets/animals/Turtle WSW.png'),
+  owl: require('../../../assets/animals/Owl WSW.png'),
+  cheetah: require('../../../assets/animals/Cheetah WSW.png'),
+  fox: require('../../../assets/animals/Fox WSW.png'),
+  retriever: require('../../../assets/animals/Golden Retriever WSW.png'),
+  sloth: require('../../../assets/animals/Sloth WSW.png'),
+  badger: require('../../../assets/animals/badger.png'),
+  monkey: require('../../../assets/animals/monkey.png'),
+  bear: require('../../../assets/animals/Bear WSW.png'),
+  dolphin: require('../../../assets/animals/Dolphin WSW.png'),
+  lion: require('../../../assets/animals/Lion WSW.png'),
+  octopus: require('../../../assets/animals/Octopus WSW.png'),
+  // Fallback to lion for animals without images yet
+  bull: require('../../../assets/animals/Lion WSW.png'),
+  chameleon: require('../../../assets/animals/Owl WSW.png'),
+  tiger: require('../../../assets/animals/Tiger_Jacket.jpeg'),
+};
+
+// Tiger avatar for Rules of the Jungle
+const TIGER_AVATAR = require('../../../assets/animals/Tiger_Jacket.jpeg');
 
 const { width } = Dimensions.get('window');
 
@@ -26,7 +55,7 @@ const StrategyDetailScreen: React.FC = () => {
   const route = useRoute<RouteProps>();
   const { strategyId } = route.params;
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'setup' | 'example'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'walkthrough' | 'setup' | 'greeks'>('overview');
 
   // Load strategy data
   const strategy = useMemo(() => getStrategyById(strategyId), [strategyId]);
@@ -49,6 +78,69 @@ const StrategyDetailScreen: React.FC = () => {
   const tierInfo = TIER_INFO[strategy.tier] || TIER_INFO[0];
   const tierColor = getTierColor(strategy.tier);
   const outlookColor = getOutlookColor(strategy.outlook);
+
+  // Get mentor for this strategy
+  const mentor = useMemo(() => getMentorForStrategy(strategyId), [strategyId]);
+  const mentorImage = ANIMAL_IMAGES[mentor.id] || ANIMAL_IMAGES['owl'];
+
+  // Get relevant quotes
+  const strategyQuotes = useMemo(() => getQuotesForStrategy(strategyId), [strategyId]);
+  const courseQuotes = useMemo(() => getCourseQuotes(), []);
+  const displayQuote = strategyQuotes.length > 0
+    ? strategyQuotes[0]
+    : (strategyId === 'course-goals' ? courseQuotes[0] : null);
+
+  // Breathing animation for Know Thyself Greek text
+  const breatheAnim = useRef(new Animated.Value(1)).current;
+  const glowAnim = useRef(new Animated.Value(0.6)).current;
+
+  useEffect(() => {
+    if (strategyId === 'know-thyself') {
+      // Scale breathing animation
+      const breathe = Animated.loop(
+        Animated.sequence([
+          Animated.timing(breatheAnim, {
+            toValue: 1.08,
+            duration: 2000,
+            easing: Easing.inOut(Easing.ease),
+            useNativeDriver: true,
+          }),
+          Animated.timing(breatheAnim, {
+            toValue: 1,
+            duration: 2000,
+            easing: Easing.inOut(Easing.ease),
+            useNativeDriver: true,
+          }),
+        ])
+      );
+      // Opacity glow animation
+      const glow = Animated.loop(
+        Animated.sequence([
+          Animated.timing(glowAnim, {
+            toValue: 1,
+            duration: 2000,
+            easing: Easing.inOut(Easing.ease),
+            useNativeDriver: true,
+          }),
+          Animated.timing(glowAnim, {
+            toValue: 0.6,
+            duration: 2000,
+            easing: Easing.inOut(Easing.ease),
+            useNativeDriver: true,
+          }),
+        ])
+      );
+      breathe.start();
+      glow.start();
+      return () => {
+        breathe.stop();
+        glow.stop();
+      };
+    }
+  }, [strategyId, breatheAnim, glowAnim]);
+
+  // Check if this is a Tier 0 educational module
+  const isTier0 = strategy.tier === 0 || strategy.tier === 0.5;
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -89,16 +181,78 @@ const StrategyDetailScreen: React.FC = () => {
           <Text style={styles.strategyTierName}>{tierInfo.name}</Text>
         </View>
 
+        {/* Special Content: Know Thyself Greek Quote */}
+        {strategyId === 'know-thyself' && (
+          <View style={styles.greekQuoteContainer}>
+            <Animated.Text
+              style={[
+                styles.greekText,
+                {
+                  transform: [{ scale: breatheAnim }],
+                  opacity: glowAnim,
+                }
+              ]}
+            >
+              "γνῶθι σεαυτόν"
+            </Animated.Text>
+            <Text style={styles.greekSource}>— Inscribed at the Temple of Apollo at Delphi</Text>
+          </View>
+        )}
+
+        {/* Special Content: Rules of the Jungle Tiger Avatar */}
+        {strategyId === 'rules-of-the-jungle' && (
+          <View style={styles.tigerContainer}>
+            <Text style={styles.jungleSubtitle}>
+              Hunt with patience. <Text style={styles.jungleHighlight}>Strike</Text> with precision.
+            </Text>
+            <View style={styles.tigerAvatarWrapper}>
+              <Image
+                source={TIGER_AVATAR}
+                style={styles.tigerAvatar}
+                resizeMode="cover"
+              />
+            </View>
+          </View>
+        )}
+
+        {/* Mentor Card */}
+        <View style={[styles.mentorCard, { borderColor: mentor.colors.primary }]}>
+          <Image
+            source={mentorImage}
+            style={styles.mentorAvatar}
+            resizeMode="contain"
+          />
+          <View style={styles.mentorContent}>
+            <View style={styles.mentorHeader}>
+              <Text style={styles.mentorEmoji}>{mentor.emoji}</Text>
+              <Text style={[styles.mentorName, { color: mentor.colors.primary }]}>
+                {mentor.characterName}
+              </Text>
+              <Text style={styles.mentorTitle}>{mentor.name}</Text>
+            </View>
+            <Text style={styles.mentorGreeting}>{mentor.dialogues.greeting}</Text>
+            <Text style={styles.mentorCatchphrase}>"{mentor.catchphrase}"</Text>
+          </View>
+        </View>
+
+        {/* Wisdom Quote (if available) */}
+        {displayQuote && (
+          <View style={styles.quoteCard}>
+            <Text style={styles.quoteText}>"{displayQuote.text}"</Text>
+            <Text style={styles.quoteAuthor}>— {displayQuote.author}{displayQuote.source ? `, ${displayQuote.source}` : ''}</Text>
+          </View>
+        )}
+
         {/* Quick Stats */}
         <View style={styles.statsRow}>
           <View style={styles.statItem}>
             <Text style={styles.statLabel}>Risk</Text>
-            <Text style={styles.statValue}>{strategy.riskLevel}</Text>
+            <Text style={styles.statValue}>{strategy.riskLevel || strategy.risk || 'N/A'}</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
             <Text style={styles.statLabel}>Category</Text>
-            <Text style={styles.statValue}>{strategy.category}</Text>
+            <Text style={styles.statValue}>{strategy.category || 'General'}</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
@@ -111,42 +265,88 @@ const StrategyDetailScreen: React.FC = () => {
 
         {/* Tabs */}
         <View style={styles.tabs}>
-          {(['overview', 'setup', 'example'] as const).map((tab) => (
-            <TouchableOpacity
-              key={tab}
-              style={[styles.tab, activeTab === tab && styles.tabActive]}
-              onPress={() => setActiveTab(tab)}
-            >
-              <Text style={[styles.tabText, activeTab === tab && styles.tabTextActive]}>
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </Text>
-            </TouchableOpacity>
-          ))}
+          {(['overview', 'walkthrough', 'setup', 'greeks'] as const).map((tab) => {
+            // Hide walkthrough tab if no trade paths available
+            if (tab === 'walkthrough' && !strategy.education?.tradePaths?.length) {
+              return null;
+            }
+            return (
+              <TouchableOpacity
+                key={tab}
+                style={[styles.tab, activeTab === tab && styles.tabActive]}
+                onPress={() => setActiveTab(tab)}
+              >
+                <Text style={[styles.tabText, activeTab === tab && styles.tabTextActive]}>
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
 
         {/* Tab Content */}
         {activeTab === 'overview' && (
           <View style={styles.tabContent}>
-            {/* Description Card */}
-            <View style={styles.card}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.cardEmoji}></Text>
-                <Text style={styles.cardTitle}>Overview</Text>
+            {/* What It Does Card - from education content */}
+            {strategy.education?.whatItDoes ? (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>📖</Text>
+                  <Text style={styles.cardTitle}>What It Does</Text>
+                </View>
+                <Text style={styles.cardText}>{strategy.education.whatItDoes}</Text>
               </View>
-              <Text style={styles.cardText}>{strategy.description}</Text>
-            </View>
+            ) : (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>📖</Text>
+                  <Text style={styles.cardTitle}>Overview</Text>
+                </View>
+                <Text style={styles.cardText}>{strategy.description}</Text>
+              </View>
+            )}
+
+            {/* Real World Example */}
+            {strategy.education?.realWorldExample && (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>💹</Text>
+                  <Text style={styles.cardTitle}>Real Example</Text>
+                </View>
+                <View style={styles.exampleGrid}>
+                  <View style={styles.exampleItem}>
+                    <Text style={styles.exampleLabel}>Ticker</Text>
+                    <Text style={styles.exampleValue}>{strategy.education.realWorldExample.ticker}</Text>
+                  </View>
+                  <View style={styles.exampleItem}>
+                    <Text style={styles.exampleLabel}>Stock Price</Text>
+                    <Text style={styles.exampleValue}>${strategy.education.realWorldExample.stockPrice}</Text>
+                  </View>
+                  <View style={styles.exampleItem}>
+                    <Text style={styles.exampleLabel}>Strike</Text>
+                    <Text style={styles.exampleValue}>${strategy.education.realWorldExample.strikePrice}</Text>
+                  </View>
+                  <View style={styles.exampleItem}>
+                    <Text style={styles.exampleLabel}>Premium</Text>
+                    <Text style={styles.exampleValue}>${strategy.education.realWorldExample.premium}</Text>
+                  </View>
+                </View>
+              </View>
+            )}
 
             {/* When to Use Card */}
-            <View style={styles.card}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.cardEmoji}></Text>
-                <Text style={styles.cardTitle}>When to Use</Text>
+            {strategy.whenToUse && (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>🎯</Text>
+                  <Text style={styles.cardTitle}>When to Use</Text>
+                </View>
+                <Text style={styles.cardText}>{strategy.whenToUse}</Text>
               </View>
-              <Text style={styles.cardText}>{strategy.whenToUse}</Text>
-            </View>
+            )}
 
             {/* Payoff Diagram */}
-            {strategyConfig && (
+            {strategyConfig && !strategy.hidePayoffChart && (
               <PayoffChart
                 legs={strategyConfig.legs}
                 currentPrice={strategyConfig.defaultStockPrice}
@@ -154,28 +354,92 @@ const StrategyDetailScreen: React.FC = () => {
               />
             )}
 
-            {/* Advantages & Disadvantages */}
-            <View style={styles.prosConsContainer}>
-              <View style={[styles.prosConsCard, styles.prosCard]}>
-                <Text style={styles.prosConsTitle}>Advantages</Text>
-                {strategy.advantages.map((adv, i) => (
-                  <View key={i} style={styles.prosConsItem}>
-                    <Text style={styles.prosIcon}>+</Text>
-                    <Text style={styles.prosConsText}>{adv}</Text>
-                  </View>
-                ))}
+            {/* Key Lessons */}
+            {strategy.education?.keyLessons && strategy.education.keyLessons.length > 0 && (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>💡</Text>
+                  <Text style={styles.cardTitle}>Key Lessons</Text>
+                </View>
+                <View style={styles.lessonsList}>
+                  {strategy.education.keyLessons.map((lesson, i) => (
+                    <View key={i} style={styles.lessonItem}>
+                      <Text style={styles.lessonBullet}>•</Text>
+                      <Text style={styles.lessonText}>{lesson}</Text>
+                    </View>
+                  ))}
+                </View>
               </View>
+            )}
 
-              <View style={[styles.prosConsCard, styles.consCard]}>
-                <Text style={styles.prosConsTitle}>Disadvantages</Text>
-                {strategy.disadvantages.map((dis, i) => (
-                  <View key={i} style={styles.prosConsItem}>
-                    <Text style={styles.consIcon}>-</Text>
-                    <Text style={styles.prosConsText}>{dis}</Text>
-                  </View>
-                ))}
+            {/* Analogy */}
+            {strategy.analogy && (
+              <View style={[styles.card, styles.analogyCard]}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>🎭</Text>
+                  <Text style={styles.cardTitle}>Think of it like...</Text>
+                </View>
+                <Text style={styles.analogyText}>{strategy.analogy}</Text>
               </View>
-            </View>
+            )}
+
+            {/* The Nuance - Key Insight */}
+            {strategy.nuance && (
+              <View style={[styles.card, styles.nuanceCard]}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>⚡</Text>
+                  <Text style={styles.cardTitle}>The Nuance</Text>
+                </View>
+                <Text style={styles.nuanceText}>{strategy.nuance}</Text>
+              </View>
+            )}
+
+            {/* Advantages & Disadvantages */}
+            {strategy.advantages && strategy.advantages.length > 0 && (
+              <View style={styles.prosConsContainer}>
+                <View style={[styles.prosConsCard, styles.prosCard]}>
+                  <Text style={styles.prosConsTitle}>Advantages</Text>
+                  {strategy.advantages.map((adv, i) => (
+                    <View key={i} style={styles.prosConsItem}>
+                      <Text style={styles.prosIcon}>+</Text>
+                      <Text style={styles.prosConsText}>{adv}</Text>
+                    </View>
+                  ))}
+                </View>
+
+                {strategy.disadvantages && strategy.disadvantages.length > 0 && (
+                  <View style={[styles.prosConsCard, styles.consCard]}>
+                    <Text style={styles.prosConsTitle}>Disadvantages</Text>
+                    {strategy.disadvantages.map((dis, i) => (
+                      <View key={i} style={styles.prosConsItem}>
+                        <Text style={styles.consIcon}>-</Text>
+                        <Text style={styles.prosConsText}>{dis}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
+              </View>
+            )}
+          </View>
+        )}
+
+        {/* Walkthrough Tab - Trade scenario paths */}
+        {activeTab === 'walkthrough' && strategy.education?.tradePaths && (
+          <View style={styles.tabContent}>
+            <TradeWalkthrough
+              tradePaths={strategy.education.tradePaths}
+              ticker={strategy.education.realWorldExample?.ticker || 'STOCK'}
+              stockPrice={strategy.education.realWorldExample?.stockPrice || 100}
+            />
+
+            {/* Payoff Chart for context */}
+            {strategyConfig && !strategy.hidePayoffChart && (
+              <PayoffChart
+                legs={strategyConfig.legs}
+                currentPrice={strategyConfig.defaultStockPrice}
+                title="Payoff Reference"
+              />
+            )}
           </View>
         )}
 
@@ -214,98 +478,158 @@ const StrategyDetailScreen: React.FC = () => {
             )}
 
             {/* Risk/Reward */}
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Risk/Reward Profile</Text>
-              <View style={styles.riskRewardGrid}>
-                <View style={styles.riskRewardItem}>
-                  <Text style={styles.riskRewardLabel}>Max Profit</Text>
-                  <Text style={[styles.riskRewardValue, { color: colors.bullish }]}>
-                    {strategy.maxProfit}
-                  </Text>
-                </View>
-                <View style={styles.riskRewardItem}>
-                  <Text style={styles.riskRewardLabel}>Max Loss</Text>
-                  <Text style={[styles.riskRewardValue, { color: colors.bearish }]}>
-                    {strategy.maxLoss}
-                  </Text>
-                </View>
-                <View style={styles.riskRewardItem}>
-                  <Text style={styles.riskRewardLabel}>Breakeven</Text>
-                  <Text style={styles.riskRewardValue}>{strategy.breakeven}</Text>
+            {(strategy.maxProfit || strategy.maxLoss || strategy.breakeven) && (
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Risk/Reward Profile</Text>
+                <View style={styles.riskRewardGrid}>
+                  {strategy.maxProfit && (
+                    <View style={styles.riskRewardItem}>
+                      <Text style={styles.riskRewardLabel}>Max Profit</Text>
+                      <Text style={[styles.riskRewardValue, { color: colors.bullish }]}>
+                        {strategy.maxProfit}
+                      </Text>
+                    </View>
+                  )}
+                  {strategy.maxLoss && (
+                    <View style={styles.riskRewardItem}>
+                      <Text style={styles.riskRewardLabel}>Max Loss</Text>
+                      <Text style={[styles.riskRewardValue, { color: colors.bearish }]}>
+                        {strategy.maxLoss}
+                      </Text>
+                    </View>
+                  )}
+                  {strategy.breakeven && (
+                    <View style={styles.riskRewardItem}>
+                      <Text style={styles.riskRewardLabel}>Breakeven</Text>
+                      <Text style={styles.riskRewardValue}>{strategy.breakeven}</Text>
+                    </View>
+                  )}
                 </View>
               </View>
-            </View>
+            )}
 
-            {/* Greeks */}
-            <View style={styles.card}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.cardEmoji}></Text>
-                <Text style={styles.cardTitle}>The Greeks</Text>
-              </View>
-              <View style={styles.greeksGrid}>
-                <View style={styles.greekItem}>
-                  <Text style={styles.greekLabel}>Delta</Text>
-                  <Text style={styles.greekValue}>{strategy.greeks.delta}</Text>
-                </View>
-                <View style={styles.greekItem}>
-                  <Text style={styles.greekLabel}>Gamma</Text>
-                  <Text style={styles.greekValue}>{strategy.greeks.gamma}</Text>
-                </View>
-                <View style={styles.greekItem}>
-                  <Text style={styles.greekLabel}>Theta</Text>
-                  <Text style={styles.greekValue}>{strategy.greeks.theta}</Text>
-                </View>
-                <View style={styles.greekItem}>
-                  <Text style={styles.greekLabel}>Vega</Text>
-                  <Text style={styles.greekValue}>{strategy.greeks.vega}</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        )}
-
-        {activeTab === 'example' && (
-          <View style={styles.tabContent}>
-            {/* Example Scenario */}
-            <View style={styles.card}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.cardEmoji}></Text>
-                <Text style={styles.cardTitle}>Example Trade</Text>
-              </View>
-              <View style={styles.exampleBox}>
-                <Text style={styles.exampleTitle}>Scenario: AAPL at $150</Text>
-                <Text style={styles.exampleText}>
-                  {strategy.id === 'long-call' &&
-                    'You buy 1 AAPL $150 Call for $3.00 ($300 total).\n\nIf AAPL rises to $160:\n• Call value = $10 intrinsic\n• Profit = ($10 - $3) × 100 = $700\n\nIf AAPL stays at $150:\n• Call expires worthless\n• Loss = $300 (premium paid)'}
-                  {strategy.id === 'long-put' &&
-                    'You buy 1 AAPL $150 Put for $3.00 ($300 total).\n\nIf AAPL drops to $140:\n• Put value = $10 intrinsic\n• Profit = ($10 - $3) × 100 = $700\n\nIf AAPL stays at $150:\n• Put expires worthless\n• Loss = $300 (premium paid)'}
-                  {strategy.id === 'covered-call' &&
-                    'You own 100 AAPL shares at $150. You sell 1 $155 Call for $2.00.\n\nIf AAPL stays below $155:\n• Keep $200 premium\n• Keep your shares\n\nIf AAPL rises to $160:\n• Sell shares at $155\n• Total gain = $500 + $200 = $700'}
-                  {strategy.id === 'cash-secured-put' &&
-                    'You want to buy AAPL at $145. You sell 1 $145 Put for $2.00, holding $14,500 cash.\n\nIf AAPL stays above $145:\n• Keep $200 premium\n• No shares assigned\n\nIf AAPL drops to $140:\n• Buy 100 shares at $145\n• Effective cost = $143/share'}
-                  {strategy.id === 'bull-call-spread' &&
-                    'You buy 1 AAPL $150 Call for $4.00 and sell 1 $160 Call for $1.50. Net debit = $2.50.\n\nIf AAPL rises to $165:\n• Max profit = ($10 - $2.50) × 100 = $750\n\nIf AAPL stays at $150:\n• Max loss = $250 (net debit)'}
-                  {strategy.id === 'iron-condor' &&
-                    'AAPL at $150. Sell $145/$140 put spread and $155/$160 call spread for $2.00 credit.\n\nIf AAPL stays between $145-$155:\n• Max profit = $200\n\nIf AAPL moves outside $140-$160:\n• Max loss = $300'}
-                  {!['long-call', 'long-put', 'covered-call', 'cash-secured-put', 'bull-call-spread', 'iron-condor'].includes(strategy.id) &&
-                    'Example trade scenario for this strategy will show how to set up and manage the position with real stock prices and expected outcomes.'}
-                </Text>
-              </View>
-            </View>
-
-            {/* Payoff Chart for Example */}
-            {strategyConfig && (
+            {/* Payoff Diagram */}
+            {strategyConfig && !strategy.hidePayoffChart && (
               <PayoffChart
                 legs={strategyConfig.legs}
                 currentPrice={strategyConfig.defaultStockPrice}
-                title="Example Payoff Diagram"
+                title="Payoff at Expiration"
               />
             )}
 
+            {/* Nuance */}
+            {strategy.nuance && (
+              <View style={[styles.card, styles.nuanceCard]}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>⚡</Text>
+                  <Text style={styles.cardTitle}>Key Insight</Text>
+                </View>
+                <Text style={styles.nuanceText}>{strategy.nuance}</Text>
+              </View>
+            )}
+
             {/* Try It Button */}
-            <TouchableOpacity style={styles.tryItButton}>
-              <Text style={styles.tryItButtonText}>Try in Paper Trading</Text>
-            </TouchableOpacity>
+            {!strategy.hideSimulator && (
+              <TouchableOpacity style={styles.tryItButton}>
+                <Text style={styles.tryItButtonText}>Try in Paper Trading</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
+
+        {activeTab === 'greeks' && (
+          <View style={styles.tabContent}>
+            {/* Greeks Overview */}
+            {strategy.greeks && (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>Δ</Text>
+                  <Text style={styles.cardTitle}>The Greeks</Text>
+                </View>
+                <View style={styles.greeksGrid}>
+                  <View style={styles.greekItem}>
+                    <Text style={styles.greekLabel}>Delta (Δ)</Text>
+                    <Text style={styles.greekValue}>{strategy.greeks.delta}</Text>
+                  </View>
+                  <View style={styles.greekItem}>
+                    <Text style={styles.greekLabel}>Gamma (Γ)</Text>
+                    <Text style={styles.greekValue}>{strategy.greeks.gamma}</Text>
+                  </View>
+                  <View style={styles.greekItem}>
+                    <Text style={styles.greekLabel}>Theta (Θ)</Text>
+                    <Text style={styles.greekValue}>{strategy.greeks.theta}</Text>
+                  </View>
+                  <View style={styles.greekItem}>
+                    <Text style={styles.greekLabel}>Vega (ν)</Text>
+                    <Text style={styles.greekValue}>{strategy.greeks.vega}</Text>
+                  </View>
+                </View>
+              </View>
+            )}
+
+            {/* Greek Insights - from education */}
+            {strategy.education?.greekInsights && (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>🧠</Text>
+                  <Text style={styles.cardTitle}>Greek Insights</Text>
+                </View>
+                <View style={styles.insightsContainer}>
+                  <View style={styles.insightItem}>
+                    <View style={[styles.insightIcon, { backgroundColor: 'rgba(16, 185, 129, 0.15)' }]}>
+                      <Text style={[styles.insightIconText, { color: colors.bullish }]}>Δ</Text>
+                    </View>
+                    <View style={styles.insightContent}>
+                      <Text style={styles.insightLabel}>Delta</Text>
+                      <Text style={styles.insightText}>{strategy.education.greekInsights.delta}</Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.insightItem}>
+                    <View style={[styles.insightIcon, { backgroundColor: 'rgba(139, 92, 246, 0.15)' }]}>
+                      <Text style={[styles.insightIconText, { color: colors.neutral }]}>Γ</Text>
+                    </View>
+                    <View style={styles.insightContent}>
+                      <Text style={styles.insightLabel}>Gamma</Text>
+                      <Text style={styles.insightText}>{strategy.education.greekInsights.gamma}</Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.insightItem}>
+                    <View style={[styles.insightIcon, { backgroundColor: 'rgba(239, 68, 68, 0.15)' }]}>
+                      <Text style={[styles.insightIconText, { color: colors.bearish }]}>Θ</Text>
+                    </View>
+                    <View style={styles.insightContent}>
+                      <Text style={styles.insightLabel}>Theta</Text>
+                      <Text style={styles.insightText}>{strategy.education.greekInsights.theta}</Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.insightItem}>
+                    <View style={[styles.insightIcon, { backgroundColor: 'rgba(245, 158, 11, 0.15)' }]}>
+                      <Text style={[styles.insightIconText, { color: colors.warning }]}>ν</Text>
+                    </View>
+                    <View style={styles.insightContent}>
+                      <Text style={styles.insightLabel}>Vega</Text>
+                      <Text style={styles.insightText}>{strategy.education.greekInsights.vega}</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            )}
+
+            {/* No Greeks Available Message */}
+            {!strategy.greeks && !strategy.education?.greekInsights && (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>📚</Text>
+                  <Text style={styles.cardTitle}>Greeks</Text>
+                </View>
+                <Text style={styles.cardText}>
+                  Greek analysis is not applicable to this educational module.
+                </Text>
+              </View>
+            )}
           </View>
         )}
 
@@ -727,6 +1051,222 @@ const styles = StyleSheet.create({
     ...typography.styles.labelSm,
     color: colors.background.primary,
     opacity: 0.8,
+  },
+  // New styles for education content
+  exampleGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.md,
+    marginTop: spacing.sm,
+  },
+  exampleItem: {
+    width: '45%',
+    backgroundColor: colors.background.tertiary,
+    padding: spacing.sm,
+    borderRadius: borderRadius.md,
+  },
+  exampleLabel: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+    marginBottom: 2,
+  },
+  exampleValue: {
+    ...typography.styles.label,
+    color: colors.text.primary,
+  },
+  lessonsList: {
+    gap: spacing.sm,
+  },
+  lessonItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.sm,
+  },
+  lessonBullet: {
+    color: colors.accent,
+    fontSize: 16,
+    fontWeight: typography.weights.bold,
+  },
+  lessonText: {
+    ...typography.styles.bodySm,
+    color: colors.text.secondary,
+    flex: 1,
+    lineHeight: 20,
+  },
+  analogyCard: {
+    backgroundColor: 'rgba(139, 92, 246, 0.08)',
+    borderColor: 'rgba(139, 92, 246, 0.2)',
+  },
+  analogyText: {
+    ...typography.styles.body,
+    color: colors.text.secondary,
+    fontStyle: 'italic',
+    lineHeight: 24,
+  },
+  nuanceCard: {
+    backgroundColor: 'rgba(0, 240, 255, 0.08)',
+    borderColor: 'rgba(0, 240, 255, 0.2)',
+  },
+  nuanceText: {
+    ...typography.styles.body,
+    color: colors.text.secondary,
+    lineHeight: 24,
+  },
+  insightsContainer: {
+    gap: spacing.md,
+  },
+  insightItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.md,
+  },
+  insightIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  insightIconText: {
+    fontSize: 16,
+    fontWeight: typography.weights.bold,
+  },
+  insightContent: {
+    flex: 1,
+  },
+  insightLabel: {
+    ...typography.styles.labelSm,
+    color: colors.text.muted,
+    marginBottom: 2,
+  },
+  insightText: {
+    ...typography.styles.bodySm,
+    color: colors.text.secondary,
+    lineHeight: 20,
+  },
+  // Mentor Card Styles
+  mentorCard: {
+    flexDirection: 'row',
+    backgroundColor: colors.background.secondary,
+    borderRadius: borderRadius.xl,
+    padding: spacing.md,
+    marginBottom: spacing.md,
+    borderWidth: 2,
+    borderLeftWidth: 4,
+    overflow: 'hidden',
+  },
+  mentorAvatar: {
+    width: 80,
+    height: 80,
+    borderRadius: borderRadius.lg,
+    marginRight: spacing.md,
+  },
+  mentorContent: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  mentorHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: spacing.xs,
+    marginBottom: spacing.xs,
+  },
+  mentorEmoji: {
+    fontSize: 20,
+  },
+  mentorName: {
+    ...typography.styles.h5,
+    fontWeight: typography.weights.bold,
+  },
+  mentorTitle: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+  },
+  mentorGreeting: {
+    ...typography.styles.bodySm,
+    color: colors.text.secondary,
+    marginBottom: spacing.xs,
+    lineHeight: 18,
+  },
+  mentorCatchphrase: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+    fontStyle: 'italic',
+  },
+  // Quote Card Styles
+  quoteCard: {
+    backgroundColor: 'rgba(139, 92, 246, 0.08)',
+    borderRadius: borderRadius.xl,
+    padding: spacing.lg,
+    marginBottom: spacing.lg,
+    borderLeftWidth: 4,
+    borderLeftColor: colors.neon.purple,
+  },
+  quoteText: {
+    ...typography.styles.body,
+    color: colors.text.primary,
+    fontStyle: 'italic',
+    lineHeight: 24,
+    marginBottom: spacing.sm,
+  },
+  quoteAuthor: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+    textAlign: 'right',
+  },
+  // Know Thyself Greek Quote Styles
+  greekQuoteContainer: {
+    alignItems: 'center',
+    paddingVertical: spacing.lg,
+    marginBottom: spacing.md,
+  },
+  greekText: {
+    fontSize: 28,
+    fontStyle: 'italic',
+    color: '#39ff14', // Neon green
+    textShadowColor: 'rgba(57, 255, 20, 0.6)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 20,
+    marginBottom: spacing.sm,
+  },
+  greekSource: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+    fontStyle: 'italic',
+  },
+  // Rules of the Jungle Tiger Styles
+  tigerContainer: {
+    alignItems: 'center',
+    marginBottom: spacing.lg,
+  },
+  jungleSubtitle: {
+    ...typography.styles.body,
+    color: colors.text.secondary,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    marginBottom: spacing.lg,
+  },
+  jungleHighlight: {
+    color: colors.bullish,
+    fontWeight: typography.weights.bold,
+  },
+  tigerAvatarWrapper: {
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    overflow: 'hidden',
+    borderWidth: 4,
+    borderColor: '#f97316', // Orange
+    shadowColor: '#f97316',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 20,
+    elevation: 10,
+  },
+  tigerAvatar: {
+    width: '100%',
+    height: '100%',
   },
 });
 
