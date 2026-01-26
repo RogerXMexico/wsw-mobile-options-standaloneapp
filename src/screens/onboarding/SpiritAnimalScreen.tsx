@@ -88,9 +88,10 @@ const ANIMAL_IMAGES: Record<string, any> = {
 
 interface Props {
   onComplete: (animalId: string, experienceLevel: string) => void;
+  onBack?: () => void;
 }
 
-const SpiritAnimalScreen: React.FC<Props> = ({ onComplete }) => {
+const SpiritAnimalScreen: React.FC<Props> = ({ onComplete, onBack }) => {
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
 
@@ -146,11 +147,12 @@ const SpiritAnimalScreen: React.FC<Props> = ({ onComplete }) => {
 
     const level = EXPERIENCE_LEVELS.find(l => l.id === selectedLevel);
     if (level) {
-      // Save to AsyncStorage
+      // Save spirit animal and experience level to AsyncStorage
       await AsyncStorage.setItem('userSpiritAnimal', level.animal);
       await AsyncStorage.setItem('userExperienceLevel', level.id);
-      await AsyncStorage.setItem('onboardingComplete', 'true');
+      await AsyncStorage.setItem('userStartTier', level.startTier.toString());
 
+      // Let the parent (OnboardingNavigator) handle marking onboarding complete
       onComplete(level.animal, level.id);
     }
   };
@@ -211,6 +213,15 @@ const SpiritAnimalScreen: React.FC<Props> = ({ onComplete }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Back button */}
+      {onBack && (
+        <View style={styles.navHeader}>
+          <TouchableOpacity onPress={onBack} style={styles.backButton}>
+            <Text style={styles.backText}>← Back</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
       <Animated.View
         style={[
           styles.content,
@@ -294,6 +305,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background.primary,
+  },
+  navHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.md,
+  },
+  backButton: {
+    padding: spacing.sm,
+  },
+  backText: {
+    ...typography.styles.body,
+    color: colors.text.secondary,
   },
   content: {
     flex: 1,

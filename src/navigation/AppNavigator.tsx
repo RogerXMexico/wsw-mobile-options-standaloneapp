@@ -10,9 +10,7 @@ import { colors, typography, shadows } from '../theme';
 // Import navigators
 import AuthNavigator from './AuthNavigator';
 import MainTabNavigator from './MainTabNavigator';
-
-// Import onboarding
-import SpiritAnimalScreen from '../screens/onboarding/SpiritAnimalScreen';
+import OnboardingNavigator from './OnboardingNavigator';
 
 // Import hooks
 import { useAuth } from '../contexts';
@@ -68,10 +66,6 @@ const loadingStyles = StyleSheet.create({
   },
 });
 
-// Wrapper component for onboarding screen
-const OnboardingWrapper: React.FC<{ onComplete: (animalId: string, level: string) => void }> = ({ onComplete }) => {
-  return <SpiritAnimalScreen onComplete={onComplete} />;
-};
 
 export const AppNavigator: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -100,7 +94,7 @@ export const AppNavigator: React.FC = () => {
   }, [isAuthenticated]);
 
   // Handle onboarding completion
-  const handleOnboardingComplete = async (animalId: string, experienceLevel: string) => {
+  const handleOnboardingComplete = () => {
     setOnboardingComplete(true);
   };
 
@@ -115,7 +109,7 @@ export const AppNavigator: React.FC = () => {
   return (
     <NavigationContainer>
       {showOnboarding ? (
-        <OnboardingWrapper onComplete={handleOnboardingComplete} />
+        <OnboardingNavigator onComplete={handleOnboardingComplete} />
       ) : (
         <Stack.Navigator
           screenOptions={{
