@@ -33,14 +33,12 @@ const WelcomeScreen: React.FC<Props> = ({ onNext }) => {
     <SafeAreaView style={styles.container}>
       <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
         {/* Logo Section */}
-        <View style={styles.lionGlowRing}>
-          <View style={styles.lionContainer}>
-            <Image
-              source={require('../../../assets/lion.png')}
-              style={styles.lionImage}
-              resizeMode="cover"
-            />
-          </View>
+        <View style={styles.lionContainer}>
+          <Image
+            source={require('../../../assets/lion.png')}
+            style={styles.lionImage}
+            resizeMode="cover"
+          />
         </View>
 
         {/* Title Section */}
@@ -105,26 +103,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: spacing.xl,
   },
-  lionGlowRing: {
-    width: 146,
-    height: 146,
-    borderRadius: 73,
-    borderWidth: 3,
-    borderColor: colors.neon.green,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: spacing.xl,
-    shadowColor: colors.neon.green,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 20,
-    elevation: 15,
-  },
   lionContainer: {
     width: 140,
     height: 140,
     borderRadius: 70,
+    borderWidth: 3,
+    borderColor: colors.neon.green,
     overflow: 'hidden',
+    marginBottom: spacing.xl,
+    shadowColor: colors.neon.green,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 25,
+    elevation: 20,
   },
   lionImage: {
     width: '100%',

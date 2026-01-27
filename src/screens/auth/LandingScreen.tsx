@@ -103,8 +103,6 @@ const LandingScreen: React.FC = () => {
         </View>
       </SafeAreaView>
 
-      {/* Decorative geometric line */}
-      <View style={styles.geometricLine} />
     </View>
   );
 };
@@ -144,18 +142,18 @@ const styles = StyleSheet.create({
     borderColor: colors.neon.green,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#000000',
     shadowColor: colors.neon.green,
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 20,
-    elevation: 15,
+    shadowOpacity: 0.8,
+    shadowRadius: 25,
+    elevation: 20,
   },
   lionContainer: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
     overflow: 'hidden',
-    backgroundColor: '#0a0a0a',
   },
   lionImage: {
     width: '100%',
@@ -239,16 +237,6 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     fontSize: 15,
     color: colors.text.secondary,
-  },
-  geometricLine: {
-    position: 'absolute',
-    bottom: '25%',
-    right: -50,
-    width: 150,
-    height: 2,
-    backgroundColor: colors.neon.green,
-    opacity: 0.3,
-    transform: [{ rotate: '-45deg' }],
   },
 });
 
