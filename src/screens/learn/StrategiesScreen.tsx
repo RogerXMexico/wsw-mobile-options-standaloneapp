@@ -1,5 +1,5 @@
 // Strategies Screen for Wall Street Wildlife Mobile
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,13 +7,15 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { LearnStackScreenProps } from '../../navigation/types';
 import { colors, typography, spacing, borderRadius, shadows, getOutlookColor } from '../../theme';
 import { TIER_INFO } from '../../data/constants';
-import { strategies, strategyCounts } from '../../data/strategies';
+import { strategies, strategyCounts, getStrategiesByTierLazy, preloadTier } from '../../data/strategies';
+import { Strategy } from '../../data/types';
 import { useAuth } from '../../contexts';
 import { GlassCard, GlowButton, GradientText, PremiumModal } from '../../components/ui';
 
@@ -26,9 +28,49 @@ const StrategiesScreen: React.FC = () => {
   const [expandedTier, setExpandedTier] = useState<number | null>(0);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
+  // Lazy-loaded strategies for the currently expanded tier
+  const [lazyTierStrategies, setLazyTierStrategies] = useState<Strategy[]>([]);
+  const [loadingTier, setLoadingTier] = useState(false);
+
+  // Load tier strategies lazily when a tier is expanded
+  useEffect(() => {
+    if (expandedTier === null) {
+      setLazyTierStrategies([]);
+      return;
+    }
+
+    let cancelled = false;
+    setLoadingTier(true);
+
+    getStrategiesByTierLazy(expandedTier)
+      .then((result) => {
+        if (!cancelled) {
+          setLazyTierStrategies(result);
+          setLoadingTier(false);
+
+          // Prefetch the next tier while the user reads the current one
+          const tierNumbers = TIER_INFO.map(t => t.tier as number);
+          const currentIndex = tierNumbers.indexOf(expandedTier);
+          if (currentIndex >= 0 && currentIndex < tierNumbers.length - 1) {
+            preloadTier(tierNumbers[currentIndex + 1]);
+          }
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          // Fallback: use the synchronous full-array filter
+          setLazyTierStrategies(strategies.filter(s => s.tier === expandedTier));
+          setLoadingTier(false);
+        }
+      });
+
+    return () => { cancelled = true; };
+  }, [expandedTier]);
+
   const subscriptionTier = user?.subscriptionTier || 'free';
   const freeAccessTiers = [0, 0.5, 1, 2];
 
+  // Synchronous helper – used for search filtering (needs all strategies)
   const getStrategiesForTier = (tier: number) => {
     return strategies.filter(s => s.tier === tier);
   };
@@ -285,7 +327,11 @@ const StrategiesScreen: React.FC = () => {
                     </TouchableOpacity>
                   )}
 
-                  {tierStrategies.map((strategy) => (
+                  {loadingTier ? (
+                    <View style={styles.tierLoadingContainer}>
+                      <ActivityIndicator size="small" color={colors.neon.cyan} />
+                    </View>
+                  ) : lazyTierStrategies.map((strategy) => (
                     <TouchableOpacity
                       key={strategy.id}
                       style={styles.strategyItem}
@@ -475,6 +521,11 @@ const styles = StyleSheet.create({
   strategiesList: {
     borderTopWidth: 1,
     borderTopColor: colors.glass.border,
+  },
+  tierLoadingContainer: {
+    paddingVertical: spacing.lg,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   quizButton: {
     flexDirection: 'row',

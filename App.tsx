@@ -18,7 +18,12 @@ import {
 // Navigation imports
 import { AppNavigator } from './src/navigation';
 
-import { AuthProvider, JungleProvider } from './src/contexts';
+import { AuthProvider, JungleProvider, BookmarksProvider } from './src/contexts';
+import {
+  registerForPushNotifications,
+  configureNotificationChannels,
+  scheduleStreakReminder,
+} from './src/services/notifications';
 
 // Font mapping for use in the app
 export const fontMap = {
@@ -128,6 +133,16 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [fontsLoaded]);
 
+  // Initialize push notifications
+  useEffect(() => {
+    const initNotifications = async () => {
+      await configureNotificationChannels();
+      await registerForPushNotifications();
+      await scheduleStreakReminder();
+    };
+    initNotifications().catch(console.warn);
+  }, []);
+
   if (!fontsLoaded && !skipFonts) {
     return <LoadingScreen />;
   }
@@ -137,10 +152,12 @@ export default function App() {
       <View style={styles.container}>
         <AuthProvider>
           <JungleProvider>
-            <SafeAreaProvider>
-              <StatusBar style="light" backgroundColor="#000000" />
-              <AppNavigator />
-            </SafeAreaProvider>
+            <BookmarksProvider>
+              <SafeAreaProvider>
+                <StatusBar style="light" backgroundColor="#000000" />
+                <AppNavigator />
+              </SafeAreaProvider>
+            </BookmarksProvider>
           </JungleProvider>
         </AuthProvider>
       </View>

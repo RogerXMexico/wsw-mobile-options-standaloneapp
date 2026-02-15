@@ -1,7 +1,7 @@
 // Jungle Tribes Screen
-// Community groups for social competition
+// Community groups for social competition with tribe chat
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,27 +9,66 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  TextInput,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
+import { Ionicons } from '@expo/vector-icons';
+import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlassCard, GlowButton } from '../../components/ui';
 import { ProfileStackParamList } from '../../navigation/types';
-import { JUNGLE_TRIBES, getRankedTribes, JungleTribe } from '../../data/jungleTribes';
+import { getRankedTribes, JungleTribe } from '../../data/jungleTribes';
+import { useTribeChat, TribeChatMessage } from '../../hooks';
 
 type NavigationProp = NativeStackNavigationProp<ProfileStackParamList>;
 
 // Mock user's current tribe (null = not joined)
 const userTribeId: string | null = null;
 
+// Format a relative timestamp from an ISO date string
+const getRelativeTime = (isoDate: string): string => {
+  const now = Date.now();
+  const then = new Date(isoDate).getTime();
+  const diffMs = now - then;
+  const diffSec = Math.floor(diffMs / 1000);
+  const diffMin = Math.floor(diffSec / 60);
+  const diffHr = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHr / 24);
+
+  if (diffSec < 60) return 'just now';
+  if (diffMin < 60) return `${diffMin}m ago`;
+  if (diffHr < 24) return `${diffHr}h ago`;
+  if (diffDay < 7) return `${diffDay}d ago`;
+  return new Date(isoDate).toLocaleDateString();
+};
+
 const JungleTribesScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const [selectedTribe, setSelectedTribe] = useState<JungleTribe | null>(null);
+  const [chatInput, setChatInput] = useState('');
+  const chatScrollRef = useRef<ScrollView>(null);
 
   const rankedTribes = getRankedTribes();
   const userTribe = userTribeId ? rankedTribes.find(t => t.id === userTribeId) : null;
+
+  // Chat hook - activated when a tribe is selected
+  const { messages, loading: chatLoading, sendMessage, refresh: refreshChat } = useTribeChat(
+    selectedTribe?.id || null
+  );
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    if (messages.length > 0 && chatScrollRef.current) {
+      setTimeout(() => {
+        chatScrollRef.current?.scrollToEnd({ animated: true });
+      }, 100);
+    }
+  }, [messages.length]);
 
   const handleJoinTribe = (tribe: JungleTribe) => {
     Alert.alert(
@@ -48,6 +87,12 @@ const JungleTribesScreen: React.FC = () => {
     );
   };
 
+  const handleSendMessage = () => {
+    if (!chatInput.trim()) return;
+    sendMessage(chatInput.trim());
+    setChatInput('');
+  };
+
   const formatXP = (xp: number): string => {
     if (xp >= 1000000) {
       return `${(xp / 1000000).toFixed(1)}M`;
@@ -57,6 +102,32 @@ const JungleTribesScreen: React.FC = () => {
     }
     return xp.toString();
   };
+
+  const renderChatMessage = (msg: TribeChatMessage) => (
+    <View
+      key={msg.id}
+      style={[
+        styles.chatMessage,
+        msg.isOwn && styles.chatMessageOwn,
+      ]}
+    >
+      <View style={styles.chatMessageHeader}>
+        <Text
+          style={[
+            styles.chatDisplayName,
+            msg.isOwn && styles.chatDisplayNameOwn,
+          ]}
+          numberOfLines={1}
+        >
+          {msg.display_name}
+        </Text>
+        <Text style={styles.chatTimestamp}>
+          {getRelativeTime(msg.created_at)}
+        </Text>
+      </View>
+      <Text style={styles.chatMessageText}>{msg.message_text}</Text>
+    </View>
+  );
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -79,7 +150,7 @@ const JungleTribesScreen: React.FC = () => {
           colors={['rgba(59, 130, 246, 0.15)', 'rgba(139, 92, 246, 0.1)', 'transparent']}
           style={styles.heroGradient}
         >
-          <Text style={styles.heroEmoji}></Text>
+          <Text style={styles.heroEmoji}>{'\u{1F3D5}'}</Text>
           <Text style={styles.heroTitle}>Join a Tribe</Text>
           <Text style={styles.heroSubtitle}>
             Team up with fellow traders. Your XP contributes to your tribe's ranking!
@@ -120,7 +191,7 @@ const JungleTribesScreen: React.FC = () => {
           </GlassCard>
         ) : (
           <GlassCard style={styles.noTribeCard}>
-            <Text style={styles.noTribeEmoji}></Text>
+            <Text style={styles.noTribeEmoji}>{'\u{1F50D}'}</Text>
             <Text style={styles.noTribeTitle}>You haven't joined a tribe yet</Text>
             <Text style={styles.noTribeSubtitle}>
               Choose a tribe below to start contributing to team rankings
@@ -142,9 +213,9 @@ const JungleTribesScreen: React.FC = () => {
           <View style={styles.seasonRewards}>
             <Text style={styles.seasonRewardsLabel}>Season Rewards:</Text>
             <View style={styles.rewardsList}>
-              <Text style={styles.rewardItem}> Tribe Champion badge</Text>
-              <Text style={styles.rewardItem}> +500 bonus XP</Text>
-              <Text style={styles.rewardItem}> Exclusive avatar frame</Text>
+              <Text style={styles.rewardItem}>{'\u{1F3C6}'} Tribe Champion badge</Text>
+              <Text style={styles.rewardItem}>{'\u{2B50}'} +500 bonus XP</Text>
+              <Text style={styles.rewardItem}>{'\u{1F5BC}'} Exclusive avatar frame</Text>
             </View>
           </View>
         </GlassCard>
@@ -171,7 +242,7 @@ const JungleTribesScreen: React.FC = () => {
                   tribe.rank === 3 && styles.tribeRankThird,
                 ]}>
                   <Text style={styles.tribeRankText}>
-                    {tribe.rank === 1 ? '' : tribe.rank === 2 ? '' : tribe.rank === 3 ? '' : `#${tribe.rank}`}
+                    {tribe.rank === 1 ? '\u{1F947}' : tribe.rank === 2 ? '\u{1F948}' : tribe.rank === 3 ? '\u{1F949}' : `#${tribe.rank}`}
                   </Text>
                 </View>
 
@@ -217,69 +288,145 @@ const JungleTribesScreen: React.FC = () => {
         <View style={styles.bottomSpacer} />
       </ScrollView>
 
-      {/* Tribe Detail Modal */}
+      {/* Tribe Detail Modal with Chat */}
       {selectedTribe && (
         <TouchableOpacity
           style={styles.modalOverlay}
           activeOpacity={1}
           onPress={() => setSelectedTribe(null)}
         >
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => {}}
-            style={styles.modalContent}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.modalKeyboardView}
           >
-            <LinearGradient
-              colors={[`${selectedTribe.color}30`, colors.background.secondary]}
-              style={styles.modalGradient}
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {}}
+              style={styles.modalContent}
             >
-              <View style={[styles.modalAvatar, { borderColor: selectedTribe.color }]}>
-                <Text style={styles.modalEmoji}>{selectedTribe.leaderEmoji}</Text>
-              </View>
-              <Text style={[styles.modalName, { color: selectedTribe.color }]}>
-                {selectedTribe.name}
-              </Text>
-              <Text style={styles.modalMotto}>"{selectedTribe.motto}"</Text>
-              <Text style={styles.modalDescription}>{selectedTribe.description}</Text>
-
-              <View style={styles.modalStats}>
-                <View style={styles.modalStat}>
-                  <Text style={styles.modalStatValue}>#{selectedTribe.rank}</Text>
-                  <Text style={styles.modalStatLabel}>Rank</Text>
-                </View>
-                <View style={styles.modalStat}>
-                  <Text style={styles.modalStatValue}>{selectedTribe.memberCount.toLocaleString()}</Text>
-                  <Text style={styles.modalStatLabel}>Members</Text>
-                </View>
-                <View style={styles.modalStat}>
-                  <Text style={[styles.modalStatValue, { color: selectedTribe.color }]}>
-                    {formatXP(selectedTribe.totalXP)}
-                  </Text>
-                  <Text style={styles.modalStatLabel}>Total XP</Text>
-                </View>
-              </View>
-
-              {selectedTribe.id === userTribeId ? (
-                <View style={styles.alreadyJoined}>
-                  <Text style={styles.alreadyJoinedText}>You're a member!</Text>
-                </View>
-              ) : (
-                <GlowButton
-                  title={`Join ${selectedTribe.name}`}
-                  onPress={() => handleJoinTribe(selectedTribe)}
-                  fullWidth
-                  style={styles.joinButton}
-                />
-              )}
-
-              <TouchableOpacity
-                style={styles.closeButton}
-                onPress={() => setSelectedTribe(null)}
+              <ScrollView
+                style={styles.modalScroll}
+                contentContainerStyle={styles.modalScrollContent}
+                showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
               >
-                <Text style={styles.closeButtonText}>Close</Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          </TouchableOpacity>
+                <LinearGradient
+                  colors={[`${selectedTribe.color}30`, colors.background.secondary]}
+                  style={styles.modalGradient}
+                >
+                  <View style={[styles.modalAvatar, { borderColor: selectedTribe.color }]}>
+                    <Text style={styles.modalEmoji}>{selectedTribe.leaderEmoji}</Text>
+                  </View>
+                  <Text style={[styles.modalName, { color: selectedTribe.color }]}>
+                    {selectedTribe.name}
+                  </Text>
+                  <Text style={styles.modalMotto}>"{selectedTribe.motto}"</Text>
+                  <Text style={styles.modalDescription}>{selectedTribe.description}</Text>
+
+                  <View style={styles.modalStats}>
+                    <View style={styles.modalStat}>
+                      <Text style={styles.modalStatValue}>#{selectedTribe.rank}</Text>
+                      <Text style={styles.modalStatLabel}>Rank</Text>
+                    </View>
+                    <View style={styles.modalStat}>
+                      <Text style={styles.modalStatValue}>{selectedTribe.memberCount.toLocaleString()}</Text>
+                      <Text style={styles.modalStatLabel}>Members</Text>
+                    </View>
+                    <View style={styles.modalStat}>
+                      <Text style={[styles.modalStatValue, { color: selectedTribe.color }]}>
+                        {formatXP(selectedTribe.totalXP)}
+                      </Text>
+                      <Text style={styles.modalStatLabel}>Total XP</Text>
+                    </View>
+                  </View>
+
+                  {selectedTribe.id === userTribeId ? (
+                    <View style={styles.alreadyJoined}>
+                      <Text style={styles.alreadyJoinedText}>You're a member!</Text>
+                    </View>
+                  ) : (
+                    <GlowButton
+                      title={`Join ${selectedTribe.name}`}
+                      onPress={() => handleJoinTribe(selectedTribe)}
+                      fullWidth
+                      style={styles.joinButton}
+                    />
+                  )}
+
+                  {/* Tribe Chat Section */}
+                  <View style={styles.chatSection}>
+                    <View style={styles.chatSectionHeader}>
+                      <Ionicons name="chatbubbles-outline" size={18} color={colors.neon.cyan} />
+                      <Text style={styles.chatSectionTitle}>Tribe Chat</Text>
+                      <TouchableOpacity onPress={refreshChat} style={styles.chatRefreshButton}>
+                        <Ionicons name="refresh-outline" size={16} color={colors.text.muted} />
+                      </TouchableOpacity>
+                    </View>
+
+                    {/* Chat Messages */}
+                    <View style={styles.chatMessagesContainer}>
+                      {chatLoading ? (
+                        <View style={styles.chatLoadingContainer}>
+                          <ActivityIndicator size="small" color={colors.neon.cyan} />
+                          <Text style={styles.chatLoadingText}>Loading messages...</Text>
+                        </View>
+                      ) : messages.length === 0 ? (
+                        <View style={styles.chatEmptyContainer}>
+                          <Ionicons name="chatbubble-ellipses-outline" size={24} color={colors.text.muted} />
+                          <Text style={styles.chatEmptyText}>No messages yet. Start the conversation!</Text>
+                        </View>
+                      ) : (
+                        <ScrollView
+                          ref={chatScrollRef}
+                          style={styles.chatMessagesList}
+                          contentContainerStyle={styles.chatMessagesListContent}
+                          showsVerticalScrollIndicator={false}
+                          nestedScrollEnabled
+                        >
+                          {messages.map(renderChatMessage)}
+                        </ScrollView>
+                      )}
+                    </View>
+
+                    {/* Chat Input */}
+                    <View style={styles.chatInputContainer}>
+                      <TextInput
+                        style={styles.chatTextInput}
+                        placeholder="Say something to the tribe..."
+                        placeholderTextColor={colors.text.muted}
+                        value={chatInput}
+                        onChangeText={setChatInput}
+                        multiline={false}
+                        returnKeyType="send"
+                        onSubmitEditing={handleSendMessage}
+                      />
+                      <TouchableOpacity
+                        style={[
+                          styles.chatSendButton,
+                          !chatInput.trim() && styles.chatSendButtonDisabled,
+                        ]}
+                        onPress={handleSendMessage}
+                        disabled={!chatInput.trim()}
+                      >
+                        <Ionicons
+                          name="send"
+                          size={18}
+                          color={chatInput.trim() ? colors.background.primary : colors.text.muted}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  <TouchableOpacity
+                    style={styles.closeButton}
+                    onPress={() => setSelectedTribe(null)}
+                  >
+                    <Text style={styles.closeButtonText}>Close</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              </ScrollView>
+            </TouchableOpacity>
+          </KeyboardAvoidingView>
         </TouchableOpacity>
       )}
     </SafeAreaView>
@@ -599,6 +746,7 @@ const styles = StyleSheet.create({
   bottomSpacer: {
     height: 40,
   },
+
   // Modal styles
   modalOverlay: {
     ...StyleSheet.absoluteFillObject,
@@ -606,10 +754,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  modalKeyboardView: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   modalContent: {
-    width: '85%',
+    width: '90%',
+    maxHeight: '85%',
     borderRadius: borderRadius.xl,
     overflow: 'hidden',
+  },
+  modalScroll: {
+    flexGrow: 0,
+  },
+  modalScrollContent: {
+    flexGrow: 1,
   },
   modalGradient: {
     padding: spacing.xl,
@@ -694,6 +855,139 @@ const styles = StyleSheet.create({
     fontFamily: typography.fonts.medium,
     fontSize: typography.sizes.md,
     color: colors.text.muted,
+  },
+
+  // Chat section styles
+  chatSection: {
+    width: '100%',
+    marginTop: spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: colors.glass.border,
+    paddingTop: spacing.md,
+  },
+  chatSectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spacing.sm,
+  },
+  chatSectionTitle: {
+    fontFamily: typography.fonts.semiBold,
+    fontSize: typography.sizes.md,
+    color: colors.neon.cyan,
+    marginLeft: spacing.xs,
+    flex: 1,
+  },
+  chatRefreshButton: {
+    padding: spacing.xs,
+  },
+  chatMessagesContainer: {
+    width: '100%',
+    minHeight: 120,
+    maxHeight: 200,
+    backgroundColor: colors.background.primary,
+    borderRadius: borderRadius.lg,
+    overflow: 'hidden',
+  },
+  chatLoadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: spacing.lg,
+  },
+  chatLoadingText: {
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.sm,
+    color: colors.text.muted,
+    marginTop: spacing.sm,
+  },
+  chatEmptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: spacing.lg,
+  },
+  chatEmptyText: {
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.sm,
+    color: colors.text.muted,
+    marginTop: spacing.sm,
+    textAlign: 'center',
+  },
+  chatMessagesList: {
+    flex: 1,
+  },
+  chatMessagesListContent: {
+    padding: spacing.sm,
+    gap: spacing.sm,
+  },
+  chatMessage: {
+    backgroundColor: colors.overlay.light,
+    borderRadius: borderRadius.md,
+    padding: spacing.sm,
+    borderLeftWidth: 2,
+    borderLeftColor: colors.text.muted,
+  },
+  chatMessageOwn: {
+    borderLeftColor: colors.neon.green,
+    backgroundColor: 'rgba(57, 255, 20, 0.05)',
+  },
+  chatMessageHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 2,
+  },
+  chatDisplayName: {
+    fontFamily: typography.fonts.semiBold,
+    fontSize: typography.sizes.xs,
+    color: colors.text.secondary,
+    flex: 1,
+  },
+  chatDisplayNameOwn: {
+    color: colors.neon.green,
+  },
+  chatTimestamp: {
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.xs,
+    color: colors.text.muted,
+    marginLeft: spacing.sm,
+  },
+  chatMessageText: {
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.sm,
+    color: colors.text.primary,
+    lineHeight: 18,
+  },
+
+  // Chat input styles
+  chatInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: spacing.sm,
+    gap: spacing.sm,
+  },
+  chatTextInput: {
+    flex: 1,
+    height: 40,
+    backgroundColor: colors.background.tertiary,
+    borderRadius: borderRadius.lg,
+    paddingHorizontal: spacing.md,
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.sm,
+    color: colors.text.primary,
+    borderWidth: 1,
+    borderColor: colors.glass.border,
+  },
+  chatSendButton: {
+    width: 40,
+    height: 40,
+    borderRadius: borderRadius.full,
+    backgroundColor: colors.neon.cyan,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chatSendButtonDisabled: {
+    backgroundColor: colors.background.tertiary,
   },
 });
 

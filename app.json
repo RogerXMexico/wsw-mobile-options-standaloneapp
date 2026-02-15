@@ -11,6 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
+    "scheme": "wsw",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.wallstreetwildlife.optionsuniversity",
@@ -30,7 +31,14 @@
     },
     "plugins": [
       "expo-secure-store",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#39ff14"
+        }
+      ]
     ]
   }
 }

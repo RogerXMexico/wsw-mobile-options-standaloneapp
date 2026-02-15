@@ -3,3 +3,5 @@
 export { useAuth } from '../contexts';
 export { useSubscription } from './useSubscription';
 export { useProgress } from './useProgress';
+export { useTribeChat } from './useTribeChat';
+export type { TribeChatMessage } from './useTribeChat';

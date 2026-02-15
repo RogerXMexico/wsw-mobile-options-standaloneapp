@@ -23,6 +23,10 @@ import {
   tier8Strategies,
   tier9Strategies,
   tier10Strategies,
+  // Lazy loading utilities
+  getStrategiesByTierLazy,
+  preloadTier,
+  clearTierCache,
 } from './strategies/index';
 
 // Strategy leg configurations for payoff charts
@@ -294,3 +298,6 @@ export {
   tier9Strategies,
   tier10Strategies,
 };
+
+// Re-export lazy loading utilities
+export { getStrategiesByTierLazy, preloadTier, clearTierCache };

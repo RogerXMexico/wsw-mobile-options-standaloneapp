@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootStackParamList } from './types';
+import { linking } from './linking';
 import { colors, typography, shadows } from '../theme';
 
 // Import navigators
@@ -107,7 +108,7 @@ export const AppNavigator: React.FC = () => {
   const showOnboarding = isAuthenticated && onboardingComplete === false;
 
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       {showOnboarding ? (
         <OnboardingNavigator onComplete={handleOnboardingComplete} />
       ) : (
