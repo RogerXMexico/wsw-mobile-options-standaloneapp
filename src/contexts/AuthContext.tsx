@@ -1,7 +1,10 @@
 // AuthContext for Wall Street Wildlife Mobile
 // Provides shared authentication state across the app
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
-import { User } from '../data/types';
+// Uses Supabase for production, mock auth for development
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef, ReactNode } from 'react';
+import { User, AnimalMascot } from '../data/types';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { useUserStore } from '../stores';
 
 interface AuthState {
   user: User | null;
@@ -37,6 +40,36 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+const fetchProfile = async (userId: string): Promise<User> => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', userId)
+    .single();
+
+  if (error || !data) {
+    return {
+      id: userId,
+      email: '',
+      displayName: undefined,
+      avatarAnimal: 'monkey',
+      createdAt: new Date().toISOString(),
+      subscriptionTier: 'free',
+      progress: defaultProgress,
+    };
+  }
+
+  return {
+    id: data.id,
+    email: data.email,
+    displayName: data.display_name,
+    avatarAnimal: data.avatar_animal || 'monkey',
+    createdAt: data.created_at,
+    subscriptionTier: data.subscription_tier || 'free',
+    progress: defaultProgress,
+  };
+};
+
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [state, setState] = useState<AuthState>({
     user: null,
@@ -45,23 +78,112 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     error: null,
   });
 
-  // Check for existing session on mount
+  const userStore = useUserStore();
+  const useSupabase = isSupabaseConfigured();
+  // Keep a ref to the latest user for callbacks that need current state
+  const userRef = useRef<User | null>(null);
+  userRef.current = state.user;
+
+  // Check for existing session on mount + set up auth listener
   useEffect(() => {
     checkSession();
-  }, []);
+
+    if (useSupabase) {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(
+        async (event, session) => {
+          if (session?.user) {
+            const profile = await fetchProfile(session.user.id);
+            setState({
+              user: profile,
+              isAuthenticated: true,
+              isLoading: false,
+              error: null,
+            });
+            userStore.setProfile({
+              id: profile.id,
+              email: profile.email,
+              displayName: profile.displayName,
+              avatarAnimal: profile.avatarAnimal || 'monkey',
+              subscriptionTier: profile.subscriptionTier || 'free',
+            });
+            userStore.setAuthenticated(true);
+          } else {
+            setState({
+              user: null,
+              isAuthenticated: false,
+              isLoading: false,
+              error: null,
+            });
+            userStore.setAuthenticated(false);
+          }
+        }
+      );
+
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
+  }, [useSupabase]);
 
   const checkSession = async () => {
     try {
-      // TODO: Replace with Supabase session check
-      // const { data: { session } } = await supabase.auth.getSession();
+      if (useSupabase) {
+        const { data: { session }, error } = await supabase.auth.getSession();
 
-      // For now, simulate no session
-      setState(prev => ({
-        ...prev,
-        isLoading: false,
-        isAuthenticated: false,
-      }));
-    } catch (error) {
+        if (error) throw error;
+
+        if (session?.user) {
+          const profile = await fetchProfile(session.user.id);
+          setState({
+            user: profile,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
+          userStore.setAuthenticated(true);
+        } else {
+          setState(prev => ({
+            ...prev,
+            isLoading: false,
+            isAuthenticated: false,
+          }));
+        }
+      } else {
+        // Mock mode - check persisted store
+        if (userStore.isAuthenticated && userStore.profile.id) {
+          setState({
+            user: {
+              id: userStore.profile.id,
+              email: userStore.profile.email || '',
+              displayName: userStore.profile.displayName || undefined,
+              avatarAnimal: (userStore.profile.avatarAnimal as AnimalMascot) || undefined,
+              createdAt: userStore.profile.createdAt || new Date().toISOString(),
+              subscriptionTier: userStore.profile.subscriptionTier,
+              progress: {
+                ...defaultProgress,
+                xp: userStore.progress.xp,
+                level: userStore.progress.level,
+                streak: userStore.progress.streak,
+                badges: userStore.progress.earnedBadges,
+                completedStrategies: userStore.progress.completedStrategies,
+                completedQuizzes: userStore.progress.completedQuizzes,
+              },
+            },
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
+        } else {
+          setState(prev => ({
+            ...prev,
+            isLoading: false,
+            isAuthenticated: false,
+          }));
+        }
+        userStore.setLoading(false);
+      }
+    } catch (error: any) {
+      console.error('Session check error:', error);
       setState(prev => ({
         ...prev,
         isLoading: false,
@@ -78,76 +200,153 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      // TODO: Replace with Supabase auth
-      // const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (useSupabase) {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
-      // Simulate successful login for development
-      const mockUser: User = {
-        id: 'mock-user-id',
-        email,
-        displayName: email.split('@')[0],
-        avatarAnimal: 'monkey',
-        createdAt: new Date().toISOString(),
-        subscriptionTier: 'free',
-        progress: defaultProgress,
-      };
+        if (error) throw error;
 
-      setState({
-        user: mockUser,
-        isAuthenticated: true,
-        isLoading: false,
-        error: null,
-      });
+        if (data.user) {
+          const profile = await fetchProfile(data.user.id);
+          setState({
+            user: profile,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
+        }
+      } else {
+        // Mock mode for development
+        const mockUser: User = {
+          id: `user-${Date.now()}`,
+          email,
+          displayName: email.split('@')[0],
+          avatarAnimal: 'monkey',
+          createdAt: new Date().toISOString(),
+          subscriptionTier: 'free',
+          progress: defaultProgress,
+        };
+
+        userStore.setProfile({
+          id: mockUser.id,
+          email: mockUser.email,
+          displayName: mockUser.displayName,
+          avatarAnimal: mockUser.avatarAnimal,
+          subscriptionTier: mockUser.subscriptionTier,
+          createdAt: mockUser.createdAt,
+        });
+        userStore.setAuthenticated(true);
+
+        setState({
+          user: mockUser,
+          isAuthenticated: true,
+          isLoading: false,
+          error: null,
+        });
+      }
     } catch (error: any) {
+      const errorMessage = error.message || 'Sign in failed';
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error.message || 'Sign in failed',
+        error: errorMessage,
       }));
-      throw error;
+      throw new Error(errorMessage);
     }
-  }, []);
+  }, [useSupabase, userStore]);
 
   const signUp = useCallback(async (email: string, password: string, displayName?: string) => {
     setState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      // TODO: Replace with Supabase auth
-      // const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { displayName } } });
+      if (useSupabase) {
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              display_name: displayName || email.split('@')[0],
+            },
+          },
+        });
 
-      // Simulate successful signup for development
-      const mockUser: User = {
-        id: 'mock-user-id-' + Date.now(),
-        email,
-        displayName: displayName || email.split('@')[0],
-        avatarAnimal: 'owl', // Default mascot for new users
-        createdAt: new Date().toISOString(),
-        subscriptionTier: 'free',
-        progress: defaultProgress,
-      };
+        if (error) throw error;
 
-      setState({
-        user: mockUser,
-        isAuthenticated: true,
-        isLoading: false,
-        error: null,
-      });
+        if (data.user) {
+          // Create profile in database
+          const { error: profileError } = await supabase.from('profiles').insert({
+            id: data.user.id,
+            email,
+            display_name: displayName || email.split('@')[0],
+            avatar_animal: 'owl',
+            subscription_tier: 'free',
+          });
+
+          if (profileError) {
+            console.error('Profile creation error:', profileError);
+          }
+
+          const profile = await fetchProfile(data.user.id);
+          setState({
+            user: profile,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
+        }
+      } else {
+        // Mock mode
+        const mockUser: User = {
+          id: `user-${Date.now()}`,
+          email,
+          displayName: displayName || email.split('@')[0],
+          avatarAnimal: 'owl',
+          createdAt: new Date().toISOString(),
+          subscriptionTier: 'free',
+          progress: defaultProgress,
+        };
+
+        userStore.setProfile({
+          id: mockUser.id,
+          email: mockUser.email,
+          displayName: mockUser.displayName,
+          avatarAnimal: mockUser.avatarAnimal,
+          subscriptionTier: mockUser.subscriptionTier,
+          createdAt: mockUser.createdAt,
+        });
+        userStore.setAuthenticated(true);
+
+        setState({
+          user: mockUser,
+          isAuthenticated: true,
+          isLoading: false,
+          error: null,
+        });
+      }
     } catch (error: any) {
+      const errorMessage = error.message || 'Sign up failed';
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error.message || 'Sign up failed',
+        error: errorMessage,
       }));
-      throw error;
+      throw new Error(errorMessage);
     }
-  }, []);
+  }, [useSupabase, userStore]);
 
   const signOut = useCallback(async () => {
     setState(prev => ({ ...prev, isLoading: true }));
 
     try {
-      // TODO: Replace with Supabase auth
-      // await supabase.auth.signOut();
+      if (useSupabase) {
+        const { error } = await supabase.auth.signOut();
+        if (error) throw error;
+      }
+
+      // Clear store
+      userStore.clearProfile();
 
       setState({
         user: null,
@@ -156,44 +355,67 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         error: null,
       });
     } catch (error: any) {
+      const errorMessage = error.message || 'Sign out failed';
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error.message || 'Sign out failed',
+        error: errorMessage,
       }));
-      throw error;
+      throw new Error(errorMessage);
     }
-  }, []);
+  }, [useSupabase, userStore]);
 
   const resetPassword = useCallback(async (email: string) => {
     setState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      // TODO: Replace with Supabase auth
-      // await supabase.auth.resetPasswordForEmail(email);
+      if (useSupabase) {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: 'wsw://reset-password',
+        });
+        if (error) throw error;
+      }
 
       setState(prev => ({
         ...prev,
         isLoading: false,
       }));
     } catch (error: any) {
+      const errorMessage = error.message || 'Password reset failed';
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error.message || 'Password reset failed',
+        error: errorMessage,
       }));
-      throw error;
+      throw new Error(errorMessage);
     }
-  }, []);
+  }, [useSupabase]);
 
   const updateProfile = useCallback(async (updates: Partial<User>) => {
-    if (!state.user) return;
+    if (!userRef.current) return;
 
     setState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      // TODO: Replace with Supabase update
-      // await supabase.from('users').update(updates).eq('id', state.user.id);
+      if (useSupabase) {
+        const { error } = await supabase
+          .from('profiles')
+          .update({
+            display_name: updates.displayName,
+            avatar_animal: updates.avatarAnimal,
+            subscription_tier: updates.subscriptionTier,
+          })
+          .eq('id', userRef.current!.id);
+
+        if (error) throw error;
+      }
+
+      // Update store
+      userStore.setProfile({
+        displayName: updates.displayName || userStore.profile.displayName,
+        avatarAnimal: updates.avatarAnimal || userStore.profile.avatarAnimal,
+        subscriptionTier: updates.subscriptionTier || userStore.profile.subscriptionTier,
+      });
 
       setState(prev => ({
         ...prev,
@@ -201,14 +423,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         isLoading: false,
       }));
     } catch (error: any) {
+      const errorMessage = error.message || 'Profile update failed';
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error.message || 'Profile update failed',
+        error: errorMessage,
       }));
-      throw error;
+      throw new Error(errorMessage);
     }
-  }, [state.user]);
+  }, [useSupabase, userStore]);
 
   const value: AuthContextType = {
     ...state,

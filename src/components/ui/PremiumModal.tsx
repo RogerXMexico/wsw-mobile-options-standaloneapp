@@ -7,16 +7,15 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
+  Linking,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
-import { GlassCard } from './GlassCard';
 import { GlowButton } from './GlowButton';
-import { ProfileStackParamList } from '../../navigation/types';
 
 const { width } = Dimensions.get('window');
+const WEBSITE_PRICING_URL = 'https://wallstreetwildlife.com/pricing';
 
 interface PremiumModalProps {
   visible: boolean;
@@ -25,12 +24,14 @@ interface PremiumModalProps {
 }
 
 const PREMIUM_FEATURES = [
-  { icon: '📊', text: 'Real-time market data' },
-  { icon: '🧮', text: 'All calculators & tools' },
-  { icon: '🤖', text: 'AI Signal Analyzer' },
-  { icon: '📈', text: 'Unlimited paper trading' },
-  { icon: '🎓', text: 'All strategy lessons' },
-  { icon: '🏆', text: 'Priority support' },
+  { text: 'All 70+ strategy lessons' },
+  { text: 'Real-time market data' },
+  { text: 'All calculators & tools' },
+  { text: 'AI Signal Analyzer' },
+  { text: 'Options Flow data' },
+  { text: 'Unlimited paper trading' },
+  { text: '16 Animal Mentor guides' },
+  { text: 'Tribe chat & social features' },
 ];
 
 export const PremiumModal: React.FC<PremiumModalProps> = ({
@@ -38,12 +39,9 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
   onClose,
   featureName,
 }) => {
-  const navigation = useNavigation<NativeStackNavigationProp<ProfileStackParamList>>();
-
-  const handleUpgrade = () => {
+  const handleSubscribeOnWeb = () => {
     onClose();
-    // Navigate to subscription screen
-    navigation.navigate('Subscription');
+    Linking.openURL(WEBSITE_PRICING_URL);
   };
 
   return (
@@ -66,7 +64,7 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
             >
               {/* Crown Icon */}
               <View style={styles.iconContainer}>
-                <Text style={styles.crownIcon}>👑</Text>
+                <Ionicons name="diamond" size={36} color={colors.neon.green} />
               </View>
 
               {/* Title */}
@@ -87,7 +85,11 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
               <View style={styles.featuresList}>
                 {PREMIUM_FEATURES.map((feature, index) => (
                   <View key={index} style={styles.featureRow}>
-                    <Text style={styles.featureIcon}>{feature.icon}</Text>
+                    <Ionicons
+                      name="checkmark-circle"
+                      size={18}
+                      color={colors.neon.green}
+                    />
                     <Text style={styles.featureLabel}>{feature.text}</Text>
                   </View>
                 ))}
@@ -95,15 +97,17 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
 
               {/* Pricing */}
               <View style={styles.pricingContainer}>
-                <Text style={styles.priceStrike}>$14.99</Text>
-                <Text style={styles.price}>$9.99</Text>
+                <Text style={styles.price}>$49</Text>
                 <Text style={styles.pricePeriod}>/month</Text>
               </View>
+              <Text style={styles.annualNote}>
+                or $470/year (save $118)
+              </Text>
 
-              {/* Buttons */}
+              {/* Subscribe on Web Button */}
               <GlowButton
-                title="Upgrade Now"
-                onPress={handleUpgrade}
+                title="Subscribe on wallstreetwildlife.com"
+                onPress={handleSubscribeOnWeb}
                 variant="primary"
                 fullWidth
                 style={styles.upgradeButton}
@@ -113,9 +117,10 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
                 <Text style={styles.laterButtonText}>Maybe Later</Text>
               </TouchableOpacity>
 
-              {/* Trial Note */}
+              {/* Note */}
               <Text style={styles.trialNote}>
-                Start with a 7-day free trial. Cancel anytime.
+                Subscribe on our website to get the best price.{'\n'}
+                Your premium access syncs automatically to this app.
               </Text>
             </LinearGradient>
           </View>
@@ -155,9 +160,6 @@ const styles = StyleSheet.create({
     borderColor: colors.neon.green,
     ...shadows.neonGreenSubtle,
   },
-  crownIcon: {
-    fontSize: 40,
-  },
   title: {
     ...typography.styles.h3,
     color: colors.neon.green,
@@ -189,10 +191,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
     borderBottomWidth: 1,
     borderBottomColor: colors.glass.border,
-  },
-  featureIcon: {
-    fontSize: 20,
-    marginRight: spacing.md,
+    gap: spacing.sm,
   },
   featureLabel: {
     ...typography.styles.body,
@@ -202,13 +201,7 @@ const styles = StyleSheet.create({
   pricingContainer: {
     flexDirection: 'row',
     alignItems: 'baseline',
-    marginBottom: spacing.lg,
-  },
-  priceStrike: {
-    ...typography.styles.body,
-    color: colors.text.muted,
-    textDecorationLine: 'line-through',
-    marginRight: spacing.sm,
+    marginBottom: spacing.xs,
   },
   price: {
     ...typography.styles.h2,
@@ -218,6 +211,11 @@ const styles = StyleSheet.create({
     ...typography.styles.body,
     color: colors.text.secondary,
     marginLeft: spacing.xs,
+  },
+  annualNote: {
+    ...typography.styles.bodySm,
+    color: colors.text.muted,
+    marginBottom: spacing.lg,
   },
   upgradeButton: {
     marginBottom: spacing.md,
@@ -235,6 +233,7 @@ const styles = StyleSheet.create({
     color: colors.text.muted,
     textAlign: 'center',
     marginTop: spacing.md,
+    lineHeight: 18,
   },
 });
 

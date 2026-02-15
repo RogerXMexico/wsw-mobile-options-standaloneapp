@@ -11,10 +11,12 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { TIER_INFO, getLevelFromXP, MASCOTS } from '../../data/constants';
 import { useAuth } from '../../contexts';
+import { useJungle } from '../../contexts';
 import { GlassCard, GlowButton, GradientText } from '../../components/ui';
 
 // Spirit animal images
@@ -31,6 +33,7 @@ const { width } = Dimensions.get('window');
 const DashboardScreen: React.FC = () => {
   const navigation = useNavigation();
   const { user } = useAuth();
+  const { progress, level, levelName, xpProgress, streakDays } = useJungle();
   const [spiritAnimal, setSpiritAnimal] = useState<string | null>(null);
 
   // Load spirit animal from AsyncStorage
@@ -48,15 +51,6 @@ const DashboardScreen: React.FC = () => {
     loadSpiritAnimal();
   }, []);
 
-  // Mock data for demonstration
-  const progress = user?.progress || {
-    xp: 0,
-    streak: 0,
-    completedStrategies: [],
-    currentTier: 0,
-  };
-
-  const levelInfo = getLevelFromXP(progress.xp);
   const mascot = MASCOTS.find(m => m.id === (user?.avatarAnimal || 'monkey'));
   const animalImage = spiritAnimal ? SPIRIT_ANIMAL_IMAGES[spiritAnimal] : null;
 
@@ -75,7 +69,10 @@ const DashboardScreen: React.FC = () => {
               {user?.displayName || 'Trader'}
             </GradientText>
           </View>
-          <TouchableOpacity style={styles.avatarContainer}>
+          <TouchableOpacity
+            style={styles.avatarContainer}
+            onPress={() => (navigation as any).navigate('ProfileTab')}
+          >
             {animalImage ? (
               <Image
                 source={animalImage}
@@ -83,12 +80,7 @@ const DashboardScreen: React.FC = () => {
                 resizeMode="cover"
               />
             ) : (
-              <Text style={styles.avatarEmoji}>
-                {mascot?.id === 'monkey' ? '🐵' :
-                 mascot?.id === 'owl' ? '🦉' :
-                 mascot?.id === 'bull' ? '🐂' :
-                 mascot?.id === 'bear' ? '🐻' : '🐵'}
-              </Text>
+              <Ionicons name="person" size={24} color={colors.neon.yellow} />
             )}
           </TouchableOpacity>
         </View>
@@ -97,10 +89,11 @@ const DashboardScreen: React.FC = () => {
         <GlassCard style={styles.progressCard} withGlow>
           <View style={styles.progressHeader}>
             <View>
-              <Text style={styles.levelBadge}>Level {levelInfo.level}</Text>
-              <Text style={styles.levelTitle}>{levelInfo.title}</Text>
+              <Text style={styles.levelBadge}>Level {level}</Text>
+              <Text style={styles.levelTitle}>{levelName}</Text>
             </View>
             <View style={styles.xpBadge}>
+              <Ionicons name="star" size={14} color={colors.neon.green} />
               <Text style={styles.xpText}>{progress.xp} XP</Text>
             </View>
           </View>
@@ -111,19 +104,22 @@ const DashboardScreen: React.FC = () => {
               <View
                 style={[
                   styles.progressBarFill,
-                  { width: `${levelInfo.progress * 100}%` },
+                  { width: `${xpProgress.percentage}%` },
                 ]}
               />
             </View>
             <Text style={styles.progressPercent}>
-              {Math.round(levelInfo.progress * 100)}%
+              {Math.round(xpProgress.percentage)}%
             </Text>
           </View>
 
           {/* Streak */}
           <View style={styles.streakContainer}>
-            <Text style={styles.streakIcon}></Text>
-            <Text style={styles.streakText}>{progress.streak} day streak</Text>
+            <Ionicons name="flame" size={18} color={colors.neon.yellow} />
+            <Text style={styles.streakText}>{streakDays} day streak</Text>
+            <View style={styles.streakSpacer} />
+            <Ionicons name="ribbon" size={14} color={colors.text.muted} />
+            <Text style={styles.badgeCountText}>{progress.earnedBadges.length} badges</Text>
           </View>
         </GlassCard>
 
@@ -134,20 +130,86 @@ const DashboardScreen: React.FC = () => {
             style={[styles.actionCard, { borderColor: colors.bullish }]}
             onPress={() => (navigation as any).navigate('LearnTab')}
           >
-            <Text style={styles.actionEmoji}></Text>
+            <Ionicons name="book" size={32} color={colors.bullish} />
             <Text style={styles.actionTitle}>Continue Learning</Text>
-            <Text style={styles.actionSubtitle}>Tier {progress.currentTier}</Text>
+            <Text style={styles.actionSubtitle}>
+              {progress.completedLessons.length} lessons done
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.actionCard, { borderColor: colors.neon.cyan }]}
             onPress={() => (navigation as any).navigate('PracticeTab')}
           >
-            <Text style={styles.actionEmoji}></Text>
+            <Ionicons name="trending-up" size={32} color={colors.neon.cyan} />
             <Text style={styles.actionTitle}>Paper Trade</Text>
             <Text style={styles.actionSubtitle}>$10,000 virtual</Text>
           </TouchableOpacity>
         </View>
+
+        {/* Explore Features */}
+        <Text style={styles.sectionTitle}>Explore</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.featureScroll}
+          contentContainerStyle={styles.featureScrollContent}
+        >
+          <TouchableOpacity
+            style={[styles.featureCard, { borderColor: 'rgba(57, 255, 20, 0.3)' }]}
+            onPress={() => (navigation as any).navigate('SocialFeed')}
+          >
+            <View style={[styles.featureIconBg, { backgroundColor: 'rgba(57, 255, 20, 0.1)' }]}>
+              <Ionicons name="people" size={22} color={colors.neon.green} />
+            </View>
+            <Text style={styles.featureTitle}>Social Feed</Text>
+            <Text style={styles.featureSubtitle}>See what others trade</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.featureCard, { borderColor: 'rgba(251, 191, 36, 0.3)' }]}
+            onPress={() => (navigation as any).navigate('LearnTab', { screen: 'ChallengePaths' })}
+          >
+            <View style={[styles.featureIconBg, { backgroundColor: 'rgba(251, 191, 36, 0.1)' }]}>
+              <Ionicons name="trophy" size={22} color={colors.neon.yellow} />
+            </View>
+            <Text style={styles.featureTitle}>Challenges</Text>
+            <Text style={styles.featureSubtitle}>Earn badges & XP</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.featureCard, { borderColor: 'rgba(0, 240, 255, 0.3)' }]}
+            onPress={() => (navigation as any).navigate('ToolsTab', { screen: 'OptionsFlow' })}
+          >
+            <View style={[styles.featureIconBg, { backgroundColor: 'rgba(0, 240, 255, 0.1)' }]}>
+              <Ionicons name="radio" size={22} color={colors.neon.cyan} />
+            </View>
+            <Text style={styles.featureTitle}>Live Flow</Text>
+            <Text style={styles.featureSubtitle}>Options flow alerts</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.featureCard, { borderColor: 'rgba(245, 158, 11, 0.3)' }]}
+            onPress={() => (navigation as any).navigate('LearnTab', { screen: 'VideoLessons' })}
+          >
+            <View style={[styles.featureIconBg, { backgroundColor: 'rgba(245, 158, 11, 0.1)' }]}>
+              <Ionicons name="videocam" size={22} color={colors.volatility} />
+            </View>
+            <Text style={styles.featureTitle}>Video Lessons</Text>
+            <Text style={styles.featureSubtitle}>Coming soon</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.featureCard, { borderColor: 'rgba(139, 92, 246, 0.3)' }]}
+            onPress={() => (navigation as any).navigate('LearnTab', { screen: 'LearningPathSelector' })}
+          >
+            <View style={[styles.featureIconBg, { backgroundColor: 'rgba(139, 92, 246, 0.1)' }]}>
+              <Ionicons name="compass" size={22} color={colors.neon.purple} />
+            </View>
+            <Text style={styles.featureTitle}>Learning Paths</Text>
+            <Text style={styles.featureSubtitle}>Choose your journey</Text>
+          </TouchableOpacity>
+        </ScrollView>
 
         {/* Featured Strategy */}
         <Text style={styles.sectionTitle}>Featured Strategy</Text>
@@ -173,8 +235,9 @@ const DashboardScreen: React.FC = () => {
         <Text style={styles.sectionTitle}>Your Journey</Text>
         <GlassCard style={styles.tiersContainer}>
           {TIER_INFO.slice(0, 5).map((tier, index) => {
-            const isCompleted = tier.tier < progress.currentTier;
-            const isCurrent = tier.tier === progress.currentTier;
+            const completedCount = progress.completedStrategies.length;
+            const isCompleted = tier.tier < (completedCount > 10 ? 3 : completedCount > 5 ? 2 : completedCount > 0 ? 1 : 0);
+            const isCurrent = !isCompleted && (index === 0 || TIER_INFO[index - 1]?.tier < (completedCount > 10 ? 3 : completedCount > 5 ? 2 : completedCount > 0 ? 1 : 0));
 
             return (
               <View key={tier.tier} style={styles.tierItem}>
@@ -195,7 +258,7 @@ const DashboardScreen: React.FC = () => {
                     },
                   ]}
                 >
-                  {isCompleted && <Text style={styles.tierCheck}></Text>}
+                  {isCompleted && <Ionicons name="checkmark" size={14} color={colors.text.primary} />}
                 </View>
                 <Text
                   style={[
@@ -215,13 +278,18 @@ const DashboardScreen: React.FC = () => {
         <Text style={styles.sectionTitle}>Daily Mission</Text>
         <GlassCard style={styles.missionCard}>
           <View style={styles.missionLeft}>
-            <Text style={styles.missionEmoji}></Text>
+            <View style={styles.missionIconBg}>
+              <Ionicons name="flag" size={22} color={colors.neon.yellow} />
+            </View>
             <View>
               <Text style={styles.missionTitle}>Complete 1 Strategy</Text>
-              <Text style={styles.missionProgress}>0 / 1 completed</Text>
+              <Text style={styles.missionProgress}>
+                {progress.completedStrategies.length > 0 ? '1' : '0'} / 1 completed
+              </Text>
             </View>
           </View>
           <View style={styles.missionReward}>
+            <Ionicons name="star" size={12} color={colors.neon.green} />
             <Text style={styles.missionRewardText}>+50 XP</Text>
           </View>
         </GlassCard>
@@ -280,9 +348,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  avatarEmoji: {
-    fontSize: 24,
-  },
   progressCard: {
     marginBottom: spacing.xl,
   },
@@ -301,6 +366,9 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
   },
   xpBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
     backgroundColor: colors.overlay.neonGreen,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.xs,
@@ -343,12 +411,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.sm,
   },
-  streakIcon: {
-    fontSize: 16,
-  },
   streakText: {
     ...typography.styles.bodySm,
     color: colors.neon.yellow,
+  },
+  streakSpacer: {
+    flex: 1,
+  },
+  badgeCountText: {
+    ...typography.styles.bodySm,
+    color: colors.text.muted,
   },
   sectionTitle: {
     ...typography.styles.h5,
@@ -369,9 +441,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.sm,
   },
-  actionEmoji: {
-    fontSize: 32,
-  },
   actionTitle: {
     ...typography.styles.label,
     color: colors.text.primary,
@@ -380,6 +449,39 @@ const styles = StyleSheet.create({
   actionSubtitle: {
     ...typography.styles.caption,
     color: colors.text.secondary,
+  },
+  // Explore features horizontal scroll
+  featureScroll: {
+    marginHorizontal: -spacing.lg,
+  },
+  featureScrollContent: {
+    paddingHorizontal: spacing.lg,
+    gap: spacing.sm,
+  },
+  featureCard: {
+    width: 130,
+    backgroundColor: colors.glass.background,
+    borderRadius: borderRadius.lg,
+    padding: spacing.md,
+    borderWidth: 1,
+    gap: spacing.sm,
+  },
+  featureIconBg: {
+    width: 40,
+    height: 40,
+    borderRadius: borderRadius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  featureTitle: {
+    fontFamily: typography.fonts.semiBold,
+    fontSize: typography.sizes.sm,
+    color: colors.text.primary,
+  },
+  featureSubtitle: {
+    fontFamily: typography.fonts.regular,
+    fontSize: 11,
+    color: colors.text.muted,
   },
   featuredCard: {
     padding: spacing.lg,
@@ -440,10 +542,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: spacing.xs,
   },
-  tierCheck: {
-    fontSize: 12,
-    color: colors.text.primary,
-  },
   tierName: {
     ...typography.styles.caption,
     textAlign: 'center',
@@ -466,8 +564,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.md,
   },
-  missionEmoji: {
-    fontSize: 32,
+  missionIconBg: {
+    width: 44,
+    height: 44,
+    borderRadius: borderRadius.md,
+    backgroundColor: 'rgba(251, 191, 36, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   missionTitle: {
     ...typography.styles.label,
@@ -478,6 +581,9 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
   },
   missionReward: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
     backgroundColor: colors.overlay.neonGreen,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,

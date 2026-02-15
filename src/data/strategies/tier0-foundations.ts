@@ -1,5 +1,5 @@
 // Tier 0: Foundations - Core educational modules
-// 6 strategies introducing options basics
+// 7 strategies introducing options basics
 
 import { Strategy } from '../types';
 
@@ -148,6 +148,34 @@ export const tier0Strategies: Strategy[] = [
     },
     analogy: 'A race car driver knows their limits before hitting the track. A trader must know their psychological limits before entering the market.',
     nuance: 'The market is a mirror. Every trade reflects your psychology—your fears, your hopes, your discipline. Master yourself first.',
+  },
+  {
+    id: 'options-vocabulary',
+    name: 'Options Vocabulary',
+    tier: 0,
+    tierName: 'Foundations',
+    category: 'educational',
+    outlook: 'Educational',
+    objective: 'Terminology',
+    risk: 'None',
+    description: 'Master the language of options trading. From BTO and STO to IV, OI, sweeps, and blocks—fluency in options vocabulary makes the charts readable and the market less intimidating.',
+    isPremium: false,
+    hideSimulator: true,
+    hideAnalyst: true,
+    hidePayoffChart: true,
+    education: {
+      whatItDoes: 'Interactive vocabulary guide covering all essential options trading terminology.',
+      keyLessons: [
+        'BTO = Buy to Open, STO = Sell to Open',
+        'BTC = Buy to Close, STC = Sell to Close',
+        'IV = Implied Volatility, OI = Open Interest',
+        'ITM = In the Money, OTM = Out of the Money, ATM = At the Money',
+        'DTE = Days to Expiration',
+        'Sweeps, blocks, and dark pool prints are institutional signals',
+      ],
+    },
+    analogy: 'A field guide to the jungle. Before you hunt, you must know the names of the creatures.',
+    nuance: 'Fluency First: Options traders speak their own language. BTO, STO, IV, OI, sweeps, blocks—master the vocabulary and the charts become readable.',
   },
   {
     id: 'rules-of-the-jungle',

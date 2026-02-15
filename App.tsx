@@ -17,8 +17,8 @@ import {
 
 // Navigation imports
 import { AppNavigator } from './src/navigation';
-import { colors } from './src/theme';
-import { AuthProvider } from './src/contexts';
+
+import { AuthProvider, JungleProvider } from './src/contexts';
 
 // Font mapping for use in the app
 export const fontMap = {
@@ -71,6 +71,41 @@ const loadingStyles = StyleSheet.create({
   },
 });
 
+// Error boundary to catch rendering crashes
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error: string }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: '' };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error: error.message };
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('[ErrorBoundary]', error.message, info.componentStack);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <View style={loadingStyles.container}>
+          <Text style={{ color: '#ef4444', fontSize: 20, fontWeight: 'bold', marginBottom: 12 }}>
+            App Crashed
+          </Text>
+          <Text style={{ color: '#ffffff', fontSize: 14, textAlign: 'center', paddingHorizontal: 24 }}>
+            {this.state.error}
+          </Text>
+        </View>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     'Inter-Regular': Inter_400Regular,
@@ -98,14 +133,18 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <AuthProvider>
-        <SafeAreaProvider>
-          <StatusBar style="light" backgroundColor="#000000" />
-          <AppNavigator />
-        </SafeAreaProvider>
-      </AuthProvider>
-    </View>
+    <ErrorBoundary>
+      <View style={styles.container}>
+        <AuthProvider>
+          <JungleProvider>
+            <SafeAreaProvider>
+              <StatusBar style="light" backgroundColor="#000000" />
+              <AppNavigator />
+            </SafeAreaProvider>
+          </JungleProvider>
+        </AuthProvider>
+      </View>
+    </ErrorBoundary>
   );
 }
 

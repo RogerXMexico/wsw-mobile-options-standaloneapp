@@ -1,5 +1,5 @@
 // Tier 0.5: Express Lane - Quick-start modules for eager learners
-// 9 strategies for accelerated learning
+// 11 strategies for accelerated learning
 
 import { Strategy } from '../types';
 
@@ -61,6 +61,74 @@ export const tier05Strategies: Strategy[] = [
       },
     },
     estimatedReadTime: 5,
+  },
+  {
+    id: 'express-iv',
+    name: 'Express: Understanding IV',
+    tier: 0.5,
+    tierName: 'Express Lane',
+    category: 'educational',
+    outlook: 'Educational',
+    objective: 'Quick Start',
+    risk: 'None',
+    description: 'IV is NOT a Greek—it\'s the market\'s forecast of how much the stock will move. It directly affects option prices. Learn why IV matters and how to avoid the dreaded IV crush.',
+    isPremium: false,
+    hideSimulator: true,
+    hidePayoffChart: true,
+    education: {
+      whatItDoes: 'Explains Implied Volatility in plain English: what it is, how it affects prices, and the IV crush trap.',
+      keyLessons: [
+        'IV is the market\'s expectation of future movement',
+        'High IV = expensive options, Low IV = cheap options',
+        'IV Rank 0-25% = Low IV (good time to buy options)',
+        'IV Rank 75-100% = High IV (be cautious buying)',
+        'IV Crush: IV drops after events like earnings, destroying option value',
+        'Always check IV before entering a trade—it\'s the price tag',
+      ],
+      realWorldExample: {
+        ticker: 'AAPL',
+        stockPrice: 180,
+        strikePrice: 180,
+        premium: 4.50,
+        expiration: '30 days',
+      },
+    },
+    estimatedReadTime: 8,
+  },
+  {
+    id: 'express-covered-call',
+    name: 'Express: Covered Call',
+    tier: 0.5,
+    tierName: 'Express Lane',
+    category: 'income',
+    outlook: 'Neutral/Bullish',
+    objective: 'Quick Income',
+    risk: 'Capped Upside',
+    description: 'Generate income from stocks you already own. The covered call is the income strategy for long-term shareholders—get paid for capping your upside.',
+    isPremium: false,
+    legs: [{ type: 'call', action: 'sell', strikeOffset: 5, quantity: 1 }],
+    education: {
+      whatItDoes: 'Sell a call against shares you own to collect premium income. If the stock stays below the strike, you keep the premium and your shares.',
+      realWorldExample: {
+        ticker: 'TSLA',
+        stockPrice: 250,
+        strikePrice: 260,
+        premium: 5.00,
+        expiration: '45 days',
+      },
+      keyLessons: [
+        'You must own 100 shares to sell 1 covered call',
+        'Premium received is yours to keep regardless of outcome',
+        'If stock stays below strike: keep premium + shares (repeat monthly)',
+        'If stock rises above strike: shares called away at strike + premium',
+        'If stock drops: premium cushions the loss vs just holding shares',
+        'Don\'t sell covered calls before major catalysts (earnings, product launches)',
+      ],
+    },
+    maxProfit: 'Premium + Upside to Strike',
+    maxLoss: 'Stock Drop - Premium',
+    breakeven: 'Cost Basis - Premium',
+    estimatedReadTime: 15,
   },
   {
     id: 'express-chain',

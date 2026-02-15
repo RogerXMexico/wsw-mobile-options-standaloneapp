@@ -31,6 +31,7 @@ export type MainTabParamList = {
 export type HomeStackParamList = {
   Dashboard: undefined;
   Notifications: undefined;
+  SocialFeed: undefined;
 };
 
 // Learn stack params
@@ -59,6 +60,10 @@ export type LearnStackParamList = {
   AISignalAnalyzer: undefined;
   EarningsCalendar: undefined;
   OptionsChainViewer: { ticker?: string };
+  // Phase 4 additions
+  LearningPathSelector: undefined;
+  ChallengePaths: undefined;
+  VideoLessons: undefined;
 };
 
 // Event Horizons stack params (for nested navigation)
@@ -91,6 +96,7 @@ export type ToolsStackParamList = {
   OptionsChain: { ticker?: string };
   Watchlist: undefined;
   OptionsSurface3D: undefined;
+  OptionsFlow: undefined;
 };
 
 // Practice stack params

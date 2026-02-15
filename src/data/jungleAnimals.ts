@@ -417,6 +417,84 @@ export const JUNGLE_ANIMALS: Record<string, JungleAnimal> = {
     },
     favoriteStrategies: ['iron-condor', 'calendar-spread', 'diagonal-spread'],
   },
+
+  wolf: {
+    id: 'wolf',
+    name: 'The Patient Predator',
+    characterName: 'Wolfgang',
+    emoji: '🐺',
+    riskLevel: 'aggressive',
+    riskStars: 4,
+    personality: 'Ruthless, calculated, patient. Wolfgang waits in the shadows, studying his prey for days before striking with lethal precision.',
+    catchphrase: 'The pack waits. The pack watches. The pack strikes.',
+    philosophy: 'The hunt is won before the strike. Study your prey. Know the terrain. Wait for weakness. Then attack without mercy.',
+    colors: {
+      primary: '#64748b',
+      accent: '#94a3b8',
+      bg: 'rgba(100, 116, 139, 0.1)',
+    },
+    dialogues: {
+      greeting: 'You seek to join the pack? First, you must learn to wait.',
+      encouragement: 'Good. You\'re learning discipline. The weak chase—the strong wait.',
+      quizCorrect: 'Precise. Cold. Correct. You think like a predator.',
+      quizIncorrect: 'Impatience. That\'s how prey thinks. Let\'s try again.',
+      lessonComplete: 'Another weapon sharpened. The pack grows stronger.',
+      strategyComplete: 'This strategy requires patience and precision. You have both now.',
+    },
+    favoriteStrategies: ['bear-put-spread', 'bear-call-spread', 'long-put', 'short-strangle', 'iron-condor', 'ratio-spread'],
+  },
+
+  kangaroo: {
+    id: 'kangaroo',
+    name: 'The Volatile Jumper',
+    characterName: 'Joey',
+    emoji: '🦘',
+    riskLevel: 'aggressive',
+    riskStars: 5,
+    personality: 'Wild, explosive, thrives on volatility. Joey loves the chaos—big moves, big swings, big payoffs.',
+    catchphrase: 'When the market jumps, I jump higher!',
+    philosophy: 'Volatility is not risk—it\'s opportunity. The bigger the jump, the bigger the profit.',
+    colors: {
+      primary: '#dc2626',
+      accent: '#f87171',
+      bg: 'rgba(220, 38, 38, 0.1)',
+    },
+    dialogues: {
+      greeting: 'G\'day mate! Ready to catch some wild moves? Let\'s bounce!',
+      encouragement: 'That\'s the spirit! Embrace the volatility!',
+      quizCorrect: 'BOING! Nailed it! You think like a true jumper!',
+      quizIncorrect: 'Woah, missed that landing. Let\'s hop back and try again!',
+      lessonComplete: 'Another big move mastered! You\'re learning to fly!',
+      strategyComplete: 'This volatility weapon is now in your pouch. Use it when chaos erupts!',
+    },
+    favoriteStrategies: ['long-straddle', 'long-strangle', 'call-backspread', 'put-backspread', 'iron-butterfly'],
+  },
+
+  panda: {
+    id: 'panda',
+    name: 'The Zen Investor',
+    characterName: 'Puffy',
+    emoji: '🐼',
+    riskLevel: 'conservative',
+    riskStars: 1,
+    personality: 'Calm, steady, unshakeable. Puffy doesn\'t chase excitement—she collects premium while others panic.',
+    catchphrase: 'Inner peace... and consistent premium.',
+    philosophy: 'The market is chaos. You don\'t have to be. Collect your premium, manage your risk, and let time do the work.',
+    colors: {
+      primary: '#059669',
+      accent: '#6ee7b7',
+      bg: 'rgba(5, 150, 105, 0.1)',
+    },
+    dialogues: {
+      greeting: 'Welcome, friend. Take a breath. The market will wait. Let\'s learn in peace.',
+      encouragement: 'Very good. Patience and calm lead to consistent profits.',
+      quizCorrect: 'Excellent. Your mind is clear, your answer is correct.',
+      quizIncorrect: 'Hmm. Let go of the stress. Clear your mind and try again.',
+      lessonComplete: 'Another peaceful lesson absorbed. Your trading becomes more zen.',
+      strategyComplete: 'This strategy brings calm and income. A perfect combination.',
+    },
+    favoriteStrategies: ['covered-call', 'cash-secured-put', 'protective-put', 'collar', 'calendar-spread'],
+  },
 };
 
 // Map strategies to their primary mentor
@@ -455,6 +533,14 @@ export const STRATEGY_MENTORS: Record<string, string> = {
   'calendar-spread': 'fox',
   'pmcc': 'fox',
   'diagonal-spread': 'fox',
+
+  // Tier 7 - Ratios
+  'ratio-spread': 'octopus',
+  'call-backspread': 'kangaroo',
+  'put-backspread': 'kangaroo',
+  'broken-wing-butterfly': 'fox',
+  'jade-lizard': 'sloth',
+  'zebra': 'lion',
 
   // Default
   'default': 'owl',

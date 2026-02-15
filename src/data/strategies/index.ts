@@ -1,5 +1,5 @@
 // Strategy exports - combines all tier strategy files
-// This file aggregates all 77 strategies from the Wall Street Wildlife course
+// This file aggregates all strategies from the Wall Street Wildlife course
 
 import { Strategy } from '../types';
 
@@ -17,7 +17,7 @@ import { tier8Strategies } from './tier8-eventhorizons';
 import { tier9Strategies } from './tier9-tools';
 import { tier10Strategies } from './tier10-play';
 
-// Combined strategies array - all 77 strategies
+// Combined strategies array
 export const allStrategies: Strategy[] = [
   ...tier0Strategies,
   ...tier05Strategies,

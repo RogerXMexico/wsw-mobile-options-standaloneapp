@@ -6,152 +6,90 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert,
-  Platform,
   Linking,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { GlassCard, GradientText, GlowButton } from '../../components/ui';
 import { useAuth } from '../../contexts';
+
+const WEBSITE_PRICING_URL = 'https://wallstreetwildlife.com/pricing';
 
 interface PlanFeature {
   text: string;
   included: boolean;
 }
 
-interface SubscriptionPlan {
-  id: string;
+interface PricingOption {
+  id: 'monthly' | 'annual';
   name: string;
   price: string;
+  pricePerMonth: string;
   period: string;
-  description: string;
-  features: PlanFeature[];
-  popular?: boolean;
-  color: string;
+  savings?: string;
+  bestValue?: boolean;
 }
 
-const PLANS: SubscriptionPlan[] = [
+const PRICING_OPTIONS: PricingOption[] = [
   {
-    id: 'free',
-    name: 'Free',
-    price: '$0',
-    period: 'forever',
-    description: 'Get started with options basics',
-    color: colors.text.secondary,
-    features: [
-      { text: 'Basic strategy lessons', included: true },
-      { text: '5 practice trades/day', included: true },
-      { text: 'Limited quizzes', included: true },
-      { text: 'Community access', included: true },
-      { text: 'Real-time data', included: false },
-      { text: 'Advanced calculators', included: false },
-      { text: 'AI Signal Analyzer', included: false },
-      { text: 'Paper trading', included: false },
-    ],
-  },
-  {
-    id: 'premium',
-    name: 'Premium',
-    price: '$9.99',
+    id: 'monthly',
+    name: 'Monthly',
+    price: '$49',
+    pricePerMonth: '$49',
     period: '/month',
-    description: 'Unlock the full jungle experience',
-    color: colors.neon.green,
-    popular: true,
-    features: [
-      { text: 'All strategy lessons', included: true },
-      { text: 'Unlimited practice trades', included: true },
-      { text: 'All quizzes & badges', included: true },
-      { text: 'Priority community access', included: true },
-      { text: 'Real-time market data', included: true },
-      { text: 'All calculators & tools', included: true },
-      { text: 'AI Signal Analyzer', included: true },
-      { text: 'Full paper trading', included: true },
-    ],
   },
   {
-    id: 'pro',
-    name: 'Pro',
-    price: '$19.99',
-    period: '/month',
-    description: 'For serious traders',
-    color: colors.neon.yellow,
-    features: [
-      { text: 'Everything in Premium', included: true },
-      { text: 'Advanced analytics', included: true },
-      { text: 'Options flow data', included: true },
-      { text: 'Exclusive strategies', included: true },
-      { text: 'Direct mentor access', included: true },
-      { text: '1-on-1 coaching calls', included: true },
-      { text: 'Early feature access', included: true },
-      { text: 'Custom alerts', included: true },
-    ],
+    id: 'annual',
+    name: 'Annual',
+    price: '$470',
+    pricePerMonth: '$39.17',
+    period: '/year',
+    savings: 'Save $118',
+    bestValue: true,
   },
+];
+
+const FREE_FEATURES: PlanFeature[] = [
+  { text: 'Tier 0 & 0.5 strategy lessons', included: true },
+  { text: '5 practice trades per day', included: true },
+  { text: 'Basic quizzes', included: true },
+  { text: 'Community access', included: true },
+  { text: 'All strategy tiers (1-10)', included: false },
+  { text: 'Real-time market data', included: false },
+  { text: 'Advanced calculators & tools', included: false },
+  { text: 'AI Signal Analyzer', included: false },
+  { text: 'Options Flow data', included: false },
+  { text: 'Unlimited paper trading', included: false },
+];
+
+const PREMIUM_FEATURES: PlanFeature[] = [
+  { text: 'All 70+ strategy lessons (Tiers 0-10)', included: true },
+  { text: 'Unlimited paper trading', included: true },
+  { text: 'All quizzes, badges & challenges', included: true },
+  { text: 'Real-time market data', included: true },
+  { text: 'All calculators & tools', included: true },
+  { text: 'AI Signal Analyzer', included: true },
+  { text: 'Options Flow data', included: true },
+  { text: 'Earnings Calendar', included: true },
+  { text: '16 Animal Mentor guides', included: true },
+  { text: 'Tribe chat & social trading', included: true },
+  { text: 'Challenge Paths', included: true },
+  { text: 'Priority community access', included: true },
 ];
 
 const SubscriptionScreen: React.FC = () => {
   const navigation = useNavigation();
   const { user } = useAuth();
-  const [selectedPlan, setSelectedPlan] = useState<string>(user?.subscriptionTier || 'free');
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
+  const [selectedBilling, setSelectedBilling] = useState<'monthly' | 'annual'>('annual');
 
   const currentPlan = user?.subscriptionTier || 'free';
-  const isCurrentPlan = (planId: string) => currentPlan === planId;
+  const isPremium = currentPlan !== 'free';
 
-  const handleSelectPlan = (planId: string) => {
-    setSelectedPlan(planId);
-  };
-
-  const handleSubscribe = () => {
-    if (selectedPlan === currentPlan) {
-      Alert.alert('Current Plan', 'You are already on this plan.');
-      return;
-    }
-
-    Alert.alert(
-      'Upgrade Plan',
-      `Upgrade to ${PLANS.find(p => p.id === selectedPlan)?.name}?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Upgrade',
-          onPress: () => {
-            // Handle subscription - would integrate with App Store/Play Store
-            Alert.alert('Success', 'Subscription updated! (Demo)');
-          },
-        },
-      ]
-    );
-  };
-
-  const handleRestorePurchases = () => {
-    Alert.alert('Restore Purchases', 'Checking for previous purchases...', [
-      { text: 'OK' },
-    ]);
-  };
-
-  const handleManageSubscription = () => {
-    Alert.alert(
-      'Manage Subscription',
-      'This will open your device settings to manage your subscription.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Open Settings',
-          onPress: () => {
-            if (Platform.OS === 'ios') {
-              // Opens iOS subscription settings
-              Linking.openURL('itms-apps://apps.apple.com/account/subscriptions');
-            } else {
-              // Opens Google Play subscription settings
-              Linking.openURL('https://play.google.com/store/account/subscriptions');
-            }
-          },
-        },
-      ]
-    );
+  const handleSubscribeOnWeb = () => {
+    Linking.openURL(WEBSITE_PRICING_URL);
   };
 
   return (
@@ -159,7 +97,7 @@ const SubscriptionScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <GradientText style={styles.headerTitle}>Subscription</GradientText>
         <View style={styles.headerSpacer} />
@@ -171,156 +109,193 @@ const SubscriptionScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
       >
         {/* Current Plan Banner */}
-        <GlassCard style={styles.currentPlanCard} withGlow glowColor={colors.neon.green}>
+        <GlassCard style={styles.currentPlanCard} withGlow glowColor={isPremium ? colors.neon.green : colors.text.muted}>
           <Text style={styles.currentPlanLabel}>Current Plan</Text>
-          <Text style={styles.currentPlanName}>
-            {PLANS.find(p => p.id === currentPlan)?.name || 'Free'}
+          <Text style={[styles.currentPlanName, !isPremium && { color: colors.text.secondary }]}>
+            {isPremium ? 'Premium' : 'Free'}
           </Text>
-          {currentPlan !== 'free' && (
-            <Text style={styles.renewalDate}>Renews on March 1, 2025</Text>
+          {isPremium && (
+            <Text style={styles.renewalNote}>
+              Subscription managed on wallstreetwildlife.com
+            </Text>
           )}
         </GlassCard>
 
-        {/* Billing Cycle Toggle */}
-        <View style={styles.billingToggle}>
-          <TouchableOpacity
-            style={[
-              styles.billingOption,
-              billingCycle === 'monthly' && styles.billingOptionActive,
-            ]}
-            onPress={() => setBillingCycle('monthly')}
-          >
-            <Text
-              style={[
-                styles.billingOptionText,
-                billingCycle === 'monthly' && styles.billingOptionTextActive,
-              ]}
-            >
-              Monthly
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.billingOption,
-              billingCycle === 'yearly' && styles.billingOptionActive,
-            ]}
-            onPress={() => setBillingCycle('yearly')}
-          >
-            <Text
-              style={[
-                styles.billingOptionText,
-                billingCycle === 'yearly' && styles.billingOptionTextActive,
-              ]}
-            >
-              Yearly
-            </Text>
-            <View style={styles.saveBadge}>
-              <Text style={styles.saveBadgeText}>Save 20%</Text>
+        {!isPremium && (
+          <>
+            {/* Unlock Premium Section */}
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Unlock the Full Jungle</Text>
+              <Text style={styles.sectionSubtitle}>
+                Get access to all 70+ strategies, real-time data, and premium tools
+              </Text>
             </View>
-          </TouchableOpacity>
-        </View>
 
-        {/* Plans */}
-        {PLANS.map((plan) => (
-          <TouchableOpacity
-            key={plan.id}
-            activeOpacity={0.8}
-            onPress={() => handleSelectPlan(plan.id)}
-          >
-            <GlassCard
-              style={[
-                styles.planCard,
-                selectedPlan === plan.id && styles.planCardSelected,
-                selectedPlan === plan.id && { borderColor: plan.color },
-              ]}
-            >
-              {plan.popular && (
-                <LinearGradient
-                  colors={[colors.neon.green, colors.neon.cyan]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.popularBadge}
+            {/* Billing Toggle */}
+            <View style={styles.billingToggle}>
+              {PRICING_OPTIONS.map((option) => (
+                <TouchableOpacity
+                  key={option.id}
+                  style={[
+                    styles.billingOption,
+                    selectedBilling === option.id && styles.billingOptionActive,
+                  ]}
+                  onPress={() => setSelectedBilling(option.id)}
                 >
-                  <Text style={styles.popularBadgeText}>MOST POPULAR</Text>
-                </LinearGradient>
-              )}
+                  <Text
+                    style={[
+                      styles.billingOptionText,
+                      selectedBilling === option.id && styles.billingOptionTextActive,
+                    ]}
+                  >
+                    {option.name}
+                  </Text>
+                  {option.bestValue && (
+                    <View style={styles.bestValueBadge}>
+                      <Text style={styles.bestValueText}>BEST VALUE</Text>
+                    </View>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
 
-              <View style={styles.planHeader}>
-                <View>
-                  <Text style={[styles.planName, { color: plan.color }]}>{plan.name}</Text>
-                  <Text style={styles.planDescription}>{plan.description}</Text>
+            {/* Pricing Display */}
+            <GlassCard style={styles.pricingCard} withGlow glowColor={colors.neon.green}>
+              <LinearGradient
+                colors={[colors.neon.green + '15', 'transparent']}
+                style={styles.pricingGradient}
+              >
+                <View style={styles.priceRow}>
+                  <Text style={styles.priceAmount}>
+                    {PRICING_OPTIONS.find(o => o.id === selectedBilling)?.price}
+                  </Text>
+                  <Text style={styles.pricePeriod}>
+                    {PRICING_OPTIONS.find(o => o.id === selectedBilling)?.period}
+                  </Text>
                 </View>
-                <View style={styles.planPricing}>
-                  <Text style={styles.planPrice}>{plan.price}</Text>
-                  <Text style={styles.planPeriod}>{plan.period}</Text>
-                </View>
-              </View>
+                {selectedBilling === 'annual' && (
+                  <>
+                    <Text style={styles.pricePerMonth}>
+                      Just {PRICING_OPTIONS[1].pricePerMonth}/month
+                    </Text>
+                    <View style={styles.savingsBadge}>
+                      <Ionicons name="star" size={14} color={colors.background.primary} />
+                      <Text style={styles.savingsText}>
+                        {PRICING_OPTIONS[1].savings} vs monthly
+                      </Text>
+                    </View>
+                  </>
+                )}
+              </LinearGradient>
 
+              {/* Premium Features */}
               <View style={styles.featuresList}>
-                {plan.features.map((feature, index) => (
+                {PREMIUM_FEATURES.map((feature, index) => (
                   <View key={index} style={styles.featureRow}>
-                    <Text
-                      style={[
-                        styles.featureIcon,
-                        { color: feature.included ? colors.success : colors.text.muted },
-                      ]}
-                    >
-                      {feature.included ? '✓' : '✗'}
-                    </Text>
-                    <Text
-                      style={[
-                        styles.featureText,
-                        !feature.included && styles.featureTextDisabled,
-                      ]}
-                    >
-                      {feature.text}
-                    </Text>
+                    <Ionicons
+                      name="checkmark-circle"
+                      size={18}
+                      color={colors.neon.green}
+                      style={styles.featureIcon}
+                    />
+                    <Text style={styles.featureText}>{feature.text}</Text>
                   </View>
                 ))}
               </View>
-
-              {isCurrentPlan(plan.id) && (
-                <View style={styles.currentBadge}>
-                  <Text style={styles.currentBadgeText}>Current Plan</Text>
-                </View>
-              )}
-
-              {selectedPlan === plan.id && !isCurrentPlan(plan.id) && (
-                <View style={[styles.selectedIndicator, { backgroundColor: plan.color }]} />
-              )}
             </GlassCard>
-          </TouchableOpacity>
-        ))}
 
-        {/* Subscribe Button */}
-        {selectedPlan !== currentPlan && (
-          <GlowButton
-            title={`Upgrade to ${PLANS.find(p => p.id === selectedPlan)?.name}`}
-            onPress={handleSubscribe}
-            variant="primary"
-            fullWidth
-            style={styles.subscribeButton}
-          />
+            {/* Subscribe on Web Button */}
+            <GlowButton
+              title="Subscribe on wallstreetwildlife.com"
+              onPress={handleSubscribeOnWeb}
+              variant="primary"
+              fullWidth
+              style={styles.subscribeButton}
+            />
+
+            <Text style={styles.webOnlyNote}>
+              Subscriptions are managed through our website to offer you the best price.
+              Your premium access syncs automatically to this app.
+            </Text>
+
+            {/* Patreon Discount */}
+            <GlassCard style={styles.patreonCard}>
+              <View style={styles.patreonHeader}>
+                <Text style={styles.patreonTitle}>Patreon Members</Text>
+                <View style={styles.discountBadge}>
+                  <Text style={styles.discountText}>30% OFF</Text>
+                </View>
+              </View>
+              <Text style={styles.patreonDescription}>
+                Capybara, Dolphin, Jungle Cat, and Unicorn tier Patreon members
+                get 30% off with an exclusive coupon code. Check your Patreon messages
+                for your discount code.
+              </Text>
+            </GlassCard>
+          </>
         )}
 
-        {/* Action Links */}
-        <View style={styles.actionLinks}>
-          <TouchableOpacity style={styles.actionLink} onPress={handleRestorePurchases}>
-            <Text style={styles.actionLinkText}>Restore Purchases</Text>
-          </TouchableOpacity>
-          {currentPlan !== 'free' && (
-            <TouchableOpacity style={styles.actionLink} onPress={handleManageSubscription}>
-              <Text style={styles.actionLinkText}>Manage Subscription</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+        {isPremium && (
+          <>
+            {/* Premium Features List */}
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Your Premium Features</Text>
+            </View>
 
-        {/* Legal */}
-        <Text style={styles.legalText}>
-          Subscriptions auto-renew unless cancelled 24 hours before the end of the current period.
-          Payment will be charged to your App Store account. You can manage and cancel subscriptions
-          in your device's account settings.
-        </Text>
+            <GlassCard style={styles.featuresCard}>
+              {PREMIUM_FEATURES.map((feature, index) => (
+                <View key={index} style={styles.featureRow}>
+                  <Ionicons
+                    name="checkmark-circle"
+                    size={18}
+                    color={colors.neon.green}
+                    style={styles.featureIcon}
+                  />
+                  <Text style={styles.featureText}>{feature.text}</Text>
+                </View>
+              ))}
+            </GlassCard>
+
+            <TouchableOpacity
+              style={styles.manageLink}
+              onPress={handleSubscribeOnWeb}
+            >
+              <Text style={styles.manageLinkText}>
+                Manage subscription on wallstreetwildlife.com
+              </Text>
+              <Ionicons name="open-outline" size={16} color={colors.neon.cyan} />
+            </TouchableOpacity>
+          </>
+        )}
+
+        {/* Free Plan Comparison (when not premium) */}
+        {!isPremium && (
+          <>
+            <View style={[styles.sectionHeader, { marginTop: spacing.lg }]}>
+              <Text style={styles.sectionTitle}>Free Plan</Text>
+            </View>
+            <GlassCard style={styles.featuresCard}>
+              {FREE_FEATURES.map((feature, index) => (
+                <View key={index} style={styles.featureRow}>
+                  <Ionicons
+                    name={feature.included ? 'checkmark-circle' : 'close-circle'}
+                    size={18}
+                    color={feature.included ? colors.success : colors.text.muted}
+                    style={styles.featureIcon}
+                  />
+                  <Text
+                    style={[
+                      styles.featureText,
+                      !feature.included && styles.featureTextDisabled,
+                    ]}
+                  >
+                    {feature.text}
+                  </Text>
+                </View>
+              ))}
+            </GlassCard>
+          </>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -343,10 +318,6 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 24,
-    color: colors.text.primary,
   },
   headerTitle: {
     ...typography.styles.h4,
@@ -377,10 +348,22 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
   },
-  renewalDate: {
+  renewalNote: {
     ...typography.styles.caption,
     color: colors.text.muted,
     marginTop: spacing.xs,
+  },
+  sectionHeader: {
+    marginBottom: spacing.md,
+  },
+  sectionTitle: {
+    ...typography.styles.h4,
+    color: colors.text.primary,
+    marginBottom: spacing.xs,
+  },
+  sectionSubtitle: {
+    ...typography.styles.bodySm,
+    color: colors.text.secondary,
   },
   billingToggle: {
     flexDirection: 'row',
@@ -409,69 +392,68 @@ const styles = StyleSheet.create({
   billingOptionTextActive: {
     color: colors.text.primary,
   },
-  saveBadge: {
+  bestValueBadge: {
     backgroundColor: colors.neon.green,
     paddingHorizontal: spacing.sm,
     paddingVertical: 2,
     borderRadius: borderRadius.sm,
     marginLeft: spacing.sm,
   },
-  saveBadgeText: {
+  bestValueText: {
     ...typography.styles.caption,
     color: colors.background.primary,
     fontWeight: '700',
-    fontSize: 10,
+    fontSize: 9,
   },
-  planCard: {
-    marginBottom: spacing.md,
-    position: 'relative',
+  pricingCard: {
+    marginBottom: spacing.lg,
+    padding: 0,
     overflow: 'hidden',
-    borderWidth: 2,
-    borderColor: 'transparent',
   },
-  planCardSelected: {
-    borderWidth: 2,
+  pricingGradient: {
+    alignItems: 'center',
+    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.lg,
   },
-  popularBadge: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+  },
+  priceAmount: {
+    ...typography.styles.h1,
+    color: colors.neon.green,
+    textShadowColor: colors.neon.green,
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
+  },
+  pricePeriod: {
+    ...typography.styles.body,
+    color: colors.text.secondary,
+    marginLeft: spacing.xs,
+  },
+  pricePerMonth: {
+    ...typography.styles.bodySm,
+    color: colors.text.secondary,
+    marginTop: spacing.xs,
+  },
+  savingsBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.neon.green,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.xs,
-    borderBottomLeftRadius: borderRadius.md,
+    borderRadius: borderRadius.full,
+    marginTop: spacing.sm,
+    gap: spacing.xs,
   },
-  popularBadgeText: {
+  savingsText: {
     ...typography.styles.caption,
     color: colors.background.primary,
     fontWeight: '700',
-    fontSize: 10,
-  },
-  planHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: spacing.md,
-  },
-  planName: {
-    ...typography.styles.h4,
-    marginBottom: spacing.xs,
-  },
-  planDescription: {
-    ...typography.styles.caption,
-    color: colors.text.secondary,
-  },
-  planPricing: {
-    alignItems: 'flex-end',
-  },
-  planPrice: {
-    ...typography.styles.h3,
-    color: colors.text.primary,
-  },
-  planPeriod: {
-    ...typography.styles.caption,
-    color: colors.text.secondary,
   },
   featuresList: {
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.lg,
     gap: spacing.sm,
   },
   featureRow: {
@@ -479,63 +461,70 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   featureIcon: {
-    fontSize: 16,
     marginRight: spacing.sm,
-    width: 20,
+    width: 22,
   },
   featureText: {
     ...typography.styles.bodySm,
     color: colors.text.primary,
+    flex: 1,
   },
   featureTextDisabled: {
     color: colors.text.muted,
   },
-  currentBadge: {
-    position: 'absolute',
-    bottom: spacing.md,
-    right: spacing.md,
-    backgroundColor: colors.overlay.neonGreen,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: borderRadius.sm,
-    borderWidth: 1,
-    borderColor: colors.neon.green,
-  },
-  currentBadgeText: {
-    ...typography.styles.caption,
-    color: colors.neon.green,
-    fontWeight: '600',
-  },
-  selectedIndicator: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    width: 4,
-    borderTopLeftRadius: borderRadius.xl,
-    borderBottomLeftRadius: borderRadius.xl,
-  },
   subscribeButton: {
-    marginTop: spacing.md,
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
   },
-  actionLinks: {
-    alignItems: 'center',
-    gap: spacing.md,
-    marginBottom: spacing.lg,
-  },
-  actionLink: {
-    padding: spacing.sm,
-  },
-  actionLinkText: {
-    ...typography.styles.body,
-    color: colors.neon.cyan,
-  },
-  legalText: {
+  webOnlyNote: {
     ...typography.styles.caption,
     color: colors.text.muted,
     textAlign: 'center',
     lineHeight: 18,
+    marginBottom: spacing.lg,
+  },
+  patreonCard: {
+    marginBottom: spacing.lg,
+  },
+  patreonHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: spacing.sm,
+  },
+  patreonTitle: {
+    ...typography.styles.h5,
+    color: colors.neon.cyan,
+  },
+  discountBadge: {
+    backgroundColor: colors.neon.cyan,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
+    borderRadius: borderRadius.sm,
+  },
+  discountText: {
+    ...typography.styles.caption,
+    color: colors.background.primary,
+    fontWeight: '700',
+  },
+  patreonDescription: {
+    ...typography.styles.bodySm,
+    color: colors.text.secondary,
+    lineHeight: 20,
+  },
+  featuresCard: {
+    marginBottom: spacing.lg,
+    gap: spacing.sm,
+  },
+  manageLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+    paddingVertical: spacing.md,
+  },
+  manageLinkText: {
+    ...typography.styles.body,
+    color: colors.neon.cyan,
   },
 });
 

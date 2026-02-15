@@ -1,13 +1,15 @@
 // Main Tab Navigator for Wall Street Wildlife Mobile
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { MainTabParamList, HomeStackParamList, LearnStackParamList, ToolsStackParamList, PracticeStackParamList, ProfileStackParamList } from './types';
 import { colors, typography, layout, shadows } from '../theme';
 
 // Import screens
 import DashboardScreen from '../screens/home/DashboardScreen';
+import SocialFeedScreen from '../screens/social/SocialFeedScreen';
 import StrategiesScreen from '../screens/learn/StrategiesScreen';
 import StrategyDetailScreen from '../screens/learn/StrategyDetailScreen';
 import QuizScreen from '../screens/learn/QuizScreen';
@@ -18,6 +20,10 @@ import FirstTradeTutorialScreen from '../screens/learn/FirstTradeTutorialScreen'
 import BeginnerMistakesScreen from '../screens/learn/BeginnerMistakesScreen';
 import AssignmentExerciseScreen from '../screens/learn/AssignmentExerciseScreen';
 import RollingAdjustingScreen from '../screens/learn/RollingAdjustingScreen';
+// Phase 4 learn screens
+import LearningPathSelectorScreen from '../screens/learn/LearningPathSelectorScreen';
+import ChallengePathsScreen from '../screens/learn/ChallengePathsScreen';
+import VideoLessonsScreen from '../screens/learn/VideoLessonsScreen';
 import ToolsDashboardScreen from '../screens/tools/ToolsDashboardScreen';
 import GreeksVisualizerScreen from '../screens/tools/GreeksVisualizerScreen';
 import PositionSizingScreen from '../screens/tools/PositionSizingScreen';
@@ -29,6 +35,7 @@ import IVRankToolScreen from '../screens/tools/IVRankToolScreen';
 import OptionsScreenerScreen from '../screens/tools/OptionsScreenerScreen';
 import WatchlistScreen from '../screens/tools/WatchlistScreen';
 import OptionsSurface3DScreen from '../screens/tools/OptionsSurface3DScreen';
+import OptionsFlowScreen from '../screens/tools/OptionsFlowScreen';
 import PracticeDashboardScreen from '../screens/practice/PracticeDashboardScreen';
 import PaperTradingScreen from '../screens/practice/PaperTradingScreen';
 import StrategyBuilderScreen from '../screens/practice/StrategyBuilderScreen';
@@ -87,6 +94,7 @@ const screenOptions = {
 const HomeStackNavigator: React.FC = () => (
   <HomeStack.Navigator screenOptions={screenOptions}>
     <HomeStack.Screen name="Dashboard" component={DashboardScreen} />
+    <HomeStack.Screen name="SocialFeed" component={SocialFeedScreen} />
   </HomeStack.Navigator>
 );
 
@@ -116,6 +124,9 @@ const LearnStackNavigator: React.FC = () => (
     <LearnStack.Screen name="AISignalAnalyzer" component={AISignalAnalyzerScreen} />
     <LearnStack.Screen name="EarningsCalendar" component={EarningsCalendarScreen} />
     <LearnStack.Screen name="OptionsChainViewer" component={OptionsChainViewerScreen} />
+    <LearnStack.Screen name="LearningPathSelector" component={LearningPathSelectorScreen} />
+    <LearnStack.Screen name="ChallengePaths" component={ChallengePathsScreen} />
+    <LearnStack.Screen name="VideoLessons" component={VideoLessonsScreen} />
   </LearnStack.Navigator>
 );
 
@@ -133,6 +144,7 @@ const ToolsStackNavigator: React.FC = () => (
     <ToolsStack.Screen name="OptionsScreener" component={OptionsScreenerScreen} />
     <ToolsStack.Screen name="Watchlist" component={WatchlistScreen} />
     <ToolsStack.Screen name="OptionsSurface3D" component={OptionsSurface3DScreen} />
+    <ToolsStack.Screen name="OptionsFlow" component={OptionsFlowScreen} />
   </ToolsStack.Navigator>
 );
 
@@ -185,7 +197,7 @@ export const MainTabNavigator: React.FC = () => {
           tabBarLabel: 'Home',
           tabBarIcon: ({ focused, color }) => (
             <View style={styles.tabIconWrapper}>
-              <Text style={[styles.tabIcon, { color }]}></Text>
+              <Ionicons name={focused ? 'home' : 'home-outline'} size={24} color={color} />
               {focused && (
                 <View
                   style={[
@@ -206,7 +218,7 @@ export const MainTabNavigator: React.FC = () => {
           tabBarLabel: 'Learn',
           tabBarIcon: ({ focused, color }) => (
             <View style={styles.tabIconWrapper}>
-              <Text style={[styles.tabIcon, { color }]}></Text>
+              <Ionicons name={focused ? 'book' : 'book-outline'} size={24} color={color} />
               {focused && (
                 <View
                   style={[
@@ -227,7 +239,7 @@ export const MainTabNavigator: React.FC = () => {
           tabBarLabel: 'Tools',
           tabBarIcon: ({ focused, color }) => (
             <View style={styles.tabIconWrapper}>
-              <Text style={[styles.tabIcon, { color }]}></Text>
+              <Ionicons name={focused ? 'construct' : 'construct-outline'} size={24} color={color} />
               {focused && (
                 <View
                   style={[
@@ -248,7 +260,7 @@ export const MainTabNavigator: React.FC = () => {
           tabBarLabel: 'Practice',
           tabBarIcon: ({ focused, color }) => (
             <View style={styles.tabIconWrapper}>
-              <Text style={[styles.tabIcon, { color }]}></Text>
+              <Ionicons name={focused ? 'trophy' : 'trophy-outline'} size={24} color={color} />
               {focused && (
                 <View
                   style={[
@@ -269,7 +281,7 @@ export const MainTabNavigator: React.FC = () => {
           tabBarLabel: 'Profile',
           tabBarIcon: ({ focused, color }) => (
             <View style={styles.tabIconWrapper}>
-              <Text style={[styles.tabIcon, { color }]}></Text>
+              <Ionicons name={focused ? 'person' : 'person-outline'} size={24} color={color} />
               {focused && (
                 <View
                   style={[
@@ -306,9 +318,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 28,
-  },
-  tabIcon: {
-    fontSize: 24,
   },
   tabIndicator: {
     width: 4,
