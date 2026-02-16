@@ -15,6 +15,7 @@ export const colors = {
   text: {
     primary: '#ffffff',
     secondary: '#a0a0a0',
+    tertiary: '#888888',
     muted: '#666666',
     inverse: '#000000',
   },
@@ -47,6 +48,21 @@ export const colors = {
     default: '#2a2a2a',
     light: '#333333',
     accent: '#39ff14',
+    neon: '#39ff1440',
+  },
+
+  // Glass card styles
+  glass: {
+    background: 'rgba(255, 255, 255, 0.05)',
+    border: 'rgba(255, 255, 255, 0.10)',
+  },
+
+  // Overlay colors
+  overlay: {
+    light: 'rgba(255, 255, 255, 0.05)',
+    medium: 'rgba(255, 255, 255, 0.10)',
+    neonGreen: 'rgba(57, 255, 20, 0.10)',
+    neonCyan: 'rgba(0, 240, 255, 0.10)',
   },
 
   // Tier colors (0-10)
