@@ -65,6 +65,21 @@ export const colors = {
     10: '#ffd700',
   } as Record<number, string>,
 
+  // Spirit animal mascot colors
+  mascots: {
+    owl: '#bf00ff',
+    badger: '#a0a0a0',
+    monkey: '#ffff00',
+    bull: '#39ff14',
+    bear: '#ff073a',
+    chameleon: '#00f0ff',
+    cheetah: '#ff6600',
+    sloth: '#66ff44',
+    fox: '#ff6600',
+    tiger: '#ff1493',
+    eagle: '#ffd700',
+  },
+
   // Gradients
   gradients: {
     greenButton: ['#39ff14', '#00cc00'],
