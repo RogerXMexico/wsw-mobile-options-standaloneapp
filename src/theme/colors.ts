@@ -1,162 +1,107 @@
-// Neon Jungle Color Palette for Wall Street Wildlife
-// Dark theme with vibrant neon accents - aligned with web app
+// Color palette for Wall Street Wildlife Mobile
+// Dark theme with neon accents
 
 export const colors = {
-  // Base colors - Pure black backgrounds
+  // Backgrounds
   background: {
-    primary: '#000000',      // Pure black (was #0f1419)
-    secondary: '#0a0a0a',    // Surface dark
-    tertiary: '#151515',     // Surface light
-    card: '#1e1e1e',         // Card background
-    modal: '#0a0a0a',        // Modal background
+    primary: '#000000',
+    secondary: '#0a0a0a',
+    tertiary: '#1a1a1a',
+    card: '#111111',
+    elevated: '#1c1c1c',
+  },
+
+  // Text
+  text: {
+    primary: '#ffffff',
+    secondary: '#a0a0a0',
+    muted: '#666666',
+    inverse: '#000000',
   },
 
   // Neon accent colors
   neon: {
-    green: '#39ff14',      // Primary neon green
-    cyan: '#00f0ff',       // Cyan blue
-    purple: '#bf00ff',     // Neon purple
-    pink: '#ff1493',       // Hot pink
-    yellow: '#fbbf24',     // Amber/Gold
-    orange: '#ff6b35',     // Vibrant orange
+    green: '#39ff14',
+    cyan: '#00f0ff',
+    purple: '#bf00ff',
+    yellow: '#ffff00',
+    orange: '#ff6600',
+    pink: '#ff1493',
+    red: '#ff073a',
   },
 
   // Semantic colors
-  primary: '#39ff14',      // Neon green - main action color
-  secondary: '#00f0ff',    // Cyan - secondary actions
-  accent: '#fbbf24',       // Gold/amber - highlights
+  success: '#39ff14',
+  error: '#ff073a',
+  warning: '#ffff00',
+  info: '#00f0ff',
 
-  // Strategy outlook colors (matching web app)
-  bullish: '#10b981',      // Emerald green
-  bearish: '#ef4444',      // Red
-  neutral: '#8b5cf6',      // Purple
-  volatility: '#f59e0b',   // Amber
-
-  // Status colors
-  success: '#10b981',
-  warning: '#f59e0b',
-  error: '#ef4444',
-  info: '#3b82f6',
-
-  // Text colors
-  text: {
-    primary: '#ffffff',
-    secondary: '#94a3b8',
-    tertiary: '#64748b',
-    muted: '#475569',
-    inverse: '#000000',
-  },
+  // Market colors
+  bullish: '#39ff14',
+  bearish: '#ff073a',
+  neutral: '#00f0ff',
+  volatility: '#bf00ff',
 
   // Border colors
   border: {
-    default: 'rgba(255, 255, 255, 0.1)',
-    light: 'rgba(255, 255, 255, 0.05)',
-    focus: '#39ff14',
-    neon: 'rgba(57, 255, 20, 0.3)',
+    default: '#2a2a2a',
+    light: '#333333',
+    accent: '#39ff14',
   },
 
-  // Glass effect colors
-  glass: {
-    background: 'rgba(10, 10, 10, 0.7)',
-    border: 'rgba(255, 255, 255, 0.08)',
-    borderLight: 'rgba(255, 255, 255, 0.12)',
-  },
-
-  // Tier colors (matching 11 tiers from web app)
+  // Tier colors (0-10)
   tiers: {
-    0: '#64748b',    // Foundations - slate
-    0.5: '#fbbf24',  // Express Lane - amber
-    1: '#3b82f6',    // Market Structure - blue
-    2: '#f59e0b',    // Risk - amber
-    3: '#10b981',    // The Anchors - emerald
-    4: '#06b6d4',    // Verticals - cyan
-    5: '#8b5cf6',    // Volatility - purple
-    6: '#ec4899',    // Time/Skew - pink
-    7: '#f97316',    // Ratios - orange
-    8: '#8b5cf6',    // Event Horizons - purple (chameleon)
-    9: '#f43f5e',    // Strategy Tools - rose
-    10: '#10b981',   // Let's Play - emerald
-  },
+    0: '#39ff14',
+    0.5: '#66ff44',
+    1: '#00f0ff',
+    2: '#00ccff',
+    3: '#0099ff',
+    4: '#bf00ff',
+    5: '#9900cc',
+    6: '#ff6600',
+    7: '#ff3300',
+    8: '#ff1493',
+    9: '#ffff00',
+    10: '#ffd700',
+  } as Record<number, string>,
 
-  // Event Horizons specific colors
-  eventHorizons: {
-    primary: '#8b5cf6',     // Purple - main accent
-    secondary: '#14b8a6',   // Teal - secondary accent
-    gradient: ['#8b5cf6', '#14b8a6'],
-    chameleon: '#8b5cf6',
-    cheetah: '#f59e0b',
-    owl: '#3b82f6',
-  },
-
-  // Gradients (for LinearGradient component)
+  // Gradients
   gradients: {
-    primary: ['#39ff14', '#00f0ff'],
-    jungle: ['#000000', '#0a1f0a', '#000000'],
-    card: ['#0a0a0a', '#151515'],
-    neonGlow: ['rgba(57, 255, 20, 0.2)', 'transparent'],
-    bullish: ['#10b981', '#059669'],
-    bearish: ['#ef4444', '#dc2626'],
-    greenButton: ['#34d399', '#10b981'],
-    greenText: ['#34d399', '#10b981', '#059669'],
-  },
-
-  // Overlay/transparency
-  overlay: {
-    light: 'rgba(255, 255, 255, 0.05)',
-    medium: 'rgba(255, 255, 255, 0.1)',
-    dark: 'rgba(0, 0, 0, 0.5)',
-    neonGreen: 'rgba(57, 255, 20, 0.1)',
-    neonCyan: 'rgba(0, 240, 255, 0.1)',
-  },
-
-  // Animal mascot colors
-  mascots: {
-    owl: '#8b5cf6',      // Purple - wisdom
-    bull: '#10b981',     // Green - bullish
-    bear: '#ef4444',     // Red - bearish
-    fox: '#f97316',      // Orange - advanced
-    eagle: '#3b82f6',    // Blue - overview
-    badger: '#64748b',   // Slate - moderate
-    monkey: '#fbbf24',   // Amber - swing
-    sloth: '#22c55e',    // Green - conservative
-    tiger: '#f43f5e',    // Rose - aggressive
-    chameleon: '#8b5cf6', // Purple - Event Horizons, adaptation
-    cheetah: '#f59e0b',  // Amber - speed, timing
+    greenButton: ['#39ff14', '#00cc00'],
+    cyanButton: ['#00f0ff', '#0099cc'],
+    purpleButton: ['#bf00ff', '#8800aa'],
+    card: ['rgba(255,255,255,0.05)', 'rgba(255,255,255,0.02)'],
+    darkCard: ['rgba(26,26,26,0.8)', 'rgba(10,10,10,0.9)'],
   },
 } as const;
 
-export type Colors = typeof colors;
-
-// Glow shadow presets
 export const shadows = {
   neonGreen: {
     shadowColor: '#39ff14',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 10,
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    elevation: 8,
   },
   neonGreenSubtle: {
     shadowColor: '#39ff14',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.15,
     shadowRadius: 8,
-    elevation: 5,
+    elevation: 4,
   },
   neonCyan: {
     shadowColor: '#00f0ff',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 10,
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    elevation: 8,
   },
   dark: {
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4,
   },
 } as const;
-
-export type Shadows = typeof shadows;

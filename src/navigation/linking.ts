@@ -5,7 +5,7 @@ import { LinkingOptions } from '@react-navigation/native';
 import { RootStackParamList } from './types';
 
 const PREFIX = 'wsw://';
-const WEB_PREFIX = 'https://wallstreetwildlife.com';
+const WEB_PREFIX = 'https://WallStreetWildlifeOptions.com';
 
 export const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [PREFIX, WEB_PREFIX],

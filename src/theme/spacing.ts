@@ -2,14 +2,15 @@ import { Dimensions, Platform } from 'react-native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-export const spacing = {
+export const spacing: Record<string, number> = {
   xs: 4,
   sm: 8,
   md: 16,
   lg: 24,
   xl: 32,
   xxl: 48,
-} as const;
+  '2xl': 48,
+};
 
 export const borderRadius = {
   xs: 4,

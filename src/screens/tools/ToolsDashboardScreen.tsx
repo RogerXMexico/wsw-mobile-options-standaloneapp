@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing['2xl'],
+    paddingBottom: 100,
   },
   toolsGrid: {
     flexDirection: 'row',

@@ -1,91 +1,47 @@
-// GlassCard - Card with blur effect and glassmorphism styling
+// GlassCard - Translucent card with optional glow border
 import React from 'react';
-import { View, StyleSheet, ViewStyle, Platform, StyleProp } from 'react-native';
-import { BlurView } from 'expo-blur';
-import { colors, borderRadius, spacing } from '../../theme';
-
-// Inline glass colors as fallback
-const GLASS_COLORS = {
-  background: colors?.glass?.background || 'rgba(10, 10, 10, 0.7)',
-  border: colors?.glass?.border || 'rgba(255, 255, 255, 0.08)',
-  borderLight: colors?.glass?.borderLight || 'rgba(255, 255, 255, 0.12)',
-};
+import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import { colors, spacing, borderRadius } from '../../theme';
 
 interface GlassCardProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  intensity?: number;
   withGlow?: boolean;
   glowColor?: string;
-  noPadding?: boolean;
 }
 
 export const GlassCard: React.FC<GlassCardProps> = ({
   children,
   style,
-  intensity = 20,
   withGlow = false,
-  glowColor = colors?.neon?.green || '#39ff14',
-  noPadding = false,
+  glowColor = colors.neon.green,
 }) => {
   const glowStyle = withGlow
     ? {
         shadowColor: glowColor,
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.3,
-        shadowRadius: 12,
-        elevation: 8,
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 4,
+        borderColor: glowColor + '30',
+        borderWidth: 1,
       }
     : {};
 
-  // On Android, BlurView doesn't work well, so we use a solid background
-  if (Platform.OS === 'android') {
-    return (
-      <View
-        style={[
-          styles.container,
-          styles.androidFallback,
-          !noPadding && styles.padding,
-          glowStyle,
-          style,
-        ]}
-      >
-        {children}
-      </View>
-    );
-  }
-
   return (
-    <View style={[styles.container, glowStyle, style]}>
-      <BlurView
-        intensity={intensity}
-        tint="dark"
-        style={[styles.blur, !noPadding && styles.padding]}
-      >
-        {children}
-      </BlurView>
+    <View style={[styles.card, glowStyle, style]}>
+      {children}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    borderRadius: borderRadius?.xl || 16,
-    overflow: 'hidden',
+  card: {
+    backgroundColor: colors.background.card,
+    borderRadius: borderRadius.lg,
+    padding: spacing.lg,
     borderWidth: 1,
-    borderColor: GLASS_COLORS.border,
-    backgroundColor: GLASS_COLORS.background,
-  },
-  blur: {
-    flex: 1,
-    backgroundColor: GLASS_COLORS.background,
-  },
-  padding: {
-    padding: spacing?.md || 16,
-  },
-  androidFallback: {
-    backgroundColor: colors?.background?.secondary || '#0a0a0a',
-    borderColor: GLASS_COLORS.borderLight,
+    borderColor: colors.border.default,
   },
 });
 

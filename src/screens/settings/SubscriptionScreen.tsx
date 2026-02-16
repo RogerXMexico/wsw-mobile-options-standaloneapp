@@ -16,7 +16,7 @@ import { colors, typography, spacing, borderRadius, shadows } from '../../theme'
 import { GlassCard, GradientText, GlowButton } from '../../components/ui';
 import { useAuth } from '../../contexts';
 
-const WEBSITE_PRICING_URL = 'https://wallstreetwildlife.com/pricing';
+const WEBSITE_PRICING_URL = 'https://WallStreetWildlifeOptions.com/pricing';
 
 interface PlanFeature {
   text: string;
@@ -116,7 +116,7 @@ const SubscriptionScreen: React.FC = () => {
           </Text>
           {isPremium && (
             <Text style={styles.renewalNote}>
-              Subscription managed on wallstreetwildlife.com
+              Subscription managed on WallStreetWildlifeOptions.com
             </Text>
           )}
         </GlassCard>
@@ -206,7 +206,7 @@ const SubscriptionScreen: React.FC = () => {
 
             {/* Subscribe on Web Button */}
             <GlowButton
-              title="Subscribe on wallstreetwildlife.com"
+              title="Subscribe on WallStreetWildlifeOptions.com"
               onPress={handleSubscribeOnWeb}
               variant="primary"
               fullWidth
@@ -261,7 +261,7 @@ const SubscriptionScreen: React.FC = () => {
               onPress={handleSubscribeOnWeb}
             >
               <Text style={styles.manageLinkText}>
-                Manage subscription on wallstreetwildlife.com
+                Manage subscription on WallStreetWildlifeOptions.com
               </Text>
               <Ionicons name="open-outline" size={16} color={colors.neon.cyan} />
             </TouchableOpacity>
