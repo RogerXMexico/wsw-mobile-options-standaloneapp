@@ -35,6 +35,7 @@ const TOOLS: ToolItem[] = [
   { id: 'screener', name: 'Options Screener', description: 'Find trading opportunities', emoji: '🔍', isPremium: true },
   { id: 'watchlist', name: 'Watchlist', description: 'Track your favorites', emoji: '⭐', isPremium: false },
   { id: '3d-surface', name: 'IV Surface', description: 'Visualize volatility in 3D', emoji: '🌐', isPremium: true },
+  { id: 'profit-calculator', name: 'Profit Calculator', description: 'Calculate options P&L', emoji: '💵', isPremium: false },
 ];
 
 type ToolsNavProp = NativeStackNavigationProp<ToolsStackParamList>;
@@ -85,6 +86,9 @@ const ToolsDashboardScreen: React.FC = () => {
         break;
       case '3d-surface':
         navigation.navigate('OptionsSurface3D');
+        break;
+      case 'profit-calculator':
+        navigation.navigate('ProfitCalculator');
         break;
       default:
         break;

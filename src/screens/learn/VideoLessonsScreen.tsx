@@ -1,7 +1,7 @@
 // Video Lessons Screen - Coming Soon screen for upcoming video content
 // Dark theme with amber (#f59e0b) accents
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
+import { PremiumModal } from '../../components/ui';
+import { useSubscription } from '../../hooks/useSubscription';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const AMBER = '#f59e0b';
@@ -126,6 +128,8 @@ const getTierColor = (tier: number): string => {
 
 const VideoLessonsScreen: React.FC = () => {
   const navigation = useNavigation();
+  const { isPremium } = useSubscription();
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
 
   const renderLessonCard = (lesson: VideoLesson) => {
     const tierColor = getTierColor(lesson.tier);
@@ -187,6 +191,51 @@ const VideoLessonsScreen: React.FC = () => {
       </View>
     );
   };
+
+  if (!isPremium) {
+    return (
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons name="chevron-back" size={24} color={colors.text.primary} />
+          </TouchableOpacity>
+          <View style={styles.headerCenter}>
+            <Ionicons name="film-outline" size={22} color={AMBER} style={styles.headerIcon} />
+            <View>
+              <Text style={styles.headerTitle}>Video Lessons</Text>
+              <Text style={styles.headerSubtitle}>Learn by watching</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.lockedContainer}>
+          <View style={styles.lockedIconCircle}>
+            <Ionicons name="lock-closed" size={48} color={colors.neon.green} />
+          </View>
+          <Text style={styles.lockedTitle}>Premium Feature</Text>
+          <Text style={styles.lockedDescription}>
+            Watch high-quality video lessons covering options trading from beginner to advanced. 8 lessons planned with 3.5+ hours of content across 7 tiers.
+          </Text>
+          <TouchableOpacity
+            style={styles.lockedButton}
+            onPress={() => setShowPremiumModal(true)}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="diamond-outline" size={18} color="#000000" />
+            <Text style={styles.lockedButtonText}>Unlock Video Lessons</Text>
+          </TouchableOpacity>
+        </View>
+        <PremiumModal
+          visible={showPremiumModal}
+          onClose={() => setShowPremiumModal(false)}
+          featureName="Video Lessons"
+        />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -538,6 +587,53 @@ const styles = StyleSheet.create({
     color: colors.text.muted,
     flex: 1,
     lineHeight: 20,
+  },
+
+  // Premium locked state
+  lockedContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xl,
+  },
+  lockedIconCircle: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: 'rgba(57, 255, 20, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(57, 255, 20, 0.25)',
+  },
+  lockedTitle: {
+    ...typography.styles.h3,
+    color: colors.text.primary,
+    textAlign: 'center',
+    marginBottom: spacing.sm,
+  },
+  lockedDescription: {
+    ...typography.styles.body,
+    color: colors.text.secondary,
+    textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: spacing.xl,
+    maxWidth: 320,
+  },
+  lockedButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.neon.green,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.md,
+    borderRadius: borderRadius.lg,
+    gap: spacing.sm,
+  },
+  lockedButtonText: {
+    ...typography.styles.button,
+    color: '#000000',
   },
 });
 

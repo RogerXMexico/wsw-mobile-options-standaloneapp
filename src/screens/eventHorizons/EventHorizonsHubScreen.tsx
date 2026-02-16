@@ -1,6 +1,6 @@
 // Event Horizons Hub Screen - Tier 8
 // Main hub for prediction market + options integration tools
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -14,9 +14,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
-import { GlassCard } from '../../components/ui';
+import { GlassCard, PremiumModal } from '../../components/ui';
 import { EventHorizonsStackParamList } from '../../navigation/types';
+import { EVENT_HORIZONS_LESSONS } from '../../data/eventHorizonsLessons';
+import { EVENT_HORIZONS_BADGES } from '../../data/eventHorizonsBadges';
+import { useProgress } from '../../hooks/useProgress';
+import { useSubscription } from '../../hooks/useSubscription';
 
 const { width } = Dimensions.get('window');
 
@@ -88,6 +93,47 @@ const StatCard: React.FC<StatCardProps> = ({ icon, label, value, subtitle, onPre
 
 const EventHorizonsHubScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
+  const { progress } = useProgress();
+  const { isPremium } = useSubscription();
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
+
+  // Compute stats from data
+  const totalLessons = EVENT_HORIZONS_LESSONS.length;
+  const totalBadges = EVENT_HORIZONS_BADGES.length;
+  const ehLessonIds = EVENT_HORIZONS_LESSONS.map((l) => l.id);
+  const completedLessons = progress.completedModules.filter((id) =>
+    ehLessonIds.includes(id)
+  ).length;
+
+  if (!isPremium) {
+    return (
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <View style={styles.lockedContainer}>
+          <View style={styles.lockedIconCircle}>
+            <Ionicons name="lock-closed" size={48} color={colors.neon.green} />
+          </View>
+          <Text style={styles.lockedTitle}>Event Horizons</Text>
+          <Text style={styles.lockedSubtitle}>Tier 8 - Premium Feature</Text>
+          <Text style={styles.lockedDescription}>
+            Analyze prediction markets and options volatility. Access 7 analysis tools, AI signal synthesis, event replay, paper trading, and more.
+          </Text>
+          <TouchableOpacity
+            style={styles.lockedButton}
+            onPress={() => setShowPremiumModal(true)}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="diamond-outline" size={18} color="#000000" />
+            <Text style={styles.lockedButtonText}>Unlock Event Horizons</Text>
+          </TouchableOpacity>
+        </View>
+        <PremiumModal
+          visible={showPremiumModal}
+          onClose={() => setShowPremiumModal(false)}
+          featureName="Event Horizons"
+        />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -135,13 +181,18 @@ const EventHorizonsHubScreen: React.FC = () => {
         {/* Quick Stats */}
         <View style={styles.statsGrid}>
           <StatCard icon="📡" label="Tools" value="7" subtitle="Analysis tools" />
-          <StatCard icon="📚" label="Lessons" value="10" subtitle="Educational content" />
+          <StatCard
+            icon="📚"
+            label="Lessons"
+            value={`${completedLessons}/${totalLessons}`}
+            subtitle="Completed"
+          />
           <StatCard icon="🎯" label="Events" value="4" subtitle="Event types" />
           <StatCard
             icon="🏆"
-            label="Progress"
-            value="13"
-            subtitle="Badges available"
+            label="Badges"
+            value={String(totalBadges)}
+            subtitle="Available"
             onPress={() => navigation.navigate('EventHorizonsProgress')}
           />
         </View>
@@ -155,7 +206,7 @@ const EventHorizonsHubScreen: React.FC = () => {
             <ToolCard
               title="Lessons"
               subtitle="Learn the concepts"
-              description="Master prediction market analysis with 10 comprehensive lessons."
+              description={`Master prediction market analysis with ${totalLessons} comprehensive lessons.`}
               icon="📖"
               color="#8b5cf6"
               onPress={() => navigation.navigate('EventHorizonsLessons')}
@@ -581,6 +632,63 @@ const styles = StyleSheet.create({
     fontFamily: typography.fonts.regular,
     color: colors.text.tertiary,
     flex: 1,
+  },
+
+  // Premium locked state
+  lockedContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xl,
+  },
+  lockedIconCircle: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: 'rgba(57, 255, 20, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(57, 255, 20, 0.25)',
+  },
+  lockedTitle: {
+    fontSize: typography.sizes['2xl'],
+    fontFamily: typography.fonts.bold,
+    color: colors.text.primary,
+    textAlign: 'center',
+    marginBottom: spacing.xs,
+  },
+  lockedSubtitle: {
+    fontSize: typography.sizes.sm,
+    fontFamily: typography.fonts.medium,
+    color: '#c4b5fd',
+    textAlign: 'center',
+    marginBottom: spacing.md,
+  },
+  lockedDescription: {
+    fontSize: typography.sizes.md,
+    fontFamily: typography.fonts.regular,
+    color: colors.text.secondary,
+    textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: spacing.xl,
+    maxWidth: 320,
+  },
+  lockedButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.neon.green,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.md,
+    borderRadius: 16,
+    gap: spacing.sm,
+  },
+  lockedButtonText: {
+    fontSize: typography.sizes.md,
+    fontFamily: typography.fonts.semiBold,
+    color: '#000000',
   },
 });
 

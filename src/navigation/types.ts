@@ -60,6 +60,8 @@ export type LearnStackParamList = {
   AISignalAnalyzer: undefined;
   EarningsCalendar: undefined;
   OptionsChainViewer: { ticker?: string };
+  // Options Encyclopedia
+  OptionsEncyclopedia: undefined;
   // Phase 4 additions
   LearningPathSelector: undefined;
   ChallengePaths: undefined;
@@ -97,6 +99,7 @@ export type ToolsStackParamList = {
   Watchlist: undefined;
   OptionsSurface3D: undefined;
   OptionsFlow: undefined;
+  ProfitCalculator: undefined;
 };
 
 // Practice stack params

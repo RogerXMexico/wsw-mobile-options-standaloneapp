@@ -24,6 +24,7 @@ import RollingAdjustingScreen from '../screens/learn/RollingAdjustingScreen';
 import LearningPathSelectorScreen from '../screens/learn/LearningPathSelectorScreen';
 import ChallengePathsScreen from '../screens/learn/ChallengePathsScreen';
 import VideoLessonsScreen from '../screens/learn/VideoLessonsScreen';
+import OptionsEncyclopediaScreen from '../screens/learn/OptionsEncyclopediaScreen';
 import ToolsDashboardScreen from '../screens/tools/ToolsDashboardScreen';
 import GreeksVisualizerScreen from '../screens/tools/GreeksVisualizerScreen';
 import PositionSizingScreen from '../screens/tools/PositionSizingScreen';
@@ -36,6 +37,7 @@ import OptionsScreenerScreen from '../screens/tools/OptionsScreenerScreen';
 import WatchlistScreen from '../screens/tools/WatchlistScreen';
 import OptionsSurface3DScreen from '../screens/tools/OptionsSurface3DScreen';
 import OptionsFlowScreen from '../screens/tools/OptionsFlowScreen';
+import ProfitCalculatorScreen from '../screens/tools/ProfitCalculatorScreen';
 import PracticeDashboardScreen from '../screens/practice/PracticeDashboardScreen';
 import PaperTradingScreen from '../screens/practice/PaperTradingScreen';
 import StrategyBuilderScreen from '../screens/practice/StrategyBuilderScreen';
@@ -124,6 +126,7 @@ const LearnStackNavigator: React.FC = () => (
     <LearnStack.Screen name="AISignalAnalyzer" component={AISignalAnalyzerScreen} />
     <LearnStack.Screen name="EarningsCalendar" component={EarningsCalendarScreen} />
     <LearnStack.Screen name="OptionsChainViewer" component={OptionsChainViewerScreen} />
+    <LearnStack.Screen name="OptionsEncyclopedia" component={OptionsEncyclopediaScreen} />
     <LearnStack.Screen name="LearningPathSelector" component={LearningPathSelectorScreen} />
     <LearnStack.Screen name="ChallengePaths" component={ChallengePathsScreen} />
     <LearnStack.Screen name="VideoLessons" component={VideoLessonsScreen} />
@@ -145,6 +148,7 @@ const ToolsStackNavigator: React.FC = () => (
     <ToolsStack.Screen name="Watchlist" component={WatchlistScreen} />
     <ToolsStack.Screen name="OptionsSurface3D" component={OptionsSurface3DScreen} />
     <ToolsStack.Screen name="OptionsFlow" component={OptionsFlowScreen} />
+    <ToolsStack.Screen name="ProfitCalculator" component={ProfitCalculatorScreen} />
   </ToolsStack.Navigator>
 );
 

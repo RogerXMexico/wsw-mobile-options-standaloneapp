@@ -68,7 +68,7 @@ const StrategiesScreen: React.FC = () => {
   }, [expandedTier]);
 
   const subscriptionTier = user?.subscriptionTier || 'free';
-  const freeAccessTiers = [0, 0.5, 1, 2];
+  const freeAccessTiers = [0, 0.5];
 
   // Synchronous helper – used for search filtering (needs all strategies)
   const getStrategiesForTier = (tier: number) => {
@@ -168,6 +168,22 @@ const StrategiesScreen: React.FC = () => {
               </TouchableOpacity>
             </ScrollView>
           </GlassCard>
+        )}
+
+        {/* Encyclopedia Quick Access */}
+        {!searchQuery && (
+          <TouchableOpacity
+            style={styles.encyclopediaCard}
+            onPress={() => navigation.navigate('OptionsEncyclopedia')}
+          >
+            <View style={styles.encyclopediaLeft}>
+              <Text style={styles.encyclopediaTitle}>Options Encyclopedia</Text>
+              <Text style={styles.encyclopediaSubtitle}>
+                Search & filter all {strategyCounts.total}+ strategies
+              </Text>
+            </View>
+            <Text style={styles.chevron}>{'\u2192'}</Text>
+          </TouchableOpacity>
         )}
 
         {filteredTiers.map((tier) => {
@@ -588,6 +604,31 @@ const styles = StyleSheet.create({
   outlookText: {
     ...typography.styles.caption,
     fontSize: 10,
+  },
+  encyclopediaCard: {
+    flexDirection: 'row' as const,
+    alignItems: 'center',
+    backgroundColor: colors.overlay.neonGreen,
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: `${colors.neon.green}30`,
+    padding: spacing.md,
+    marginBottom: spacing.lg,
+    gap: spacing.md,
+  },
+  encyclopediaLeft: {
+    flex: 1,
+  },
+  encyclopediaTitle: {
+    ...typography.styles.body,
+    color: colors.neon.green,
+    fontFamily: typography.fonts.semiBold,
+    fontWeight: '600' as const,
+  },
+  encyclopediaSubtitle: {
+    ...typography.styles.caption,
+    color: colors.text.secondary,
+    marginTop: 2,
   },
   upgradeBanner: {
     padding: spacing.xl,

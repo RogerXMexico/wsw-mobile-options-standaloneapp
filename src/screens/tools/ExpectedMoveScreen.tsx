@@ -14,8 +14,10 @@ import Slider from '@react-native-community/slider';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
-import { GlassCard } from '../../components/ui';
+import { GlassCard, PremiumModal } from '../../components/ui';
+import { useSubscription } from '../../hooks/useSubscription';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -36,6 +38,8 @@ const TIMEFRAMES: TimeframeInfo[] = [
 
 const ExpectedMoveScreen: React.FC = () => {
   const navigation = useNavigation();
+  const { isPremium } = useSubscription();
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
   const [stockPrice, setStockPrice] = useState(100);
   const [iv, setIV] = useState(30);
   const [timeframe, setTimeframe] = useState<TimeframeType>('weekly');
@@ -96,6 +100,29 @@ const ExpectedMoveScreen: React.FC = () => {
   const chartWidth = SCREEN_WIDTH - spacing.md * 4;
   const priceRange = calculations.upper2SD - calculations.lower2SD;
   const currentPricePosition = ((stockPrice - calculations.lower2SD) / priceRange) * chartWidth;
+
+  if (!isPremium) {
+    return (
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Text style={styles.backText}>{'<'} Back</Text>
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Expected Move</Text>
+          <View style={styles.headerSpacer} />
+        </View>
+        <View style={styles.lockedContainer}>
+          <Ionicons name="lock-closed" size={64} color={colors.neon.green} />
+          <Text style={styles.lockedTitle}>Premium Feature</Text>
+          <Text style={styles.lockedMessage}>Unlock this tool with a premium subscription</Text>
+          <TouchableOpacity style={styles.unlockButton} onPress={() => setShowPremiumModal(true)}>
+            <Text style={styles.unlockButtonText}>Unlock Now</Text>
+          </TouchableOpacity>
+        </View>
+        <PremiumModal visible={showPremiumModal} onClose={() => setShowPremiumModal(false)} featureName="Expected Move Calculator" />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -570,6 +597,37 @@ const styles = StyleSheet.create({
   },
   bottomSpacer: {
     height: 40,
+  },
+  lockedContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xl,
+  },
+  lockedTitle: {
+    fontFamily: typography.fonts.bold,
+    fontSize: typography.sizes.xl,
+    color: colors.text.primary,
+    marginTop: spacing.lg,
+    marginBottom: spacing.sm,
+  },
+  lockedMessage: {
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.md,
+    color: colors.text.secondary,
+    textAlign: 'center',
+    marginBottom: spacing.xl,
+  },
+  unlockButton: {
+    backgroundColor: colors.neon.green,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.md,
+    borderRadius: borderRadius.lg,
+  },
+  unlockButtonText: {
+    fontFamily: typography.fonts.bold,
+    fontSize: typography.sizes.md,
+    color: colors.background.primary,
   },
 });
 

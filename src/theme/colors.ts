@@ -31,6 +31,10 @@ export const colors = {
     red: '#ff073a',
   },
 
+  // Top-level convenience aliases
+  accent: '#39ff14',
+  primary: '#39ff14',
+
   // Semantic colors
   success: '#39ff14',
   error: '#ff073a',

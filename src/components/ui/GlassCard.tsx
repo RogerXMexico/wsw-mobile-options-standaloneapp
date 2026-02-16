@@ -3,11 +3,12 @@ import React from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { colors, spacing, borderRadius } from '../../theme';
 
-interface GlassCardProps {
+export interface GlassCardProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   withGlow?: boolean;
   glowColor?: string;
+  noPadding?: boolean;
 }
 
 export const GlassCard: React.FC<GlassCardProps> = ({
@@ -15,6 +16,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   style,
   withGlow = false,
   glowColor = colors.neon.green,
+  noPadding = false,
 }) => {
   const glowStyle = withGlow
     ? {
@@ -29,7 +31,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
     : {};
 
   return (
-    <View style={[styles.card, glowStyle, style]}>
+    <View style={[styles.card, glowStyle, noPadding && { padding: 0 }, style]}>
       {children}
     </View>
   );

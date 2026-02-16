@@ -8,111 +8,113 @@ import {
   TouchableOpacity,
   Modal,
   TextInput,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { colors, typography, spacing, borderRadius } from '../../theme';
-
-interface JournalEntry {
-  id: string;
-  date: string;
-  symbol: string;
-  strategy: string;
-  entryPrice: number;
-  exitPrice: number | null;
-  quantity: number;
-  pnl: number | null;
-  status: 'open' | 'closed' | 'expired';
-  notes: string;
-  sentiment: 'bullish' | 'bearish' | 'neutral';
-  setup: string;
-  mistakes?: string;
-  lessons?: string;
-}
-
-// Mock journal entries
-const MOCK_ENTRIES: JournalEntry[] = [
-  {
-    id: '1',
-    date: '2024-01-15',
-    symbol: 'SPY',
-    strategy: 'Bull Call Spread',
-    entryPrice: 2.50,
-    exitPrice: 4.20,
-    quantity: 2,
-    pnl: 340,
-    status: 'closed',
-    notes: 'Market was showing strong momentum after earnings season.',
-    sentiment: 'bullish',
-    setup: 'Breakout above 470 resistance',
-    lessons: 'Patience paid off - held through minor pullback.',
-  },
-  {
-    id: '2',
-    date: '2024-01-12',
-    symbol: 'AAPL',
-    strategy: 'Iron Condor',
-    entryPrice: 3.20,
-    exitPrice: 1.60,
-    quantity: 1,
-    pnl: 160,
-    status: 'closed',
-    notes: 'Expected consolidation after product launch.',
-    sentiment: 'neutral',
-    setup: 'High IV after earnings, range-bound price action',
-  },
-  {
-    id: '3',
-    date: '2024-01-10',
-    symbol: 'NVDA',
-    strategy: 'Long Call',
-    entryPrice: 5.80,
-    exitPrice: 3.20,
-    quantity: 1,
-    pnl: -260,
-    status: 'closed',
-    notes: 'Semiconductor weakness caught me off guard.',
-    sentiment: 'bullish',
-    setup: 'Cup and handle pattern on daily',
-    mistakes: 'Entered too early before confirmation. Should have waited for breakout.',
-    lessons: 'Always wait for confirmation before entering breakout trades.',
-  },
-  {
-    id: '4',
-    date: '2024-01-08',
-    symbol: 'TSLA',
-    strategy: 'Put Credit Spread',
-    entryPrice: 1.80,
-    exitPrice: null,
-    quantity: 3,
-    pnl: null,
-    status: 'open',
-    notes: 'Support at 240 looks solid.',
-    sentiment: 'bullish',
-    setup: 'Bounce from 50-day MA support',
-  },
-];
+import { useTradingStore, TradeJournalEntry } from '../../stores/tradingStore';
 
 const TradeJournalScreen: React.FC = () => {
   const navigation = useNavigation();
-  const [entries, setEntries] = useState<JournalEntry[]>(MOCK_ENTRIES);
+  const entries = useTradingStore((s) => s.journalEntries);
+  const addJournalEntry = useTradingStore((s) => s.addJournalEntry);
+  const deleteJournalEntry = useTradingStore((s) => s.deleteJournalEntry);
+
   const [filter, setFilter] = useState<'all' | 'open' | 'closed'>('all');
-  const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
+  const [selectedEntry, setSelectedEntry] = useState<TradeJournalEntry | null>(null);
   const [showNewEntry, setShowNewEntry] = useState(false);
 
+  // New entry form state
+  const [formSymbol, setFormSymbol] = useState('');
+  const [formStrategy, setFormStrategy] = useState('');
+  const [formEntryPrice, setFormEntryPrice] = useState('');
+  const [formQuantity, setFormQuantity] = useState('');
+  const [formSentiment, setFormSentiment] = useState<'bullish' | 'bearish' | 'neutral'>('bullish');
+  const [formSetup, setFormSetup] = useState('');
+  const [formNotes, setFormNotes] = useState('');
+
+  const resetForm = () => {
+    setFormSymbol('');
+    setFormStrategy('');
+    setFormEntryPrice('');
+    setFormQuantity('');
+    setFormSentiment('bullish');
+    setFormSetup('');
+    setFormNotes('');
+  };
+
+  const handleSubmitEntry = () => {
+    const price = parseFloat(formEntryPrice);
+    const qty = parseInt(formQuantity, 10);
+
+    if (!formSymbol.trim()) {
+      Alert.alert('Missing Field', 'Please enter a symbol.');
+      return;
+    }
+    if (!formStrategy.trim()) {
+      Alert.alert('Missing Field', 'Please enter a strategy.');
+      return;
+    }
+    if (isNaN(price) || price <= 0) {
+      Alert.alert('Invalid Price', 'Please enter a valid entry price.');
+      return;
+    }
+    if (isNaN(qty) || qty <= 0) {
+      Alert.alert('Invalid Quantity', 'Please enter a valid quantity.');
+      return;
+    }
+
+    addJournalEntry({
+      date: new Date().toISOString().split('T')[0],
+      symbol: formSymbol.trim().toUpperCase(),
+      strategy: formStrategy.trim(),
+      direction: formSentiment,
+      entryPrice: price,
+      quantity: qty,
+      status: 'open',
+      notes: formNotes.trim(),
+      lessons: formSetup.trim(),
+      emotions: [],
+      tags: [],
+    });
+
+    resetForm();
+    setShowNewEntry(false);
+  };
+
+  const handleDeleteEntry = (entry: TradeJournalEntry) => {
+    Alert.alert(
+      'Delete Entry',
+      `Delete the ${entry.symbol} ${entry.strategy} entry?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            deleteJournalEntry(entry.id);
+            setSelectedEntry(null);
+          },
+        },
+      ],
+    );
+  };
+
   // Calculate stats
+  const closedEntries = entries.filter(e => e.status !== 'open');
   const stats = {
-    totalTrades: entries.filter(e => e.status === 'closed').length,
-    winningTrades: entries.filter(e => e.pnl !== null && e.pnl > 0).length,
-    losingTrades: entries.filter(e => e.pnl !== null && e.pnl < 0).length,
+    totalTrades: closedEntries.length,
+    winningTrades: entries.filter(e => e.pnl !== undefined && e.pnl !== null && e.pnl > 0).length,
+    losingTrades: entries.filter(e => e.pnl !== undefined && e.pnl !== null && e.pnl < 0).length,
     totalPnl: entries.reduce((sum, e) => sum + (e.pnl || 0), 0),
-    avgWin: entries.filter(e => e.pnl !== null && e.pnl > 0).length > 0
-      ? entries.filter(e => e.pnl !== null && e.pnl > 0).reduce((sum, e) => sum + (e.pnl || 0), 0) /
-        entries.filter(e => e.pnl !== null && e.pnl > 0).length
+    avgWin: entries.filter(e => e.pnl !== undefined && e.pnl !== null && e.pnl > 0).length > 0
+      ? entries.filter(e => e.pnl !== undefined && e.pnl !== null && e.pnl > 0).reduce((sum, e) => sum + (e.pnl || 0), 0) /
+        entries.filter(e => e.pnl !== undefined && e.pnl !== null && e.pnl > 0).length
       : 0,
-    avgLoss: entries.filter(e => e.pnl !== null && e.pnl < 0).length > 0
-      ? entries.filter(e => e.pnl !== null && e.pnl < 0).reduce((sum, e) => sum + (e.pnl || 0), 0) /
-        entries.filter(e => e.pnl !== null && e.pnl < 0).length
+    avgLoss: entries.filter(e => e.pnl !== undefined && e.pnl !== null && e.pnl < 0).length > 0
+      ? entries.filter(e => e.pnl !== undefined && e.pnl !== null && e.pnl < 0).reduce((sum, e) => sum + (e.pnl || 0), 0) /
+        entries.filter(e => e.pnl !== undefined && e.pnl !== null && e.pnl < 0).length
       : 0,
   };
 
@@ -122,7 +124,8 @@ const TradeJournalScreen: React.FC = () => {
 
   const filteredEntries = entries.filter(e => {
     if (filter === 'all') return true;
-    return e.status === filter;
+    if (filter === 'open') return e.status === 'open';
+    return e.status !== 'open'; // 'closed' filter shows win/loss/breakeven
   });
 
   const formatDate = (dateStr: string) => {
@@ -130,8 +133,8 @@ const TradeJournalScreen: React.FC = () => {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
 
-  const getSentimentEmoji = (sentiment: string) => {
-    switch (sentiment) {
+  const getDirectionEmoji = (direction: string) => {
+    switch (direction) {
       case 'bullish': return '🐂';
       case 'bearish': return '🐻';
       default: return '😐';
@@ -141,8 +144,9 @@ const TradeJournalScreen: React.FC = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'open': return colors.neon.cyan;
-      case 'closed': return colors.text.muted;
-      case 'expired': return colors.neon.yellow;
+      case 'win': return colors.bullish;
+      case 'loss': return colors.bearish;
+      case 'breakeven': return colors.neon.yellow;
       default: return colors.text.muted;
     }
   };
@@ -236,7 +240,7 @@ const TradeJournalScreen: React.FC = () => {
             >
               <View style={styles.entryHeader}>
                 <View style={styles.entrySymbol}>
-                  <Text style={styles.sentimentEmoji}>{getSentimentEmoji(entry.sentiment)}</Text>
+                  <Text style={styles.sentimentEmoji}>{getDirectionEmoji(entry.direction)}</Text>
                   <View>
                     <Text style={styles.symbolText}>{entry.symbol}</Text>
                     <Text style={styles.strategyText}>{entry.strategy}</Text>
@@ -262,26 +266,26 @@ const TradeJournalScreen: React.FC = () => {
                   <View style={styles.priceItem}>
                     <Text style={styles.priceLabel}>Exit</Text>
                     <Text style={styles.priceValue}>
-                      {entry.exitPrice !== null ? `$${entry.exitPrice.toFixed(2)}` : '-'}
+                      {entry.exitPrice != null ? `$${entry.exitPrice.toFixed(2)}` : '-'}
                     </Text>
                   </View>
                   <View style={styles.priceItem}>
                     <Text style={styles.priceLabel}>P&L</Text>
                     <Text style={[
                       styles.pnlValue,
-                      { color: entry.pnl !== null ? (entry.pnl >= 0 ? colors.bullish : colors.bearish) : colors.text.muted }
+                      { color: entry.pnl != null ? (entry.pnl >= 0 ? colors.bullish : colors.bearish) : colors.text.muted }
                     ]}>
-                      {entry.pnl !== null ? `${entry.pnl >= 0 ? '+' : ''}$${entry.pnl}` : '-'}
+                      {entry.pnl != null ? `${entry.pnl >= 0 ? '+' : ''}$${entry.pnl}` : '-'}
                     </Text>
                   </View>
                 </View>
               </View>
 
-              {entry.notes && (
+              {entry.notes ? (
                 <Text style={styles.notesPreview} numberOfLines={2}>
                   {entry.notes}
                 </Text>
-              )}
+              ) : null}
             </TouchableOpacity>
           ))}
         </View>
@@ -322,7 +326,7 @@ const TradeJournalScreen: React.FC = () => {
               <>
                 <View style={styles.modalHeader}>
                   <View style={styles.modalTitleRow}>
-                    <Text style={styles.modalEmoji}>{getSentimentEmoji(selectedEntry.sentiment)}</Text>
+                    <Text style={styles.modalEmoji}>{getDirectionEmoji(selectedEntry.direction)}</Text>
                     <View>
                       <Text style={styles.modalTitle}>{selectedEntry.symbol}</Text>
                       <Text style={styles.modalSubtitle}>{selectedEntry.strategy}</Text>
@@ -342,6 +346,12 @@ const TradeJournalScreen: React.FC = () => {
                       <Text style={styles.detailValue}>{selectedEntry.date}</Text>
                     </View>
                     <View style={styles.detailRow}>
+                      <Text style={styles.detailLabel}>Direction</Text>
+                      <Text style={styles.detailValue}>
+                        {selectedEntry.direction.charAt(0).toUpperCase() + selectedEntry.direction.slice(1)}
+                      </Text>
+                    </View>
+                    <View style={styles.detailRow}>
                       <Text style={styles.detailLabel}>Quantity</Text>
                       <Text style={styles.detailValue}>{selectedEntry.quantity} contracts</Text>
                     </View>
@@ -352,55 +362,59 @@ const TradeJournalScreen: React.FC = () => {
                     <View style={styles.detailRow}>
                       <Text style={styles.detailLabel}>Exit Price</Text>
                       <Text style={styles.detailValue}>
-                        {selectedEntry.exitPrice !== null ? `$${selectedEntry.exitPrice.toFixed(2)}` : 'Open'}
+                        {selectedEntry.exitPrice != null ? `$${selectedEntry.exitPrice.toFixed(2)}` : 'Open'}
                       </Text>
                     </View>
                     <View style={styles.detailRow}>
                       <Text style={styles.detailLabel}>P&L</Text>
                       <Text style={[
                         styles.detailValue,
-                        { color: selectedEntry.pnl !== null ? (selectedEntry.pnl >= 0 ? colors.bullish : colors.bearish) : colors.text.muted }
+                        { color: selectedEntry.pnl != null ? (selectedEntry.pnl >= 0 ? colors.bullish : colors.bearish) : colors.text.muted }
                       ]}>
-                        {selectedEntry.pnl !== null ? `${selectedEntry.pnl >= 0 ? '+' : ''}$${selectedEntry.pnl}` : '-'}
+                        {selectedEntry.pnl != null ? `${selectedEntry.pnl >= 0 ? '+' : ''}$${selectedEntry.pnl}` : '-'}
                       </Text>
                     </View>
                   </View>
 
-                  {/* Setup */}
-                  <View style={styles.detailSection}>
-                    <Text style={styles.detailSectionTitle}>Setup</Text>
-                    <Text style={styles.notesText}>{selectedEntry.setup}</Text>
-                  </View>
-
                   {/* Notes */}
-                  <View style={styles.detailSection}>
-                    <Text style={styles.detailSectionTitle}>Notes</Text>
-                    <Text style={styles.notesText}>{selectedEntry.notes}</Text>
-                  </View>
-
-                  {/* Mistakes */}
-                  {selectedEntry.mistakes && (
-                    <View style={[styles.detailSection, styles.mistakesSection]}>
-                      <Text style={styles.detailSectionTitle}>Mistakes</Text>
-                      <Text style={styles.notesText}>{selectedEntry.mistakes}</Text>
+                  {selectedEntry.notes ? (
+                    <View style={styles.detailSection}>
+                      <Text style={styles.detailSectionTitle}>Notes</Text>
+                      <Text style={styles.notesText}>{selectedEntry.notes}</Text>
                     </View>
-                  )}
+                  ) : null}
 
                   {/* Lessons */}
-                  {selectedEntry.lessons && (
+                  {selectedEntry.lessons ? (
                     <View style={[styles.detailSection, styles.lessonsSection]}>
-                      <Text style={styles.detailSectionTitle}>Lessons Learned</Text>
+                      <Text style={styles.detailSectionTitle}>Lessons / Setup</Text>
                       <Text style={styles.notesText}>{selectedEntry.lessons}</Text>
+                    </View>
+                  ) : null}
+
+                  {/* Tags */}
+                  {selectedEntry.tags.length > 0 && (
+                    <View style={styles.detailSection}>
+                      <Text style={styles.detailSectionTitle}>Tags</Text>
+                      <Text style={styles.notesText}>{selectedEntry.tags.join(', ')}</Text>
                     </View>
                   )}
                 </ScrollView>
 
-                <TouchableOpacity
-                  style={styles.closeButton}
-                  onPress={() => setSelectedEntry(null)}
-                >
-                  <Text style={styles.closeButtonText}>Close</Text>
-                </TouchableOpacity>
+                <View style={styles.modalActions}>
+                  <TouchableOpacity
+                    style={styles.deleteButton}
+                    onPress={() => handleDeleteEntry(selectedEntry)}
+                  >
+                    <Text style={styles.deleteButtonText}>Delete</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.closeButton, { flex: 1 }]}
+                    onPress={() => setSelectedEntry(null)}
+                  >
+                    <Text style={styles.closeButtonText}>Close</Text>
+                  </TouchableOpacity>
+                </View>
               </>
             )}
           </View>
@@ -412,13 +426,13 @@ const TradeJournalScreen: React.FC = () => {
         visible={showNewEntry}
         transparent
         animationType="slide"
-        onRequestClose={() => setShowNewEntry(false)}
+        onRequestClose={() => { resetForm(); setShowNewEntry(false); }}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>New Trade Entry</Text>
-              <TouchableOpacity onPress={() => setShowNewEntry(false)}>
+              <TouchableOpacity onPress={() => { resetForm(); setShowNewEntry(false); }}>
                 <Text style={styles.modalClose}>×</Text>
               </TouchableOpacity>
             </View>
@@ -430,6 +444,9 @@ const TradeJournalScreen: React.FC = () => {
                   style={styles.formInput}
                   placeholder="e.g., SPY"
                   placeholderTextColor={colors.text.muted}
+                  value={formSymbol}
+                  onChangeText={setFormSymbol}
+                  autoCapitalize="characters"
                 />
               </View>
 
@@ -439,6 +456,8 @@ const TradeJournalScreen: React.FC = () => {
                   style={styles.formInput}
                   placeholder="e.g., Bull Call Spread"
                   placeholderTextColor={colors.text.muted}
+                  value={formStrategy}
+                  onChangeText={setFormStrategy}
                 />
               </View>
 
@@ -450,6 +469,8 @@ const TradeJournalScreen: React.FC = () => {
                     placeholder="0.00"
                     keyboardType="decimal-pad"
                     placeholderTextColor={colors.text.muted}
+                    value={formEntryPrice}
+                    onChangeText={setFormEntryPrice}
                   />
                 </View>
                 <View style={[styles.formSection, { flex: 1 }]}>
@@ -459,19 +480,31 @@ const TradeJournalScreen: React.FC = () => {
                     placeholder="1"
                     keyboardType="number-pad"
                     placeholderTextColor={colors.text.muted}
+                    value={formQuantity}
+                    onChangeText={setFormQuantity}
                   />
                 </View>
               </View>
 
               <View style={styles.formSection}>
-                <Text style={styles.formLabel}>Sentiment</Text>
+                <Text style={styles.formLabel}>Direction</Text>
                 <View style={styles.sentimentRow}>
                   {(['bullish', 'neutral', 'bearish'] as const).map(s => (
-                    <TouchableOpacity key={s} style={styles.sentimentButton}>
+                    <TouchableOpacity
+                      key={s}
+                      style={[
+                        styles.sentimentButton,
+                        formSentiment === s && styles.sentimentButtonActive,
+                      ]}
+                      onPress={() => setFormSentiment(s)}
+                    >
                       <Text style={styles.sentimentButtonEmoji}>
-                        {getSentimentEmoji(s)}
+                        {getDirectionEmoji(s)}
                       </Text>
-                      <Text style={styles.sentimentButtonText}>
+                      <Text style={[
+                        styles.sentimentButtonText,
+                        formSentiment === s && styles.sentimentButtonTextActive,
+                      ]}>
                         {s.charAt(0).toUpperCase() + s.slice(1)}
                       </Text>
                     </TouchableOpacity>
@@ -487,6 +520,8 @@ const TradeJournalScreen: React.FC = () => {
                   placeholderTextColor={colors.text.muted}
                   multiline
                   numberOfLines={3}
+                  value={formSetup}
+                  onChangeText={setFormSetup}
                 />
               </View>
 
@@ -498,13 +533,15 @@ const TradeJournalScreen: React.FC = () => {
                   placeholderTextColor={colors.text.muted}
                   multiline
                   numberOfLines={3}
+                  value={formNotes}
+                  onChangeText={setFormNotes}
                 />
               </View>
             </ScrollView>
 
             <TouchableOpacity
               style={styles.submitButton}
-              onPress={() => setShowNewEntry(false)}
+              onPress={handleSubmitEntry}
             >
               <Text style={styles.submitButtonText}>Add Entry</Text>
             </TouchableOpacity>
@@ -855,8 +892,25 @@ const styles = StyleSheet.create({
     padding: spacing.md,
     borderRadius: borderRadius.lg,
   },
+  modalActions: {
+    flexDirection: 'row',
+    paddingHorizontal: spacing.xl,
+    paddingBottom: spacing.xl,
+    paddingTop: spacing.sm,
+    gap: spacing.md,
+  },
+  deleteButton: {
+    backgroundColor: colors.bearish + '20',
+    borderRadius: borderRadius.lg,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.xl,
+    alignItems: 'center',
+  },
+  deleteButtonText: {
+    ...typography.styles.button,
+    color: colors.bearish,
+  },
   closeButton: {
-    margin: spacing.xl,
     backgroundColor: colors.background.tertiary,
     borderRadius: borderRadius.lg,
     paddingVertical: spacing.md,
@@ -908,9 +962,16 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: spacing.xs,
   },
+  sentimentButtonActive: {
+    borderColor: colors.neon.green,
+    backgroundColor: colors.neon.green + '15',
+  },
   sentimentButtonText: {
     ...typography.styles.caption,
     color: colors.text.secondary,
+  },
+  sentimentButtonTextActive: {
+    color: colors.neon.green,
   },
   submitButton: {
     margin: spacing.xl,

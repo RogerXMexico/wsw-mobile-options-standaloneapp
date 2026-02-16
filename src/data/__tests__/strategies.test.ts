@@ -69,12 +69,18 @@ describe('Strategy Data', () => {
       });
     });
 
-    it('only includes tier 0 and 0.5 strategies', () => {
+    it('always includes tier 0 and 0.5 strategies', () => {
       const free = getFreeStrategies();
       const tiers = new Set(free.map((s) => s.tier));
-      tiers.forEach((tier) => {
-        expect([0, 0.5]).toContain(tier);
-      });
+      // Free strategies must include the foundational tiers
+      expect(tiers.has(0)).toBe(true);
+      expect(tiers.has(0.5)).toBe(true);
+    });
+
+    it('never includes strategies marked as premium', () => {
+      const free = getFreeStrategies();
+      const premiumInFree = free.filter((s) => s.isPremium === true);
+      expect(premiumInFree).toEqual([]);
     });
   });
 

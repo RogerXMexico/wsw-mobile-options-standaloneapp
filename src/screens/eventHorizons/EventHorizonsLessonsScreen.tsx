@@ -1,6 +1,6 @@
 // Event Horizons Lessons Screen
 // Educational content for prediction market + options integration
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing } from '../../theme';
 import { EventHorizonsStackParamList } from '../../navigation/types';
 import { EVENT_HORIZONS_LESSONS, EventHorizonsLesson } from '../../data/eventHorizonsLessons';
+import { useProgress } from '../../hooks/useProgress';
 
 const { width } = Dimensions.get('window');
 
@@ -124,8 +125,13 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson, isCompleted, onPress })
 
 const EventHorizonsLessonsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
-  // TODO: Get from Redux/Context
-  const [completedLessons] = useState<string[]>([]);
+  const { progress } = useProgress();
+
+  // Filter completed modules to only Event Horizons lesson IDs
+  const ehLessonIds = EVENT_HORIZONS_LESSONS.map((l) => l.id);
+  const completedLessons = progress.completedModules.filter((id) =>
+    ehLessonIds.includes(id)
+  );
 
   const totalLessons = EVENT_HORIZONS_LESSONS.length;
   const completedCount = completedLessons.length;

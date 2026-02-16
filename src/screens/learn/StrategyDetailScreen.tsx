@@ -12,6 +12,7 @@ import {
   Easing,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { LearnStackParamList, LearnStackScreenProps } from '../../navigation/types';
 import { colors, typography, spacing, borderRadius, createNeonGlow, getTierColor, getOutlookColor } from '../../theme';
@@ -21,6 +22,8 @@ import { PayoffChart } from '../../components/charts/PayoffChart';
 import { TradeWalkthrough } from '../../components/learn/TradeWalkthrough';
 import { getMentorForStrategy } from '../../data/jungleAnimals';
 import { getQuotesForStrategy, getRandomQuote, getCourseQuotes } from '../../data/quotes';
+import { useSubscription } from '../../hooks';
+import { PremiumModal } from '../../components/ui';
 
 // Animal avatar images
 const ANIMAL_IMAGES: Record<string, any> = {
@@ -56,6 +59,8 @@ const StrategyDetailScreen: React.FC = () => {
   const { strategyId } = route.params;
 
   const [activeTab, setActiveTab] = useState<'overview' | 'walkthrough' | 'setup' | 'greeks'>('overview');
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
+  const { isPremium, canAccessTier } = useSubscription();
 
   // Load strategy data
   const strategy = useMemo(() => getStrategyById(strategyId), [strategyId]);
@@ -78,6 +83,9 @@ const StrategyDetailScreen: React.FC = () => {
   const tierInfo = TIER_INFO[strategy.tier] || TIER_INFO[0];
   const tierColor = getTierColor(strategy.tier);
   const outlookColor = getOutlookColor(strategy.outlook);
+
+  // Check if strategy is locked behind premium
+  const isLocked = strategy.isPremium && !isPremium;
 
   // Get mentor for this strategy
   const mentor = useMemo(() => getMentorForStrategy(strategyId), [strategyId]);
@@ -182,7 +190,7 @@ const StrategyDetailScreen: React.FC = () => {
         </View>
 
         {/* Special Content: Know Thyself Greek Quote */}
-        {strategyId === 'know-thyself' && (
+        {!isLocked && strategyId === 'know-thyself' && (
           <View style={styles.greekQuoteContainer}>
             <Animated.Text
               style={[
@@ -200,7 +208,7 @@ const StrategyDetailScreen: React.FC = () => {
         )}
 
         {/* Special Content: Rules of the Jungle Tiger Avatar */}
-        {strategyId === 'rules-of-the-jungle' && (
+        {!isLocked && strategyId === 'rules-of-the-jungle' && (
           <View style={styles.tigerContainer}>
             <Text style={styles.jungleSubtitle}>
               Hunt with patience. <Text style={styles.jungleHighlight}>Strike</Text> with precision.
@@ -215,8 +223,8 @@ const StrategyDetailScreen: React.FC = () => {
           </View>
         )}
 
-        {/* Mentor Card */}
-        <View style={[styles.mentorCard, { borderColor: mentor.colors.primary }]}>
+        {/* Mentor Card - hidden when locked */}
+        {!isLocked && <View style={[styles.mentorCard, { borderColor: mentor.colors.primary }]}>
           <Image
             source={mentorImage}
             style={styles.mentorAvatar}
@@ -233,10 +241,10 @@ const StrategyDetailScreen: React.FC = () => {
             <Text style={styles.mentorGreeting}>{mentor.dialogues.greeting}</Text>
             <Text style={styles.mentorCatchphrase}>"{mentor.catchphrase}"</Text>
           </View>
-        </View>
+        </View>}
 
         {/* Wisdom Quote (if available) */}
-        {displayQuote && (
+        {!isLocked && displayQuote && (
           <View style={styles.quoteCard}>
             <Text style={styles.quoteText}>"{displayQuote.text}"</Text>
             <Text style={styles.quoteAuthor}>— {displayQuote.author}{displayQuote.source ? `, ${displayQuote.source}` : ''}</Text>
@@ -263,8 +271,28 @@ const StrategyDetailScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* Tabs */}
-        <View style={styles.tabs}>
+        {/* Premium Gate Overlay */}
+        {isLocked && (
+          <View style={styles.premiumGate}>
+            <View style={styles.premiumGateIconContainer}>
+              <Ionicons name="lock-closed" size={40} color={colors.neon.green} />
+            </View>
+            <Text style={styles.premiumGateTitle}>Premium Strategy</Text>
+            <Text style={styles.premiumGateText}>
+              Subscribe to unlock {strategy.name} and all 70+ strategies, detailed walkthroughs, and advanced content.
+            </Text>
+            <TouchableOpacity
+              style={styles.premiumGateButton}
+              onPress={() => setShowPremiumModal(true)}
+            >
+              <Ionicons name="star" size={18} color={colors.background.primary} />
+              <Text style={styles.premiumGateButtonText}>Unlock Premium</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {/* Tabs - hidden when locked */}
+        {!isLocked && (<View style={styles.tabs}>
           {(['overview', 'walkthrough', 'setup', 'greeks'] as const).map((tab) => {
             // Hide walkthrough tab if no trade paths available
             if (tab === 'walkthrough' && !strategy.education?.tradePaths?.length) {
@@ -282,10 +310,10 @@ const StrategyDetailScreen: React.FC = () => {
               </TouchableOpacity>
             );
           })}
-        </View>
+        </View>)}
 
-        {/* Tab Content */}
-        {activeTab === 'overview' && (
+        {/* Tab Content - hidden when locked */}
+        {!isLocked && activeTab === 'overview' && (
           <View style={styles.tabContent}>
             {/* What It Does Card - from education content */}
             {strategy.education?.whatItDoes ? (
@@ -424,7 +452,7 @@ const StrategyDetailScreen: React.FC = () => {
         )}
 
         {/* Walkthrough Tab - Trade scenario paths */}
-        {activeTab === 'walkthrough' && strategy.education?.tradePaths && (
+        {!isLocked && activeTab === 'walkthrough' && strategy.education?.tradePaths && (
           <View style={styles.tabContent}>
             <TradeWalkthrough
               tradePaths={strategy.education.tradePaths}
@@ -443,7 +471,7 @@ const StrategyDetailScreen: React.FC = () => {
           </View>
         )}
 
-        {activeTab === 'setup' && (
+        {!isLocked && activeTab === 'setup' && (
           <View style={styles.tabContent}>
             {/* Legs */}
             {strategyConfig && (
@@ -537,7 +565,7 @@ const StrategyDetailScreen: React.FC = () => {
           </View>
         )}
 
-        {activeTab === 'greeks' && (
+        {!isLocked && activeTab === 'greeks' && (
           <View style={styles.tabContent}>
             {/* Greeks Overview */}
             {strategy.greeks && (
@@ -634,7 +662,7 @@ const StrategyDetailScreen: React.FC = () => {
         )}
 
         {/* Quiz CTA */}
-        <View style={styles.quizCta}>
+        {!isLocked && <View style={styles.quizCta}>
           <View style={styles.quizCtaContent}>
             <Text style={styles.quizCtaEmoji}></Text>
             <View>
@@ -645,16 +673,25 @@ const StrategyDetailScreen: React.FC = () => {
           <TouchableOpacity style={styles.quizCtaButton}>
             <Text style={styles.quizCtaButtonText}>Start Quiz</Text>
           </TouchableOpacity>
-        </View>
+        </View>}
       </ScrollView>
 
-      {/* Mark Complete Button */}
-      <View style={styles.bottomBar}>
-        <TouchableOpacity style={styles.completeButton}>
-          <Text style={styles.completeButtonText}>Mark as Complete</Text>
-          <Text style={styles.completeButtonXp}>+25 XP</Text>
-        </TouchableOpacity>
-      </View>
+      {/* Mark Complete Button - hidden when locked */}
+      {!isLocked && (
+        <View style={styles.bottomBar}>
+          <TouchableOpacity style={styles.completeButton}>
+            <Text style={styles.completeButtonText}>Mark as Complete</Text>
+            <Text style={styles.completeButtonXp}>+25 XP</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* Premium Modal */}
+      <PremiumModal
+        visible={showPremiumModal}
+        onClose={() => setShowPremiumModal(false)}
+        featureName={strategy.name}
+      />
     </SafeAreaView>
   );
 };
@@ -784,6 +821,51 @@ const styles = StyleSheet.create({
   statDivider: {
     width: 1,
     backgroundColor: colors.border.default,
+  },
+  premiumGate: {
+    alignItems: 'center',
+    backgroundColor: colors.background.secondary,
+    borderRadius: borderRadius.xl,
+    padding: spacing.xl,
+    marginBottom: spacing.lg,
+    borderWidth: 1,
+    borderColor: colors.neon.green + '30',
+  },
+  premiumGateIconContainer: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: colors.neon.green + '15',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.md,
+  },
+  premiumGateTitle: {
+    ...typography.styles.h4,
+    color: colors.text.primary,
+    marginBottom: spacing.sm,
+  },
+  premiumGateText: {
+    ...typography.styles.bodySm,
+    color: colors.text.secondary,
+    textAlign: 'center',
+    lineHeight: 20,
+    marginBottom: spacing.lg,
+  },
+  premiumGateButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.neon.green,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.xl,
+    borderRadius: borderRadius.lg,
+    gap: spacing.sm,
+    ...createNeonGlow(colors.neon.green, 0.3),
+  },
+  premiumGateButtonText: {
+    ...typography.styles.button,
+    color: colors.background.primary,
   },
   tabs: {
     flexDirection: 'row',

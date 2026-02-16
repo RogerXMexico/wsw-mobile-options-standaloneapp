@@ -20,10 +20,11 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
-import { GlassCard, GlowButton } from '../../components/ui';
+import { GlassCard, GlowButton, PremiumModal } from '../../components/ui';
 import { ProfileStackParamList } from '../../navigation/types';
 import { getRankedTribes, JungleTribe } from '../../data/jungleTribes';
 import { useTribeChat, TribeChatMessage } from '../../hooks';
+import { useSubscription } from '../../hooks/useSubscription';
 
 type NavigationProp = NativeStackNavigationProp<ProfileStackParamList>;
 
@@ -49,6 +50,8 @@ const getRelativeTime = (isoDate: string): string => {
 
 const JungleTribesScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
+  const { isPremium } = useSubscription();
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
   const [selectedTribe, setSelectedTribe] = useState<JungleTribe | null>(null);
   const [chatInput, setChatInput] = useState('');
   const chatScrollRef = useRef<ScrollView>(null);
@@ -128,6 +131,42 @@ const JungleTribesScreen: React.FC = () => {
       <Text style={styles.chatMessageText}>{msg.message_text}</Text>
     </View>
   );
+
+  if (!isPremium) {
+    return (
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Text style={styles.backText}>{'<'} Back</Text>
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Jungle Tribes</Text>
+          <View style={styles.headerSpacer} />
+        </View>
+        <View style={styles.lockedContainer}>
+          <View style={styles.lockedIconCircle}>
+            <Ionicons name="lock-closed" size={48} color={colors.neon.green} />
+          </View>
+          <Text style={styles.lockedTitle}>Premium Feature</Text>
+          <Text style={styles.lockedDescription}>
+            Join a tribe and compete with fellow traders. Your XP contributes to tribe rankings, access tribe chat, and earn exclusive seasonal rewards.
+          </Text>
+          <TouchableOpacity
+            style={styles.lockedButton}
+            onPress={() => setShowPremiumModal(true)}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="diamond-outline" size={18} color="#000000" />
+            <Text style={styles.lockedButtonText}>Unlock Jungle Tribes</Text>
+          </TouchableOpacity>
+        </View>
+        <PremiumModal
+          visible={showPremiumModal}
+          onClose={() => setShowPremiumModal(false)}
+          featureName="Jungle Tribes"
+        />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -988,6 +1027,56 @@ const styles = StyleSheet.create({
   },
   chatSendButtonDisabled: {
     backgroundColor: colors.background.tertiary,
+  },
+
+  // Premium locked state
+  lockedContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xl,
+  },
+  lockedIconCircle: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: 'rgba(57, 255, 20, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(57, 255, 20, 0.25)',
+  },
+  lockedTitle: {
+    fontFamily: typography.fonts.bold,
+    fontSize: typography.sizes['2xl'],
+    color: colors.text.primary,
+    textAlign: 'center',
+    marginBottom: spacing.sm,
+  },
+  lockedDescription: {
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.md,
+    color: colors.text.secondary,
+    textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: spacing.xl,
+    maxWidth: 320,
+  },
+  lockedButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.neon.green,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.md,
+    borderRadius: borderRadius.lg,
+    gap: spacing.sm,
+  },
+  lockedButtonText: {
+    fontFamily: typography.fonts.semiBold,
+    fontSize: typography.sizes.md,
+    color: '#000000',
   },
 });
 

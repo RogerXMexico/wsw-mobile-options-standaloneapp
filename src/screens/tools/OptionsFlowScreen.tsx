@@ -19,6 +19,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
 import { colors, typography, spacing, borderRadius } from '../../theme';
+import { PremiumModal } from '../../components/ui';
+import { useSubscription } from '../../hooks/useSubscription';
 import {
   getBullflowApiKey,
   setBullflowApiKey,
@@ -152,6 +154,8 @@ const getStatusLabel = (status: StreamStatus): string => {
 
 const OptionsFlowScreen: React.FC = () => {
   const navigation = useNavigation();
+  const { isPremium } = useSubscription();
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
 
   // Connection state
   const [status, setStatus] = useState<StreamStatus>('disconnected');
@@ -195,64 +199,131 @@ const OptionsFlowScreen: React.FC = () => {
     };
   }, []);
 
+  // Track latest timestamp to avoid duplicate alerts
+  const lastTimestampRef = useRef<number>(0);
+  // Track whether we've ever connected successfully (to decide fallback behavior)
+  const hasConnectedRef = useRef(false);
+  // Track whether the component is still mounted for async safety
+  const isMountedRef = useRef(true);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   // -- Polling logic --
+
+  const fetchAlerts = useCallback(async (apiKey: string): Promise<BullflowAlert[]> => {
+    const url = getStreamUrl(apiKey);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: { Accept: 'application/json, text/event-stream' },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Bullflow API error: ${response.status}`);
+    }
+
+    const text = await response.text();
+
+    // Parse SSE events or JSON response
+    const alerts: BullflowAlert[] = [];
+
+    // Try JSON array first
+    try {
+      const json = JSON.parse(text);
+      const items = Array.isArray(json) ? json : json.data ? [].concat(json.data) : [json];
+      for (const item of items) {
+        if (item && item.symbol) {
+          alerts.push({
+            alertType: item.alertType || item.alert_type || 'algo',
+            symbol: item.symbol,
+            alertName: item.alertName || item.alert_name || 'Flow Alert',
+            alertPremium: item.alertPremium || item.alert_premium || item.premium || 0,
+            timestamp: item.timestamp || Date.now(),
+            parsed: parseOCCSymbol(item.symbol),
+          });
+        }
+      }
+      return alerts;
+    } catch {
+      // Not JSON, try SSE format
+    }
+
+    // Parse SSE text: "data: {...}\n\n"
+    const lines = text.split('\n');
+    for (const line of lines) {
+      if (line.startsWith('data:')) {
+        try {
+          const item = JSON.parse(line.slice(5).trim());
+          if (item && item.symbol) {
+            alerts.push({
+              alertType: item.alertType || item.alert_type || 'algo',
+              symbol: item.symbol,
+              alertName: item.alertName || item.alert_name || 'Flow Alert',
+              alertPremium: item.alertPremium || item.alert_premium || item.premium || 0,
+              timestamp: item.timestamp || Date.now(),
+              parsed: parseOCCSymbol(item.symbol),
+            });
+          }
+        } catch {
+          // Skip malformed SSE lines
+        }
+      }
+    }
+
+    return alerts;
+  }, []);
 
   const startPolling = useCallback((apiKey: string) => {
     setStatus('connecting');
+    hasConnectedRef.current = false;
+    lastTimestampRef.current = 0;
 
-    // Simulate initial connection delay
-    const connectTimeout = setTimeout(() => {
-      setStatus('connected');
-    }, 1500);
+    const doFetch = async () => {
+      try {
+        const newAlerts = await fetchAlerts(apiKey);
+        if (!isMountedRef.current) return;
 
-    // Poll for new alerts every POLL_INTERVAL_MS
-    pollIntervalRef.current = setInterval(() => {
-      // In a real implementation, this would call the Bullflow REST API
-      // For now, generate simulated live alerts based on mock patterns
-      const tickers = ['AAPL', 'TSLA', 'NVDA', 'SPY', 'META', 'AMZN', 'GOOGL', 'MSFT', 'AMD', 'QQQ'];
-      const alertNames = [
-        'Unusual Volume Sweep',
-        'Smart Money Flow',
-        'Large Block Trade',
-        'Aggressive Sweep',
-        'Opening Sweep',
-        'Repeat Buyer Detected',
-      ];
-      const types: Array<'call' | 'put'> = ['call', 'put'];
-      const alertTypes: Array<'algo' | 'custom'> = ['algo', 'custom'];
+        hasConnectedRef.current = true;
+        setStatus('connected');
 
-      // 60% chance of a new alert each poll
-      if (Math.random() > 0.4) {
-        const ticker = tickers[Math.floor(Math.random() * tickers.length)];
-        const type = types[Math.random() > 0.45 ? 0 : 1];
-        const strike = Math.round((100 + Math.random() * 900) / 5) * 5;
-        const premium = Math.round(50_000 + Math.random() * 3_000_000);
-
-        const newAlert: BullflowAlert = {
-          alertType: alertTypes[Math.floor(Math.random() * alertTypes.length)],
-          symbol: `O:${ticker}260320${type === 'call' ? 'C' : 'P'}${String(strike * 1000).padStart(8, '0')}`,
-          alertName: alertNames[Math.floor(Math.random() * alertNames.length)],
-          alertPremium: premium,
-          timestamp: Date.now(),
-          parsed: {
-            ticker,
-            expiry: '2026-03-20',
-            type,
-            strike,
-          },
-        };
-
-        setAlerts((prev) => {
-          const updated = [newAlert, ...prev];
-          return updated.slice(0, MAX_ALERTS);
-        });
+        if (newAlerts.length > 0) {
+          // Filter out alerts we've already seen
+          const fresh = newAlerts.filter((a) => a.timestamp > lastTimestampRef.current);
+          if (fresh.length > 0) {
+            lastTimestampRef.current = Math.max(...fresh.map((a) => a.timestamp));
+            setAlerts((prev) => {
+              const updated = [...fresh, ...prev];
+              return updated.slice(0, MAX_ALERTS);
+            });
+          }
+        }
+      } catch (err) {
+        if (!isMountedRef.current) return;
+        console.warn('Bullflow fetch error:', err);
+        // If we never connected successfully, fall back to mock data
+        if (!hasConnectedRef.current) {
+          setStatus('error');
+          setAlerts(MOCK_ALERTS);
+          setUseMockData(true);
+          // Stop polling since we're falling back to mock
+          if (pollIntervalRef.current) {
+            clearInterval(pollIntervalRef.current);
+            pollIntervalRef.current = null;
+          }
+        }
+        // If already connected, keep 'connected' status and retry on next poll
       }
-    }, POLL_INTERVAL_MS);
-
-    return () => {
-      clearTimeout(connectTimeout);
     };
-  }, []);
+
+    doFetch();
+
+    // Continue polling
+    pollIntervalRef.current = setInterval(doFetch, POLL_INTERVAL_MS);
+  }, [fetchAlerts]);
 
   const stopPolling = useCallback(() => {
     if (pollIntervalRef.current) {
@@ -484,6 +555,36 @@ const OptionsFlowScreen: React.FC = () => {
   };
 
   // -- Main render --
+
+  if (!isPremium) {
+    return (
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons name="chevron-back" size={24} color={colors.text.primary} />
+          </TouchableOpacity>
+          <View style={styles.headerCenter}>
+            <Ionicons name="pulse" size={20} color={CYAN} style={styles.headerIcon} />
+            <Text style={styles.headerTitle}>Live Flow & Alerts</Text>
+          </View>
+          <View style={{ width: 80 }} />
+        </View>
+        <View style={styles.lockedContainer}>
+          <Ionicons name="lock-closed" size={64} color={colors.neon.green} />
+          <Text style={styles.lockedTitle}>Premium Feature</Text>
+          <Text style={styles.lockedMessage}>Unlock this tool with a premium subscription</Text>
+          <TouchableOpacity style={styles.unlockBtn} onPress={() => setShowPremiumModal(true)}>
+            <Text style={styles.unlockBtnText}>Unlock Now</Text>
+          </TouchableOpacity>
+        </View>
+        <PremiumModal visible={showPremiumModal} onClose={() => setShowPremiumModal(false)} featureName="Options Flow" />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -1201,6 +1302,34 @@ const styles = StyleSheet.create({
     ...typography.styles.labelSm,
     color: colors.error,
     marginLeft: 6,
+  },
+  lockedContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xl,
+  },
+  lockedTitle: {
+    ...typography.styles.h3,
+    color: colors.text.primary,
+    marginTop: spacing.lg,
+    marginBottom: spacing.sm,
+  },
+  lockedMessage: {
+    ...typography.styles.body,
+    color: colors.text.secondary,
+    textAlign: 'center',
+    marginBottom: spacing.xl,
+  },
+  unlockBtn: {
+    backgroundColor: colors.neon.green,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.md,
+    borderRadius: borderRadius.lg,
+  },
+  unlockBtnText: {
+    ...typography.styles.button,
+    color: colors.background.primary,
   },
 });
 
