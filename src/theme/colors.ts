@@ -81,6 +81,12 @@ export const colors = {
     10: '#ffd700',
   } as Record<number, string>,
 
+  // Event Horizons feature colors
+  eventHorizons: {
+    primary: '#00f0ff',
+    secondary: '#bf00ff',
+  },
+
   // Spirit animal mascot colors
   mascots: {
     owl: '#bf00ff',
