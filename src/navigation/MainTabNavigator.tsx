@@ -317,15 +317,15 @@ const styles = StyleSheet.create({
   tabIconWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 28,
+    height: 30,
   },
   tabIndicator: {
     width: 4,
     height: 4,
     borderRadius: 2,
-    marginTop: 4,
+    marginTop: 2,
     position: 'absolute',
-    bottom: -8,
+    bottom: -6,
   },
 });
 
