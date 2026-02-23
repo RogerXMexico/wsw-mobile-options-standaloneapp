@@ -10,6 +10,7 @@ import {
   Image,
   Animated,
   Easing,
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,6 +24,7 @@ import { TradeWalkthrough } from '../../components/learn/TradeWalkthrough';
 import { getMentorForStrategy } from '../../data/jungleAnimals';
 import { getQuotesForStrategy, getRandomQuote, getCourseQuotes } from '../../data/quotes';
 import { useSubscription } from '../../hooks';
+import { useTradierOptionsData } from '../../hooks/useTradierOptionsData';
 import { PremiumModal } from '../../components/ui';
 import { getStrategyContent } from '../../data/strategyContentMobile';
 import { getJungleStrategiesForCoreStrategy } from '../../data/jungleStrategies';
@@ -71,6 +73,22 @@ const StrategyDetailScreen: React.FC = () => {
   const jungleVariants = useMemo(() => getJungleStrategiesForCoreStrategy(strategyId), [strategyId]);
   const jungleStrategy = jungleVariants.length > 0 ? jungleVariants[0] : null;
   const [showFullAnalysis, setShowFullAnalysis] = useState(false);
+
+  // Derive ticker from strategy education data (for live quote panel)
+  const strategyTicker = strategy?.education?.realWorldExample?.ticker || null;
+
+  // Live quote data from Tradier API
+  const {
+    data: liveQuoteData,
+    loading: liveQuoteLoading,
+    isConfigured: isTradierConfigured,
+    refresh: refreshQuote,
+  } = useTradierOptionsData(strategyTicker);
+
+  // Navigate to a tool screen in the Tools tab
+  const navigateToTool = (screen: string) => {
+    (navigation as any).navigate('ToolsTab', { screen });
+  };
 
   // Fallback for missing strategy
   if (!strategy) {
@@ -383,13 +401,152 @@ const StrategyDetailScreen: React.FC = () => {
               </View>
             )}
 
-            {/* Payoff Diagram */}
+            {/* Interactive Payoff Diagram */}
             {strategyConfig && !strategy.hidePayoffChart && (
               <PayoffChart
                 legs={strategyConfig.legs}
-                currentPrice={strategyConfig.defaultStockPrice}
-                title="Payoff at Expiration"
+                currentPrice={
+                  liveQuoteData?.dataQuality === 'real' && liveQuoteData.stockPrice > 0
+                    ? liveQuoteData.stockPrice
+                    : strategyConfig.defaultStockPrice
+                }
+                title="Interactive Payoff Diagram"
+                interactive={true}
+                showTimeSlider={true}
+                touchToInspect={true}
+                showProbabilityZones={true}
+                showBreakeven={true}
+                showMaxProfit={true}
+                showMaxLoss={true}
+                daysToExpiry={
+                  liveQuoteData?.dataQuality === 'real' && liveQuoteData.daysToExpiration > 0
+                    ? liveQuoteData.daysToExpiration
+                    : 30
+                }
+                impliedVolatility={
+                  liveQuoteData?.dataQuality === 'real' && liveQuoteData.atmIV > 0
+                    ? liveQuoteData.atmIV / 100
+                    : 0.30
+                }
               />
+            )}
+
+            {/* Live Quote Data Panel */}
+            <View style={styles.liveDataPanel}>
+              <View style={styles.liveDataHeader}>
+                <Ionicons name="pulse-outline" size={18} color={colors.neon.cyan} />
+                <Text style={styles.liveDataTitle}>Live Market Data</Text>
+                {liveQuoteLoading && (
+                  <ActivityIndicator size="small" color={colors.neon.cyan} style={{ marginLeft: spacing.xs }} />
+                )}
+              </View>
+
+              {isTradierConfigured && liveQuoteData?.dataQuality === 'real' ? (
+                <View style={styles.liveDataGrid}>
+                  <View style={styles.liveDataItem}>
+                    <Text style={styles.liveDataLabel}>Stock Price</Text>
+                    <Text style={styles.liveDataValue}>
+                      ${liveQuoteData.stockPrice.toFixed(2)}
+                    </Text>
+                  </View>
+                  <View style={styles.liveDataItem}>
+                    <Text style={styles.liveDataLabel}>ATM IV</Text>
+                    <Text style={styles.liveDataValue}>
+                      {liveQuoteData.atmIV.toFixed(1)}%
+                    </Text>
+                  </View>
+                  <View style={styles.liveDataItem}>
+                    <Text style={styles.liveDataLabel}>IV Rank</Text>
+                    <Text style={[
+                      styles.liveDataValue,
+                      {
+                        color: liveQuoteData.ivRank > 50
+                          ? colors.bearish
+                          : liveQuoteData.ivRank >= 0
+                            ? colors.bullish
+                            : colors.text.muted,
+                      },
+                    ]}>
+                      {liveQuoteData.ivRank >= 0 ? `${liveQuoteData.ivRank.toFixed(0)}` : 'N/A'}
+                    </Text>
+                  </View>
+                  <View style={styles.liveDataItem}>
+                    <Text style={styles.liveDataLabel}>Expected Move</Text>
+                    <Text style={styles.liveDataValue}>
+                      {liveQuoteData.expectedMove > 0
+                        ? `\u00B1${liveQuoteData.expectedMoveAbsolute.toFixed(2)}`
+                        : 'N/A'}
+                    </Text>
+                  </View>
+                  <TouchableOpacity style={styles.refreshButton} onPress={refreshQuote}>
+                    <Ionicons name="refresh-outline" size={14} color={colors.neon.cyan} />
+                    <Text style={styles.refreshText}>Refresh</Text>
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <View style={styles.liveDataPlaceholder}>
+                  <Text style={styles.liveDataPlaceholderText}>
+                    {strategyTicker
+                      ? `Connect your Tradier API key to see live data for ${strategyTicker}`
+                      : 'Live data available when API is connected'}
+                  </Text>
+                  <TouchableOpacity
+                    style={styles.connectApiButton}
+                    onPress={() => (navigation as any).navigate('ProfileTab', { screen: 'ProfileMain' })}
+                  >
+                    <Ionicons name="key-outline" size={14} color={colors.background.primary} />
+                    <Text style={styles.connectApiText}>Connect Tradier API</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+
+            {/* Quick-Launch Tool Buttons */}
+            {strategyConfig && (
+              <View style={styles.toolButtonsContainer}>
+                <Text style={styles.toolButtonsTitle}>Strategy Tools</Text>
+                <View style={styles.toolButtonsRow}>
+                  <TouchableOpacity
+                    style={styles.toolButton}
+                    onPress={() => navigateToTool('GreeksVisualizer')}
+                  >
+                    <View style={[styles.toolButtonIcon, { backgroundColor: 'rgba(0, 240, 255, 0.12)' }]}>
+                      <Ionicons name="analytics-outline" size={20} color={colors.neon.cyan} />
+                    </View>
+                    <Text style={styles.toolButtonLabel}>Greeks</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.toolButton}
+                    onPress={() => navigateToTool('ProfitCalculator')}
+                  >
+                    <View style={[styles.toolButtonIcon, { backgroundColor: 'rgba(57, 255, 20, 0.12)' }]}>
+                      <Ionicons name="calculator-outline" size={20} color={colors.neon.green} />
+                    </View>
+                    <Text style={styles.toolButtonLabel}>P&L Calc</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.toolButton}
+                    onPress={() => navigateToTool('RiskReward')}
+                  >
+                    <View style={[styles.toolButtonIcon, { backgroundColor: 'rgba(255, 7, 58, 0.12)' }]}>
+                      <Ionicons name="shield-checkmark-outline" size={20} color={colors.neon.red} />
+                    </View>
+                    <Text style={styles.toolButtonLabel}>Risk/Reward</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.toolButton}
+                    onPress={() => navigateToTool('ToolsDashboard')}
+                  >
+                    <View style={[styles.toolButtonIcon, { backgroundColor: 'rgba(191, 0, 255, 0.12)' }]}>
+                      <Ionicons name="git-compare-outline" size={20} color={colors.neon.purple} />
+                    </View>
+                    <Text style={styles.toolButtonLabel}>Compare</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             )}
 
             {/* Key Lessons */}
@@ -592,6 +749,10 @@ const StrategyDetailScreen: React.FC = () => {
                 legs={strategyConfig.legs}
                 currentPrice={strategyConfig.defaultStockPrice}
                 title="Payoff Reference"
+                compact={true}
+                interactive={false}
+                showTimeSlider={false}
+                touchToInspect={true}
               />
             )}
           </View>
@@ -668,6 +829,10 @@ const StrategyDetailScreen: React.FC = () => {
                 legs={strategyConfig.legs}
                 currentPrice={strategyConfig.defaultStockPrice}
                 title="Payoff at Expiration"
+                interactive={true}
+                showTimeSlider={true}
+                touchToInspect={true}
+                showProbabilityZones={true}
               />
             )}
 
@@ -1490,6 +1655,126 @@ const styles = StyleSheet.create({
   tigerAvatar: {
     width: '100%',
     height: '100%',
+  },
+  // -----------------------------------------------------------------------
+  // Live Quote Data Panel
+  // -----------------------------------------------------------------------
+  liveDataPanel: {
+    backgroundColor: colors.background.secondary,
+    borderRadius: borderRadius.xl,
+    padding: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.border.default,
+  },
+  liveDataHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.md,
+  },
+  liveDataTitle: {
+    ...typography.styles.label,
+    color: colors.text.primary,
+  },
+  liveDataGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+  },
+  liveDataItem: {
+    width: '46%',
+    backgroundColor: colors.background.tertiary,
+    padding: spacing.sm,
+    borderRadius: borderRadius.md,
+  },
+  liveDataLabel: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+    fontSize: 10,
+    marginBottom: 2,
+  },
+  liveDataValue: {
+    ...typography.styles.mono,
+    color: colors.text.primary,
+    fontSize: 15,
+    fontWeight: '700' as const,
+  },
+  refreshButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    gap: spacing.xs,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: borderRadius.sm,
+    backgroundColor: 'rgba(0, 240, 255, 0.08)',
+  },
+  refreshText: {
+    ...typography.styles.caption,
+    color: colors.neon.cyan,
+    fontSize: 10,
+  },
+  liveDataPlaceholder: {
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+    gap: spacing.sm,
+  },
+  liveDataPlaceholderText: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+    textAlign: 'center',
+    lineHeight: 18,
+  },
+  connectApiButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    backgroundColor: colors.neon.cyan,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs + 2,
+    borderRadius: borderRadius.md,
+  },
+  connectApiText: {
+    ...typography.styles.caption,
+    color: colors.background.primary,
+    fontWeight: '600' as const,
+  },
+  // -----------------------------------------------------------------------
+  // Quick-Launch Tool Buttons
+  // -----------------------------------------------------------------------
+  toolButtonsContainer: {
+    backgroundColor: colors.background.secondary,
+    borderRadius: borderRadius.xl,
+    padding: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.border.default,
+  },
+  toolButtonsTitle: {
+    ...typography.styles.label,
+    color: colors.text.primary,
+    marginBottom: spacing.md,
+  },
+  toolButtonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  toolButton: {
+    alignItems: 'center',
+    flex: 1,
+    gap: spacing.xs,
+  },
+  toolButtonIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  toolButtonLabel: {
+    ...typography.styles.caption,
+    color: colors.text.secondary,
+    fontSize: 10,
+    textAlign: 'center',
   },
 });
 
