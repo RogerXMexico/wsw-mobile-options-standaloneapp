@@ -29,3 +29,7 @@ export { usePortfolio } from './usePortfolio';
 export { usePolymarketData, usePolymarketEvent } from './usePolymarketData';
 export { useBullflowStream } from './useBullflowStream';
 export { useFollows } from './useFollows';
+
+// Phase 7A: Strategy animations
+export { useStrategyAnimations } from './useStrategyAnimations';
+export type { StrategyAnimations } from './useStrategyAnimations';
