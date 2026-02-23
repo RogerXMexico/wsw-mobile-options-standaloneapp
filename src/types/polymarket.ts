@@ -84,3 +84,17 @@ export interface PolymarketCache {
   }>;
   lastFullRefresh: string;
 }
+
+// ============ Gemini AI Analysis Types ============
+
+export interface GeminiEventAnalysisRequest {
+  eventName: string;
+  eventType: EventType;
+  ticker: string | null;
+  eventDate: string;
+  polymarketProbability: number;
+  optionsIV: number;
+  optionsIVRank: number;
+  optionsExpectedMove: number;
+  historicalIVCrushAverage?: number;
+}
