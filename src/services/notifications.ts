@@ -28,6 +28,7 @@ export interface NotificationPreferences {
   missionAlerts: boolean;
   levelUpAlerts: boolean;
   earningsAlerts: boolean;
+  ivAlerts: boolean;
   socialAlerts: boolean;
 }
 
@@ -36,6 +37,7 @@ const DEFAULT_PREFS: NotificationPreferences = {
   missionAlerts: true,
   levelUpAlerts: true,
   earningsAlerts: true,
+  ivAlerts: true,
   socialAlerts: true,
 };
 
@@ -106,6 +108,13 @@ export async function configureNotificationChannels(): Promise<void> {
     await Notifications.setNotificationChannelAsync('earnings', {
       name: 'Earnings Alerts',
       importance: Notifications.AndroidImportance.HIGH,
+    });
+
+    await Notifications.setNotificationChannelAsync('iv-alerts', {
+      name: 'IV Rank Alerts',
+      importance: Notifications.AndroidImportance.HIGH,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#39ff14',
     });
 
     await Notifications.setNotificationChannelAsync('social', {
@@ -210,6 +219,30 @@ export async function notifyEarningsAlert(ticker: string, date: string): Promise
     `${ticker} reports earnings on ${date}. Review your positions!`,
     { type: 'earnings_alert', ticker, date },
     'earnings',
+  );
+}
+
+// IV rank alert notification
+export async function notifyIVAlert(
+  ticker: string,
+  ivRank: number,
+  direction: 'high' | 'low',
+): Promise<void> {
+  const prefs = await getNotificationPreferences();
+  if (!prefs.ivAlerts) return;
+
+  const title = direction === 'high'
+    ? `High IV Alert: ${ticker}`
+    : `Low IV Alert: ${ticker}`;
+  const body = direction === 'high'
+    ? `${ticker} IV Rank is ${ivRank.toFixed(0)}% — premium selling opportunity!`
+    : `${ticker} IV Rank is ${ivRank.toFixed(0)}% — cheap options, buying opportunity!`;
+
+  await sendLocalNotification(
+    title,
+    body,
+    { type: 'iv_alert', ticker, ivRank, direction },
+    'iv-alerts',
   );
 }
 

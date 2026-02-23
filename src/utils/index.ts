@@ -1,8 +1,11 @@
-// Barrel export for all math utility modules
+// Barrel export for all utility modules
 
 export * from './math';
-export * from './greeksMath';
+export { normalCDF as greeksNormalCDF, normalPDF as greeksNormalPDF, calculateOptionPrice } from './greeksMath';
 export * from './probabilityMath';
 export * from './profitCalculatorEngine';
 export * from './screenerMath';
 export * from './tradeAnalytics';
+export * from './formatters';
+export * from './optionsCalc';
+export * from './haptics';

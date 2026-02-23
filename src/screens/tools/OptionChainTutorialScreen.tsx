@@ -654,17 +654,17 @@ const OptionChainTutorialScreen: React.FC = () => {
                   const revealed = showResults[idx];
                   const isCorrect = opt.label === q.correct;
 
-                  let optStyle = styles.quizOption;
-                  let optTextColor = colors.text.secondary;
+                  const optStyles: any[] = [styles.quizOption];
+                  let optTextColor: string = colors.text.secondary;
 
                   if (isSelected && !revealed) {
-                    optStyle = { ...styles.quizOption, ...styles.quizOptionSelected };
+                    optStyles.push(styles.quizOptionSelected);
                     optTextColor = colors.neon.purple;
                   } else if (revealed && isCorrect) {
-                    optStyle = { ...styles.quizOption, ...styles.quizOptionCorrect };
+                    optStyles.push(styles.quizOptionCorrect);
                     optTextColor = colors.neon.green;
                   } else if (revealed && isSelected && !isCorrect) {
-                    optStyle = { ...styles.quizOption, ...styles.quizOptionWrong };
+                    optStyles.push(styles.quizOptionWrong);
                     optTextColor = '#ff6b6b';
                   }
 
@@ -673,7 +673,7 @@ const OptionChainTutorialScreen: React.FC = () => {
                       key={opt.label}
                       onPress={() => !revealed && handleQuizAnswer(idx, opt.label as QuizAnswer)}
                       disabled={revealed}
-                      style={optStyle}
+                      style={optStyles}
                       activeOpacity={0.7}
                     >
                       <Text style={[styles.quizOptionText, { color: optTextColor }]}>

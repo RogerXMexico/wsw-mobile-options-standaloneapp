@@ -16,7 +16,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import Svg, { Line, Polyline, Circle, Text as SvgText, Rect } from 'react-native-svg';
 import { colors, typography, spacing, borderRadius } from '../../theme';
-import { allStrategies } from '../../data/strategies';
+import { strategies as allStrategies } from '../../data/strategies';
+import { Strategy } from '../../data/types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CHART_WIDTH = SCREEN_WIDTH - spacing.md * 2 - spacing.md * 2;
@@ -296,13 +297,13 @@ const StrategyComparisonScreen: React.FC = () => {
 
   // Only strategies that have metrics defined
   const comparableStrategies = useMemo(
-    () => allStrategies.filter(s => STRATEGY_METRICS[s.id]),
+    () => allStrategies.filter((s: Strategy) => STRATEGY_METRICS[s.id]),
     [],
   );
 
   const filteredStrategies = useMemo(
     () =>
-      comparableStrategies.filter(s => {
+      comparableStrategies.filter((s: Strategy) => {
         if (outlookFilter === 'all') return true;
         return s.outlook.toLowerCase().includes(outlookFilter);
       }),
@@ -313,7 +314,7 @@ const StrategyComparisonScreen: React.FC = () => {
     () =>
       selectedIds
         .map(id => {
-          const strat = allStrategies.find(s => s.id === id);
+          const strat = allStrategies.find((s: Strategy) => s.id === id);
           const metrics = STRATEGY_METRICS[id];
           if (!strat || !metrics) return null;
           return { ...strat, metrics };

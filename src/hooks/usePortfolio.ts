@@ -53,7 +53,7 @@ export const usePortfolio = () => {
         const stored = await AsyncStorage.getItem(STORAGE_KEY);
         if (stored) {
           localState = { ...DEFAULT_PORTFOLIO_STATE, ...JSON.parse(stored) };
-          setState(localState);
+          setState(localState as PortfolioState);
         }
       } catch (err) {
         console.error('Failed to load portfolio from AsyncStorage:', err);
