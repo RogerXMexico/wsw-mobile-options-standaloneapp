@@ -1128,6 +1128,614 @@ export const CURATED_CASE_STUDIES: CuratedCaseStudy[] = [
     difficulty: 3,
     tags: ['crypto', 'ethereum', 'etf', 'probability-shift', 'surprise'],
   },
+
+  // ============ ADDITIONAL FDA/BIOTECH EVENTS ============
+
+  {
+    id: 'advisory-committee-shift',
+    eventType: 'fda',
+    ticker: 'DEF',
+    companyName: 'Example Therapeutics',
+    eventName: 'FDA Advisory Committee Meeting',
+    eventDate: '2024-04-12',
+
+    summary:
+      'An advisory committee meeting showed how prediction markets can shift dramatically intraday. Started at 65% approval, dropped to 30% during negative Q&A, then recovered to 55% after sponsor response.',
+
+    setupContext:
+      'Advisory committee meetings are public and provide real-time signal. This case demonstrates how to read probability shifts and potentially trade options around the live event.',
+
+    timeline: [
+      {
+        timestamp: '2024-04-05',
+        daysToEvent: -7,
+        polymarketProbability: 0.62,
+        optionsIV: 145,
+        optionsExpectedMove: 22.0,
+        stockPrice: 38.6,
+        notes: 'Pre-meeting baseline',
+      },
+      {
+        timestamp: '2024-04-11',
+        daysToEvent: -1,
+        polymarketProbability: 0.65,
+        optionsIV: 185,
+        optionsExpectedMove: 28.0,
+        stockPrice: 40.2,
+        notes: 'Day before AdCom - elevated IV',
+      },
+      {
+        timestamp: '2024-04-12T10:00',
+        daysToEvent: 0,
+        polymarketProbability: 0.65,
+        optionsIV: 200,
+        optionsExpectedMove: 30.0,
+        stockPrice: 41.5,
+        notes: 'Meeting starts - market hopeful',
+      },
+      {
+        timestamp: '2024-04-12T14:00',
+        daysToEvent: 0,
+        polymarketProbability: 0.30,
+        optionsIV: 195,
+        optionsExpectedMove: 29.5,
+        stockPrice: 32.4,
+        notes: 'Tough FDA questioning - probability crashes',
+      },
+      {
+        timestamp: '2024-04-12T16:00',
+        daysToEvent: 0,
+        polymarketProbability: 0.55,
+        optionsIV: 120,
+        optionsExpectedMove: 18.0,
+        stockPrice: 36.8,
+        notes: 'Sponsor response strong - recovery',
+      },
+    ],
+
+    outcome: {
+      actualMove: -8.4,
+      direction: 'down',
+      predictionAccurate: false,
+      ivCrushMagnitude: 35,
+      keyTakeaway:
+        'Advisory committee meetings are live events where you can watch prediction markets in real-time. The probability can swing wildly. This creates intraday trading opportunities.',
+    },
+
+    lessonId: 'lesson-3',
+    teachingPoints: [
+      'AdCom meetings are live tradeable events',
+      'Polymarket prices update faster than options during live events',
+      'Intraday swings create entry/exit opportunities',
+      'The final outcome was still uncertain - moderation was key',
+    ],
+    suggestedStrategies: ['long-straddle', 'calendar-spread'],
+
+    difficulty: 3,
+    tags: ['fda', 'adcom', 'live-event', 'intraday', 'probability-shift'],
+  },
+
+  {
+    id: 'lly-weight-loss-2024',
+    eventType: 'fda',
+    ticker: 'LLY',
+    companyName: 'Eli Lilly and Company',
+    eventName: 'FDA Expanded Approval - Weight Loss Drug',
+    eventDate: '2024-11-08',
+
+    summary:
+      'Eli Lilly sought expanded FDA approval for Zepbound (tirzepatide) for additional indications. Prediction markets showed 88% approval probability. Approved as expected, but stock barely moved as it was fully priced in.',
+
+    setupContext:
+      'Unlike small biotechs, large pharma like LLY has diversified portfolios. A single FDA decision, even a major one, has less impact. Markets had months to price in the expected approval.',
+
+    timeline: [
+      {
+        timestamp: '2024-11-01',
+        daysToEvent: -7,
+        polymarketProbability: 0.85,
+        optionsIV: 38,
+        optionsExpectedMove: 4.8,
+        stockPrice: 785.2,
+        notes: 'High confidence, moderate IV for mega-cap',
+      },
+      {
+        timestamp: '2024-11-05',
+        daysToEvent: -3,
+        polymarketProbability: 0.87,
+        optionsIV: 42,
+        optionsExpectedMove: 5.2,
+        stockPrice: 792.4,
+        notes: 'Probability ticking higher',
+      },
+      {
+        timestamp: '2024-11-07',
+        daysToEvent: -1,
+        polymarketProbability: 0.88,
+        optionsIV: 48,
+        optionsExpectedMove: 5.8,
+        stockPrice: 798.6,
+        notes: 'Pre-decision IV elevated but not extreme',
+      },
+      {
+        timestamp: '2024-11-08',
+        daysToEvent: 0,
+        polymarketProbability: 1.0,
+        optionsIV: 32,
+        optionsExpectedMove: 0,
+        stockPrice: 805.3,
+        notes: 'Approved! Stock up just 0.8% - priced in',
+      },
+    ],
+
+    outcome: {
+      actualMove: 0.8,
+      direction: 'up',
+      predictionAccurate: true,
+      ivCrushMagnitude: 33,
+      keyTakeaway:
+        'When prediction markets show 88% probability, the news is largely priced in. Large pharma stocks react less violently than small biotechs. Premium sellers benefited from the muted move.',
+    },
+
+    lessonId: 'lesson-3',
+    teachingPoints: [
+      'Large pharma has lower FDA event volatility than small biotech',
+      'High probability = priced in = small move expected',
+      'IV crush rewards premium sellers in priced-in scenarios',
+      'Company size affects event risk profile',
+    ],
+    suggestedStrategies: ['iron-condor', 'short-strangle', 'calendar-spread'],
+
+    difficulty: 1,
+    tags: ['fda', 'pharma', 'mega-cap', 'priced-in', 'weight-loss'],
+  },
+
+  {
+    id: 'sgen-cancer-drug-2024',
+    eventType: 'fda',
+    ticker: 'SGEN',
+    companyName: 'Seagen Inc.',
+    eventName: 'FDA Priority Review - Cancer Treatment',
+    eventDate: '2024-03-15',
+
+    summary:
+      'Seagen awaited FDA decision on an antibody-drug conjugate for breast cancer. Priority Review designation suggested urgency. 70% approval odds. The drug was approved, triggering a 25% move.',
+
+    setupContext:
+      'Priority Review means FDA commits to a faster decision. This oncology drug had breakthrough therapy designation. The street was optimistic but the 30% rejection risk kept IV extremely elevated.',
+
+    timeline: [
+      {
+        timestamp: '2024-03-08',
+        daysToEvent: -7,
+        polymarketProbability: 0.67,
+        optionsIV: 165,
+        optionsExpectedMove: 22.0,
+        stockPrice: 185.4,
+        notes: 'Elevated probability, extreme IV',
+      },
+      {
+        timestamp: '2024-03-12',
+        daysToEvent: -3,
+        polymarketProbability: 0.69,
+        optionsIV: 190,
+        optionsExpectedMove: 25.5,
+        stockPrice: 188.2,
+        notes: 'IV continuing to climb',
+      },
+      {
+        timestamp: '2024-03-14',
+        daysToEvent: -1,
+        polymarketProbability: 0.70,
+        optionsIV: 220,
+        optionsExpectedMove: 28.0,
+        stockPrice: 190.8,
+        notes: 'Peak IV - market bracing for binary outcome',
+      },
+      {
+        timestamp: '2024-03-15',
+        daysToEvent: 0,
+        polymarketProbability: 1.0,
+        optionsIV: 75,
+        optionsExpectedMove: 0,
+        stockPrice: 238.5,
+        notes: 'Approved! Stock gaps +25%, IV crushed 66%',
+      },
+    ],
+
+    outcome: {
+      actualMove: 25.0,
+      direction: 'up',
+      predictionAccurate: true,
+      ivCrushMagnitude: 66,
+      keyTakeaway:
+        'Mid-cap biotech FDA events combine high probability uncertainty with extreme IV. The 25% move was within the expected range but still dramatic. Position sizing is critical.',
+    },
+
+    lessonId: 'lesson-3',
+    teachingPoints: [
+      'Priority Review and Breakthrough Therapy are positive signals',
+      'Mid-cap biotech has extreme IV profiles',
+      'Even 70% probability means 30% chance of disaster',
+      'Size positions for the worst case scenario',
+    ],
+    suggestedStrategies: ['bull-call-spread', 'collar', 'long-call'],
+
+    difficulty: 3,
+    tags: ['fda', 'biotech', 'oncology', 'priority-review', 'breakthrough'],
+  },
+
+  // ============ ADDITIONAL FED/MACRO EVENTS ============
+
+  {
+    id: 'fed-emergency-cut-2024',
+    eventType: 'macro',
+    ticker: null,
+    companyName: 'Federal Reserve',
+    eventName: 'FOMC July 2024 - Emergency Discussion',
+    eventDate: '2024-07-31',
+
+    summary:
+      'Markets speculated about an emergency rate cut amid banking stress. Polymarket had 25% probability of emergency action. The Fed held rates but signaled September cut, markets rallied on clarity.',
+
+    setupContext:
+      'Regional bank concerns resurfaced in summer 2024. Some traders positioned for emergency action. The market was pricing in tail risk that ultimately did not materialize.',
+
+    timeline: [
+      {
+        timestamp: '2024-07-24',
+        daysToEvent: -7,
+        polymarketProbability: 0.20,
+        optionsIV: 24,
+        optionsExpectedMove: 1.6,
+        stockPrice: 545.2,
+        notes: 'Low probability but elevated IV on banking fears',
+      },
+      {
+        timestamp: '2024-07-29',
+        daysToEvent: -2,
+        polymarketProbability: 0.25,
+        optionsIV: 28,
+        optionsExpectedMove: 1.9,
+        stockPrice: 538.6,
+        notes: 'Probability ticking up on speculation',
+      },
+      {
+        timestamp: '2024-07-30',
+        daysToEvent: -1,
+        polymarketProbability: 0.25,
+        optionsIV: 32,
+        optionsExpectedMove: 2.2,
+        stockPrice: 542.3,
+        notes: 'Peak uncertainty before decision',
+      },
+      {
+        timestamp: '2024-07-31',
+        daysToEvent: 0,
+        polymarketProbability: 0.0,
+        optionsIV: 18,
+        optionsExpectedMove: 0,
+        stockPrice: 555.8,
+        notes: 'No emergency cut but dovish statement. Relief rally +2.5%',
+      },
+    ],
+
+    outcome: {
+      actualMove: 2.5,
+      direction: 'up',
+      predictionAccurate: true,
+      ivCrushMagnitude: 44,
+      keyTakeaway:
+        "Low probability events (25%) still move markets when they don't happen. The relief rally showed that removing uncertainty is bullish. \"No news\" can be good news.",
+    },
+
+    lessonId: 'lesson-4',
+    teachingPoints: [
+      'Low probability events create outsized IV relative to likelihood',
+      'Relief rallies occur when tail risks are removed',
+      'Fed communication matters as much as action',
+      "Short premium benefits when scary scenarios don't materialize",
+    ],
+    suggestedStrategies: ['iron-condor', 'short-strangle'],
+
+    difficulty: 2,
+    tags: ['fed', 'fomc', 'emergency', 'banking-stress', 'relief-rally'],
+  },
+
+  {
+    id: 'fed-dot-plot-dec-2024',
+    eventType: 'macro',
+    ticker: null,
+    companyName: 'Federal Reserve',
+    eventName: 'FOMC December 2024 - Dot Plot Update',
+    eventDate: '2024-12-18',
+
+    summary:
+      'The December Fed meeting included updated economic projections and the "dot plot" of rate expectations. Markets focused on 2025 rate path. Polymarket showed 70% probability of dovish guidance.',
+
+    setupContext:
+      "The dot plot shows each Fed member's rate expectations. Markets obsess over shifts in the median projection. This meeting would set expectations for the entire coming year.",
+
+    timeline: [
+      {
+        timestamp: '2024-12-11',
+        daysToEvent: -7,
+        polymarketProbability: 0.65,
+        optionsIV: 20,
+        optionsExpectedMove: 1.3,
+        stockPrice: 612.4,
+        notes: 'Markets leaning toward dovish outcome',
+      },
+      {
+        timestamp: '2024-12-16',
+        daysToEvent: -2,
+        polymarketProbability: 0.68,
+        optionsIV: 24,
+        optionsExpectedMove: 1.6,
+        stockPrice: 608.8,
+        notes: 'Slight pullback ahead of meeting',
+      },
+      {
+        timestamp: '2024-12-17',
+        daysToEvent: -1,
+        polymarketProbability: 0.70,
+        optionsIV: 28,
+        optionsExpectedMove: 1.8,
+        stockPrice: 610.2,
+        notes: 'Peak IV pre-FOMC',
+      },
+      {
+        timestamp: '2024-12-18',
+        daysToEvent: 0,
+        polymarketProbability: 0.0,
+        optionsIV: 16,
+        optionsExpectedMove: 0,
+        stockPrice: 595.4,
+        notes: 'Hawkish surprise! Fewer cuts projected. SPY drops 2.4%',
+      },
+    ],
+
+    outcome: {
+      actualMove: -2.4,
+      direction: 'down',
+      predictionAccurate: false,
+      ivCrushMagnitude: 43,
+      keyTakeaway:
+        'Fed dot plots can surprise even when the rate decision is expected. The forward guidance component is harder to predict. Long put holders protected capital.',
+    },
+
+    lessonId: 'lesson-4',
+    teachingPoints: [
+      'Fed meetings have multiple components - rate decision AND forward guidance',
+      'Dot plots influence market more than single rate decisions',
+      'Even 70% consensus can be wrong',
+      'Hedging with puts protects against hawkish surprises',
+    ],
+    suggestedStrategies: ['long-put', 'collar', 'bear-put-spread'],
+
+    difficulty: 3,
+    tags: ['fed', 'fomc', 'dot-plot', 'hawkish-surprise', 'forward-guidance'],
+  },
+
+  // ============ ADDITIONAL CORPORATE EVENTS ============
+
+  {
+    id: 'ceo-transition-2024',
+    eventType: 'corporate',
+    ticker: 'LEAD',
+    companyName: 'Leading Corp',
+    eventName: 'CEO Transition Announcement',
+    eventDate: '2024-05-20',
+
+    summary:
+      'A beloved CEO announced retirement after 15 years. No prediction market existed for this event (surprise announcement). Options IV spiked 50% intraday as uncertainty about succession gripped the market.',
+
+    setupContext:
+      "Not all corporate events can be predicted. Surprise announcements like CEO departures show how options volatility reacts when there's no prediction market to reference.",
+
+    timeline: [
+      {
+        timestamp: '2024-05-13',
+        daysToEvent: -7,
+        polymarketProbability: 0,
+        optionsIV: 28,
+        optionsExpectedMove: 3.5,
+        stockPrice: 142.8,
+        notes: 'Normal pre-announcement state',
+      },
+      {
+        timestamp: '2024-05-20T09:30',
+        daysToEvent: 0,
+        polymarketProbability: 0,
+        optionsIV: 28,
+        optionsExpectedMove: 3.5,
+        stockPrice: 143.1,
+        notes: 'Market open - no news yet',
+      },
+      {
+        timestamp: '2024-05-20T10:15',
+        daysToEvent: 0,
+        polymarketProbability: 0,
+        optionsIV: 42,
+        optionsExpectedMove: 5.2,
+        stockPrice: 136.5,
+        notes: 'CEO departure announced! IV spikes 50%',
+      },
+      {
+        timestamp: '2024-05-20T16:00',
+        daysToEvent: 0,
+        polymarketProbability: 0,
+        optionsIV: 38,
+        optionsExpectedMove: 4.8,
+        stockPrice: 138.2,
+        notes: 'Stock recovers partially, IV elevated',
+      },
+    ],
+
+    outcome: {
+      actualMove: -3.4,
+      direction: 'down',
+      predictionAccurate: false,
+      ivCrushMagnitude: 0,
+      keyTakeaway:
+        'Surprise corporate events cause IV spikes, not crush. Without a prediction market, options are the only way to gauge sentiment. Watch for these as potential long vol opportunities.',
+    },
+
+    lessonId: 'lesson-5',
+    teachingPoints: [
+      'Not all events have prediction markets',
+      'Surprise news causes IV spikes, not crush',
+      'Long volatility benefits from surprise announcements',
+      'Management changes create extended uncertainty periods',
+    ],
+    suggestedStrategies: ['long-straddle', 'long-strangle'],
+
+    difficulty: 2,
+    tags: ['ceo', 'leadership', 'surprise', 'iv-spike', 'no-prediction'],
+  },
+
+  {
+    id: 'product-launch-2024',
+    eventType: 'corporate',
+    ticker: 'TECH',
+    companyName: 'Tech Innovators Inc',
+    eventName: 'Major Product Launch Event',
+    eventDate: '2024-09-10',
+
+    summary:
+      "A highly anticipated product launch event. No direct Polymarket, but the event was well-telegraphed. Options implied ±6% move. The launch met expectations but didn't exceed them - stock flat.",
+
+    setupContext:
+      "Product launches are scheduled corporate events. Unlike earnings, there's often no clear \"beat/miss\" prediction market. The event is about qualitative reception, not numbers.",
+
+    timeline: [
+      {
+        timestamp: '2024-09-03',
+        daysToEvent: -7,
+        polymarketProbability: 0,
+        optionsIV: 45,
+        optionsExpectedMove: 5.2,
+        stockPrice: 228.5,
+        notes: 'Anticipation building for launch',
+      },
+      {
+        timestamp: '2024-09-09',
+        daysToEvent: -1,
+        polymarketProbability: 0,
+        optionsIV: 52,
+        optionsExpectedMove: 6.0,
+        stockPrice: 232.4,
+        notes: 'Peak IV pre-event',
+      },
+      {
+        timestamp: '2024-09-10',
+        daysToEvent: 0,
+        polymarketProbability: 0,
+        optionsIV: 32,
+        optionsExpectedMove: 0,
+        stockPrice: 233.1,
+        notes: 'Launch as expected. Stock flat, IV crushed',
+      },
+    ],
+
+    outcome: {
+      actualMove: 0.3,
+      direction: 'up',
+      predictionAccurate: false,
+      ivCrushMagnitude: 38,
+      keyTakeaway:
+        "Product launches without surprises lead to \"sell the volatility\" outcomes. Premium sellers win when the event meets (but doesn't exceed) expectations. IV-only analysis works here.",
+    },
+
+    lessonId: 'lesson-5',
+    teachingPoints: [
+      'Product launches are IV events even without prediction markets',
+      'No prediction market = analyze IV alone',
+      'Scheduled corporate events still have IV crush',
+      'Premium selling works when expectations are met',
+    ],
+    suggestedStrategies: ['iron-condor', 'short-straddle'],
+
+    difficulty: 1,
+    tags: ['product-launch', 'corporate', 'scheduled-event', 'no-prediction', 'iv-only'],
+  },
+
+  // ============ ADDITIONAL CRYPTO EVENTS ============
+
+  {
+    id: 'btc-halving-2024',
+    eventType: 'corporate',
+    ticker: 'BTC',
+    companyName: 'Bitcoin Network',
+    eventName: 'Bitcoin Halving Event',
+    eventDate: '2024-04-20',
+
+    summary:
+      "Bitcoin's programmatic halving reduces mining rewards by 50% every ~4 years. No prediction market needed - the event is deterministic. The question was market reaction. Stock flat as event was fully priced.",
+
+    setupContext:
+      'Unlike most events, Bitcoin halvings are predictable to the block. The uncertainty is entirely about market reaction. Historical halvings preceded bull runs, but timing varied from months to years.',
+
+    timeline: [
+      {
+        timestamp: '2024-04-13',
+        daysToEvent: -7,
+        polymarketProbability: 1.0,
+        optionsIV: 68,
+        optionsExpectedMove: 8.5,
+        stockPrice: 63500,
+        notes: 'Halving date known, only reaction unknown',
+      },
+      {
+        timestamp: '2024-04-17',
+        daysToEvent: -3,
+        polymarketProbability: 1.0,
+        optionsIV: 75,
+        optionsExpectedMove: 9.8,
+        stockPrice: 64200,
+        notes: 'IV building despite known outcome',
+      },
+      {
+        timestamp: '2024-04-19',
+        daysToEvent: -1,
+        polymarketProbability: 1.0,
+        optionsIV: 82,
+        optionsExpectedMove: 10.5,
+        stockPrice: 63800,
+        notes: 'Peak IV - market positioning for reaction',
+      },
+      {
+        timestamp: '2024-04-20',
+        daysToEvent: 0,
+        polymarketProbability: 1.0,
+        optionsIV: 52,
+        optionsExpectedMove: 0,
+        stockPrice: 64100,
+        notes: 'Halving occurs! Market reaction: yawn. +0.5%',
+      },
+    ],
+
+    outcome: {
+      actualMove: 0.5,
+      direction: 'up',
+      predictionAccurate: true,
+      ivCrushMagnitude: 37,
+      keyTakeaway:
+        "Deterministic events with known timing often see muted reactions as they're fully priced. The halving \"effect\" plays out over months/years, not days. Premium sellers collected IV with minimal risk.",
+    },
+
+    lessonId: 'lesson-6',
+    teachingPoints: [
+      'Known events with known timing = mostly priced in',
+      'IV can be elevated even without outcome uncertainty',
+      'The "event" and the "effect" happen on different timescales',
+      'Short premium works well on deterministic events',
+    ],
+    suggestedStrategies: ['iron-condor', 'short-strangle', 'calendar-spread'],
+
+    difficulty: 1,
+    tags: ['crypto', 'bitcoin', 'halving', 'deterministic', 'priced-in'],
+  },
 ];
 
 // ============ Helper Functions ============

@@ -5,16 +5,16 @@ import { TierInfo, GlossaryTerm, MascotInfo, AnimalMascot } from './types';
 export const TIER_INFO: TierInfo[] = [
   { tier: 0, name: 'Foundations', color: '#64748b', description: 'Options basics, contracts, the Greeks' },
   { tier: 0.5, name: 'Express Lane', color: '#fbbf24', description: 'Fast-track essentials' },
-  { tier: 1, name: 'Market Structure', color: '#3b82f6', description: 'Support/resistance, AVWAP, cycles' },
-  { tier: 2, name: 'Risk', color: '#f59e0b', description: 'Position sizing, defined risk' },
-  { tier: 3, name: 'The Anchors', color: '#10b981', description: 'Covered calls, cash-secured puts' },
-  { tier: 4, name: 'Verticals', color: '#06b6d4', description: 'Bull/bear spreads' },
-  { tier: 5, name: 'Volatility', color: '#8b5cf6', description: 'Straddles, strangles, IV plays' },
-  { tier: 6, name: 'Time/Skew', color: '#ec4899', description: 'Calendar spreads, diagonals' },
-  { tier: 7, name: 'Ratios', color: '#f97316', description: 'Ratio spreads, backspreads' },
-  { tier: 8, name: 'Event Horizons', color: '#8b5cf6', description: 'Prediction markets + options analysis', isEventHorizons: true },
-  { tier: 9, name: 'Strategy Tools', color: '#f43f5e', description: 'Advanced portfolio strategies' },
-  { tier: 10, name: "Let's Play", color: '#10b981', description: 'Practice and real scenarios' },
+  { tier: 1, name: "Investor's Mirror", color: '#a855f7', description: 'Trading psychology, archetypes, bias awareness' },
+  { tier: 2, name: 'Market Structure', color: '#06b6d4', description: 'Support/resistance, AVWAP, cycles' },
+  { tier: 3, name: 'Risk', color: '#f59e0b', description: 'Position sizing, defined risk, the Greeks' },
+  { tier: 4, name: 'The Anchors', color: '#10b981', description: 'Covered calls, cash-secured puts' },
+  { tier: 5, name: 'Verticals', color: '#06b6d4', description: 'Bull/bear spreads' },
+  { tier: 6, name: 'Volatility', color: '#8b5cf6', description: 'Straddles, strangles, IV plays' },
+  { tier: 7, name: 'Time/Skew', color: '#ec4899', description: 'Calendar spreads, diagonals' },
+  { tier: 8, name: 'Advanced + Exotic', color: '#f97316', description: 'Ratio spreads, butterflies, exotics' },
+  { tier: 9, name: 'Event Horizons', color: '#8b5cf6', description: 'Prediction markets + options analysis', isEventHorizons: true },
+  { tier: 10, name: 'Flow', color: '#10b981', description: 'Options flow & live alerts' },
 ];
 
 // Glossary of options terms
@@ -106,7 +106,7 @@ export const MASCOTS: MascotInfo[] = [
     description: 'Sees the big picture from above. Portfolio-level thinking.',
     specialty: 'Portfolio Overview',
     riskLevel: 'moderate',
-    color: '#3b82f6',
+    color: '#06b6d4',
   },
   {
     id: 'badger',
@@ -212,14 +212,14 @@ export const SUBSCRIPTION_TIERS = {
       'Limited paper trading (5 trades/day)',
       '1 daily mission',
     ],
-    accessibleTiers: [0, 0.5, 1, 2],
+    accessibleTiers: [0, 0.5, 1, 2, 3],
   },
   premium: {
     name: 'Premium',
     monthlyPrice: 14.99,
     yearlyPrice: 99.99,
     features: [
-      'All 44+ strategies',
+      'All 90+ strategies',
       'All tutorials',
       'All calculators',
       'Unlimited paper trading',
@@ -231,7 +231,7 @@ export const SUBSCRIPTION_TIERS = {
       'Leaderboard access',
       'Badge collection',
     ],
-    accessibleTiers: [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    accessibleTiers: [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   },
   pro: {
     name: 'Pro',
@@ -247,7 +247,7 @@ export const SUBSCRIPTION_TIERS = {
       'Jungle Tribes (social)',
       'Social Trading Feed',
     ],
-    accessibleTiers: [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    accessibleTiers: [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   },
 };
 

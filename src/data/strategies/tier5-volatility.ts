@@ -7,7 +7,7 @@ export const tier5Strategies: Strategy[] = [
   {
     id: 'long-straddle',
     name: 'Long Straddle',
-    tier: 5,
+    tier: 6,
     tierName: 'Volatility',
     category: 'volatility',
     outlook: 'Explosive',
@@ -119,7 +119,7 @@ export const tier5Strategies: Strategy[] = [
   {
     id: 'long-strangle',
     name: 'Long Strangle',
-    tier: 5,
+    tier: 6,
     tierName: 'Volatility',
     category: 'volatility',
     outlook: 'Explosive',
@@ -235,7 +235,7 @@ export const tier5Strategies: Strategy[] = [
   {
     id: 'short-straddle',
     name: 'Short Straddle',
-    tier: 5,
+    tier: 6,
     tierName: 'Volatility',
     category: 'volatility',
     outlook: 'Neutral',
@@ -351,7 +351,7 @@ export const tier5Strategies: Strategy[] = [
   {
     id: 'short-strangle',
     name: 'Short Strangle',
-    tier: 5,
+    tier: 6,
     tierName: 'Volatility',
     category: 'volatility',
     outlook: 'Neutral',
@@ -467,7 +467,7 @@ export const tier5Strategies: Strategy[] = [
   {
     id: 'iron-condor',
     name: 'Iron Condor',
-    tier: 5,
+    tier: 6,
     tierName: 'Volatility',
     category: 'income',
     outlook: 'Neutral',
@@ -584,7 +584,7 @@ export const tier5Strategies: Strategy[] = [
   {
     id: 'iron-butterfly',
     name: 'Iron Butterfly',
-    tier: 5,
+    tier: 6,
     tierName: 'Volatility',
     category: 'income',
     outlook: 'Neutral',

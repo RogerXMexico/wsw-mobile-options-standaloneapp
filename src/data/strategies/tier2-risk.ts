@@ -7,7 +7,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'philosophy-of-risk',
     name: 'Philosophy of Risk',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'educational',
     outlook: 'Educational',
@@ -34,7 +34,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'the-greeks',
     name: 'The Greeks',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'educational',
     outlook: 'Educational',
@@ -66,7 +66,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'option-pricing',
     name: 'Pricing & IV',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'educational',
     outlook: 'Educational',
@@ -93,7 +93,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'strike-expiration',
     name: 'Strike & Expiration Selection',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'educational',
     outlook: 'Educational',
@@ -119,7 +119,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'assignment-exercise',
     name: 'Assignment & Exercise',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'educational',
     outlook: 'Educational',
@@ -146,7 +146,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'iv-crush-calculator',
     name: 'IV Crush Calculator',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'tools',
     outlook: 'Educational',
@@ -173,7 +173,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'options-taxes',
     name: 'Taxes & Options',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'educational',
     outlook: 'Educational',
@@ -201,7 +201,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'beginner-mistakes',
     name: 'Common Beginner Mistakes',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'educational',
     outlook: 'Educational',
@@ -229,7 +229,7 @@ export const tier2Strategies: Strategy[] = [
   {
     id: 'expected-move',
     name: 'Expected Move',
-    tier: 2,
+    tier: 3,
     tierName: 'Risk',
     category: 'tools',
     outlook: 'Educational',

@@ -24,6 +24,8 @@ import { getMentorForStrategy } from '../../data/jungleAnimals';
 import { getQuotesForStrategy, getRandomQuote, getCourseQuotes } from '../../data/quotes';
 import { useSubscription } from '../../hooks';
 import { PremiumModal } from '../../components/ui';
+import { getStrategyContent } from '../../data/strategyContentMobile';
+import { getJungleStrategiesForCoreStrategy } from '../../data/jungleStrategies';
 
 // Animal avatar images
 const ANIMAL_IMAGES: Record<string, any> = {
@@ -58,13 +60,17 @@ const StrategyDetailScreen: React.FC = () => {
   const route = useRoute<RouteProps>();
   const { strategyId } = route.params;
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'walkthrough' | 'setup' | 'greeks'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'lesson' | 'walkthrough' | 'setup' | 'greeks'>('overview');
   const [showPremiumModal, setShowPremiumModal] = useState(false);
   const { isPremium, canAccessTier } = useSubscription();
 
   // Load strategy data
   const strategy = useMemo(() => getStrategyById(strategyId), [strategyId]);
   const strategyConfig = useMemo(() => getStrategyConfig(strategyId), [strategyId]);
+  const richContent = useMemo(() => getStrategyContent(strategyId), [strategyId]);
+  const jungleVariants = useMemo(() => getJungleStrategiesForCoreStrategy(strategyId), [strategyId]);
+  const jungleStrategy = jungleVariants.length > 0 ? jungleVariants[0] : null;
+  const [showFullAnalysis, setShowFullAnalysis] = useState(false);
 
   // Fallback for missing strategy
   if (!strategy) {
@@ -293,7 +299,11 @@ const StrategyDetailScreen: React.FC = () => {
 
         {/* Tabs - hidden when locked */}
         {!isLocked && (<View style={styles.tabs}>
-          {(['overview', 'walkthrough', 'setup', 'greeks'] as const).map((tab) => {
+          {(['overview', 'lesson', 'walkthrough', 'setup', 'greeks'] as const).map((tab) => {
+            // Hide lesson tab if no rich content available
+            if (tab === 'lesson' && !richContent?.analysis) {
+              return null;
+            }
             // Hide walkthrough tab if no trade paths available
             if (tab === 'walkthrough' && !strategy.education?.tradePaths?.length) {
               return null;
@@ -305,7 +315,7 @@ const StrategyDetailScreen: React.FC = () => {
                 onPress={() => setActiveTab(tab)}
               >
                 <Text style={[styles.tabText, activeTab === tab && styles.tabTextActive]}>
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  {tab === 'lesson' ? 'Deep Dive' : tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </Text>
               </TouchableOpacity>
             );
@@ -448,6 +458,122 @@ const StrategyDetailScreen: React.FC = () => {
                 )}
               </View>
             )}
+
+            {/* Jungle Strategy Extras - Tips & Common Mistakes */}
+            {jungleStrategy && (
+              <>
+                {jungleStrategy.tips.length > 0 && (
+                  <View style={styles.card}>
+                    <View style={styles.cardHeader}>
+                      <Text style={styles.cardEmoji}>{mentor.emoji}</Text>
+                      <Text style={styles.cardTitle}>Pro Tips</Text>
+                    </View>
+                    <View style={styles.lessonsList}>
+                      {jungleStrategy.tips.map((tip, i) => (
+                        <View key={i} style={styles.lessonItem}>
+                          <Text style={styles.lessonBullet}>•</Text>
+                          <Text style={styles.lessonText}>{tip}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  </View>
+                )}
+
+                {jungleStrategy.commonMistakes.length > 0 && (
+                  <View style={[styles.card, { borderColor: 'rgba(239, 68, 68, 0.2)' }]}>
+                    <View style={styles.cardHeader}>
+                      <Text style={styles.cardEmoji}>{'⚠️'}</Text>
+                      <Text style={styles.cardTitle}>Common Mistakes</Text>
+                    </View>
+                    <View style={styles.lessonsList}>
+                      {jungleStrategy.commonMistakes.map((mistake, i) => (
+                        <View key={i} style={styles.lessonItem}>
+                          <Text style={[styles.lessonBullet, { color: colors.bearish }]}>✗</Text>
+                          <Text style={styles.lessonText}>{mistake}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  </View>
+                )}
+              </>
+            )}
+          </View>
+        )}
+
+        {/* Lesson / Deep Dive Tab - Rich analysis content from desktop */}
+        {!isLocked && activeTab === 'lesson' && richContent?.analysis && (
+          <View style={styles.tabContent}>
+            {/* Full Analysis */}
+            <View style={styles.card}>
+              <View style={styles.cardHeader}>
+                <Text style={styles.cardEmoji}>📚</Text>
+                <Text style={styles.cardTitle}>Full Lesson</Text>
+              </View>
+              <Text style={styles.cardText}>
+                {showFullAnalysis
+                  ? richContent.analysis
+                  : richContent.analysis.substring(0, 800) + (richContent.analysis.length > 800 ? '...' : '')}
+              </Text>
+              {richContent.analysis.length > 800 && (
+                <TouchableOpacity
+                  style={styles.expandButton}
+                  onPress={() => setShowFullAnalysis(!showFullAnalysis)}
+                >
+                  <Text style={styles.expandButtonText}>
+                    {showFullAnalysis ? 'Show Less' : 'Read Full Lesson'}
+                  </Text>
+                  <Ionicons
+                    name={showFullAnalysis ? 'chevron-up' : 'chevron-down'}
+                    size={16}
+                    color={colors.neon.green}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+
+            {/* Rich Analogy (from desktop content, may differ from inline analogy) */}
+            {richContent.analogy ? (
+              <View style={[styles.card, styles.analogyCard]}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>🎭</Text>
+                  <Text style={styles.cardTitle}>Think of it like...</Text>
+                </View>
+                <Text style={styles.analogyText}>{richContent.analogy}</Text>
+              </View>
+            ) : null}
+
+            {/* Rich Nuance */}
+            {richContent.nuance ? (
+              <View style={[styles.card, styles.nuanceCard]}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>⚡</Text>
+                  <Text style={styles.cardTitle}>The Nuance</Text>
+                </View>
+                <Text style={styles.nuanceText}>{richContent.nuance}</Text>
+              </View>
+            ) : null}
+
+            {/* Worked Example */}
+            {richContent.example ? (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>🧮</Text>
+                  <Text style={styles.cardTitle}>Worked Example</Text>
+                </View>
+                <Text style={styles.cardText}>{richContent.example}</Text>
+              </View>
+            ) : null}
+
+            {/* Animal Metaphor */}
+            {richContent.animalMetaphor ? (
+              <View style={[styles.card, { borderColor: `${colors.neon.purple}40` }]}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardEmoji}>🦁</Text>
+                  <Text style={styles.cardTitle}>Animal Metaphor</Text>
+                </View>
+                <Text style={styles.cardText}>{richContent.animalMetaphor}</Text>
+              </View>
+            ) : null}
           </View>
         )}
 
@@ -1193,6 +1319,21 @@ const styles = StyleSheet.create({
     ...typography.styles.body,
     color: colors.text.secondary,
     lineHeight: 24,
+  },
+  expandButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+    paddingVertical: spacing.md,
+    marginTop: spacing.sm,
+    borderTopWidth: 1,
+    borderTopColor: `${colors.neon.green}20`,
+  },
+  expandButtonText: {
+    ...typography.styles.label,
+    color: colors.neon.green,
+    fontWeight: '600',
   },
   insightsContainer: {
     gap: spacing.md,

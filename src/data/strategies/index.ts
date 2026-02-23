@@ -4,49 +4,53 @@
 import { Strategy } from '../types';
 
 // Import strategies from each tier file
+// Tier numbering matches desktop: 0, 0.5, 1 (Mirror), 2 (Structure), 3 (Risk), etc.
 import { tier0Strategies } from './tier0-foundations';
 import { tier05Strategies } from './tier05-express';
-import { tier1Strategies } from './tier1-structure';
-import { tier2Strategies } from './tier2-risk';
-import { tier3Strategies } from './tier3-anchors';
-import { tier4Strategies } from './tier4-verticals';
-import { tier5Strategies } from './tier5-volatility';
-import { tier6Strategies } from './tier6-timeskew';
-import { tier7Strategies } from './tier7-ratios';
-import { tier8Strategies } from './tier8-eventhorizons';
-import { tier9Strategies } from './tier9-tools';
-import { tier10Strategies } from './tier10-play';
+import { tier1Strategies as tier1MirrorStrategies } from './tier1-mirror';
+import { tier1Strategies as tier2StructureStrategies } from './tier1-structure';
+import { tier2Strategies as tier3RiskStrategies } from './tier2-risk';
+import { tier3Strategies as tier4AnchorStrategies } from './tier3-anchors';
+import { tier4Strategies as tier5VerticalStrategies } from './tier4-verticals';
+import { tier5Strategies as tier6VolatilityStrategies } from './tier5-volatility';
+import { tier6Strategies as tier7TimeskewStrategies } from './tier6-timeskew';
+import { tier7Strategies as tier8AdvancedStrategies } from './tier7-ratios';
+import { tier8Strategies as tier9EventStrategies } from './tier8-eventhorizons';
+import { tier9Strategies as tier10FlowStrategies } from './tier9-tools';
+import { tier10Strategies as tier10PlayStrategies } from './tier10-play';
 
 // Combined strategies array
 export const allStrategies: Strategy[] = [
   ...tier0Strategies,
   ...tier05Strategies,
-  ...tier1Strategies,
-  ...tier2Strategies,
-  ...tier3Strategies,
-  ...tier4Strategies,
-  ...tier5Strategies,
-  ...tier6Strategies,
-  ...tier7Strategies,
-  ...tier8Strategies,
-  ...tier9Strategies,
-  ...tier10Strategies,
+  ...tier1MirrorStrategies,
+  ...tier2StructureStrategies,
+  ...tier3RiskStrategies,
+  ...tier4AnchorStrategies,
+  ...tier5VerticalStrategies,
+  ...tier6VolatilityStrategies,
+  ...tier7TimeskewStrategies,
+  ...tier8AdvancedStrategies,
+  ...tier9EventStrategies,
+  ...tier10FlowStrategies,
+  ...tier10PlayStrategies,
 ];
 
 // Re-export tier arrays for direct access
 export {
   tier0Strategies,
   tier05Strategies,
-  tier1Strategies,
-  tier2Strategies,
-  tier3Strategies,
-  tier4Strategies,
-  tier5Strategies,
-  tier6Strategies,
-  tier7Strategies,
-  tier8Strategies,
-  tier9Strategies,
-  tier10Strategies,
+  tier1MirrorStrategies,
+  tier2StructureStrategies,
+  tier3RiskStrategies,
+  tier4AnchorStrategies,
+  tier5VerticalStrategies,
+  tier6VolatilityStrategies,
+  tier7TimeskewStrategies,
+  tier8AdvancedStrategies,
+  tier9EventStrategies,
+  tier10FlowStrategies,
+  tier10PlayStrategies,
 };
 
 // Helper functions
@@ -70,16 +74,16 @@ export const getPremiumStrategies = (): Strategy[] => {
 export const strategyCounts = {
   tier0: tier0Strategies.length,
   tier05: tier05Strategies.length,
-  tier1: tier1Strategies.length,
-  tier2: tier2Strategies.length,
-  tier3: tier3Strategies.length,
-  tier4: tier4Strategies.length,
-  tier5: tier5Strategies.length,
-  tier6: tier6Strategies.length,
-  tier7: tier7Strategies.length,
-  tier8: tier8Strategies.length,
-  tier9: tier9Strategies.length,
-  tier10: tier10Strategies.length,
+  tier1: tier1MirrorStrategies.length,
+  tier2: tier2StructureStrategies.length,
+  tier3: tier3RiskStrategies.length,
+  tier4: tier4AnchorStrategies.length,
+  tier5: tier5VerticalStrategies.length,
+  tier6: tier6VolatilityStrategies.length,
+  tier7: tier7TimeskewStrategies.length,
+  tier8: tier8AdvancedStrategies.length,
+  tier9: tier9EventStrategies.length,
+  tier10: tier10FlowStrategies.length + tier10PlayStrategies.length,
   total: allStrategies.length,
 };
 
@@ -100,16 +104,16 @@ const tierCache = new Map<number, Strategy[]>();
 const tierModules: Record<number, () => Promise<Record<string, unknown>>> = {
   0:    () => import('./tier0-foundations'),
   0.5:  () => import('./tier05-express'),
-  1:    () => import('./tier1-structure'),
-  2:    () => import('./tier2-risk'),
-  3:    () => import('./tier3-anchors'),
-  4:    () => import('./tier4-verticals'),
-  5:    () => import('./tier5-volatility'),
-  6:    () => import('./tier6-timeskew'),
-  7:    () => import('./tier7-ratios'),
-  8:    () => import('./tier8-eventhorizons'),
-  9:    () => import('./tier9-tools'),
-  10:   () => import('./tier10-play'),
+  1:    () => import('./tier1-mirror'),
+  2:    () => import('./tier1-structure'),
+  3:    () => import('./tier2-risk'),
+  4:    () => import('./tier3-anchors'),
+  5:    () => import('./tier4-verticals'),
+  6:    () => import('./tier5-volatility'),
+  7:    () => import('./tier6-timeskew'),
+  8:    () => import('./tier7-ratios'),
+  9:    () => import('./tier8-eventhorizons'),
+  10:   () => import('./tier9-tools'),
 };
 
 /**

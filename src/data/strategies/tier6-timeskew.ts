@@ -7,7 +7,7 @@ export const tier6Strategies: Strategy[] = [
   {
     id: 'calendar-spread',
     name: 'Calendar Spread',
-    tier: 6,
+    tier: 7,
     tierName: 'Time/Skew',
     category: 'income',
     outlook: 'Neutral',
@@ -118,7 +118,7 @@ export const tier6Strategies: Strategy[] = [
   {
     id: 'pmcc',
     name: 'Poor Man\'s Covered Call',
-    tier: 6,
+    tier: 7,
     tierName: 'Time/Skew',
     category: 'income',
     outlook: 'Bullish',
@@ -232,7 +232,7 @@ export const tier6Strategies: Strategy[] = [
   {
     id: 'diagonal-spread',
     name: 'Diagonal Spread',
-    tier: 6,
+    tier: 7,
     tierName: 'Time/Skew',
     category: 'directional',
     outlook: 'Directional',

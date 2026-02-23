@@ -7,7 +7,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'long-call',
     name: 'Long Call',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'directional',
     outlook: 'Bullish',
@@ -109,7 +109,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'long-put',
     name: 'Long Put',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'directional',
     outlook: 'Bearish',
@@ -220,7 +220,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'covered-call',
     name: 'Covered Call',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'income',
     outlook: 'Neutral/Bullish',
@@ -324,7 +324,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'cash-secured-put',
     name: 'Cash-Secured Put',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'income',
     outlook: 'Neutral/Bullish',
@@ -426,7 +426,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'protective-put',
     name: 'Protective Put',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'hedging',
     outlook: 'Bullish',
@@ -543,7 +543,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'collar',
     name: 'Collar',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'hedging',
     outlook: 'Neutral',
@@ -662,7 +662,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'exit-strategies',
     name: 'Exit Strategies',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'educational',
     outlook: 'Educational',
@@ -690,7 +690,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'first-trade',
     name: 'Your First Trade',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'educational',
     outlook: 'Educational',
@@ -718,7 +718,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'patience',
     name: 'Patience',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'educational',
     outlook: 'Educational',
@@ -747,7 +747,7 @@ export const tier3Strategies: Strategy[] = [
   {
     id: 'rolling-adjusting',
     name: 'Rolling & Adjusting',
-    tier: 3,
+    tier: 4,
     tierName: 'The Anchors',
     category: 'educational',
     outlook: 'Educational',

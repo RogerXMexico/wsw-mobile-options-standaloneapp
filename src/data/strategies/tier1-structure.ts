@@ -7,7 +7,7 @@ export const tier1Strategies: Strategy[] = [
   {
     id: 'market-time',
     name: 'Time (Relativity)',
-    tier: 1,
+    tier: 2,
     tierName: 'Market Structure',
     category: 'educational',
     outlook: 'Educational',
@@ -33,7 +33,7 @@ export const tier1Strategies: Strategy[] = [
   {
     id: 'four-frames',
     name: 'Four Frames of Reference',
-    tier: 1,
+    tier: 2,
     tierName: 'Market Structure',
     category: 'educational',
     outlook: 'Educational',
@@ -59,7 +59,7 @@ export const tier1Strategies: Strategy[] = [
   {
     id: 'mkt-structure',
     name: 'Market Structure',
-    tier: 1,
+    tier: 2,
     tierName: 'Market Structure',
     category: 'educational',
     outlook: 'Educational',
@@ -85,7 +85,7 @@ export const tier1Strategies: Strategy[] = [
   {
     id: 'support-resistance',
     name: 'Support & Resistance',
-    tier: 1,
+    tier: 2,
     tierName: 'Market Structure',
     category: 'educational',
     outlook: 'Educational',
@@ -111,7 +111,7 @@ export const tier1Strategies: Strategy[] = [
   {
     id: 'avwap',
     name: 'Anchored VWAP',
-    tier: 1,
+    tier: 2,
     tierName: 'Market Structure',
     category: 'educational',
     outlook: 'Educational',
@@ -137,7 +137,7 @@ export const tier1Strategies: Strategy[] = [
   {
     id: 'avoid-biases',
     name: 'Avoiding Biases',
-    tier: 1,
+    tier: 2,
     tierName: 'Market Structure',
     category: 'educational',
     outlook: 'Psychology',

@@ -1,5 +1,5 @@
 // Options Vocabulary Screen
-// Interactive glossary of options trading terms
+// Interactive glossary of 200+ options trading terms with rich educational content
 
 import React, { useState, useMemo } from 'react';
 import {
@@ -13,67 +13,23 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { colors, typography, spacing, borderRadius } from '../../theme';
-import { GlassCard, GradientText } from '../../components/ui';
-import { GLOSSARY } from '../../data/constants';
+import {
+  VOCABULARY_TERMS,
+  VOCABULARY_COUNT,
+  ALL_CATEGORIES,
+  filterTerms,
+  groupTermsByCategory,
+  VocabularyTerm,
+} from '../../data/vocabularyData';
 
-// Extended vocabulary with more terms
-const VOCABULARY_TERMS = [
-  // Greeks
-  { term: 'Delta', definition: 'The amount an option price changes for a $1 move in the stock. Also a proxy for probability (0.50 Delta = ~50% chance ITM).', category: 'Greeks', emoji: '' },
-  { term: 'Gamma', definition: 'The rate of change of Delta. High Gamma means your P&L swings wildly. Highest for ATM options near expiration.', category: 'Greeks', emoji: '' },
-  { term: 'Theta', definition: 'Time decay. The amount of value the option loses every day as it approaches expiration.', category: 'Greeks', emoji: '' },
-  { term: 'Vega', definition: 'Sensitivity to Implied Volatility. Long Vega means you profit if IV rises (fear increases).', category: 'Greeks', emoji: '' },
-  { term: 'Rho', definition: 'Sensitivity to interest rates. Usually minor unless trading LEAPS.', category: 'Greeks', emoji: '' },
-
-  // Volatility
-  { term: 'IV (Implied Volatility)', definition: 'The market\'s forecast of likely movement. High IV = expensive options. Think of it as "fear gauge."', category: 'Volatility', emoji: '' },
-  { term: 'HV (Historical Volatility)', definition: 'How much the stock actually moved in the past. Compare to IV to find opportunity.', category: 'Volatility', emoji: '' },
-  { term: 'IV Rank', definition: 'Where current IV sits relative to its range over the past year. 80% = IV is high compared to history.', category: 'Volatility', emoji: '' },
-  { term: 'IV Crush', definition: 'The sudden drop in IV after an event (like earnings). Options lose value even if stock moves your way.', category: 'Volatility', emoji: '' },
-  { term: 'Volatility Smile', definition: 'The curve showing higher IV for deep OTM options. Markets price in tail risk.', category: 'Volatility', emoji: '' },
-
-  // Basics
-  { term: 'Call Option', definition: 'The right to BUY 100 shares at the strike price before expiration. Bullish bet or income tool.', category: 'Basics', emoji: '' },
-  { term: 'Put Option', definition: 'The right to SELL 100 shares at the strike price before expiration. Bearish bet or protection.', category: 'Basics', emoji: '' },
-  { term: 'Strike Price', definition: 'The price at which you can buy (call) or sell (put) the underlying stock.', category: 'Basics', emoji: '' },
-  { term: 'Premium', definition: 'The price you pay (or receive) for an option contract. Made up of intrinsic + extrinsic value.', category: 'Basics', emoji: '' },
-  { term: 'Expiration', definition: 'The date when the option contract expires and ceases to exist.', category: 'Basics', emoji: '' },
-  { term: 'Contract', definition: 'One option contract controls 100 shares of the underlying stock.', category: 'Basics', emoji: '' },
-
-  // Moneyness
-  { term: 'ITM (In The Money)', definition: 'Call: stock price > strike. Put: stock price < strike. Has intrinsic value.', category: 'Moneyness', emoji: '' },
-  { term: 'OTM (Out of The Money)', definition: 'Call: stock price < strike. Put: stock price > strike. Only extrinsic value.', category: 'Moneyness', emoji: '' },
-  { term: 'ATM (At The Money)', definition: 'Stock price is at or very close to the strike price. Highest theta decay here.', category: 'Moneyness', emoji: '' },
-  { term: 'Intrinsic Value', definition: 'Real value if exercised now. ITM options have intrinsic value = difference between stock and strike.', category: 'Moneyness', emoji: '' },
-  { term: 'Extrinsic Value', definition: 'Time value + volatility premium. This is what decays away by expiration.', category: 'Moneyness', emoji: '' },
-
-  // Mechanics
-  { term: 'Exercise', definition: 'The buyer uses their right to buy (call) or sell (put) shares at the strike price.', category: 'Mechanics', emoji: '' },
-  { term: 'Assignment', definition: 'The seller is obligated to deliver shares (call) or buy shares (put) when the buyer exercises.', category: 'Mechanics', emoji: '' },
-  { term: 'Open Interest', definition: 'The total number of outstanding contracts. High OI = liquid options.', category: 'Mechanics', emoji: '' },
-  { term: 'Volume', definition: 'The number of contracts traded today. Liquidity indicator.', category: 'Mechanics', emoji: '' },
-  { term: 'Bid-Ask Spread', definition: 'The gap between buy and sell prices. Tight spread = liquid, easy to trade.', category: 'Mechanics', emoji: '' },
-
-  // Trading
-  { term: 'Debit', definition: 'You PAY money to enter the trade. Buying options is a debit transaction.', category: 'Trading', emoji: '' },
-  { term: 'Credit', definition: 'You RECEIVE money to enter the trade. Selling options is a credit transaction.', category: 'Trading', emoji: '' },
-  { term: 'Long', definition: 'You bought the option. You have rights, not obligations.', category: 'Trading', emoji: '' },
-  { term: 'Short', definition: 'You sold the option. You have obligations to fulfill if assigned.', category: 'Trading', emoji: '' },
-  { term: 'BTO (Buy to Open)', definition: 'Opening a new long position by buying an option.', category: 'Trading', emoji: '' },
-  { term: 'STO (Sell to Open)', definition: 'Opening a new short position by selling an option.', category: 'Trading', emoji: '' },
-  { term: 'BTC (Buy to Close)', definition: 'Closing an existing short position by buying back the option.', category: 'Trading', emoji: '' },
-  { term: 'STC (Sell to Close)', definition: 'Closing an existing long position by selling the option.', category: 'Trading', emoji: '' },
-
-  // Strategies
-  { term: 'Covered Call', definition: 'Selling calls against stock you own. Generates income, caps upside.', category: 'Strategies', emoji: '' },
-  { term: 'Cash-Secured Put', definition: 'Selling puts with cash to buy shares if assigned. Get paid to wait for a dip.', category: 'Strategies', emoji: '' },
-  { term: 'Spread', definition: 'Combining two or more options to define risk/reward. Verticals, calendars, etc.', category: 'Strategies', emoji: '' },
-  { term: 'Straddle', definition: 'Buying both a call and put at the same strike. Profits from big moves either direction.', category: 'Strategies', emoji: '' },
-  { term: 'Iron Condor', definition: 'Four-leg neutral strategy. Profits if stock stays in a range. Defined risk.', category: 'Strategies', emoji: '' },
-  { term: 'LEAPS', definition: 'Long-term options (>1 year expiry). Lower theta decay, used for stock replacement.', category: 'Strategies', emoji: '' },
-];
-
-const CATEGORIES = ['All', 'Basics', 'Greeks', 'Volatility', 'Moneyness', 'Mechanics', 'Trading', 'Strategies'];
+// Visual indicator dot color based on buy/sell/neutral
+const getVisualColor = (visual?: string) => {
+  switch (visual) {
+    case 'buy': return '#10b981';   // emerald
+    case 'sell': return '#f43f5e';  // rose
+    default: return '#64748b';       // slate
+  }
+};
 
 const OptionsVocabularyScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -82,24 +38,14 @@ const OptionsVocabularyScreen: React.FC = () => {
   const [expandedTerm, setExpandedTerm] = useState<string | null>(null);
 
   const filteredTerms = useMemo(() => {
-    return VOCABULARY_TERMS.filter(item => {
-      const matchesSearch = searchQuery === '' ||
-        item.term.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.definition.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    });
+    return filterTerms(selectedCategory, searchQuery);
   }, [searchQuery, selectedCategory]);
 
   const termsByCategory = useMemo(() => {
     if (selectedCategory !== 'All') {
       return { [selectedCategory]: filteredTerms };
     }
-    return filteredTerms.reduce((acc, term) => {
-      if (!acc[term.category]) acc[term.category] = [];
-      acc[term.category].push(term);
-      return acc;
-    }, {} as Record<string, typeof VOCABULARY_TERMS>);
+    return groupTermsByCategory(filteredTerms);
   }, [filteredTerms, selectedCategory]);
 
   return (
@@ -118,7 +64,7 @@ const OptionsVocabularyScreen: React.FC = () => {
         <Text style={styles.heroEmoji}></Text>
         <Text style={styles.heroTitle}>Master the Language</Text>
         <Text style={styles.heroSubtitle}>
-          {VOCABULARY_TERMS.length} essential options terms
+          {VOCABULARY_COUNT} essential options terms
         </Text>
       </View>
 
@@ -139,7 +85,7 @@ const OptionsVocabularyScreen: React.FC = () => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.categoriesContainer}
       >
-        {CATEGORIES.map(category => (
+        {ALL_CATEGORIES.map(category => (
           <TouchableOpacity
             key={category}
             style={[
@@ -171,7 +117,7 @@ const OptionsVocabularyScreen: React.FC = () => {
             {selectedCategory === 'All' && (
               <Text style={styles.categoryTitle}>{category}</Text>
             )}
-            {terms.map(item => (
+            {terms.map((item: VocabularyTerm) => (
               <TouchableOpacity
                 key={item.term}
                 style={[
@@ -182,17 +128,48 @@ const OptionsVocabularyScreen: React.FC = () => {
                 activeOpacity={0.7}
               >
                 <View style={styles.termHeader}>
-                  <Text style={styles.termEmoji}>{item.emoji}</Text>
-                  <Text style={styles.termName}>{item.term}</Text>
+                  {item.visual && (
+                    <View style={[styles.visualDot, { backgroundColor: getVisualColor(item.visual) }]} />
+                  )}
+                  <View style={styles.termNameContainer}>
+                    <Text style={styles.termName}>{item.term}</Text>
+                    {item.abbrev && (
+                      <Text style={styles.termAbbrev}>{item.abbrev}</Text>
+                    )}
+                  </View>
                   <Text style={styles.expandIcon}>
-                    {expandedTerm === item.term ? '' : ''}
+                    {expandedTerm === item.term ? '\u25B2' : '\u25BC'}
                   </Text>
                 </View>
                 {expandedTerm === item.term && (
                   <View style={styles.termDefinition}>
                     <Text style={styles.definitionText}>{item.definition}</Text>
-                    <View style={styles.categoryBadge}>
-                      <Text style={styles.categoryBadgeText}>{item.category}</Text>
+
+                    {item.example && (
+                      <View style={styles.exampleContainer}>
+                        <Text style={styles.exampleLabel}>Example</Text>
+                        <Text style={styles.exampleText}>{item.example}</Text>
+                      </View>
+                    )}
+
+                    {item.tip && (
+                      <View style={styles.tipContainer}>
+                        <Text style={styles.tipLabel}>Pro Tip</Text>
+                        <Text style={styles.tipText}>{item.tip}</Text>
+                      </View>
+                    )}
+
+                    <View style={styles.badgeRow}>
+                      <View style={styles.categoryBadge}>
+                        <Text style={styles.categoryBadgeText}>{item.category}</Text>
+                      </View>
+                      {item.visual && (
+                        <View style={[styles.visualBadge, { backgroundColor: getVisualColor(item.visual) + '20' }]}>
+                          <Text style={[styles.visualBadgeText, { color: getVisualColor(item.visual) }]}>
+                            {item.visual === 'buy' ? 'Bullish' : item.visual === 'sell' ? 'Bearish' : 'Neutral'}
+                          </Text>
+                        </View>
+                      )}
                     </View>
                   </View>
                 )}
@@ -331,19 +308,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: spacing.md,
   },
-  termEmoji: {
-    fontSize: 20,
+  visualDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
     marginRight: spacing.sm,
   },
-  termName: {
+  termNameContainer: {
     flex: 1,
+  },
+  termName: {
     fontFamily: typography.fonts.semiBold,
     fontSize: typography.sizes.md,
     color: colors.text.primary,
   },
-  expandIcon: {
-    fontSize: 16,
+  termAbbrev: {
+    fontFamily: typography.fonts.medium,
+    fontSize: typography.sizes.xs,
     color: colors.text.muted,
+    marginTop: 2,
+  },
+  expandIcon: {
+    fontSize: 12,
+    color: colors.text.muted,
+    marginLeft: spacing.sm,
   },
   termDefinition: {
     paddingHorizontal: spacing.md,
@@ -359,6 +347,55 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginBottom: spacing.sm,
   },
+  exampleContainer: {
+    backgroundColor: 'rgba(6, 182, 212, 0.08)',
+    borderLeftWidth: 3,
+    borderLeftColor: '#06b6d4',
+    borderRadius: borderRadius.sm,
+    padding: spacing.sm,
+    marginBottom: spacing.sm,
+  },
+  exampleLabel: {
+    fontFamily: typography.fonts.bold,
+    fontSize: typography.sizes.xs,
+    color: '#06b6d4',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 4,
+  },
+  exampleText: {
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.sm,
+    color: colors.text.secondary,
+    lineHeight: 20,
+  },
+  tipContainer: {
+    backgroundColor: 'rgba(245, 158, 11, 0.08)',
+    borderLeftWidth: 3,
+    borderLeftColor: '#f59e0b',
+    borderRadius: borderRadius.sm,
+    padding: spacing.sm,
+    marginBottom: spacing.sm,
+  },
+  tipLabel: {
+    fontFamily: typography.fonts.bold,
+    fontSize: typography.sizes.xs,
+    color: '#f59e0b',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 4,
+  },
+  tipText: {
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.sm,
+    color: colors.text.secondary,
+    lineHeight: 20,
+  },
+  badgeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
   categoryBadge: {
     alignSelf: 'flex-start',
     backgroundColor: colors.overlay.neonGreen,
@@ -370,6 +407,16 @@ const styles = StyleSheet.create({
     fontFamily: typography.fonts.medium,
     fontSize: typography.sizes.xs,
     color: colors.neon.green,
+  },
+  visualBadge: {
+    alignSelf: 'flex-start',
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 2,
+    borderRadius: borderRadius.sm,
+  },
+  visualBadgeText: {
+    fontFamily: typography.fonts.medium,
+    fontSize: typography.sizes.xs,
   },
   emptyState: {
     alignItems: 'center',

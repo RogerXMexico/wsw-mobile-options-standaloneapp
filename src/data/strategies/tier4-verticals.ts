@@ -7,7 +7,7 @@ export const tier4Strategies: Strategy[] = [
   {
     id: 'bull-call-spread',
     name: 'Bull Call Spread',
-    tier: 4,
+    tier: 5,
     tierName: 'Verticals',
     category: 'directional',
     outlook: 'Bullish',
@@ -123,7 +123,7 @@ export const tier4Strategies: Strategy[] = [
   {
     id: 'bear-put-spread',
     name: 'Bear Put Spread',
-    tier: 4,
+    tier: 5,
     tierName: 'Verticals',
     category: 'directional',
     outlook: 'Bearish',
@@ -239,7 +239,7 @@ export const tier4Strategies: Strategy[] = [
   {
     id: 'bull-put-spread',
     name: 'Bull Put Spread',
-    tier: 4,
+    tier: 5,
     tierName: 'Verticals',
     category: 'income',
     outlook: 'Neutral/Bullish',
@@ -356,7 +356,7 @@ export const tier4Strategies: Strategy[] = [
   {
     id: 'bear-call-spread',
     name: 'Bear Call Spread',
-    tier: 4,
+    tier: 5,
     tierName: 'Verticals',
     category: 'income',
     outlook: 'Neutral/Bearish',
@@ -474,7 +474,7 @@ export const tier4Strategies: Strategy[] = [
   {
     id: 'vertical-village',
     name: 'The Vertical Village',
-    tier: 4,
+    tier: 5,
     tierName: 'Verticals',
     category: 'educational',
     outlook: 'Educational',

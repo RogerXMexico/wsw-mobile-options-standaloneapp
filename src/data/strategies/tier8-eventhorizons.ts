@@ -7,7 +7,7 @@ export const tier8Strategies: Strategy[] = [
   {
     id: 'event-horizons-course',
     name: 'Event Horizons Course',
-    tier: 8,
+    tier: 9,
     tierName: 'Event Horizons',
     category: 'educational',
     outlook: 'Educational',
@@ -34,7 +34,7 @@ export const tier8Strategies: Strategy[] = [
   {
     id: 'event-horizons',
     name: 'Event Horizons Analysis',
-    tier: 8,
+    tier: 9,
     tierName: 'Event Horizons',
     category: 'tools',
     outlook: 'Educational',
