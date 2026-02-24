@@ -14,6 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
 import { EventHorizonsStackParamList } from '../../navigation/types';
 
@@ -114,11 +115,11 @@ const MOCK_EVENTS: PredictionEvent[] = [
 ];
 
 const EVENT_TYPE_FILTERS: { key: EventType; label: string; icon: string }[] = [
-  { key: 'all', label: 'All', icon: '🌐' },
-  { key: 'earnings', label: 'Earnings', icon: '📈' },
-  { key: 'fda', label: 'FDA', icon: '💊' },
-  { key: 'fed', label: 'Fed', icon: '🏛️' },
-  { key: 'corporate', label: 'Corporate', icon: '🏢' },
+  { key: 'all', label: 'All', icon: 'globe-outline' },
+  { key: 'earnings', label: 'Earnings', icon: 'trending-up-outline' },
+  { key: 'fda', label: 'FDA', icon: 'medkit-outline' },
+  { key: 'fed', label: 'Fed', icon: 'business-outline' },
+  { key: 'corporate', label: 'Corporate', icon: 'briefcase-outline' },
 ];
 
 interface EventCardProps {
@@ -244,7 +245,7 @@ const PredictionScannerScreen: React.FC = () => {
       {/* Search Bar */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Text style={styles.searchIcon}>🔍</Text>
+          <Ionicons name="search-outline" size={16} color={colors.text.muted} style={{ marginRight: spacing.sm }} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search by ticker or event..."
@@ -271,7 +272,7 @@ const PredictionScannerScreen: React.FC = () => {
             ]}
             onPress={() => setSelectedType(filter.key)}
           >
-            <Text style={styles.filterIcon}>{filter.icon}</Text>
+            <Ionicons name={filter.icon as keyof typeof Ionicons.glyphMap} size={14} color={selectedType === filter.key ? '#8b5cf6' : colors.text.secondary} />
             <Text
               style={[
                 styles.filterLabel,
@@ -308,7 +309,7 @@ const PredictionScannerScreen: React.FC = () => {
       >
         {filteredEvents.length === 0 ? (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyIcon}>🔍</Text>
+            <Ionicons name="search-outline" size={48} color={colors.text.muted} style={{ marginBottom: spacing.md }} />
             <Text style={styles.emptyText}>No events match your filters</Text>
           </View>
         ) : (

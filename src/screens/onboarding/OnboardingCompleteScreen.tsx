@@ -12,47 +12,49 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 
 // Animal data for display
 const ANIMAL_DATA: Record<string, {
   name: string;
-  emoji: string;
+  animalKey: string;
   color: string;
   welcomeMessage: string;
   image: any;
 }> = {
   turtle: {
     name: 'The Turtle',
-    emoji: '🐢',
+    animalKey: 'turtle',
     color: '#10B981',
     welcomeMessage: 'Your journey begins with strong foundations. Take it slow, learn deep.',
     image: require('../../../assets/animals/Turtle WSW.png'),
   },
   sloth: {
     name: 'The Sloth',
-    emoji: '🦥',
+    animalKey: 'sloth',
     color: '#8B5CF6',
     welcomeMessage: 'Patience is your superpower. Time decay is your friend.',
     image: require('../../../assets/animals/Sloth WSW.png'),
   },
   owl: {
     name: 'The Owl',
-    emoji: '🦉',
+    animalKey: 'owl',
     color: '#6366F1',
     welcomeMessage: 'Wisdom guides your trades. Knowledge is your edge.',
     image: require('../../../assets/animals/Owl WSW.png'),
   },
   fox: {
     name: 'The Fox',
-    emoji: '🦊',
+    animalKey: 'fox',
     color: '#F59E0B',
     welcomeMessage: 'Adaptability is key. Every market condition is an opportunity.',
     image: require('../../../assets/animals/Fox WSW.png'),
   },
   cheetah: {
     name: 'The Cheetah',
-    emoji: '🐆',
+    animalKey: 'cheetah',
     color: '#EF4444',
     welcomeMessage: 'Speed meets precision. Strike when the moment is right.',
     image: require('../../../assets/animals/Cheetah WSW.png'),
@@ -111,7 +113,7 @@ const OnboardingCompleteScreen: React.FC<Props> = ({ onComplete }) => {
       >
         {/* Success header */}
         <View style={styles.headerSection}>
-          <Text style={styles.celebrationEmoji}>🎉</Text>
+          <Ionicons name="checkmark-circle" size={48} color={colors.neon.green} />
           <Text style={styles.congratsText}>You're All Set!</Text>
         </View>
 
@@ -130,9 +132,12 @@ const OnboardingCompleteScreen: React.FC<Props> = ({ onComplete }) => {
         </View>
 
         {/* Animal Info */}
-        <Text style={[styles.animalName, { color: animalData.color }]}>
-          {animalData.emoji} {animalData.name}
-        </Text>
+        <View style={styles.animalNameRow}>
+          <InlineIcon name={animalData.animalKey} size={28} />
+          <Text style={[styles.animalName, { color: animalData.color }]}>
+            {animalData.name}
+          </Text>
+        </View>
         <Text style={styles.welcomeMessage}>"{animalData.welcomeMessage}"</Text>
 
         {/* Ready message */}
@@ -140,15 +145,15 @@ const OnboardingCompleteScreen: React.FC<Props> = ({ onComplete }) => {
           <Text style={styles.readyTitle}>Your jungle awaits</Text>
           <View style={styles.readyFeatures}>
             <View style={styles.readyFeature}>
-              <Text style={styles.readyIcon}>📚</Text>
+              <Ionicons name="library-outline" size={20} color={colors.neon.cyan} />
               <Text style={styles.readyText}>Start with your personalized tier</Text>
             </View>
             <View style={styles.readyFeature}>
-              <Text style={styles.readyIcon}>🎯</Text>
+              <Ionicons name="disc-outline" size={20} color={colors.neon.green} />
               <Text style={styles.readyText}>Complete daily missions for rewards</Text>
             </View>
             <View style={styles.readyFeature}>
-              <Text style={styles.readyIcon}>📈</Text>
+              <Ionicons name="trending-up-outline" size={20} color={colors.bullish} />
               <Text style={styles.readyText}>Track your progress as you grow</Text>
             </View>
           </View>
@@ -163,7 +168,7 @@ const OnboardingCompleteScreen: React.FC<Props> = ({ onComplete }) => {
           activeOpacity={0.8}
         >
           <Text style={styles.enterButtonText}>Enter the Jungle</Text>
-          <Text style={styles.enterArrow}>🌴</Text>
+          <Ionicons name="arrow-forward" size={20} color={colors.background.primary} />
         </TouchableOpacity>
 
         <Text style={styles.footerText}>
@@ -211,9 +216,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  animalNameRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.sm,
+  },
   animalName: {
     ...typography.styles.h2,
-    marginBottom: spacing.sm,
   },
   welcomeMessage: {
     ...typography.styles.body,

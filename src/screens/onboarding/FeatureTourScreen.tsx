@@ -14,13 +14,14 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 
 const { width, height } = Dimensions.get('window');
 
 interface Feature {
   id: string;
-  emoji: string;
+  icon: string;
   title: string;
   description: string;
   highlights: string[];
@@ -30,7 +31,7 @@ interface Feature {
 const FEATURES: Feature[] = [
   {
     id: 'learn',
-    emoji: '📚',
+    icon: 'book-outline',
     title: 'Structured Learning',
     description: 'Master options trading through our 11-tier curriculum, from foundations to advanced strategies.',
     highlights: [
@@ -43,7 +44,7 @@ const FEATURES: Feature[] = [
   },
   {
     id: 'tools',
-    emoji: '🛠️',
+    icon: 'build-outline',
     title: 'Professional Tools',
     description: 'Access powerful calculators and visualizers used by professional traders.',
     highlights: [
@@ -56,7 +57,7 @@ const FEATURES: Feature[] = [
   },
   {
     id: 'practice',
-    emoji: '📝',
+    icon: 'create-outline',
     title: 'Risk-Free Practice',
     description: 'Paper trade with real market conditions. Build confidence before risking real money.',
     highlights: [
@@ -69,7 +70,7 @@ const FEATURES: Feature[] = [
   },
   {
     id: 'events',
-    emoji: '📅',
+    icon: 'calendar-outline',
     title: 'Event Horizons',
     description: 'Learn to trade around earnings, Fed meetings, and market events like a pro.',
     highlights: [
@@ -82,7 +83,7 @@ const FEATURES: Feature[] = [
   },
   {
     id: 'gamification',
-    emoji: '🏆',
+    icon: 'trophy-outline',
     title: 'Track & Compete',
     description: 'Earn badges, complete daily missions, and climb the leaderboard as you learn.',
     highlights: [
@@ -147,7 +148,7 @@ const FeatureTourScreen: React.FC<Props> = ({ onNext, onBack }) => {
         {/* Feature Icon */}
         <View style={[styles.iconContainer, { borderColor: item.color }]}>
           <View style={[styles.iconGlow, { backgroundColor: item.color }]} />
-          <Text style={styles.featureEmoji}>{item.emoji}</Text>
+          <Ionicons name={item.icon as any} size={48} color={item.color} />
         </View>
 
         {/* Feature Title */}
@@ -178,7 +179,10 @@ const FeatureTourScreen: React.FC<Props> = ({ onNext, onBack }) => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={onBack} style={styles.backButton}>
-          <Text style={styles.backText}>← Back</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+            <Ionicons name="arrow-back" size={18} color={colors.text.secondary} />
+            <Text style={styles.backText}>Back</Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={onNext} style={styles.skipButton}>
           <Text style={styles.skipText}>Skip</Text>
@@ -256,7 +260,7 @@ const FeatureTourScreen: React.FC<Props> = ({ onNext, onBack }) => {
           <Text style={styles.continueButtonText}>
             {isLastSlide ? 'Continue' : 'Next'}
           </Text>
-          <Text style={styles.continueArrow}>→</Text>
+          <Ionicons name="arrow-forward" size={20} color={colors.background.primary} />
         </TouchableOpacity>
 
         <Text style={styles.progressText}>
@@ -332,9 +336,6 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     opacity: 0.2,
   },
-  featureEmoji: {
-    fontSize: 48,
-  },
   featureTitle: {
     ...typography.styles.h2,
     textAlign: 'center',
@@ -396,11 +397,6 @@ const styles = StyleSheet.create({
   continueButtonText: {
     ...typography.styles.button,
     color: colors.background.primary,
-  },
-  continueArrow: {
-    fontSize: 20,
-    color: colors.background.primary,
-    fontWeight: '600',
   },
   progressText: {
     ...typography.styles.caption,

@@ -13,6 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
 import { LearnStackParamList } from '../../navigation/types';
 import {
@@ -126,31 +127,31 @@ const EventReplayScreen: React.FC = () => {
     if (prob > 70 && ivRank > 70) {
       return {
         signal: 'short-vol',
-        emoji: '🔴',
+        dotColor: '#ef4444',
         text: 'High confidence + expensive options = potential short vol opportunity. Consider selling premium.',
       };
     } else if (prob > 70 && ivRank < 50) {
       return {
         signal: 'long-vol',
-        emoji: '🟢',
+        dotColor: '#22c55e',
         text: 'High conviction but cheap options = potential long vol opportunity. Options may be underpriced.',
       };
     } else if (prob < 60 && ivRank > 70) {
       return {
         signal: 'short-vol',
-        emoji: '🟡',
+        dotColor: '#eab308',
         text: 'Uncertainty + expensive options = options may be overpriced. Consider selling premium.',
       };
     } else if (prob < 60 && ivRank < 50) {
       return {
         signal: 'neutral',
-        emoji: '⚪',
+        dotColor: '#94a3b8',
         text: 'Markets relatively aligned - no clear edge. Wait for better setup.',
       };
     }
     return {
       signal: 'neutral',
-      emoji: '🟡',
+      dotColor: '#eab308',
       text: 'Markets moderately aligned. Analyze further before taking position.',
     };
   };
@@ -185,7 +186,7 @@ const EventReplayScreen: React.FC = () => {
           <View style={styles.eventHeader}>
             <View style={styles.eventTitleSection}>
               <Text style={styles.eventTicker}>
-                {caseStudy.ticker || '📊'}
+                {caseStudy.ticker || 'MACRO'}
               </Text>
               <Text style={styles.eventCompany}>{caseStudy.companyName}</Text>
             </View>
@@ -210,13 +211,13 @@ const EventReplayScreen: React.FC = () => {
             </View>
           </View>
           <Text style={styles.eventName}>{caseStudy.eventName}</Text>
-          <Text style={styles.eventDate}>📅 {caseStudy.eventDate}</Text>
+          <Text style={styles.eventDate}><Ionicons name="calendar-outline" size={14} color={colors.text.muted} /> {caseStudy.eventDate}</Text>
           <Text style={styles.eventSummary}>{caseStudy.summary}</Text>
         </View>
 
         {/* Setup Context */}
         <View style={styles.contextCard}>
-          <Text style={styles.contextTitle}>🎯 Setup Context</Text>
+          <Text style={styles.contextTitle}><Ionicons name="locate" size={14} color="#a78bfa" /> Setup Context</Text>
           <Text style={styles.contextText}>{caseStudy.setupContext}</Text>
         </View>
 
@@ -228,7 +229,7 @@ const EventReplayScreen: React.FC = () => {
             </Text>
             <Text style={styles.timelineDays}>
               {currentData.daysToEvent === 0
-                ? '🔔 EVENT DAY'
+                ? 'EVENT DAY'
                 : currentData.daysToEvent > 0
                 ? `T-${currentData.daysToEvent} days`
                 : `T+${Math.abs(currentData.daysToEvent)} days`}
@@ -248,7 +249,7 @@ const EventReplayScreen: React.FC = () => {
         {/* Current Data Display */}
         {!showOutcome ? (
           <View style={styles.dataCard}>
-            <Text style={styles.dataTitle}>📈 Market Snapshot</Text>
+            <Text style={styles.dataTitle}><Ionicons name="trending-up" size={18} color={colors.text.primary} /> Market Snapshot</Text>
 
             <View style={styles.dataGrid}>
               <View style={styles.dataItem}>
@@ -286,7 +287,7 @@ const EventReplayScreen: React.FC = () => {
 
             {/* Notes */}
             <View style={styles.notesBox}>
-              <Text style={styles.notesLabel}>📝 Market Notes</Text>
+              <Text style={styles.notesLabel}><Ionicons name="document-text" size={14} color={colors.text.primary} /> Market Notes</Text>
               <Text style={styles.notesText}>{currentData.notes}</Text>
             </View>
 
@@ -305,7 +306,7 @@ const EventReplayScreen: React.FC = () => {
               ]}
             >
               <Text style={styles.gapLabel}>
-                {gapAnalysis.emoji} Chameleon's Gap Analysis
+                <Ionicons name="ellipse" size={10} color={gapAnalysis.dotColor} /> Chameleon's Gap Analysis
               </Text>
               <Text style={styles.gapText}>{gapAnalysis.text}</Text>
             </View>
@@ -322,7 +323,7 @@ const EventReplayScreen: React.FC = () => {
               ]}
               style={styles.outcomeGradient}
             >
-              <Text style={styles.outcomeLabel}>🎬 EVENT OUTCOME</Text>
+              <Text style={styles.outcomeLabel}><Ionicons name="videocam" size={14} color={colors.text.muted} /> EVENT OUTCOME</Text>
               <Text
                 style={[
                   styles.outcomeResult,
@@ -334,7 +335,7 @@ const EventReplayScreen: React.FC = () => {
                   },
                 ]}
               >
-                {caseStudy.outcome.direction === 'up' ? '📈' : '📉'}{' '}
+                <Ionicons name={caseStudy.outcome.direction === 'up' ? 'trending-up' : 'trending-down'} size={24} color={caseStudy.outcome.direction === 'up' ? colors.bullish : colors.bearish} />{' '}
                 {caseStudy.outcome.actualMove >= 0 ? '+' : ''}
                 {caseStudy.outcome.actualMove}% MOVE
               </Text>
@@ -375,14 +376,14 @@ const EventReplayScreen: React.FC = () => {
                       },
                     ]}
                   >
-                    {caseStudy.outcome.predictionAccurate ? '✓ Right' : '✗ Wrong'}
+                    {caseStudy.outcome.predictionAccurate ? 'Right' : 'Wrong'}
                   </Text>
                 </View>
               </View>
 
               {/* Key Takeaway */}
               <View style={styles.takeawayBox}>
-                <Text style={styles.takeawayTitle}>💡 Key Takeaway</Text>
+                <Text style={styles.takeawayTitle}><Ionicons name="bulb" size={14} color="#fbbf24" /> Key Takeaway</Text>
                 <Text style={styles.takeawayText}>
                   {caseStudy.outcome.keyTakeaway}
                 </Text>
@@ -390,7 +391,7 @@ const EventReplayScreen: React.FC = () => {
 
               {/* Teaching Points */}
               <View style={styles.teachingPoints}>
-                <Text style={styles.teachingTitle}>📚 What We Learned</Text>
+                <Text style={styles.teachingTitle}><Ionicons name="book" size={14} color="#a78bfa" /> What We Learned</Text>
                 {caseStudy.teachingPoints.map((point, index) => (
                   <View key={index} style={styles.teachingPoint}>
                     <Text style={styles.teachingBullet}>•</Text>
@@ -402,7 +403,7 @@ const EventReplayScreen: React.FC = () => {
               {/* Suggested Strategies */}
               {caseStudy.suggestedStrategies.length > 0 && (
                 <View style={styles.strategiesBox}>
-                  <Text style={styles.strategiesTitle}>🎯 Suggested Strategies</Text>
+                  <Text style={styles.strategiesTitle}><Ionicons name="locate" size={14} color="#14b8a6" /> Suggested Strategies</Text>
                   <View style={styles.strategiesList}>
                     {caseStudy.suggestedStrategies.map((strategy, index) => (
                       <View key={index} style={styles.strategyBadge}>
@@ -426,7 +427,7 @@ const EventReplayScreen: React.FC = () => {
             onPress={handlePrevious}
             disabled={currentStep === 0}
           >
-            <Text style={styles.controlButtonText}>⏮️ Back</Text>
+            <Text style={styles.controlButtonText}><Ionicons name="play-back" size={14} color={colors.text.secondary} /> Back</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -438,7 +439,7 @@ const EventReplayScreen: React.FC = () => {
               style={styles.playButtonGradient}
             >
               <Text style={styles.playButtonText}>
-                {isPlaying ? '⏸️ Pause' : '▶️ Play'}
+                {isPlaying ? 'Pause' : 'Play'}
               </Text>
             </LinearGradient>
           </TouchableOpacity>
@@ -451,13 +452,13 @@ const EventReplayScreen: React.FC = () => {
             onPress={handleNext}
             disabled={showOutcome}
           >
-            <Text style={styles.controlButtonText}>Next ⏭️</Text>
+            <Text style={styles.controlButtonText}>Next <Ionicons name="play-forward" size={14} color={colors.text.secondary} /></Text>
           </TouchableOpacity>
         </View>
 
         {showOutcome && (
           <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
-            <Text style={styles.resetButtonText}>🔄 Replay This Event</Text>
+            <Text style={styles.resetButtonText}><Ionicons name="refresh" size={16} color="#39ff14" /> Replay This Event</Text>
           </TouchableOpacity>
         )}
 
@@ -474,7 +475,7 @@ const EventReplayScreen: React.FC = () => {
                   style={styles.relatedCard}
                   onPress={() => navigateToCaseStudy(cs)}
                 >
-                  <Text style={styles.relatedTicker}>{cs.ticker || '📊'}</Text>
+                  <Text style={styles.relatedTicker}>{cs.ticker || 'MACRO'}</Text>
                   <Text style={styles.relatedName} numberOfLines={2}>
                     {cs.eventName}
                   </Text>

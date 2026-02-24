@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlassCard, GradientText, GlowButton } from '../../components/ui';
 
@@ -85,7 +86,7 @@ const PrivacySettingsScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <GradientText style={styles.headerTitle}>Privacy & Data</GradientText>
         <View style={styles.headerSpacer} />
@@ -101,7 +102,7 @@ const PrivacySettingsScreen: React.FC = () => {
         <GlassCard style={styles.settingsCard} noPadding>
           <View style={[styles.settingRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>📊</Text>
+              <Ionicons name="bar-chart-outline" size={24} color={colors.neon.cyan} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Analytics</Text>
                 <Text style={styles.settingDescription}>
@@ -120,7 +121,7 @@ const PrivacySettingsScreen: React.FC = () => {
 
           <View style={[styles.settingRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🐛</Text>
+              <Ionicons name="bug-outline" size={24} color={colors.neon.yellow} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Crash Reports</Text>
                 <Text style={styles.settingDescription}>
@@ -139,7 +140,7 @@ const PrivacySettingsScreen: React.FC = () => {
 
           <View style={styles.settingRow}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🎯</Text>
+              <Ionicons name="compass-outline" size={24} color={colors.neon.purple} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Personalized Content</Text>
                 <Text style={styles.settingDescription}>
@@ -162,7 +163,7 @@ const PrivacySettingsScreen: React.FC = () => {
         <GlassCard style={styles.settingsCard} noPadding>
           <View style={[styles.settingRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>📈</Text>
+              <Ionicons name="trending-up-outline" size={24} color={colors.neon.green} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Share Progress</Text>
                 <Text style={styles.settingDescription}>
@@ -181,7 +182,7 @@ const PrivacySettingsScreen: React.FC = () => {
 
           <View style={[styles.settingRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🏆</Text>
+              <Ionicons name="trophy-outline" size={24} color={colors.neon.yellow} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Show on Leaderboard</Text>
                 <Text style={styles.settingDescription}>
@@ -200,7 +201,7 @@ const PrivacySettingsScreen: React.FC = () => {
 
           <View style={styles.settingRow}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🦁</Text>
+              <Ionicons name="people-outline" size={24} color={colors.neon.orange} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Tribe Visibility</Text>
                 <Text style={styles.settingDescription}>
@@ -223,7 +224,7 @@ const PrivacySettingsScreen: React.FC = () => {
         <GlassCard style={styles.settingsCard} noPadding>
           <TouchableOpacity style={[styles.actionRow, styles.settingRowBorder]} onPress={handleClearCache}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🗑️</Text>
+              <Ionicons name="trash-outline" size={24} color={colors.text.secondary} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Clear Cache</Text>
                 <Text style={styles.settingDescription}>
@@ -231,12 +232,12 @@ const PrivacySettingsScreen: React.FC = () => {
                 </Text>
               </View>
             </View>
-            <Text style={styles.actionChevron}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.muted} />
           </TouchableOpacity>
 
           <TouchableOpacity style={[styles.actionRow, styles.settingRowBorder]} onPress={handleExportData}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>📥</Text>
+              <Ionicons name="download-outline" size={24} color={colors.neon.cyan} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Export My Data</Text>
                 <Text style={styles.settingDescription}>
@@ -244,12 +245,12 @@ const PrivacySettingsScreen: React.FC = () => {
                 </Text>
               </View>
             </View>
-            <Text style={styles.actionChevron}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.muted} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.actionRow} onPress={handleDeleteAccount}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>⚠️</Text>
+              <Ionicons name="warning-outline" size={24} color={colors.error} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={[styles.settingTitle, styles.dangerText]}>Delete Account</Text>
                 <Text style={styles.settingDescription}>
@@ -257,7 +258,7 @@ const PrivacySettingsScreen: React.FC = () => {
                 </Text>
               </View>
             </View>
-            <Text style={[styles.actionChevron, styles.dangerText]}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.error} />
           </TouchableOpacity>
         </GlassCard>
 
@@ -266,38 +267,38 @@ const PrivacySettingsScreen: React.FC = () => {
         <GlassCard style={styles.settingsCard} noPadding>
           <TouchableOpacity style={[styles.actionRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>📜</Text>
+              <Ionicons name="document-text-outline" size={24} color={colors.text.secondary} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Privacy Policy</Text>
               </View>
             </View>
-            <Text style={styles.actionChevron}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.muted} />
           </TouchableOpacity>
 
           <TouchableOpacity style={[styles.actionRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>📋</Text>
+              <Ionicons name="clipboard-outline" size={24} color={colors.text.secondary} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Terms of Service</Text>
               </View>
             </View>
-            <Text style={styles.actionChevron}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.muted} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.actionRow}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🍪</Text>
+              <Ionicons name="shield-checkmark-outline" size={24} color={colors.text.secondary} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Cookie Policy</Text>
               </View>
             </View>
-            <Text style={styles.actionChevron}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.muted} />
           </TouchableOpacity>
         </GlassCard>
 
         {/* Info Note */}
         <View style={styles.infoNote}>
-          <Text style={styles.infoIcon}>🔒</Text>
+          <Ionicons name="lock-closed" size={16} color={colors.neon.green} style={{ marginRight: spacing.sm }} />
           <Text style={styles.infoText}>
             Your data is encrypted and stored securely. We never sell your personal information to third parties.
           </Text>
@@ -324,10 +325,6 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 24,
-    color: colors.text.primary,
   },
   headerTitle: {
     ...typography.styles.h4,
@@ -366,8 +363,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  settingEmoji: {
-    fontSize: 24,
+  settingIcon: {
     marginRight: spacing.md,
   },
   settingText: {
@@ -389,10 +385,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: spacing.md,
   },
-  actionChevron: {
-    fontSize: 18,
-    color: colors.text.muted,
-  },
   dangerText: {
     color: colors.error,
   },
@@ -405,10 +397,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.neon.green,
     marginTop: spacing.lg,
-  },
-  infoIcon: {
-    fontSize: 16,
-    marginRight: spacing.sm,
   },
   infoText: {
     ...typography.styles.caption,

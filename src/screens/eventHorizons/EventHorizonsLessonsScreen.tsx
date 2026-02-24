@@ -13,7 +13,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 import { EventHorizonsStackParamList } from '../../navigation/types';
 import { EVENT_HORIZONS_LESSONS, EventHorizonsLesson } from '../../data/eventHorizonsLessons';
 import { useProgress } from '../../hooks/useProgress';
@@ -25,13 +27,13 @@ type NavigationProp = NativeStackNavigationProp<EventHorizonsStackParamList>;
 const getMentorInfo = (mentor: string) => {
   switch (mentor) {
     case 'chameleon':
-      return { emoji: '🦎', name: 'Chameleon', color: '#8b5cf6' };
+      return { animal: 'chameleon', name: 'Chameleon', color: '#8b5cf6' };
     case 'cheetah':
-      return { emoji: '🐆', name: 'Cheetah', color: '#f59e0b' };
+      return { animal: 'cheetah', name: 'Cheetah', color: '#f59e0b' };
     case 'owl':
-      return { emoji: '🦉', name: 'Owl', color: '#3b82f6' };
+      return { animal: 'owl', name: 'Owl', color: '#3b82f6' };
     default:
-      return { emoji: '🦎', name: 'Chameleon', color: '#8b5cf6' };
+      return { animal: 'chameleon', name: 'Chameleon', color: '#8b5cf6' };
   }
 };
 
@@ -56,17 +58,17 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson, isCompleted, onPress })
         </View>
         <View style={styles.lessonMeta}>
           <View style={[styles.mentorBadge, { backgroundColor: `${mentor.color}20` }]}>
-            <Text style={styles.mentorEmoji}>{mentor.emoji}</Text>
+            <InlineIcon name={mentor.animal} size={12} />
             <Text style={[styles.mentorName, { color: mentor.color }]}>{mentor.name}</Text>
           </View>
           <View style={styles.timeBadge}>
-            <Text style={styles.timeIcon}>⏱️</Text>
+            <Ionicons name="time-outline" size={10} color={colors.text.tertiary} />
             <Text style={styles.timeText}>{lesson.estimatedMinutes} min</Text>
           </View>
         </View>
         {isCompleted && (
           <View style={styles.completedBadge}>
-            <Text style={styles.completedIcon}>✓</Text>
+            <Ionicons name="checkmark" size={14} color={colors.text.primary} />
           </View>
         )}
       </View>
@@ -95,19 +97,19 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson, isCompleted, onPress })
         <View style={styles.featureBadges}>
           {lesson.hasQuiz && (
             <View style={styles.featureBadge}>
-              <Text style={styles.featureIcon}>📝</Text>
+              <Ionicons name="document-text-outline" size={10} color={colors.text.muted} />
               <Text style={styles.featureText}>Quiz</Text>
             </View>
           )}
           {lesson.hasSimulation && (
             <View style={styles.featureBadge}>
-              <Text style={styles.featureIcon}>🎮</Text>
+              <Ionicons name="game-controller-outline" size={10} color={colors.text.muted} />
               <Text style={styles.featureText}>Sim</Text>
             </View>
           )}
           {lesson.hasTool && (
             <View style={styles.featureBadge}>
-              <Text style={styles.featureIcon}>🔧</Text>
+              <Ionicons name="build-outline" size={10} color={colors.text.muted} />
               <Text style={styles.featureText}>Tool</Text>
             </View>
           )}
@@ -166,7 +168,7 @@ const EventHorizonsLessonsScreen: React.FC = () => {
           style={styles.progressCard}
         >
           <View style={styles.progressHeader}>
-            <Text style={styles.chameleonLarge}>🦎</Text>
+            <InlineIcon name="chameleon" size={40} />
             <View style={styles.progressTextContainer}>
               <Text style={styles.progressTitle}>Your Progress</Text>
               <Text style={styles.progressSubtitle}>

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlassCard, GradientText } from '../../components/ui';
 
@@ -23,7 +24,8 @@ interface NotificationSetting {
 interface NotificationCategory {
   id: string;
   title: string;
-  emoji: string;
+  icon: string;
+  iconColor: string;
   settings: NotificationSetting[];
 }
 
@@ -34,7 +36,8 @@ const NotificationSettingsScreen: React.FC = () => {
     {
       id: 'learning',
       title: 'Learning & Progress',
-      emoji: '📚',
+      icon: 'book-outline',
+      iconColor: colors.neon.green,
       settings: [
         { id: 'daily-reminder', title: 'Daily Learning Reminder', description: 'Get reminded to practice each day', enabled: true },
         { id: 'streak-alert', title: 'Streak Alert', description: 'Warning when streak is about to break', enabled: true },
@@ -45,7 +48,8 @@ const NotificationSettingsScreen: React.FC = () => {
     {
       id: 'market',
       title: 'Market & Trading',
-      emoji: '📈',
+      icon: 'trending-up-outline',
+      iconColor: colors.neon.cyan,
       settings: [
         { id: 'market-open', title: 'Market Open/Close', description: 'Alerts for market hours', enabled: false },
         { id: 'earnings', title: 'Earnings Alerts', description: 'Upcoming earnings for watchlist', enabled: true },
@@ -56,7 +60,8 @@ const NotificationSettingsScreen: React.FC = () => {
     {
       id: 'social',
       title: 'Social & Community',
-      emoji: '🦁',
+      icon: 'people-outline',
+      iconColor: colors.neon.yellow,
       settings: [
         { id: 'tribe-activity', title: 'Tribe Activity', description: 'Updates from your jungle tribe', enabled: true },
         { id: 'leaderboard', title: 'Leaderboard Changes', description: 'When your rank changes', enabled: false },
@@ -66,7 +71,8 @@ const NotificationSettingsScreen: React.FC = () => {
     {
       id: 'account',
       title: 'Account & Updates',
-      emoji: '⚙️',
+      icon: 'settings-outline',
+      iconColor: colors.text.secondary,
       settings: [
         { id: 'app-updates', title: 'App Updates', description: 'New features and improvements', enabled: true },
         { id: 'subscription', title: 'Subscription', description: 'Billing and renewal reminders', enabled: true },
@@ -118,7 +124,7 @@ const NotificationSettingsScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <GradientText style={styles.headerTitle}>Notifications</GradientText>
         <View style={styles.headerSpacer} />
@@ -164,7 +170,7 @@ const NotificationSettingsScreen: React.FC = () => {
             <GlassCard style={styles.quietHoursCard}>
               <View style={styles.settingRow}>
                 <View style={styles.settingInfo}>
-                  <Text style={styles.settingEmoji}>🌙</Text>
+                  <Ionicons name="moon-outline" size={24} color={colors.neon.cyan} style={styles.settingIcon} />
                   <View style={styles.settingText}>
                     <Text style={styles.settingTitle}>Quiet Hours</Text>
                     <Text style={styles.settingDescription}>No notifications 10pm - 8am</Text>
@@ -184,7 +190,7 @@ const NotificationSettingsScreen: React.FC = () => {
             {categories.map((category) => (
               <View key={category.id} style={styles.categorySection}>
                 <View style={styles.categoryHeader}>
-                  <Text style={styles.categoryEmoji}>{category.emoji}</Text>
+                  <Ionicons name={category.icon as any} size={20} color={category.iconColor} style={{ marginRight: spacing.sm }} />
                   <Text style={styles.categoryTitle}>{category.title}</Text>
                 </View>
 
@@ -219,7 +225,7 @@ const NotificationSettingsScreen: React.FC = () => {
 
             {/* Info Note */}
             <View style={styles.infoNote}>
-              <Text style={styles.infoIcon}>💡</Text>
+              <Ionicons name="bulb-outline" size={16} color={colors.neon.cyan} style={{ marginRight: spacing.sm }} />
               <Text style={styles.infoText}>
                 You can also manage notifications in your device settings.
               </Text>
@@ -248,10 +254,6 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 24,
-    color: colors.text.primary,
   },
   headerTitle: {
     ...typography.styles.h4,
@@ -316,10 +318,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: spacing.sm,
   },
-  categoryEmoji: {
-    fontSize: 20,
-    marginRight: spacing.sm,
-  },
   categoryTitle: {
     ...typography.styles.label,
     color: colors.text.primary,
@@ -344,8 +342,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  settingEmoji: {
-    fontSize: 24,
+  settingIcon: {
     marginRight: spacing.md,
   },
   settingText: {
@@ -369,10 +366,6 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.md,
     borderWidth: 1,
     borderColor: colors.neon.cyan,
-  },
-  infoIcon: {
-    fontSize: 16,
-    marginRight: spacing.sm,
   },
   infoText: {
     ...typography.styles.caption,

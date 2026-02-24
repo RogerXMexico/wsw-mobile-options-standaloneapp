@@ -11,12 +11,13 @@ import {
   ScrollView,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 
 interface Goal {
   id: string;
-  emoji: string;
+  icon: string;
   title: string;
   description: string;
   color: string;
@@ -25,42 +26,42 @@ interface Goal {
 const GOALS: Goal[] = [
   {
     id: 'income',
-    emoji: '💰',
+    icon: 'cash-outline',
     title: 'Generate Income',
     description: 'Earn consistent returns by selling premium',
     color: colors.neon.green,
   },
   {
     id: 'hedge',
-    emoji: '🛡️',
+    icon: 'shield-checkmark-outline',
     title: 'Protect My Portfolio',
     description: 'Learn to hedge positions and manage risk',
     color: colors.neon.cyan,
   },
   {
     id: 'speculate',
-    emoji: '🚀',
+    icon: 'rocket-outline',
     title: 'Speculative Gains',
     description: 'Capture big moves with directional plays',
     color: colors.neon.purple,
   },
   {
     id: 'understand',
-    emoji: '🧠',
+    icon: 'bulb-outline',
     title: 'Understand Options',
     description: 'Build a solid foundation of knowledge',
     color: colors.neon.yellow,
   },
   {
     id: 'advanced',
-    emoji: '⚡',
+    icon: 'flash-outline',
     title: 'Master Advanced Strategies',
     description: 'Level up with complex multi-leg trades',
     color: colors.neon.orange,
   },
   {
     id: 'events',
-    emoji: '📅',
+    icon: 'calendar-outline',
     title: 'Trade Market Events',
     description: 'Profit from earnings and economic releases',
     color: colors.neon.pink,
@@ -131,7 +132,10 @@ const GoalSettingScreen: React.FC<Props> = ({ onNext, onBack }) => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={onBack} style={styles.backButton}>
-          <Text style={styles.backText}>← Back</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+            <Ionicons name="arrow-back" size={18} color={colors.text.secondary} />
+            <Text style={styles.backText}>Back</Text>
+          </View>
         </TouchableOpacity>
       </View>
 
@@ -178,7 +182,7 @@ const GoalSettingScreen: React.FC<Props> = ({ onNext, onBack }) => {
                       { backgroundColor: `${goal.color}20` },
                     ]}
                   >
-                    <Text style={styles.goalEmoji}>{goal.emoji}</Text>
+                    <Ionicons name={goal.icon as any} size={24} color={goal.color} />
                   </View>
                   <Text style={[styles.goalTitle, isSelected && { color: goal.color }]}>
                     {goal.title}
@@ -186,7 +190,7 @@ const GoalSettingScreen: React.FC<Props> = ({ onNext, onBack }) => {
                   <Text style={styles.goalDescription}>{goal.description}</Text>
                   {isSelected && (
                     <View style={[styles.selectedBadge, { backgroundColor: goal.color }]}>
-                      <Text style={styles.selectedBadgeText}>✓</Text>
+                      <Ionicons name="checkmark" size={14} color={colors.background.primary} />
                     </View>
                   )}
                 </TouchableOpacity>
@@ -225,7 +229,7 @@ const GoalSettingScreen: React.FC<Props> = ({ onNext, onBack }) => {
                     <Text style={styles.timeDescription}>{time.description}</Text>
                     {isSelected && (
                       <View style={styles.timeCheckmark}>
-                        <Text style={styles.timeCheckmarkText}>✓</Text>
+                        <Ionicons name="checkmark" size={14} color={colors.background.primary} />
                       </View>
                     )}
                   </TouchableOpacity>
@@ -255,7 +259,7 @@ const GoalSettingScreen: React.FC<Props> = ({ onNext, onBack }) => {
           <Text style={styles.continueButtonText}>
             {canContinue ? 'Find Your Spirit Animal' : 'Select Goals & Time'}
           </Text>
-          {canContinue && <Text style={styles.continueArrow}>→</Text>}
+          {canContinue && <Ionicons name="arrow-forward" size={20} color={colors.background.primary} />}
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -331,9 +335,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: spacing.sm,
   },
-  goalEmoji: {
-    fontSize: 24,
-  },
   goalTitle: {
     ...typography.styles.label,
     color: colors.text.primary,
@@ -353,11 +354,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  selectedBadgeText: {
-    color: colors.background.primary,
-    fontSize: 14,
-    fontWeight: 'bold',
   },
   timeSection: {
     marginTop: spacing.xl,
@@ -410,11 +406,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  timeCheckmarkText: {
-    color: colors.background.primary,
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
   bottomSection: {
     paddingHorizontal: spacing.xl,
     paddingBottom: spacing.xl,
@@ -445,11 +436,6 @@ const styles = StyleSheet.create({
   continueButtonText: {
     ...typography.styles.button,
     color: colors.background.primary,
-  },
-  continueArrow: {
-    fontSize: 20,
-    color: colors.background.primary,
-    fontWeight: '600',
   },
 });
 

@@ -12,7 +12,9 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 
 const { width } = Dimensions.get('window');
 
@@ -41,7 +43,7 @@ const BADGES: Badge[] = [
     id: 'first-scan',
     name: 'First Scan',
     description: 'Use the Prediction Scanner for the first time',
-    icon: '📡',
+    icon: 'radio-outline',
     rarity: 'common',
     earned: true,
     earnedDate: '2025-01-15',
@@ -50,7 +52,7 @@ const BADGES: Badge[] = [
     id: 'gap-hunter',
     name: 'Gap Hunter',
     description: 'Identify 5 events with gap scores > 20',
-    icon: '🎯',
+    icon: 'locate-outline',
     rarity: 'rare',
     earned: true,
     earnedDate: '2025-01-18',
@@ -59,7 +61,7 @@ const BADGES: Badge[] = [
     id: 'paper-profit',
     name: 'Paper Profit',
     description: 'Make your first profitable paper trade',
-    icon: '💰',
+    icon: 'cash-outline',
     rarity: 'common',
     earned: true,
     earnedDate: '2025-01-16',
@@ -68,7 +70,7 @@ const BADGES: Badge[] = [
     id: 'lesson-master',
     name: 'Lesson Master',
     description: 'Complete all 10 Event Horizons lessons',
-    icon: '📚',
+    icon: 'book-outline',
     rarity: 'epic',
     earned: false,
   },
@@ -76,7 +78,7 @@ const BADGES: Badge[] = [
     id: 'chameleon-student',
     name: "Chameleon's Student",
     description: 'Score 100% on any lesson quiz',
-    icon: '🦎',
+    icon: 'chameleon',
     rarity: 'rare',
     earned: false,
   },
@@ -84,7 +86,7 @@ const BADGES: Badge[] = [
     id: 'event-oracle',
     name: 'Event Oracle',
     description: 'Correctly predict 10 event outcomes',
-    icon: '🔮',
+    icon: 'eye-outline',
     rarity: 'epic',
     earned: false,
   },
@@ -92,7 +94,7 @@ const BADGES: Badge[] = [
     id: 'iv-crusher',
     name: 'IV Crusher',
     description: 'Profit from 5 IV crush trades',
-    icon: '💥',
+    icon: 'flash-outline',
     rarity: 'rare',
     earned: false,
   },
@@ -100,7 +102,7 @@ const BADGES: Badge[] = [
     id: 'prediction-king',
     name: 'Prediction King',
     description: 'Achieve 80%+ win rate with 20+ trades',
-    icon: '👑',
+    icon: 'ribbon-outline',
     rarity: 'legendary',
     earned: false,
   },
@@ -184,7 +186,7 @@ const EventHorizonsProgressScreen: React.FC = () => {
         >
           <View style={styles.summaryStats}>
             <View style={styles.summaryStat}>
-              <Text style={styles.summaryIcon}>🏆</Text>
+              <Ionicons name="trophy-outline" size={28} color="#f59e0b" style={{ marginBottom: spacing.xs }} />
               <Text style={styles.summaryValue}>
                 {earnedBadges.length}/{totalBadges}
               </Text>
@@ -192,7 +194,7 @@ const EventHorizonsProgressScreen: React.FC = () => {
             </View>
             <View style={styles.summaryDivider} />
             <View style={styles.summaryStat}>
-              <Text style={styles.summaryIcon}>🎯</Text>
+              <Ionicons name="locate-outline" size={28} color="#8b5cf6" style={{ marginBottom: spacing.xs }} />
               <Text style={styles.summaryValue}>
                 {completedMissions}/{totalMissions}
               </Text>
@@ -200,7 +202,7 @@ const EventHorizonsProgressScreen: React.FC = () => {
             </View>
             <View style={styles.summaryDivider} />
             <View style={styles.summaryStat}>
-              <Text style={styles.summaryIcon}>📖</Text>
+              <Ionicons name="book-outline" size={28} color="#14b8a6" style={{ marginBottom: spacing.xs }} />
               <Text style={styles.summaryValue}>3/10</Text>
               <Text style={styles.summaryLabel}>Lessons</Text>
             </View>
@@ -260,9 +262,11 @@ const EventHorizonsProgressScreen: React.FC = () => {
                     },
                   ]}
                 >
-                  <Text style={[styles.badgeIcon, !badge.earned && styles.badgeIconLocked]}>
-                    {badge.icon}
-                  </Text>
+                  <InlineIcon
+                    name={badge.icon}
+                    size={20}
+                    color={badge.earned ? getRarityColor(badge.rarity) : '#64748b'}
+                  />
                 </View>
                 <Text
                   style={[styles.badgeName, !badge.earned && styles.badgeNameLocked]}
@@ -287,7 +291,7 @@ const EventHorizonsProgressScreen: React.FC = () => {
                 </View>
                 {badge.earned && (
                   <View style={styles.earnedCheck}>
-                    <Text style={styles.earnedCheckText}>✓</Text>
+                    <Ionicons name="checkmark" size={10} color={colors.text.primary} />
                   </View>
                 )}
               </View>
@@ -304,7 +308,7 @@ const EventHorizonsProgressScreen: React.FC = () => {
                 <View key={mission.id} style={[styles.missionCard, styles.missionCardCompleted]}>
                   <View style={styles.missionHeader}>
                     <View style={styles.completedRow}>
-                      <Text style={styles.completedCheck}>✓</Text>
+                      <Ionicons name="checkmark" size={14} color={colors.bullish} />
                       <Text style={[styles.missionTitle, styles.missionTitleCompleted]}>
                         {mission.title}
                       </Text>

@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { LearnStackParamList } from '../../navigation/types';
 import { getQuizByTier, QuizQuestion } from '../../data/quizData';
@@ -147,7 +148,7 @@ const QuizScreen: React.FC = () => {
           onPress={() => navigation.goBack()}
           style={styles.closeButton}
         >
-          <Text style={styles.closeButtonText}>✕</Text>
+          <Ionicons name="close" size={18} color={colors.text.secondary} />
         </TouchableOpacity>
         <View style={styles.headerCenter}>
           <Text style={styles.tierName}>{quizTier?.tierName || 'Quiz'}</Text>
@@ -195,10 +196,10 @@ const QuizScreen: React.FC = () => {
               </View>
               <Text style={getAnswerTextStyle(index)}>{option}</Text>
               {selectedAnswer !== null && index === currentQuestion.correctAnswer && (
-                <Text style={styles.checkmark}>✓</Text>
+                <Ionicons name="checkmark-circle" size={20} color={colors.success} style={{ marginLeft: spacing.sm }} />
               )}
               {selectedAnswer === index && index !== currentQuestion.correctAnswer && (
-                <Text style={styles.crossmark}>✗</Text>
+                <Ionicons name="close-circle" size={20} color={colors.error} style={{ marginLeft: spacing.sm }} />
               )}
             </TouchableOpacity>
           ))}
@@ -208,9 +209,12 @@ const QuizScreen: React.FC = () => {
         {showExplanation && (
           <View style={styles.explanationContainer}>
             <View style={styles.explanationHeader}>
-              <Text style={styles.explanationEmoji}>
-                {selectedAnswer === currentQuestion.correctAnswer ? '🎉' : '💡'}
-              </Text>
+              <Ionicons
+                name={selectedAnswer === currentQuestion.correctAnswer ? 'sparkles' : 'bulb-outline'}
+                size={24}
+                color={selectedAnswer === currentQuestion.correctAnswer ? colors.neon.yellow : colors.neon.cyan}
+                style={{ marginRight: spacing.sm }}
+              />
               <Text style={styles.explanationTitle}>
                 {selectedAnswer === currentQuestion.correctAnswer
                   ? 'Correct!'
@@ -234,7 +238,7 @@ const QuizScreen: React.FC = () => {
             <Text style={styles.nextButtonText}>
               {isLastQuestion ? 'See Results' : 'Next Question'}
             </Text>
-            <Text style={styles.nextButtonIcon}>→</Text>
+            <Ionicons name="arrow-forward" size={18} color={colors.background.primary} />
           </TouchableOpacity>
         </View>
       )}
@@ -261,10 +265,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background.secondary,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  closeButtonText: {
-    fontSize: 18,
-    color: colors.text.secondary,
   },
   headerCenter: {
     alignItems: 'center',
@@ -375,16 +375,6 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     flex: 1,
   },
-  checkmark: {
-    fontSize: 20,
-    color: colors.success,
-    marginLeft: spacing.sm,
-  },
-  crossmark: {
-    fontSize: 20,
-    color: colors.error,
-    marginLeft: spacing.sm,
-  },
   explanationContainer: {
     marginTop: spacing.xl,
     backgroundColor: colors.background.secondary,
@@ -397,10 +387,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: spacing.sm,
-  },
-  explanationEmoji: {
-    fontSize: 24,
-    marginRight: spacing.sm,
   },
   explanationTitle: {
     ...typography.styles.label,
@@ -428,11 +414,6 @@ const styles = StyleSheet.create({
   nextButtonText: {
     ...typography.styles.button,
     color: colors.background.primary,
-  },
-  nextButtonIcon: {
-    fontSize: 18,
-    color: colors.background.primary,
-    fontWeight: typography.weights.bold,
   },
   errorContainer: {
     flex: 1,

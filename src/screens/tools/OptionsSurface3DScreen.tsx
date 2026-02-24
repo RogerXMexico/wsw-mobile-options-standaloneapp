@@ -104,7 +104,7 @@ const OptionsSurface3DScreen: React.FC = () => {
       <SafeAreaView style={styles.container} edges={['top']}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Text style={styles.backIcon}>←</Text>
+            <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
           </TouchableOpacity>
           <GradientText style={styles.headerTitle}>IV Surface</GradientText>
           <View style={styles.headerSpacer} />
@@ -127,7 +127,7 @@ const OptionsSurface3DScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <GradientText style={styles.headerTitle}>IV Surface</GradientText>
         <View style={styles.headerSpacer} />
@@ -161,16 +161,16 @@ const OptionsSurface3DScreen: React.FC = () => {
         {/* View Mode Toggle */}
         <View style={styles.viewToggle}>
           {([
-            { id: 'surface', label: '3D Surface', icon: '📊' },
-            { id: 'skew', label: 'Vol Skew', icon: '📈' },
-            { id: 'term', label: 'Term Structure', icon: '📉' },
+            { id: 'surface', label: '3D Surface', icon: 'grid-outline' },
+            { id: 'skew', label: 'Vol Skew', icon: 'bar-chart-outline' },
+            { id: 'term', label: 'Term Structure', icon: 'trending-down-outline' },
           ] as { id: ViewMode; label: string; icon: string }[]).map((mode) => (
             <TouchableOpacity
               key={mode.id}
               style={[styles.viewButton, viewMode === mode.id && styles.viewButtonActive]}
               onPress={() => setViewMode(mode.id)}
             >
-              <Text style={styles.viewIcon}>{mode.icon}</Text>
+              <Ionicons name={mode.icon as any} size={20} color={viewMode === mode.id ? colors.neon.green : colors.text.muted} style={{ marginBottom: spacing.xs }} />
               <Text style={[styles.viewLabel, viewMode === mode.id && styles.viewLabelActive]}>
                 {mode.label}
               </Text>
@@ -346,7 +346,7 @@ const OptionsSurface3DScreen: React.FC = () => {
         <GlassCard style={styles.infoCard}>
           <Text style={styles.infoTitle}>Understanding IV Surface</Text>
           <View style={styles.infoItem}>
-            <Text style={styles.infoEmoji}>📊</Text>
+            <Ionicons name="grid-outline" size={24} color={colors.neon.green} style={styles.infoIcon} />
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Volatility Smile</Text>
               <Text style={styles.infoText}>
@@ -355,7 +355,7 @@ const OptionsSurface3DScreen: React.FC = () => {
             </View>
           </View>
           <View style={styles.infoItem}>
-            <Text style={styles.infoEmoji}>📈</Text>
+            <Ionicons name="bar-chart-outline" size={24} color={colors.neon.cyan} style={styles.infoIcon} />
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Put Skew</Text>
               <Text style={styles.infoText}>
@@ -364,7 +364,7 @@ const OptionsSurface3DScreen: React.FC = () => {
             </View>
           </View>
           <View style={styles.infoItem}>
-            <Text style={styles.infoEmoji}>📉</Text>
+            <Ionicons name="trending-down-outline" size={24} color={colors.neon.yellow} style={styles.infoIcon} />
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Term Structure</Text>
               <Text style={styles.infoText}>
@@ -395,10 +395,6 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 24,
-    color: colors.text.primary,
   },
   headerTitle: {
     ...typography.styles.h4,
@@ -455,10 +451,6 @@ const styles = StyleSheet.create({
   viewButtonActive: {
     backgroundColor: colors.overlay.neonGreen,
     borderColor: colors.neon.green,
-  },
-  viewIcon: {
-    fontSize: 20,
-    marginBottom: spacing.xs,
   },
   viewLabel: {
     ...typography.styles.caption,
@@ -676,8 +668,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: spacing.md,
   },
-  infoEmoji: {
-    fontSize: 24,
+  infoIcon: {
     marginRight: spacing.md,
   },
   infoContent: {

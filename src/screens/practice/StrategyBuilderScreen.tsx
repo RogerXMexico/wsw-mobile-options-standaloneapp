@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 
 interface OptionLeg {
@@ -35,28 +36,28 @@ const STRATEGY_TEMPLATES: StrategyTemplate[] = [
     id: 'long-call',
     name: 'Long Call',
     description: 'Bullish bet with limited risk',
-    emoji: '📈',
+    emoji: 'trending-up',
     legs: [{ type: 'call', action: 'buy', quantity: 1 }],
   },
   {
     id: 'long-put',
     name: 'Long Put',
     description: 'Bearish bet with limited risk',
-    emoji: '📉',
+    emoji: 'trending-down',
     legs: [{ type: 'put', action: 'buy', quantity: 1 }],
   },
   {
     id: 'covered-call',
     name: 'Covered Call',
     description: 'Generate income on shares',
-    emoji: '🛡️',
+    emoji: 'shield-checkmark',
     legs: [{ type: 'call', action: 'sell', quantity: 1 }],
   },
   {
     id: 'bull-call-spread',
     name: 'Bull Call Spread',
     description: 'Limited risk bullish play',
-    emoji: '🐂',
+    emoji: 'arrow-up-circle',
     legs: [
       { type: 'call', action: 'buy', quantity: 1 },
       { type: 'call', action: 'sell', quantity: 1 },
@@ -66,7 +67,7 @@ const STRATEGY_TEMPLATES: StrategyTemplate[] = [
     id: 'bear-put-spread',
     name: 'Bear Put Spread',
     description: 'Limited risk bearish play',
-    emoji: '🐻',
+    emoji: 'arrow-down-circle',
     legs: [
       { type: 'put', action: 'buy', quantity: 1 },
       { type: 'put', action: 'sell', quantity: 1 },
@@ -76,7 +77,7 @@ const STRATEGY_TEMPLATES: StrategyTemplate[] = [
     id: 'iron-condor',
     name: 'Iron Condor',
     description: 'Profit from low volatility',
-    emoji: '🦅',
+    emoji: 'git-merge-outline',
     legs: [
       { type: 'put', action: 'buy', quantity: 1 },
       { type: 'put', action: 'sell', quantity: 1 },
@@ -88,7 +89,7 @@ const STRATEGY_TEMPLATES: StrategyTemplate[] = [
     id: 'straddle',
     name: 'Long Straddle',
     description: 'Profit from big moves',
-    emoji: '🎯',
+    emoji: 'compass',
     legs: [
       { type: 'call', action: 'buy', quantity: 1 },
       { type: 'put', action: 'buy', quantity: 1 },
@@ -98,7 +99,7 @@ const STRATEGY_TEMPLATES: StrategyTemplate[] = [
     id: 'strangle',
     name: 'Long Strangle',
     description: 'Cheaper volatility play',
-    emoji: '🔀',
+    emoji: 'swap-horizontal',
     legs: [
       { type: 'call', action: 'buy', quantity: 1 },
       { type: 'put', action: 'buy', quantity: 1 },
@@ -269,7 +270,7 @@ const StrategyBuilderScreen: React.FC = () => {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backButtonText}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>Strategy Builder</Text>
@@ -314,7 +315,7 @@ const StrategyBuilderScreen: React.FC = () => {
                   style={styles.templateCard}
                   onPress={() => applyTemplate(template)}
                 >
-                  <Text style={styles.templateEmoji}>{template.emoji}</Text>
+                  <Ionicons name={template.emoji as keyof typeof Ionicons.glyphMap} size={28} color={colors.neon.green} />
                   <Text style={styles.templateName}>{template.name}</Text>
                   <Text style={styles.templateDescription}>{template.description}</Text>
                 </TouchableOpacity>
@@ -451,7 +452,10 @@ const StrategyBuilderScreen: React.FC = () => {
 
         {/* Tips */}
         <View style={styles.tipsCard}>
-          <Text style={styles.tipsTitle}>💡 Strategy Tips</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+            <Ionicons name="bulb-outline" size={20} color={colors.neon.yellow} />
+            <Text style={styles.tipsTitle}>Strategy Tips</Text>
+          </View>
           <Text style={styles.tipsText}>
             • Start with defined-risk strategies like spreads{'\n'}
             • Match strategy to your market outlook{'\n'}
@@ -624,10 +628,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backButtonText: {
-    fontSize: 24,
-    color: colors.text.primary,
-  },
   headerContent: {
     flex: 1,
   },
@@ -712,10 +712,6 @@ const styles = StyleSheet.create({
     padding: spacing.md,
     borderWidth: 1,
     borderColor: colors.border.default,
-  },
-  templateEmoji: {
-    fontSize: 28,
-    marginBottom: spacing.sm,
   },
   templateName: {
     ...typography.styles.label,

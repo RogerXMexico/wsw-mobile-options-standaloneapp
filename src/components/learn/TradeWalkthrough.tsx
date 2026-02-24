@@ -11,6 +11,7 @@ import {
   Animated,
   Dimensions,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { TradePath, TradeDay } from '../../data/types';
 import { colors, typography, spacing, borderRadius, createNeonGlow } from '../../theme';
 
@@ -39,19 +40,19 @@ const getOutcomeColor = (outcome: 'win' | 'loss' | 'breakeven'): string => {
 };
 
 // Get icon for path based on name/description
-const getPathIcon = (pathId: string): string => {
-  const iconMap: Record<string, string> = {
-    'rocket': '🚀',
-    'win': '🚀',
-    'rally': '📈',
-    'slow-grind': '🐌',
-    'grind': '🐌',
-    'dead-money': '💀',
-    'sideways': '➡️',
-    'crash': '💥',
-    'drop': '📉',
-    'loss': '📉',
-    'breakeven': '⚖️',
+const getPathIcon = (pathId: string): keyof typeof Ionicons.glyphMap => {
+  const iconMap: Record<string, keyof typeof Ionicons.glyphMap> = {
+    'rocket': 'rocket-outline',
+    'win': 'rocket-outline',
+    'rally': 'trending-up-outline',
+    'slow-grind': 'hourglass-outline',
+    'grind': 'hourglass-outline',
+    'dead-money': 'skull-outline',
+    'sideways': 'arrow-forward-outline',
+    'crash': 'flash-outline',
+    'drop': 'trending-down-outline',
+    'loss': 'trending-down-outline',
+    'breakeven': 'scale-outline',
   };
 
   // Try to match path ID
@@ -60,7 +61,7 @@ const getPathIcon = (pathId: string): string => {
       return icon;
     }
   }
-  return '📊';
+  return 'bar-chart-outline';
 };
 
 // Format P&L with color
@@ -172,7 +173,7 @@ export const TradeWalkthrough: React.FC<TradeWalkthroughProps> = ({
               onPress={() => handlePathSelect(index)}
               activeOpacity={0.7}
             >
-              <Text style={styles.pathIcon}>{getPathIcon(path.id)}</Text>
+              <Ionicons name={getPathIcon(path.id)} size={20} color={isSelected ? outcomeColor : colors.text.secondary} />
               <Text
                 style={[
                   styles.pathName,
@@ -196,7 +197,7 @@ export const TradeWalkthrough: React.FC<TradeWalkthroughProps> = ({
       {/* Selected Path Info */}
       <View style={styles.pathInfo}>
         <View style={styles.pathInfoHeader}>
-          <Text style={styles.pathInfoIcon}>{getPathIcon(selectedPath.id)}</Text>
+          <Ionicons name={getPathIcon(selectedPath.id)} size={28} color={getOutcomeColor(selectedPath.outcome)} />
           <View style={styles.pathInfoText}>
             <Text style={styles.pathInfoName}>{selectedPath.name}</Text>
             <Text style={styles.pathInfoDescription}>{selectedPath.description}</Text>
@@ -242,7 +243,7 @@ export const TradeWalkthrough: React.FC<TradeWalkthroughProps> = ({
       {/* Key Lesson */}
       <View style={styles.lessonContainer}>
         <View style={styles.lessonIcon}>
-          <Text style={styles.lessonIconText}>💡</Text>
+          <Ionicons name="bulb" size={16} color="#fbbf24" />
         </View>
         <View style={styles.lessonContent}>
           <Text style={styles.lessonLabel}>Key Lesson</Text>

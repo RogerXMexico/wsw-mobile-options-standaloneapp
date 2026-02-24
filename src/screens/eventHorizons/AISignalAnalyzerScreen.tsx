@@ -15,8 +15,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
 import { GlowButton } from '../../components/ui';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 import { EventHorizonsStackParamList } from '../../navigation/types';
 
 const { width } = Dimensions.get('window');
@@ -146,7 +148,7 @@ const AISignalAnalyzerScreen: React.FC = () => {
           <Text style={styles.headerSubtitle}>Powered by Gemini</Text>
         </View>
         <View style={styles.aiBadge}>
-          <Text style={styles.aiBadgeText}>🧠 AI</Text>
+          <Text style={styles.aiBadgeText}><Ionicons name="hardware-chip-outline" size={14} color="#8b5cf6" /> AI</Text>
         </View>
       </View>
 
@@ -162,7 +164,7 @@ const AISignalAnalyzerScreen: React.FC = () => {
           end={{ x: 1, y: 1 }}
           style={styles.infoBanner}
         >
-          <Text style={styles.infoIcon}>🦎</Text>
+          <InlineIcon name="chameleon" size={40} />
           <View style={styles.infoContent}>
             <Text style={styles.infoTitle}>Chameleon AI Assistant</Text>
             <Text style={styles.infoText}>
@@ -302,13 +304,13 @@ const AISignalAnalyzerScreen: React.FC = () => {
                         style={styles.actionButton}
                         onPress={() => navigation.navigate('PredictionScanner')}
                       >
-                        <Text style={styles.actionButtonText}>📡 View Scanner</Text>
+                        <Text style={styles.actionButtonText}><Ionicons name="radio-outline" size={14} color={colors.text.secondary} /> View Scanner</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={[styles.actionButton, styles.actionButtonPrimary]}
                         onPress={() => navigation.navigate('EventHorizonsPaperTrading')}
                       >
-                        <Text style={styles.actionButtonPrimaryText}>💼 Paper Trade</Text>
+                        <Text style={styles.actionButtonPrimaryText}><Ionicons name="briefcase-outline" size={14} color="#8b5cf6" /> Paper Trade</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -326,7 +328,7 @@ const AISignalAnalyzerScreen: React.FC = () => {
         {/* Disclaimer */}
         <View style={styles.disclaimer}>
           <Text style={styles.disclaimerText}>
-            ⚠️ AI-generated signals are for educational purposes only. Always do your own
+            AI-generated signals are for educational purposes only. Always do your own
             research before trading. Past performance does not guarantee future results.
           </Text>
         </View>

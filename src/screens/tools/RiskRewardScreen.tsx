@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -108,7 +109,7 @@ const RiskRewardScreen: React.FC = () => {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backButtonText}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <View>
           <Text style={styles.headerTitle}>Risk/Reward</Text>
@@ -128,9 +129,11 @@ const RiskRewardScreen: React.FC = () => {
           { borderColor: isPositiveEV ? colors.bullish + '50' : colors.bearish + '50' }
         ]}>
           <View style={styles.resultHeader}>
-            <Text style={styles.resultEmoji}>
-              {isPositiveEV ? '✅' : '⚠️'}
-            </Text>
+            <Ionicons
+              name={isPositiveEV ? 'checkmark-circle' : 'warning'}
+              size={20}
+              color={isPositiveEV ? colors.bullish : colors.bearish}
+            />
             <Text style={[
               styles.resultStatus,
               { color: isPositiveEV ? colors.bullish : colors.bearish }
@@ -171,9 +174,10 @@ const RiskRewardScreen: React.FC = () => {
           <View style={styles.priceInputs}>
             {/* Target Price */}
             <View style={styles.priceInputGroup}>
-              <Text style={[styles.priceLabel, { color: colors.bullish }]}>
-                🎯 Target
-              </Text>
+              <View style={[styles.priceLabel, { flexDirection: 'row', alignItems: 'center', gap: 4 }]}>
+                <Ionicons name="flag" size={16} color={colors.bullish} />
+                <Text style={{ color: colors.bullish, ...typography.styles.body }}>Target</Text>
+              </View>
               <View style={[styles.priceInputWrapper, { borderColor: colors.bullish + '40' }]}>
                 <Text style={styles.inputPrefix}>$</Text>
                 <TextInput
@@ -191,9 +195,10 @@ const RiskRewardScreen: React.FC = () => {
 
             {/* Entry Price */}
             <View style={styles.priceInputGroup}>
-              <Text style={[styles.priceLabel, { color: colors.text.secondary }]}>
-                📍 Entry
-              </Text>
+              <View style={[styles.priceLabel, { flexDirection: 'row', alignItems: 'center', gap: 4 }]}>
+                <Ionicons name="locate" size={16} color={colors.text.secondary} />
+                <Text style={{ color: colors.text.secondary, ...typography.styles.body }}>Entry</Text>
+              </View>
               <View style={styles.priceInputWrapper}>
                 <Text style={styles.inputPrefix}>$</Text>
                 <TextInput
@@ -209,9 +214,10 @@ const RiskRewardScreen: React.FC = () => {
 
             {/* Stop Loss */}
             <View style={styles.priceInputGroup}>
-              <Text style={[styles.priceLabel, { color: colors.bearish }]}>
-                🛑 Stop Loss
-              </Text>
+              <View style={[styles.priceLabel, { flexDirection: 'row', alignItems: 'center', gap: 4 }]}>
+                <Ionicons name="hand-left" size={16} color={colors.bearish} />
+                <Text style={{ color: colors.bearish, ...typography.styles.body }}>Stop Loss</Text>
+              </View>
               <View style={[styles.priceInputWrapper, { borderColor: colors.bearish + '40' }]}>
                 <Text style={styles.inputPrefix}>$</Text>
                 <TextInput
@@ -288,28 +294,28 @@ const RiskRewardScreen: React.FC = () => {
         {/* Stats Grid */}
         <View style={styles.statsGrid}>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>💰</Text>
+            <Ionicons name="cash-outline" size={20} color={colors.bullish} style={styles.statIconStyle} />
             <Text style={styles.statLabel}>Max Profit</Text>
             <Text style={[styles.statValue, { color: colors.bullish }]}>
               +${calculations.maxProfit.toFixed(2)}
             </Text>
           </View>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>📉</Text>
+            <Ionicons name="trending-down-outline" size={20} color={colors.bearish} style={styles.statIconStyle} />
             <Text style={styles.statLabel}>Max Loss</Text>
             <Text style={[styles.statValue, { color: colors.bearish }]}>
               -${calculations.maxLoss.toFixed(2)}
             </Text>
           </View>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>⚖️</Text>
+            <Ionicons name="scale-outline" size={20} color={colors.text.primary} style={styles.statIconStyle} />
             <Text style={styles.statLabel}>Breakeven Win%</Text>
             <Text style={styles.statValue}>
               {calculations.breakevenWinRate.toFixed(1)}%
             </Text>
           </View>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>📊</Text>
+            <Ionicons name="bar-chart-outline" size={20} color={colors.neon.cyan} style={styles.statIconStyle} />
             <Text style={styles.statLabel}>Profit Factor</Text>
             <Text style={[
               styles.statValue,
@@ -322,7 +328,10 @@ const RiskRewardScreen: React.FC = () => {
 
         {/* Tips */}
         <View style={styles.tipsCard}>
-          <Text style={styles.tipsTitle}>💡 Risk/Reward Guidelines</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: spacing.md }}>
+            <Ionicons name="bulb-outline" size={18} color={colors.text.primary} />
+            <Text style={[styles.tipsTitle, { marginBottom: 0 }]}>Risk/Reward Guidelines</Text>
+          </View>
           <Text style={styles.tipText}>
             • <Text style={{ color: colors.bullish }}>2:1 or better</Text> is ideal for most traders
           </Text>
@@ -362,10 +371,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backButtonText: {
-    fontSize: 24,
-    color: colors.text.primary,
-  },
   headerTitle: {
     ...typography.styles.h3,
     color: colors.text.primary,
@@ -394,9 +399,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: spacing.sm,
     marginBottom: spacing.md,
-  },
-  resultEmoji: {
-    fontSize: 20,
   },
   resultStatus: {
     ...typography.styles.label,
@@ -608,8 +610,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border.default,
   },
-  statEmoji: {
-    fontSize: 20,
+  statIconStyle: {
     marginBottom: spacing.xs,
   },
   statLabel: {

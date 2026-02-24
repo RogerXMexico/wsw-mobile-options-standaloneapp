@@ -11,7 +11,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 import { LearnStackParamList } from '../../navigation/types';
 import { getQuizByTier } from '../../data/quizData';
 
@@ -60,17 +62,17 @@ const QuizResultsScreen: React.FC = () => {
 
   const getMascotMessage = () => {
     if (percentage === 100) {
-      return { emoji: '🦁', message: 'Perfect score! You are the king of the jungle!' };
+      return { animal: 'lion', message: 'Perfect score! You are the king of the jungle!' };
     } else if (percentage >= 90) {
-      return { emoji: '🦅', message: 'Soaring high! Nearly flawless performance!' };
+      return { animal: 'eagle', message: 'Soaring high! Nearly flawless performance!' };
     } else if (percentage >= 80) {
-      return { emoji: '🦊', message: 'Clever work! You\'ve got sharp instincts!' };
+      return { animal: 'fox', message: 'Clever work! You\'ve got sharp instincts!' };
     } else if (percentage >= 70) {
-      return { emoji: '🐕', message: 'Good boy/girl! You passed the test!' };
+      return { animal: 'dog', message: 'Good boy/girl! You passed the test!' };
     } else if (percentage >= 50) {
-      return { emoji: '🐢', message: 'Slow and steady... Keep learning!' };
+      return { animal: 'turtle', message: 'Slow and steady... Keep learning!' };
     } else {
-      return { emoji: '🦥', message: 'Take your time... Review and try again!' };
+      return { animal: 'sloth', message: 'Take your time... Review and try again!' };
     }
   };
 
@@ -94,7 +96,7 @@ const QuizResultsScreen: React.FC = () => {
             },
           ]}
         >
-          <Text style={styles.mascotEmoji}>{mascot.emoji}</Text>
+          <InlineIcon name={mascot.animal} size={64} />
 
           <View style={styles.scoreCircle}>
             <Text style={[styles.percentageText, { color: getScoreColor() }]}>
@@ -109,12 +111,19 @@ const QuizResultsScreen: React.FC = () => {
             styles.resultBadge,
             { backgroundColor: passed ? colors.success + '20' : colors.error + '20' }
           ]}>
-            <Text style={[
-              styles.resultBadgeText,
-              { color: passed ? colors.success : colors.error }
-            ]}>
-              {passed ? '✓ PASSED' : '✗ NOT YET'}
-            </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+              <Ionicons
+                name={passed ? 'checkmark' : 'close'}
+                size={16}
+                color={passed ? colors.success : colors.error}
+              />
+              <Text style={[
+                styles.resultBadgeText,
+                { color: passed ? colors.success : colors.error }
+              ]}>
+                {passed ? 'PASSED' : 'NOT YET'}
+              </Text>
+            </View>
           </View>
 
           <Text style={styles.mascotMessage}>{mascot.message}</Text>
@@ -178,7 +187,7 @@ const QuizResultsScreen: React.FC = () => {
 
         {/* XP Earned */}
         <Animated.View style={[styles.xpCard, { opacity: fadeAnim }]}>
-          <Text style={styles.xpEmoji}>⚡</Text>
+          <Ionicons name="flash" size={32} color={colors.neon.yellow} />
           <View>
             <Text style={styles.xpAmount}>+{score * 10} XP</Text>
             <Text style={styles.xpLabel}>Experience earned</Text>
@@ -193,7 +202,10 @@ const QuizResultsScreen: React.FC = () => {
             style={styles.retryButton}
             onPress={() => navigation.replace('Quiz', { tierId })}
           >
-            <Text style={styles.retryButtonText}>🔄 Try Again</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+              <Ionicons name="refresh" size={18} color={colors.text.primary} />
+              <Text style={styles.retryButtonText}>Try Again</Text>
+            </View>
           </TouchableOpacity>
         )}
 
@@ -201,9 +213,12 @@ const QuizResultsScreen: React.FC = () => {
           style={styles.continueButton}
           onPress={() => navigation.navigate('Strategies')}
         >
-          <Text style={styles.continueButtonText}>
-            {passed ? '🎉 Continue Learning' : 'Review Strategies'}
-          </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+            {passed && <Ionicons name="sparkles" size={18} color={colors.background.primary} />}
+            <Text style={styles.continueButtonText}>
+              {passed ? 'Continue Learning' : 'Review Strategies'}
+            </Text>
+          </View>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -230,10 +245,6 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xl,
     borderWidth: 1,
     borderColor: colors.border.default,
-  },
-  mascotEmoji: {
-    fontSize: 64,
-    marginBottom: spacing.md,
   },
   scoreCircle: {
     alignItems: 'center',
@@ -343,9 +354,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.neon.yellow + '30',
     gap: spacing.md,
-  },
-  xpEmoji: {
-    fontSize: 32,
   },
   xpAmount: {
     ...typography.styles.h4,

@@ -12,6 +12,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { LearnStackScreenProps } from '../../navigation/types';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows, getOutlookColor } from '../../theme';
 import { TIER_INFO } from '../../data/constants';
 import { strategies, strategyCounts, getStrategiesByTierLazy, preloadTier } from '../../data/strategies';
@@ -182,7 +183,7 @@ const StrategiesScreen: React.FC = () => {
                 Search & filter all {strategyCounts.total}+ strategies
               </Text>
             </View>
-            <Text style={styles.chevron}>{'\u2192'}</Text>
+            <Ionicons name="chevron-forward" size={16} color={colors.text.muted} />
           </TouchableOpacity>
         )}
 
@@ -271,14 +272,14 @@ const StrategiesScreen: React.FC = () => {
                   <View style={styles.tierInfo}>
                     <View style={styles.tierTitleRow}>
                       <Text style={styles.tierName}>{tier.name}</Text>
-                      <Text style={styles.eventHorizonsBadge}>🦎</Text>
+                      <Ionicons name="pulse-outline" size={16} color="#8b5cf6" />
                       {isLocked && <Text style={styles.lockIcon}></Text>}
                     </View>
                     <Text style={styles.tierDescription}>
                       Prediction markets + options analysis
                     </Text>
                   </View>
-                  <Text style={styles.chevron}>→</Text>
+                  <Ionicons name="chevron-forward" size={20} color={colors.text.muted} />
                 </TouchableOpacity>
               </GlassCard>
             );
@@ -330,7 +331,7 @@ const StrategiesScreen: React.FC = () => {
                       onPress={() => navigation.navigate('Quiz', { tierId: tier.tier })}
                       disabled={isLocked}
                     >
-                      <Text style={styles.quizEmoji}>📝</Text>
+                      <Ionicons name="create-outline" size={24} color={colors.neon.green} />
                       <View style={styles.quizInfo}>
                         <Text style={[styles.quizTitle, isLocked && styles.lockedText]}>
                           Take Quiz
@@ -339,7 +340,7 @@ const StrategiesScreen: React.FC = () => {
                           Test your {tier.name} knowledge
                         </Text>
                       </View>
-                      <Text style={styles.quizArrow}>→</Text>
+                      <Ionicons name="arrow-forward" size={20} color={colors.background.primary} />
                     </TouchableOpacity>
                   )}
 
@@ -527,9 +528,6 @@ const styles = StyleSheet.create({
   chevronExpanded: {
     transform: [{ rotate: '180deg' }],
   },
-  eventHorizonsBadge: {
-    fontSize: 16,
-  },
   lockIcon: {
     fontSize: 16,
     color: colors.text.muted,
@@ -553,9 +551,6 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.glass.border,
     gap: spacing.md,
   },
-  quizEmoji: {
-    fontSize: 24,
-  },
   quizInfo: {
     flex: 1,
   },
@@ -569,11 +564,8 @@ const styles = StyleSheet.create({
     ...typography.styles.caption,
     color: colors.text.secondary,
   },
-  quizArrow: {
-    fontSize: 18,
-    color: colors.neon.green,
-    fontWeight: '700',
-  },
+
+
   strategyItem: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { GlassCard, GradientText } from '../../components/ui';
 
@@ -48,7 +49,7 @@ const AppearanceSettingsScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <GradientText style={styles.headerTitle}>Appearance</GradientText>
         <View style={styles.headerSpacer} />
@@ -81,9 +82,11 @@ const AppearanceSettingsScreen: React.FC = () => {
                     option === 'system' && styles.themePreviewSystem,
                   ]}
                 >
-                  <Text style={styles.themePreviewIcon}>
-                    {option === 'dark' ? '🌙' : option === 'light' ? '☀️' : '📱'}
-                  </Text>
+                  <Ionicons
+                    name={option === 'dark' ? 'moon' : option === 'light' ? 'sunny' : 'phone-portrait-outline'}
+                    size={24}
+                    color={option === 'dark' ? colors.neon.purple : option === 'light' ? colors.neon.yellow : colors.text.secondary}
+                  />
                 </View>
               </View>
               <View style={styles.themeInfo}>
@@ -168,7 +171,7 @@ const AppearanceSettingsScreen: React.FC = () => {
         <GlassCard style={styles.settingsCard} noPadding>
           <View style={[styles.settingRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>✨</Text>
+              <Ionicons name="sparkles-outline" size={24} color={colors.neon.yellow} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Glow Effects</Text>
                 <Text style={styles.settingDescription}>Neon glow on buttons and cards</Text>
@@ -185,7 +188,7 @@ const AppearanceSettingsScreen: React.FC = () => {
 
           <View style={[styles.settingRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🎬</Text>
+              <Ionicons name="film-outline" size={24} color={colors.neon.cyan} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Animations</Text>
                 <Text style={styles.settingDescription}>Smooth transitions and effects</Text>
@@ -202,7 +205,7 @@ const AppearanceSettingsScreen: React.FC = () => {
 
           <View style={styles.settingRow}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🏃</Text>
+              <Ionicons name="accessibility-outline" size={24} color={colors.neon.green} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Reduced Motion</Text>
                 <Text style={styles.settingDescription}>Minimize animation movement</Text>
@@ -223,7 +226,7 @@ const AppearanceSettingsScreen: React.FC = () => {
         <GlassCard style={styles.settingsCard} noPadding>
           <View style={[styles.settingRow, styles.settingRowBorder]}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>🔲</Text>
+              <Ionicons name="contrast-outline" size={24} color={colors.text.primary} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>High Contrast</Text>
                 <Text style={styles.settingDescription}>Increase text and border contrast</Text>
@@ -240,7 +243,7 @@ const AppearanceSettingsScreen: React.FC = () => {
 
           <View style={styles.settingRow}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingEmoji}>📐</Text>
+              <Ionicons name="resize-outline" size={24} color={colors.text.secondary} style={styles.settingIcon} />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Compact Mode</Text>
                 <Text style={styles.settingDescription}>Reduce spacing for more content</Text>
@@ -258,7 +261,7 @@ const AppearanceSettingsScreen: React.FC = () => {
 
         {/* Pro Tip */}
         <View style={styles.proTip}>
-          <Text style={styles.proTipIcon}>💡</Text>
+          <Ionicons name="bulb-outline" size={16} color={colors.neon.green} style={{ marginRight: spacing.sm }} />
           <Text style={styles.proTipText}>
             Dark mode is optimized for OLED screens, saving battery while looking great.
           </Text>
@@ -285,10 +288,6 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 24,
-    color: colors.text.primary,
   },
   headerTitle: {
     ...typography.styles.h4,
@@ -344,9 +343,6 @@ const styles = StyleSheet.create({
   },
   themePreviewSystem: {
     backgroundColor: '#555',
-  },
-  themePreviewIcon: {
-    fontSize: 24,
   },
   themeInfo: {
     flex: 1,
@@ -458,8 +454,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  settingEmoji: {
-    fontSize: 24,
+  settingIcon: {
     marginRight: spacing.md,
   },
   settingText: {
@@ -484,10 +479,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.neon.green,
     marginTop: spacing.lg,
-  },
-  proTipIcon: {
-    fontSize: 16,
-    marginRight: spacing.sm,
   },
   proTipText: {
     ...typography.styles.caption,

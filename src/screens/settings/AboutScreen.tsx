@@ -14,8 +14,10 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { GlassCard, GradientText } from '../../components/ui';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 
 const APP_VERSION = '1.0.0';
 const BUILD_NUMBER = '100';
@@ -23,14 +25,14 @@ const BUILD_NUMBER = '100';
 interface TeamMember {
   name: string;
   role: string;
-  emoji: string;
+  animalKey: string;
 }
 
 const TEAM: TeamMember[] = [
-  { name: 'Wall Street Wildlife', role: 'Education Team', emoji: '🦁' },
-  { name: 'Jungle Developers', role: 'Engineering', emoji: '🐒' },
-  { name: 'Options Experts', role: 'Content Creators', emoji: '🦉' },
-  { name: 'Design Tribe', role: 'UI/UX Design', emoji: '🦎' },
+  { name: 'Wall Street Wildlife', role: 'Education Team', animalKey: 'lion' },
+  { name: 'Jungle Developers', role: 'Engineering', animalKey: 'monkey' },
+  { name: 'Options Experts', role: 'Content Creators', animalKey: 'owl' },
+  { name: 'Design Tribe', role: 'UI/UX Design', animalKey: 'chameleon' },
 ];
 
 const AboutScreen: React.FC = () => {
@@ -86,7 +88,7 @@ const AboutScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <GradientText style={styles.headerTitle}>About</GradientText>
         <View style={styles.headerSpacer} />
@@ -105,7 +107,7 @@ const AboutScreen: React.FC = () => {
             end={{ x: 1, y: 1 }}
             style={styles.logoContainer}
           >
-            <Text style={styles.logoEmoji}>🦁</Text>
+            <InlineIcon name="lion" size={56} />
           </LinearGradient>
           <GradientText style={styles.appName}>Wall Street Wildlife</GradientText>
           <Text style={styles.appTagline}>Master Options Trading in the Jungle</Text>
@@ -117,7 +119,7 @@ const AboutScreen: React.FC = () => {
 
         {/* Mission Statement */}
         <GlassCard style={styles.missionCard}>
-          <Text style={styles.missionIcon}>🎯</Text>
+          <Ionicons name="disc-outline" size={32} color={colors.neon.green} />
           <Text style={styles.missionTitle}>Our Mission</Text>
           <Text style={styles.missionText}>
             To make options trading education accessible, engaging, and fun for everyone.
@@ -153,7 +155,9 @@ const AboutScreen: React.FC = () => {
                 index !== TEAM.length - 1 && styles.teamMemberBorder,
               ]}
             >
-              <Text style={styles.teamEmoji}>{member.emoji}</Text>
+              <View style={styles.teamEmoji}>
+                <InlineIcon name={member.animalKey} size={32} />
+              </View>
               <View style={styles.teamInfo}>
                 <Text style={styles.teamName}>{member.name}</Text>
                 <Text style={styles.teamRole}>{member.role}</Text>
@@ -167,26 +171,26 @@ const AboutScreen: React.FC = () => {
         <GlassCard style={styles.actionsCard} noPadding>
           <TouchableOpacity style={[styles.actionRow, styles.actionRowBorder]} onPress={handleRateApp}>
             <View style={styles.actionInfo}>
-              <Text style={styles.actionEmoji}>⭐</Text>
+              <Ionicons name="star-outline" size={24} color={colors.neon.yellow} style={styles.actionIcon} />
               <Text style={styles.actionTitle}>Rate the App</Text>
             </View>
-            <Text style={styles.actionChevron}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.muted} />
           </TouchableOpacity>
 
           <TouchableOpacity style={[styles.actionRow, styles.actionRowBorder]} onPress={handleShareApp}>
             <View style={styles.actionInfo}>
-              <Text style={styles.actionEmoji}>📤</Text>
+              <Ionicons name="share-outline" size={24} color={colors.neon.cyan} style={styles.actionIcon} />
               <Text style={styles.actionTitle}>Share with Friends</Text>
             </View>
-            <Text style={styles.actionChevron}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.muted} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.actionRow} onPress={handleContactSupport}>
             <View style={styles.actionInfo}>
-              <Text style={styles.actionEmoji}>💬</Text>
+              <Ionicons name="chatbubble-outline" size={24} color={colors.neon.green} style={styles.actionIcon} />
               <Text style={styles.actionTitle}>Contact Support</Text>
             </View>
-            <Text style={styles.actionChevron}>→</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.muted} />
           </TouchableOpacity>
         </GlassCard>
 
@@ -198,10 +202,10 @@ const AboutScreen: React.FC = () => {
             onPress={() => handleLink('https://wallstreetwildlife.com')}
           >
             <View style={styles.linkInfo}>
-              <Text style={styles.linkEmoji}>🌐</Text>
+              <Ionicons name="globe-outline" size={24} color={colors.neon.cyan} style={styles.linkIcon} />
               <Text style={styles.linkTitle}>Website</Text>
             </View>
-            <Text style={styles.linkChevron}>↗</Text>
+            <Ionicons name="open-outline" size={18} color={colors.neon.cyan} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -209,10 +213,10 @@ const AboutScreen: React.FC = () => {
             onPress={() => handleLink('https://twitter.com/wswildlife')}
           >
             <View style={styles.linkInfo}>
-              <Text style={styles.linkEmoji}>🐦</Text>
+              <Ionicons name="logo-twitter" size={24} color="#1DA1F2" style={styles.linkIcon} />
               <Text style={styles.linkTitle}>Twitter / X</Text>
             </View>
-            <Text style={styles.linkChevron}>↗</Text>
+            <Ionicons name="open-outline" size={18} color={colors.neon.cyan} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -220,10 +224,10 @@ const AboutScreen: React.FC = () => {
             onPress={() => handleLink('https://discord.gg/wswildlife')}
           >
             <View style={styles.linkInfo}>
-              <Text style={styles.linkEmoji}>💬</Text>
+              <Ionicons name="logo-discord" size={24} color="#5865F2" style={styles.linkIcon} />
               <Text style={styles.linkTitle}>Discord Community</Text>
             </View>
-            <Text style={styles.linkChevron}>↗</Text>
+            <Ionicons name="open-outline" size={18} color={colors.neon.cyan} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -231,10 +235,10 @@ const AboutScreen: React.FC = () => {
             onPress={() => handleLink('https://youtube.com/@wswildlife')}
           >
             <View style={styles.linkInfo}>
-              <Text style={styles.linkEmoji}>📺</Text>
+              <Ionicons name="logo-youtube" size={24} color="#FF0000" style={styles.linkIcon} />
               <Text style={styles.linkTitle}>YouTube</Text>
             </View>
-            <Text style={styles.linkChevron}>↗</Text>
+            <Ionicons name="open-outline" size={18} color={colors.neon.cyan} />
           </TouchableOpacity>
         </GlassCard>
 
@@ -264,9 +268,11 @@ const AboutScreen: React.FC = () => {
         <Text style={styles.copyright}>
           © 2025 Wall Street Wildlife. All rights reserved.
         </Text>
-        <Text style={styles.madeWith}>
-          Made with 💚 for the trading community
-        </Text>
+        <View style={styles.madeWithRow}>
+          <Text style={styles.madeWith}>Made with </Text>
+          <Ionicons name="heart" size={12} color={colors.neon.green} />
+          <Text style={styles.madeWith}> for the trading community</Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -403,7 +409,6 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.glass.border,
   },
   teamEmoji: {
-    fontSize: 32,
     marginRight: spacing.md,
   },
   teamInfo: {
@@ -440,13 +445,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginRight: spacing.md,
   },
+  actionIcon: {
+    marginRight: spacing.md,
+  },
   actionTitle: {
     ...typography.styles.body,
     color: colors.text.primary,
-  },
-  actionChevron: {
-    fontSize: 18,
-    color: colors.text.muted,
   },
   linksCard: {
     overflow: 'hidden',
@@ -470,13 +474,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginRight: spacing.md,
   },
+  linkIcon: {
+    marginRight: spacing.md,
+  },
   linkTitle: {
     ...typography.styles.body,
     color: colors.text.primary,
-  },
-  linkChevron: {
-    fontSize: 18,
-    color: colors.neon.cyan,
   },
   legalSection: {
     flexDirection: 'row',
@@ -513,6 +516,11 @@ const styles = StyleSheet.create({
     color: colors.text.muted,
     textAlign: 'center',
     marginBottom: spacing.xs,
+  },
+  madeWithRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   madeWith: {
     ...typography.styles.caption,

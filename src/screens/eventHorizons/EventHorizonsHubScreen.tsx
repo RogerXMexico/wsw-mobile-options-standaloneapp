@@ -17,6 +17,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
 import { GlassCard, PremiumModal } from '../../components/ui';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 import { EventHorizonsStackParamList } from '../../navigation/types';
 import { EVENT_HORIZONS_LESSONS } from '../../data/eventHorizonsLessons';
 import { EVENT_HORIZONS_BADGES } from '../../data/eventHorizonsBadges';
@@ -52,7 +53,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
     activeOpacity={0.8}
   >
     <View style={[styles.toolIconContainer, { backgroundColor: `${color}20` }]}>
-      <Text style={styles.toolIcon}>{icon}</Text>
+      <Ionicons name={icon as keyof typeof Ionicons.glyphMap} size={24} color={color} />
     </View>
     <View style={styles.toolContent}>
       <Text style={[styles.toolTitle, { color }]}>{title}</Text>
@@ -83,7 +84,7 @@ const StatCard: React.FC<StatCardProps> = ({ icon, label, value, subtitle, onPre
     activeOpacity={onPress ? 0.7 : 1}
   >
     <View style={styles.statHeader}>
-      <Text style={styles.statIcon}>{icon}</Text>
+      <Ionicons name={icon as keyof typeof Ionicons.glyphMap} size={14} color={colors.text.secondary} />
       <Text style={styles.statLabel}>{label}</Text>
     </View>
     <Text style={styles.statValue}>{value}</Text>
@@ -155,7 +156,7 @@ const EventHorizonsHubScreen: React.FC = () => {
               colors={['#8b5cf6', '#14b8a6']}
               style={styles.chameleonAvatar}
             >
-              <Text style={styles.chameleonEmoji}>🦎</Text>
+              <InlineIcon name="chameleon" size={32} />
             </LinearGradient>
 
             <View style={styles.heroText}>
@@ -180,16 +181,16 @@ const EventHorizonsHubScreen: React.FC = () => {
 
         {/* Quick Stats */}
         <View style={styles.statsGrid}>
-          <StatCard icon="📡" label="Tools" value="7" subtitle="Analysis tools" />
+          <StatCard icon="radio-outline" label="Tools" value="7" subtitle="Analysis tools" />
           <StatCard
-            icon="📚"
+            icon="library-outline"
             label="Lessons"
             value={`${completedLessons}/${totalLessons}`}
             subtitle="Completed"
           />
-          <StatCard icon="🎯" label="Events" value="4" subtitle="Event types" />
+          <StatCard icon="disc-outline" label="Events" value="4" subtitle="Event types" />
           <StatCard
-            icon="🏆"
+            icon="trophy-outline"
             label="Badges"
             value={String(totalBadges)}
             subtitle="Available"
@@ -207,7 +208,7 @@ const EventHorizonsHubScreen: React.FC = () => {
               title="Lessons"
               subtitle="Learn the concepts"
               description={`Master prediction market analysis with ${totalLessons} comprehensive lessons.`}
-              icon="📖"
+              icon="book-outline"
               color="#8b5cf6"
               onPress={() => navigation.navigate('EventHorizonsLessons')}
             />
@@ -217,7 +218,7 @@ const EventHorizonsHubScreen: React.FC = () => {
               title="Scanner"
               subtitle="Track live events"
               description="Browse prediction market events alongside options data."
-              icon="📡"
+              icon="radio-outline"
               color="#a855f7"
               onPress={() => navigation.navigate('PredictionScanner')}
             />
@@ -227,7 +228,7 @@ const EventHorizonsHubScreen: React.FC = () => {
               title="Gap Analyzer"
               subtitle="Find opportunities"
               description="Visualize probability vs IV gaps to find trading edges."
-              icon="📊"
+              icon="bar-chart-outline"
               color="#14b8a6"
               onPress={() => navigation.navigate('GapAnalyzer')}
             />
@@ -237,7 +238,7 @@ const EventHorizonsHubScreen: React.FC = () => {
               title="Event Replay"
               subtitle="Learn from history"
               description="Step through historical events and see how they played out."
-              icon="⏮️"
+              icon="play-back-outline"
               color="#f59e0b"
               onPress={() => navigation.navigate('EventReplay', {})}
             />
@@ -247,7 +248,7 @@ const EventHorizonsHubScreen: React.FC = () => {
               title="Paper Trading"
               subtitle="Practice predictions"
               description="Trade YES/NO shares on curated case studies risk-free."
-              icon="💼"
+              icon="briefcase-outline"
               color="#10b981"
               onPress={() => navigation.navigate('EventHorizonsPaperTrading')}
             />
@@ -257,7 +258,7 @@ const EventHorizonsHubScreen: React.FC = () => {
               title="Earnings Calendar"
               subtitle="Track upcoming events"
               description="Monitor earnings with real-time IV data and watchlist."
-              icon="📅"
+              icon="calendar-outline"
               color="#f59e0b"
               onPress={() => navigation.navigate('EarningsCalendar')}
             />
@@ -267,7 +268,7 @@ const EventHorizonsHubScreen: React.FC = () => {
               title="Options Chain"
               subtitle="Real-time data"
               description="View live options chain with Greeks, bid/ask, and volume."
-              icon="⛓️"
+              icon="link-outline"
               color="#06b6d4"
               onPress={() => navigation.navigate('OptionsChainViewer', {})}
             />
@@ -290,7 +291,7 @@ const EventHorizonsHubScreen: React.FC = () => {
                   colors={['#8b5cf6', '#14b8a6']}
                   style={styles.aiIconContainer}
                 >
-                  <Text style={styles.aiIcon}>🧠</Text>
+                  <Ionicons name="sparkles-outline" size={28} color="#fff" />
                 </LinearGradient>
                 <View style={styles.aiTextContent}>
                   <View style={styles.aiTitleRow}>
@@ -317,7 +318,7 @@ const EventHorizonsHubScreen: React.FC = () => {
             style={styles.comingSoonGradient}
           >
             <View style={styles.comingSoonHeader}>
-              <Text style={styles.comingSoonIcon}>✨</Text>
+              <Ionicons name="sparkles" size={16} color={colors.neon.purple} />
               <Text style={styles.comingSoonTitle}>Coming Soon</Text>
             </View>
             <View style={styles.comingSoonList}>

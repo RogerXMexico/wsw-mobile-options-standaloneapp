@@ -14,6 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlassCard } from '../../components/ui';
 import { ProfileStackParamList } from '../../navigation/types';
@@ -70,9 +71,9 @@ const BadgesScreen: React.FC = () => {
   ).length;
 
   const modules: { id: ModuleFilter; label: string; icon: string }[] = [
-    { id: 'all', label: 'All', icon: '🏆' },
-    { id: 'jungle', label: 'Academy', icon: '🌴' },
-    { id: 'event-horizons', label: 'Event Horizons', icon: '🦎' },
+    { id: 'all', label: 'All', icon: 'trophy-outline' },
+    { id: 'jungle', label: 'Academy', icon: 'leaf-outline' },
+    { id: 'event-horizons', label: 'Event Horizons', icon: 'pulse-outline' },
   ];
 
   const categories: { id: CategoryFilter; label: string }[] = [
@@ -143,7 +144,11 @@ const BadgesScreen: React.FC = () => {
               ]}
               onPress={() => setSelectedModule(mod.id)}
             >
-              <Text style={styles.moduleIcon}>{mod.icon}</Text>
+              <Ionicons name={mod.icon as any} size={16} color={
+                selectedModule === mod.id
+                  ? (mod.id === 'event-horizons' ? '#8b5cf6' : colors.neon.green)
+                  : colors.text.muted
+              } />
               <Text style={[
                 styles.moduleText,
                 selectedModule === mod.id && styles.moduleTextActive,
@@ -410,9 +415,6 @@ const styles = StyleSheet.create({
   moduleChipEH: {
     backgroundColor: 'rgba(139, 92, 246, 0.15)',
     borderColor: '#8b5cf6',
-  },
-  moduleIcon: {
-    fontSize: 16,
   },
   moduleText: {
     fontFamily: typography.fonts.medium,

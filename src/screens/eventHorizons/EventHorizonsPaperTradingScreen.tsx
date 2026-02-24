@@ -14,6 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
 import { GlowButton } from '../../components/ui';
 import { EventHorizonsStackParamList } from '../../navigation/types';
@@ -231,7 +232,7 @@ const EventHorizonsPaperTradingScreen: React.FC = () => {
           <View style={styles.positionsContainer}>
             {MOCK_POSITIONS.length === 0 ? (
               <View style={styles.emptyState}>
-                <Text style={styles.emptyIcon}>📈</Text>
+                <Ionicons name="trending-up-outline" size={48} color={colors.text.muted} style={{ marginBottom: spacing.md }} />
                 <Text style={styles.emptyTitle}>No Open Positions</Text>
                 <Text style={styles.emptyText}>
                   Find events in the Prediction Scanner and start trading!
@@ -341,7 +342,7 @@ const EventHorizonsPaperTradingScreen: React.FC = () => {
           <View style={styles.historyContainer}>
             {MOCK_TRADES.length === 0 ? (
               <View style={styles.emptyState}>
-                <Text style={styles.emptyIcon}>📊</Text>
+                <Ionicons name="bar-chart-outline" size={48} color={colors.text.muted} style={{ marginBottom: spacing.md }} />
                 <Text style={styles.emptyTitle}>No Trade History</Text>
                 <Text style={styles.emptyText}>
                   Your closed trades will appear here.

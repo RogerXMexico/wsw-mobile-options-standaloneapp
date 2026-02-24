@@ -5,21 +5,21 @@
 // Entries: 99
 
 export interface StrategyContentMobile {
-  /** Full lesson analysis — the main educational content */
-  analysis: string;
-  /** Real-world analogy to make the concept relatable */
-  analogy: string;
-  /** Advanced nuance and key insight for experienced traders */
-  nuance: string;
-  /** Worked numerical example */
-  example: string;
-  /** Optional animal mentor metaphor */
-  animalMetaphor?: string;
+ /** Full lesson analysis — the main educational content */
+ analysis: string;
+ /** Real-world analogy to make the concept relatable */
+ analogy: string;
+ /** Advanced nuance and key insight for experienced traders */
+ nuance: string;
+ /** Worked numerical example */
+ example: string;
+ /** Optional animal mentor metaphor */
+ animalMetaphor?: string;
 }
 
 export const STRATEGY_CONTENT: Record<string, StrategyContentMobile> = {
-  'course-goals': {
-    analysis: `"It is better to be lucky. But I would rather be exact. Then when luck comes you are ready."
+ 'course-goals': {
+ analysis: `"It is better to be lucky. But I would rather be exact. Then when luck comes you are ready."
 — Ernest Hemingway, The Old Man and the Sea
 "A ship in port is safe but that is not what ships are built for."
 — Grace Hopper
@@ -105,17 +105,17 @@ Expert Edge
 Combine Polymarket prediction-market data with options implied volatility to spot where the crowd and the options market disagree. When prediction markets price a binary event differently than the options chain, that gap is your edge. The ultimate synthesis of everything you've learned.
 Ready to begin?
 Continue to the next module: What Are Options?`,
-    analogy: `This course is a map through a jungle. You wouldn't trek the Amazon without a guide, a compass, and a plan. These modules are your guide. The commitment checkboxes are your compass. And your plan is simple: one step at a time, no shortcuts.`,
-    nuance: `Commitment Compounds: Every professional was once a beginner who decided to show up consistently. Your edge isn't intelligence—it's discipline.`,
-    example: ``,
-  },
-  'what-are-options': {
-    analysis: `Welcome to the Jungle
+ analogy: `This course is a map through a jungle. You wouldn't trek the Amazon without a guide, a compass, and a plan. These modules are your guide. The commitment checkboxes are your compass. And your plan is simple: one step at a time, no shortcuts.`,
+ nuance: `Commitment Compounds: Every professional was once a beginner who decided to show up consistently. Your edge isn't intelligence—it's discipline.`,
+ example: ``,
+ },
+ 'what-are-options': {
+ analysis: `Welcome to the Jungle
 You are no longer trading alone.
 We hunt together.
 Before we define "Options", let's solve two simple jungle problems.
-🍌
-🍌 Story 1: The "Banana Voucher"
+
+ Story 1: The "Banana Voucher"
 You're a monkey. The merchant sells bananas for \$5. You're scared the price will double tomorrow, but you don't have \$5 yet. You pay \$0.50 for a voucher that guarantees you can buy a banana at \$5 anytime this month.
 ✓
 Scenario A: Banana shortage! Price jumps to \$8. Your voucher lets you buy at \$5. You flip it for \$8. Profit!
@@ -124,7 +124,7 @@ Scenario B: Surplus. Price drops to \$4. You throw the voucher away (lose \$0.50
 This is a "Call Option"
 The right to BUY later at a fixed price.
 Bullish monkeys buy Calls.
-🍌 Story 2: The "Banana Plantation Insurance"
+ Story 2: The "Banana Plantation Insurance"
 You own a banana plantation (Stock) worth \$50k. You're scared of a disease outbreak wiping out your crop. You pay \$1k for an insurance policy.
 ✓
 Scenario A: DISEASE! Bananas rot, value hits \$0. Insurance pays you \$50k. You are saved.
@@ -173,21 +173,21 @@ Warning: If you can't explain in 30 seconds what the company does and why it wil
 Rights vs. Obligations
 When you BUY an option, you have the RIGHT to act, but you don't have to. If the trade goes against you, you simply let the contract expire worthless and lose only the premium you paid.
 When you SELL an option, you have the OBLIGATION to fulfill the contract if the buyer chooses to exercise it. This is why selling can be more dangerous!
-🧠 The Options Paradigm Shift
+ The Options Paradigm Shift
 Non-Linearity (3D Chess)
 Stocks are 2D: they go up or down. Options are 3D: you can profit from direction, time passing, or even volatility exploding. You are no longer limited to just "being right" about direction.
 Asymmetric Risk (The Shield)
 Beginners think options are risky. Pros know that owning stock is risky. Buying a Call defines your max loss instantly (the premium). Owning stock leaves you exposed to a 50% drop overnight.
 Capital Agility (The Lever)
 Why tie up \$15,000 to own 100 shares of Apple? You can control the same upside for \$500. This frees up your remaining capital to generate yield elsewhere. It's not about gambling; it's about efficient allocation.`,
-    analogy: `An option is like a VIP banana coupon. If the store price for bananas is higher than your coupon price, you use it and get more bananas for less. If the store price drops below your coupon, you toss it in the trash and buy bananas at the cheaper market price.`,
-    nuance: `The 100 Multiplier: Every \$1 in premium equals \$100 in real dollars. If you see an option for \$2.50, it costs \$250.00.`,
-    example: `Scenario: Apple is \$150. You think it hits \$170.
+ analogy: `An option is like a VIP banana coupon. If the store price for bananas is higher than your coupon price, you use it and get more bananas for less. If the store price drops below your coupon, you toss it in the trash and buy bananas at the cheaper market price.`,
+ nuance: `The 100 Multiplier: Every \$1 in premium equals \$100 in real dollars. If you see an option for \$2.50, it costs \$250.00.`,
+ example: `Scenario: Apple is \$150. You think it hits \$170.
 Option: You buy a \$160 Strike Call for \$2.00 (\$200 total).
 Result: If Apple hits \$180, your option is worth at least \$20.00 (\$2,000). You turned \$200 into \$2,000. That is the power of options.`,
-  },
-  'stocks-vs-options': {
-    analysis: `Two Tools, Different Strengths
+ },
+ 'stocks-vs-options': {
+ analysis: `Two Tools, Different Strengths
 Stocks and options aren't competitors—they're complements. Understanding when to use each is part of becoming a complete trader.
 Stocks
 Ownership
@@ -225,12 +225,12 @@ Statistical Edge
 Be the "House" by selling over-priced premium and using volatility to your advantage
 The Jungle Insight
 The best traders don't choose sides—they use both tools strategically. Own stocks for long-term wealth building. Use options to generate income, protect positions, and capitalize on short-term opportunities.`,
-    analogy: `Stocks are like owning a house. Options are like renting one—or selling insurance on it. Both have their place depending on your goals.`,
-    nuance: `Synergy: The most powerful portfolios combine stock ownership with options strategies. Covered calls on stocks you own. Protective puts when volatility spikes. The tools work together.`,
-    example: ``,
-  },
-  'who-are-options-for': {
-    analysis: `The Common Fallacy
+ analogy: `Stocks are like owning a house. Options are like renting one—or selling insurance on it. Both have their place depending on your goals.`,
+ nuance: `Synergy: The most powerful portfolios combine stock ownership with options strategies. Covered calls on stocks you own. Protective puts when volatility spikes. The tools work together.`,
+ example: ``,
+ },
+ 'who-are-options-for': {
+ analysis: `The Common Fallacy
 Many believe options are "only for experts" or "just for gambling." This myth keeps regular investors away from the most powerful risk-management tools in finance.
 What Determines Your Level?
 Your level isn't about intelligence—it's about how many variables you can manage at once. Beginners focus on one variable (direction). Intermediate traders add two variables (direction + time decay). Advanced traders juggle multiple variables (direction, time, volatility, and correlation). Each level builds on the last.
@@ -241,27 +241,27 @@ Why These Are Beginner Strategies:
 ✓ Defined risk: You can only lose what you pay (premium)
 ✓ No margin required: Cash-based, no borrowing
 ✓ Simple math: Stock goes up = Call profits. Stock goes down = Put profits.
-📈
+
 Long Call
 Buy a call when you think the stock will go UP. Max loss = premium paid.
 BULLISH • DEFINED RISK
-📉
+
 Long Put
 Buy a put when you think the stock will go DOWN. Max loss = premium paid.
 BEARISH • DEFINED RISK
-🛡️
+
 Protective Put
 Own stock + buy a put = insurance. Your stock can't fall below put strike.
 PROTECTION • INSURANCE
-🗓️
+
 LEAPS (Long-Dated Calls)
 Calls with 1-2 years until expiration. Time decay is minimal. Leverage with patience.
 LONG-TERM BULLISH
-💍
+
 Married Put
 Buy stock + put simultaneously. You're bullish but want protection from day one.
 BULLISH + PROTECTED
-🔄
+
 Synthetic Long Stock
 Buy call + sell put at same strike. Acts like owning stock with less capital.
 STOCK REPLACEMENT
@@ -272,27 +272,27 @@ Why These Are Intermediate Strategies:
 ✓ Obligation risk: Selling options means potential assignment
 ✓ Stock ownership required: Need to own shares (covered) or have cash (cash-secured)
 ✓ Time decay works FOR you: Theta is your friend when selling premium
-🏠
+
 Covered Call
 Own 100 shares + sell a call. Get paid monthly. Stock called away if it rises above strike.
 INCOME • NEUTRAL/BULLISH
-💵
+
 Cash-Secured Put
 Sell a put with cash to cover. Get paid to wait to buy stock at your target price.
 INCOME • ACQUISITION
-🎯
+
 Poor Man's Covered Call
 LEAPS call + sell short-term calls. Like covered calls but with less capital.
 INCOME • CAPITAL EFFICIENT
-📎
+
 Collar
 Own stock + buy put + sell call. Protection funded by covered call. Limited up/down.
 PROTECTION • NEUTRAL
-🐂
+
 Bull Put Spread
 Sell put + buy lower put. Collect credit if stock stays above short strike.
 BULLISH • DEFINED RISK
-🐻
+
 Bear Call Spread
 Sell call + buy higher call. Collect credit if stock stays below short strike.
 BEARISH • DEFINED RISK
@@ -304,19 +304,19 @@ Why These Are Advanced Strategies:
 ✓ 3-4 legs: Multiple options working together create complex P&L profiles
 ✓ Volatility plays: Profit when IV rises or falls, not just from stock movement
 ✓ Active management: May require rolling, adjusting, or early closing
-🦅
+
 Iron Condor
 Sell put spread + sell call spread. Profit if stock stays in range. 4 legs.
 NEUTRAL • SELL VOLATILITY
-🦋
+
 Iron Butterfly
 Sell ATM straddle + buy OTM strangle. Max profit if stock pins at center strike.
 PINNING • HIGH CREDIT
-📅
+
 Calendar Spread
 Sell short-term + buy long-term at same strike. Profits from time decay differential.
 TIME PLAY • VEGA LONG
-↗️
+↗
 Diagonal Spread
 Calendar + vertical combined. Different strikes AND different expirations.
 DIRECTIONAL + TIME
@@ -324,19 +324,19 @@ DIRECTIONAL + TIME
 Long Straddle
 Buy ATM call + ATM put. Profit from big move in either direction. Buy volatility.
 BIG MOVE • LONG VEGA
-🎸
+
 Long Strangle
 Buy OTM call + OTM put. Cheaper than straddle but needs bigger move to profit.
 BREAKOUT PLAY
-🎯
+
 Butterfly Spread
 3 strikes: Buy 1 + Sell 2 + Buy 1. Max profit at center strike. Low cost pinning bet.
 PRECISION • LOW COST
-⚖️
+⚖
 Ratio Spreads
 Uneven legs (buy 1, sell 2). Can be done for credit but has unlimited risk on one side.
 COMPLEX • UNDEFINED RISK
-🦎
+
 Jade Lizard
 Short put + short call spread. No upside risk if done correctly. Premium collection.
 PREMIUM • NO UPSIDE RISK
@@ -348,23 +348,23 @@ Why These Are Investor Strategies:
 ✓ Tax awareness: Strategies consider wash sales, holding periods, tax lots
 ✓ Wealth preservation: Focused on protecting gains, not just making gains
 ✓ Strategic acquisition: Building positions systematically over time
-🎡
+
 The Wheel Strategy
 Sell puts → get assigned → sell calls → get called away → repeat. Systematic income.
 INCOME MACHINE
-🔄
+
 Stock Replacement (LEAPS)
 Deep ITM LEAPS instead of stock. Same exposure, less capital, defined risk.
 CAPITAL EFFICIENT
-🏰
+
 Portfolio Hedge (Index Puts)
 Buy SPY or QQQ puts to protect entire portfolio from market crash. Sleep insurance.
 CRASH PROTECTION
-📊
+
 Tax-Loss Harvesting w/ Options
 Sell losing stock, use options to maintain exposure without wash sale. Tax optimization.
 TAX EFFICIENT
-💰
+
 Dividend Capture Strategy
 Buy stock before ex-div + sell covered call. Capture dividend + premium income.
 DIVIDEND + PREMIUM
@@ -387,12 +387,12 @@ Integrate options into long-term portfolio. Think about taxes, position sizing, 
 Options Are For Everyone (Who Does Their Homework)
 Options are right for all levels of investors, but only if you start with the Underlying Stock first.
 If you wouldn't buy the stock, you have no business buying the option. But if you have a thesis on the asset, options simply give you a sharper sword to express it—whether to hedge, collect income, or leverage your conviction.`,
-    analogy: `An option is like a car. A professional can use it to win a race (Advanced), a commuter uses it to get to work safely (Intermediate), and a teen uses it with a student permit and training wheels (Beginner). The car isn't the danger—the driver's training is.`,
-    nuance: `Risk Reduction: Most people think options increase risk. In reality, strategies like the Collar or Covered Call actually lower the volatility of your portfolio compared to just owning stock.`,
-    example: `Imagine the market is shaky. Instead of selling your favorite stock and paying taxes, you buy a Put for \$1.00. The market drops 20%, but your Put gains in value, offsetting your losses. You used options to stay in the game while others were forced out.`,
-  },
-  'know-thyself': {
-    analysis: `1. Scalpers
+ analogy: `An option is like a car. A professional can use it to win a race (Advanced), a commuter uses it to get to work safely (Intermediate), and a teen uses it with a student permit and training wheels (Beginner). The car isn't the danger—the driver's training is.`,
+ nuance: `Risk Reduction: Most people think options increase risk. In reality, strategies like the Collar or Covered Call actually lower the volatility of your portfolio compared to just owning stock.`,
+ example: `Imagine the market is shaky. Instead of selling your favorite stock and paying taxes, you buy a Put for \$1.00. The market drops 20%, but your Put gains in value, offsetting your losses. You used options to stay in the game while others were forced out.`,
+ },
+ 'know-thyself': {
+ analysis: `1. Scalpers
 The Adrenaline Junkies
 Timeframe: Seconds to Minutes.
 Goal: Tiny profits on high volume.
@@ -433,21 +433,21 @@ Do You Truly Know Yourself as an Investor?
 Knowing your trading style is just the beginning. The Investor's Mirror goes deeper — mapping your cognitive biases, philosophical blind spots, and the hidden patterns that cost you money. Discover your investor archetype, face your biases, and transform your psychology.
 Take The Investor's Mirror Quiz →
 Free • 20 Questions • Next Module`,
-    analogy: `The unexamined life is not worth living. — Socrates
+ analogy: `The unexamined life is not worth living. — Socrates
 Knowing yourself is the beginning of all wisdom. — Aristotle
 Wisdom comes alone through suffering. — Aeschylus
 If you do not know who you are, the market is an expensive place to find out. — Adam Smith`,
-    nuance: `Frequency vs. Accuracy: Scalpers make 100 trades to make 100 points. Investors make 1 trade to make 100 points. The tax bill and stress levels are the difference.`,
-    example: ``,
-  },
-  'options-vocabulary': {
-    analysis: `Interactive vocabulary guide - click to open`,
-    analogy: `A field guide to the jungle. Before you hunt, you must know the names of the creatures.`,
-    nuance: `Fluency First: Options traders speak their own language. BTO, STO, IV, OI, sweeps, blocks—master the vocabulary and the charts become readable.`,
-    example: ``,
-  },
-  'rules-of-the-jungle': {
-    analysis: `Tier I: Mindset
+ nuance: `Frequency vs. Accuracy: Scalpers make 100 trades to make 100 points. Investors make 1 trade to make 100 points. The tax bill and stress levels are the difference.`,
+ example: ``,
+ },
+ 'options-vocabulary': {
+ analysis: `Interactive vocabulary guide - click to open`,
+ analogy: `A field guide to the jungle. Before you hunt, you must know the names of the creatures.`,
+ nuance: `Fluency First: Options traders speak their own language. BTO, STO, IV, OI, sweeps, blocks—master the vocabulary and the charts become readable.`,
+ example: ``,
+ },
+ 'rules-of-the-jungle': {
+ analysis: `Tier I: Mindset
 Monitor Greed
 Monitor Greed
 Monitor your Greed level carefully and honestly. Emotional discipline is the first line of defense. If you feel euphoric, it's likely time to sell.
@@ -562,24 +562,24 @@ The Odds
 Options are a world of probabilities; losses are inevitable. Learn and move on.
 Even a 60% win rate means losing 40 times out of 100. That's the game.
 "The only certainty is that nothing is certain." — Pliny the Elder`,
-    analogy: `The Rules of the Jungle are like the safety briefing before a dive. You can be the best swimmer in the world, but if you ignore the rules — check your air, dive with a buddy, respect the depth limits — the ocean will humble you. The rules aren't restrictions. They're what keep you alive long enough to enjoy the beauty below.`,
-    nuance: `Mind over Math: 90% of trading is psychology. The other 10% is just looking for the buttons.`,
-    example: ``,
-  },
-  'trade-journal': {
-    analysis: `Trade Journal
+ analogy: `The Rules of the Jungle are like the safety briefing before a dive. You can be the best swimmer in the world, but if you ignore the rules — check your air, dive with a buddy, respect the depth limits — the ocean will humble you. The rules aren't restrictions. They're what keep you alive long enough to enjoy the beauty below.`,
+ nuance: `Mind over Math: 90% of trading is psychology. The other 10% is just looking for the buttons.`,
+ example: ``,
+ },
+ 'trade-journal': {
+ analysis: `Trade Journal
 "What you don't track, you can't improve. What you don't review, you're doomed to repeat."`,
-    analogy: `A pilot's logbook. Every flight, every decision, every outcome—recorded and reviewed. The journal is how you become an ace.`,
-    nuance: `Pattern Recognition: Your journal reveals truths you can't see in the moment. Over time, patterns emerge—your edge, your blind spots, your path to mastery.`,
-    example: ``,
-  },
-  'express-what-are-options': {
-    analysis: `Welcome to the Jungle
+ analogy: `A pilot's logbook. Every flight, every decision, every outcome—recorded and reviewed. The journal is how you become an ace.`,
+ nuance: `Pattern Recognition: Your journal reveals truths you can't see in the moment. Over time, patterns emerge—your edge, your blind spots, your path to mastery.`,
+ example: ``,
+ },
+ 'express-what-are-options': {
+ analysis: `Welcome to the Jungle
 Don't Start with Math.
 Start with Bananas.
 Before we define "Options", let's solve two simple jungle problems.
-🍌
-🍌 Story 1: The "Banana Voucher"
+
+ Story 1: The "Banana Voucher"
 You're a monkey. The merchant sells bananas for \$5. You're scared the price will double tomorrow, but you don't have \$5 yet. You pay \$0.50 for a voucher that guarantees you can buy a banana at \$5 anytime this month.
 ✓
 Scenario A: Banana shortage! Price jumps to \$8. Your voucher lets you buy at \$5. You flip it for \$8. Profit!
@@ -588,7 +588,7 @@ Scenario B: Surplus. Price drops to \$4. You throw the voucher away (lose \$0.50
 This is a "Call Option"
 The right to BUY later at a fixed price.
 Bullish monkeys buy Calls.
-🍌 Story 2: The "Banana Plantation Insurance"
+ Story 2: The "Banana Plantation Insurance"
 You own a banana plantation (Stock) worth \$50k. You're scared of a disease outbreak wiping out your crop. You pay \$1k for an insurance policy.
 ✓
 Scenario A: DISEASE! Bananas rot, value hits \$0. Insurance pays you \$50k. You are saved.
@@ -637,21 +637,21 @@ Warning: If you can't explain in 30 seconds what the company does and why it wil
 Rights vs. Obligations
 When you BUY an option, you have the RIGHT to act, but you don't have to. If the trade goes against you, you simply let the contract expire worthless and lose only the premium you paid.
 When you SELL an option, you have the OBLIGATION to fulfill the contract if the buyer chooses to exercise it. This is why selling can be more dangerous!
-🧠 The Options Paradigm Shift
+ The Options Paradigm Shift
 Non-Linearity (3D Chess)
 Stocks are 2D: they go up or down. Options are 3D: you can profit from direction, time passing, or even volatility exploding. You are no longer limited to just "being right" about direction.
 Asymmetric Risk (The Shield)
 Beginners think options are risky. Pros know that owning stock is risky. Buying a Call defines your max loss instantly (the premium). Owning stock leaves you exposed to a 50% drop overnight.
 Capital Agility (The Lever)
 Why tie up \$15,000 to own 100 shares of Apple? You can control the same upside for \$500. This frees up your remaining capital to generate yield elsewhere. It's not about gambling; it's about efficient allocation.`,
-    analogy: `An option is like a VIP banana coupon. If the store price for bananas is higher than your coupon price, you use it and get more bananas for less. If the store price drops below your coupon, you toss it in the trash and buy bananas at the cheaper market price.`,
-    nuance: `The 100 Multiplier: Every \$1 in premium equals \$100 in real dollars. If you see an option for \$2.50, it costs \$250.00.`,
-    example: `Scenario: Apple is \$150. You think it hits \$170.
+ analogy: `An option is like a VIP banana coupon. If the store price for bananas is higher than your coupon price, you use it and get more bananas for less. If the store price drops below your coupon, you toss it in the trash and buy bananas at the cheaper market price.`,
+ nuance: `The 100 Multiplier: Every \$1 in premium equals \$100 in real dollars. If you see an option for \$2.50, it costs \$250.00.`,
+ example: `Scenario: Apple is \$150. You think it hits \$170.
 Option: You buy a \$160 Strike Call for \$2.00 (\$200 total).
 Result: If Apple hits \$180, your option is worth at least \$20.00 (\$2,000). You turned \$200 into \$2,000. That is the power of options.`,
-  },
-  'express-greeks': {
-    analysis: `🚀
+ },
+ 'express-greeks': {
+ analysis: `
 Express Lane
 The Only 2 Greeks You Need (8 min)
 Greeks measure how your option's price changes. For your first trades, focus on just two: Delta and Theta.
@@ -670,10 +670,10 @@ Pro Tip: Delta also approximates probability of expiring ITM. 0.30 delta ≈ 30%
 Theta — The Daily Tax
 How much value your option loses each day
 If your option has Theta = -0.05, you lose \$5 per day per contract just from time passing. Options are melting ice cubes.
-⚠️ The Theta Warning
+⚠ The Theta Warning
 Time decay accelerates in the final 2 weeks before expiration. Don't hold options into expiration week unless you know what you're doing.
 For Beginners: Buy options with 60-120 days until expiration. This gives you time to be right without losing too much to Theta.
-🎯 Quick Decision Framework
+ Quick Decision Framework
 Bullish Trade?
 Buy a 0.50-0.70 delta call with 60-90 days until expiration. This balances speed (delta) and decay (theta).
 Bearish Trade?
@@ -682,15 +682,15 @@ Why 60-90 Days?
 Theta doesn't hurt as much, but the option is still reasonably priced. You have time to be right.
 ✓ You now understand: Delta (directional exposure) and Theta (time decay)
 Next up: Learn about IV (Implied Volatility) and why it matters for pricing`,
-    analogy: `Delta is your car's speedometer—it tells you how fast your option reacts when the stock moves. Theta is the gas tank draining—every day the engine runs, you burn fuel whether you're driving or parked.`,
-    nuance: `Delta as Probability: A 0.30 delta option has roughly a 30% chance of finishing in the money. Higher delta = higher cost but higher probability of profit.
+ analogy: `Delta is your car's speedometer—it tells you how fast your option reacts when the stock moves. Theta is the gas tank draining—every day the engine runs, you burn fuel whether you're driving or parked.`,
+ nuance: `Delta as Probability: A 0.30 delta option has roughly a 30% chance of finishing in the money. Higher delta = higher cost but higher probability of profit.
 Theta Accelerates: Time decay is slow at 90 days but becomes a cliff in the final 2 weeks. Always give yourself enough runway.`,
-    example: `Scenario: You buy a 0.50 delta call on AAPL (\$180) for \$5.00 with 75 days to expiration.
+ example: `Scenario: You buy a 0.50 delta call on AAPL (\$180) for \$5.00 with 75 days to expiration.
 Delta: AAPL moves up \$2 → your option gains roughly \$1.00 (\$100 per contract).
 Theta: Each day costs you about \$0.04 (\$4/day). Over 10 flat days, you lose \$40 to time alone.`,
-  },
-  'express-iv': {
-    analysis: `🚀
+ },
+ 'express-iv': {
+ analysis: `
 Express Lane
 Understanding IV (Implied Volatility) (8 min)
 IV is NOT a Greek—it's the market's forecast of how much the stock will move. It directly affects option prices.
@@ -703,20 +703,20 @@ Good time to buy options if you think a big move is coming.
 High IV (~50-100%+)
 Options are expensive. Market expects big moves.
 Be careful buying—you're paying a premium for fear.
-📈 IV in Action: Real Example
+ IV in Action: Real Example
 Scenario 1: AAPL (Low IV = 25%)
 Stock at \$180. 30-day ATM call costs \$4.50 (\$450 per contract).
 ✓ Market is calm. Options are reasonably priced.
 Scenario 2: AAPL Earnings Week (High IV = 60%)
 Stock still at \$180. Same 30-day ATM call now costs \$8.20 (\$820 per contract).
-⚠️ You're paying 82% more for the same strike, just because IV spiked.
+⚠ You're paying 82% more for the same strike, just because IV spiked.
 Key Insight: If you buy options when IV is high and it drops after (IV crush), your option loses value even if the stock doesn't move.
-🔥 IV Crush: The Silent Killer
+ IV Crush: The Silent Killer
 IV Crush happens when implied volatility suddenly drops—usually after a major event like earnings.
 Before earnings: IV = 80% (high fear). After earnings: IV = 30% (event over, calm restored). Your option can lose 30-50% of its value overnight, even if you guessed the direction correctly.
-⚠️ Beginner Warning
+⚠ Beginner Warning
 Avoid buying options right before earnings if you're new. The IV crush can wipe out your gains even if the stock moves in your favor.
-📊 How to Check IV
+ How to Check IV
 1. Check IV Percentile (IV Rank)
 IV Rank tells you where current IV sits relative to its 52-week range.
 • IV Rank 0-25% = Low IV, options cheap
@@ -724,7 +724,7 @@ IV Rank tells you where current IV sits relative to its 52-week range.
 • IV Rank 75-100% = High IV, options expensive
 2. Compare to Historical Average
 SPY typically trades at 15-20% IV. If it's at 40%, something unusual is happening (market fear, event risk).
-✅ Quick IV Strategy Guide
+ Quick IV Strategy Guide
 When IV is Low (Buy Options)
 • Options are on sale—good time to buy calls/puts
 • You benefit if IV increases (expands value)
@@ -735,19 +735,19 @@ When IV is High (Be Cautious)
 • Consider waiting or using spreads instead
 ✓ You now understand: What IV is, why it matters, and when to avoid buying options
 IV isn't a Greek—it's the price tag. Always check IV before entering a trade.`,
-    analogy: `IV is like surge pricing for Uber. When demand spikes (fear, earnings, news), the price of the same ride doubles. When things calm down, prices drop. You're buying the same option—you're just paying more when the market is scared.`,
-    nuance: `IV Crush is Real: Buying calls before earnings and being right on direction but still losing money is the most common beginner mistake. IV can drop 50%+ overnight after the event passes.
+ analogy: `IV is like surge pricing for Uber. When demand spikes (fear, earnings, news), the price of the same ride doubles. When things calm down, prices drop. You're buying the same option—you're just paying more when the market is scared.`,
+ nuance: `IV Crush is Real: Buying calls before earnings and being right on direction but still losing money is the most common beginner mistake. IV can drop 50%+ overnight after the event passes.
 IV Rank is Your Friend: Always check where IV sits relative to its 52-week range before buying. Below 25th percentile = cheap. Above 75th = expensive.`,
-    example: `Scenario: AAPL at \$180. You buy a \$185 call for \$4.50 when IV is 25% (low).
+ example: `Scenario: AAPL at \$180. You buy a \$185 call for \$4.50 when IV is 25% (low).
 Good: If AAPL rises to \$190 and IV stays stable, your call is worth ~\$7.50. Profit: \$300.
 Bad: Same trade but IV was 60% (pre-earnings). Even if AAPL hits \$190, IV crush drops your call to \$5.50. Profit: only \$100 instead of \$300.`,
-  },
-  'express-chain': {
-    analysis: `🚀
+ },
+ 'express-chain': {
+ analysis: `
 Express Lane
 Reading an Options Chain (10 min)
 The options chain is your menu. Here's how to read it.
-📊 Anatomy of the Chain (Example)
+ Anatomy of the Chain (Example)
 CALLS |
 STRIKE |
 PUTS |
@@ -858,19 +858,19 @@ Vol |
 Stock price: \$120.45
 Expiration: 30 DTE (Feb 26, 2026)
 IV Rank: 52%
-📗 Bid vs Ask
+ Bid vs Ask
 Bid: What buyers will pay (you sell at this price)
 Ask: What sellers want (you buy at this price)
 The difference is the "spread." Tighter spread = more liquid = better.
-🎯 Strike Selection
+ Strike Selection
 ITM (In The Money): Higher delta, more expensive, safer
 ATM (At The Money): ~0.50 delta, balanced
 OTM (Out of Money): Lower delta, cheaper, riskier
-📊 Volume & OI
+ Volume & OI
 Volume (Vol): Contracts traded today
 Open Interest (OI): Total open contracts
 High OI + Volume = Liquid option = Easier to enter/exit
-🔥
+
 Liquidity Check
 Before trading any option, verify:
 •
@@ -888,7 +888,7 @@ Delta tells you probability and movement:
 0.50 delta - ATM, coin flip, most balanced
 •
 0.30 delta - OTM, ~30% chance, high leverage
-🛒 Placing Your First Order
+ Placing Your First Order
 1
 Select expiration: 60-120 days out for beginners
 2
@@ -898,30 +898,30 @@ Check the Ask price: Multiply by 100 for total cost
 4
 Use a Limit Order: Set your price between bid and ask (mid-price)
 ✓ You now understand: How to read strikes, bids, asks, and place orders
-🔴
+
 LIVE Interactive Options Chain Below ↓
 Try it yourself! Scroll down to enter any ticker and explore real-time options data.
 Click different strikes, change expirations, and see live bid/ask/volume/OI data update in real-time.`,
-    analogy: `The options chain is like a restaurant menu. Strikes are dishes at different price points, bid/ask is the negotiation range, volume is how popular the dish is today, and open interest is how many servings exist. Always order from the busy section—that's where the kitchen is fastest (liquidity is best).`,
-    nuance: `Liquidity Rules Everything: Open interest above 1,000 and volume above 100 means tight spreads and easy fills. Low liquidity means you'll overpay to get in and get less when exiting.
+ analogy: `The options chain is like a restaurant menu. Strikes are dishes at different price points, bid/ask is the negotiation range, volume is how popular the dish is today, and open interest is how many servings exist. Always order from the busy section—that's where the kitchen is fastest (liquidity is best).`,
+ nuance: `Liquidity Rules Everything: Open interest above 1,000 and volume above 100 means tight spreads and easy fills. Low liquidity means you'll overpay to get in and get less when exiting.
 Always Use Limit Orders: Never use market orders on options. Set your price at the mid-point between bid and ask.`,
-    example: `Reading the Chain: NVDA \$800 call — Bid: \$12.40, Ask: \$12.80, Volume: 5,200, OI: 42,000, Delta: 0.45, IV: 38%.
+ example: `Reading the Chain: NVDA \$800 call — Bid: \$12.40, Ask: \$12.80, Volume: 5,200, OI: 42,000, Delta: 0.45, IV: 38%.
 Translation: Liquid (high OI/volume), fair price around \$12.60 (mid), ~45% chance of profit, moderate IV. This is a tradeable option.`,
-  },
-  'express-long-call': {
-    analysis: `🚀
+ },
+ 'express-long-call': {
+ analysis: `
 Express Lane
 Long Call (15 min)
 Your first bullish trade. Buy a call when you think the stock is going UP.
 Direction
-📈 BULLISH
+ BULLISH
 Max Profit
 ∞ Unlimited
 Max Loss
 Premium Paid
 Breakeven
 Strike + Premium
-📖 Real Example: AAPL Long Call
+ Real Example: AAPL Long Call
 Stock: AAPL at \$175
 Your View: Bullish — earnings coming
 Strike: \$180 Call
@@ -929,46 +929,46 @@ Expiration: 90 days
 Premium: \$6.50 (\$650 total)
 Breakeven: \$186.50
 Three Possible Outcomes:
-🎯 AAPL goes to \$195
+ AAPL goes to \$195
 +\$850 profit (+131%)
 Option worth \$15 (intrinsic) × 100 = \$1,500. Minus \$650 cost = \$850 profit.
-😐 AAPL stays at \$175
+ AAPL stays at \$175
 -\$650 loss (-100%)
 Option expires worthless. You lose the premium paid. Nothing more.
-📉 AAPL crashes to \$150
+ AAPL crashes to \$150
 -\$650 loss (-100%)
 Same loss as staying flat. Your risk is DEFINED. This is the power of options.
-✅ Long Call Checklist
+ Long Call Checklist
 I'm BULLISH on this stock (expecting it to go UP)
 I've chosen 60-120 days until expiration
 I'm using ATM or slightly OTM strike (0.40-0.50 delta)
 I'm only risking money I can afford to lose (1-2% of account)
 I have an exit plan (profit target AND stop loss)
 ✓ You now understand: How to buy calls for bullish trades with defined risk`,
-    analogy: `Buying a call is like buying a concert ticket at face value before it sells out. If the artist blows up, your ticket is worth 10x on resale. If the concert flops, you only lose what you paid for the ticket—nothing more.`,
-    nuance: `Time is Your Enemy: Every day you hold a long call, theta eats a small piece. Give yourself 60-120 DTE to be right.
+ analogy: `Buying a call is like buying a concert ticket at face value before it sells out. If the artist blows up, your ticket is worth 10x on resale. If the concert flops, you only lose what you paid for the ticket—nothing more.`,
+ nuance: `Time is Your Enemy: Every day you hold a long call, theta eats a small piece. Give yourself 60-120 DTE to be right.
 Strike Selection Matters: ATM calls (0.50 delta) balance cost and probability. Deep OTM calls are cheap but rarely pay off.`,
-    example: `Scenario: AAPL at \$175. You're bullish over the next 2 months.
+ example: `Scenario: AAPL at \$175. You're bullish over the next 2 months.
 The Trade: Buy 1x \$180 call, 90 DTE, for \$6.50 (\$650 total).
 Win: AAPL hits \$195 in 6 weeks. Call worth ~\$16.50. Profit: \$1,000.
 Lose: AAPL drops to \$170. Call expires worthless. Max loss: \$650.`,
-    animalMetaphor: `The Cheetah
+ animalMetaphor: `The Cheetah
 The cheetah is the fastest land animal, capable of explosive acceleration from 0 to 70 mph in seconds. A long call embodies this same explosive upside potential—when the underlying stock rockets higher, your profits accelerate without limit. Like a cheetah stalking prey, you pay a premium upfront (the energy to sprint), but if you time it right and the prey runs in your direction, the payoff is spectacular. Defined risk, unlimited reward.`,
-  },
-  'express-long-put': {
-    analysis: `🚀
+ },
+ 'express-long-put': {
+ analysis: `
 Express Lane
 Long Put (15 min)
 Profit from falling stocks OR protect your portfolio. The put is your insurance policy.
 Direction
-📉 BEARISH
+ BEARISH
 Max Profit
 Strike - Premium
 Max Loss
 Premium Paid
 Breakeven
 Strike - Premium
-📖 Real Example: META Long Put
+ Real Example: META Long Put
 Stock: META at \$500
 Your View: Bearish — overvalued
 Strike: \$490 Put
@@ -976,52 +976,52 @@ Expiration: 90 days
 Premium: \$12.00 (\$1,200 total)
 Breakeven: \$478
 Three Possible Outcomes:
-🎯 META drops to \$450
+ META drops to \$450
 +\$2,800 profit (+233%)
 Put worth \$40 (intrinsic) × 100 = \$4,000. Minus \$1,200 cost = \$2,800 profit.
-😐 META stays at \$500
+ META stays at \$500
 -\$1,200 loss (-100%)
 Put expires worthless. You lose the premium paid.
-📈 META rallies to \$550
+ META rallies to \$550
 -\$1,200 loss (-100%)
 Same max loss whether stock goes up a little or a lot. Risk is DEFINED.
-🛡️ Puts as Portfolio Insurance
+ Puts as Portfolio Insurance
 Own 100 shares of NVDA at \$120? Buy a \$115 put for \$3 (\$300). If NVDA crashes to \$80, you can sell your shares at \$115. Your "floor" is set.
 Without Protection
 NVDA drops to \$80. Loss: \$4,000 (100 × \$40)
 With \$115 Put
 NVDA drops to \$80. Loss capped at \$500 + \$300 premium = \$800
 ✓ You now understand: How to buy puts for bearish trades or portfolio protection`,
-    analogy: `Buying a put is like buying car insurance. You pay a premium hoping you never need it—but if you crash (stock tanks), the insurance pays out and saves you from catastrophe. The premium is the cost of sleeping well at night.`,
-    nuance: `Protection vs. Speculation: Puts serve two purposes—betting on a decline, or protecting stock you already own. As insurance on existing shares, the cost is your peace of mind.
+ analogy: `Buying a put is like buying car insurance. You pay a premium hoping you never need it—but if you crash (stock tanks), the insurance pays out and saves you from catastrophe. The premium is the cost of sleeping well at night.`,
+ nuance: `Protection vs. Speculation: Puts serve two purposes—betting on a decline, or protecting stock you already own. As insurance on existing shares, the cost is your peace of mind.
 Same Rules Apply: Use 60-120 DTE, ATM or slightly OTM strikes, and defined risk (the premium you pay).`,
-    example: `Scenario: You own META at \$500 and want downside protection.
+ example: `Scenario: You own META at \$500 and want downside protection.
 The Trade: Buy 1x \$490 put, 90 DTE, for \$12.00 (\$1,200).
 Crash: META drops to \$430. Put is worth \$60. You lost \$70 on stock but gained \$48 on the put. Net loss: \$2,200 instead of \$7,000.
 Rally: META rises to \$550. Put expires worthless. Cost: \$1,200 (insurance premium).`,
-    animalMetaphor: `The Vulture
+ animalMetaphor: `The Vulture
 Vultures thrive when others fall. They circle patiently, waiting for weakness, then descend to profit from decline. A long put buyer profits when stocks collapse—the greater the carnage, the larger the feast. Like a vulture's keen eyesight spotting distress from miles away, put buyers identify overvalued or troubled companies. The premium paid is the cost of patience, but when the stock crashes, the payoff is substantial with limited downside risk.`,
-  },
-  'express-csp': {
-    analysis: `🚀
+ },
+ 'express-csp': {
+ analysis: `
 Express Lane
 Cash-Secured Put Deep Dive (15 min)
 Get PAID to potentially buy a stock at a lower price. The income strategy for patient investors.
 Direction
-📊 NEUTRAL+
+ NEUTRAL+
 Max Profit
 Premium Received
 Max Loss
 Strike × 100 - Premium
 Breakeven
 Strike - Premium
-💡 The Concept: Getting Paid to Wait
+ The Concept: Getting Paid to Wait
 You want to buy AAPL, but think \$175 is too expensive. You'd buy at \$165. Instead of waiting and hoping, you can:
 Sell a \$165 Put and collect \$2.50 (\$250) immediately.
 • If AAPL stays above \$165: You keep the \$250 and try again next month.
 • If AAPL drops below \$165: You buy 100 shares at \$165 (your target price) AND keep the \$250.
 Either way, you win. You either collect income or buy the stock at your preferred price.
-📖 Real Example: AMD Cash-Secured Put
+ Real Example: AMD Cash-Secured Put
 Stock: AMD at \$160
 Your View: Would buy at \$150
 Strike: Sell \$150 Put
@@ -1029,48 +1029,48 @@ Expiration: 60 days
 Premium Received: +\$4.50 (+\$450)
 Cash Required: \$15,000 (secured)
 Three Possible Outcomes:
-📈 AMD stays above \$150
+ AMD stays above \$150
 +\$450 profit (3% in 60 days)
 Put expires worthless. You keep the \$450 premium. Annualized: ~18% return.
-🎯 AMD drops to \$145
+ AMD drops to \$145
 Assigned: Buy at effective \$145.50
 You buy 100 shares at \$150, but you collected \$450, so net cost = \$145.50/share. Better than buying at \$160!
-💥 AMD crashes to \$100
+ AMD crashes to \$100
 You own shares at \$145.50
 You still buy at \$150 - \$4.50 = \$145.50. Paper loss, but you wanted to own AMD anyway.
-⚠️ Critical Rule: Only Sell CSPs on Stocks You WANT to Own
+⚠ Critical Rule: Only Sell CSPs on Stocks You WANT to Own
 Never sell puts just for premium on stocks you wouldn't want to hold. If assigned, you'll own 100 shares. Make sure that's a win, not a punishment.
 ✓ You now understand: How to sell puts for income while waiting to buy stocks cheaper`,
-    analogy: `Selling a cash-secured put is like putting in a lowball bid at an auction while getting paid to wait. You tell the market: 'I'll buy this stock at a discount, and you'll pay me for the privilege of having me stand ready.' If the stock never dips, you keep the payment. If it does dip, you buy what you wanted at the price you wanted.`,
-    nuance: `Only Sell on Stocks You Want to Own: This is the golden rule. If assigned, you'll buy 100 shares at the strike price. Make sure that's a price you're happy with.
+ analogy: `Selling a cash-secured put is like putting in a lowball bid at an auction while getting paid to wait. You tell the market: 'I'll buy this stock at a discount, and you'll pay me for the privilege of having me stand ready.' If the stock never dips, you keep the payment. If it does dip, you buy what you wanted at the price you wanted.`,
+ nuance: `Only Sell on Stocks You Want to Own: This is the golden rule. If assigned, you'll buy 100 shares at the strike price. Make sure that's a price you're happy with.
 Cash Required: Your broker locks up strike × 100 in cash as collateral. The premium you collect offsets this, but the capital commitment is real.`,
-    example: `Scenario: AMD at \$160. You'd love to own it at \$150.
+ example: `Scenario: AMD at \$160. You'd love to own it at \$150.
 The Trade: Sell 1x \$150 put, 45 DTE, for \$4.50 (\$450 credit). Requires \$15,000 cash secured.
 Win: AMD stays above \$150. Put expires worthless. You keep \$450. Return: 3% in 45 days.
 Assignment: AMD drops to \$145. You buy 100 shares at \$150 (your target price) but your effective cost is \$145.50 after the premium.`,
-    animalMetaphor: `The Trapdoor Spider
+ animalMetaphor: `The Trapdoor Spider
 The trapdoor spider builds a burrow and waits patiently for prey to wander within striking distance. Selling cash-secured puts is identical—you set your trap (strike price) at a level where you'd happily own the stock, then wait. If the stock stumbles into your trap (falls to strike), you acquire shares at your desired discount. If it doesn't, you keep the premium. Patient, opportunistic, and always prepared to strike at the right price.`,
-  },
-  'express-covered-call': {
-    analysis: `🚀
+ },
+ 'express-covered-call': {
+ analysis: `
 Express Lane
 Selling Covered Call (15 min)
 Generate income from stocks you already own. The income strategy for long-term shareholders.
 Direction
-📊 NEUTRAL+
+ NEUTRAL+
 Max Profit
 Premium + Upside to Strike
 Max Loss
 Stock Drop - Premium
 Breakeven
 Cost Basis - Premium
-💡 The Concept: Getting Paid for Capping Upside
+ The Concept: Getting Paid for Capping Upside
 You own 100 shares of NVDA at \$900. You're happy with the stock, but don't expect a huge move in the next month. Instead of just holding, you can:
 Sell a \$920 Call and collect \$8.00 (\$800) immediately.
 • If NVDA stays below \$920: You keep the \$800 and still own the shares. Rinse & repeat next month.
 • If NVDA rises above \$920: You sell your shares at \$920 (a 2.2% gain) PLUS keep the \$800 premium.
 Either way, you profit. You either collect income or sell your shares at a higher price.
-📖 Real Example: TSLA Covered Call
+ Real Example: TSLA Covered Call
 Stock: TSLA at \$250 (you own 100 shares)
 Your View: Sideways to slightly bullish
 Strike: Sell \$260 Call
@@ -1078,41 +1078,41 @@ Expiration: 45 days
 Premium Received: +\$5.00 (+\$500)
 Your Cost Basis: \$240/share
 Three Possible Outcomes:
-📊 TSLA stays at \$250-\$255
+ TSLA stays at \$250-\$255
 +\$500 profit (2% on shares in 45 days)
 Call expires worthless. You keep the \$500 premium and still own shares. Annualized: ~16% return on your stock position.
-📈 TSLA rises to \$270
+ TSLA rises to \$270
 +\$2,500 total profit (shares called away)
 You sell shares at \$260 (\$2,000 gain from \$240 basis) + \$500 premium = \$2,500 total. You miss gains above \$260, but you still made 10.4% in 45 days.
-📉 TSLA drops to \$230
+ TSLA drops to \$230
 -\$1,500 loss on shares (offset by \$500 premium)
 Your shares lost \$2,000 in value, but the \$500 premium cushions the fall. Net loss: -\$1,500 vs. -\$2,000 if you just held.
-✅ Covered Call Checklist
+ Covered Call Checklist
 I own 100 shares of this stock (or multiples of 100)
 I'm okay selling my shares at the strike price (it's above my cost basis)
 I'm not expecting a massive rally in the next 30-60 days
 I'm selling 30-60 days out with 0.30-0.40 delta (OTM strikes)
 I understand I'm giving up unlimited upside for consistent income
-⚠️ Critical Rule: Don't Sell Covered Calls Before Major Catalysts
+⚠ Critical Rule: Don't Sell Covered Calls Before Major Catalysts
 Avoid selling covered calls right before earnings, product launches, or major announcements. You want to collect premium during quiet periods, not cap your gains when the stock might explode higher.
 ✓ You now understand: How to sell covered calls for income on stocks you own`,
-    analogy: `Selling a covered call is like renting out a room in your house. You already own the house (stock), and the tenant pays you rent (premium) every month. The catch: if someone offers to buy the house at the agreed price, you have to sell. You get income, but you cap your upside.`,
-    nuance: `Don't Sell Before Catalysts: If earnings, an FDA decision, or a product launch could send your stock soaring, selling a covered call caps you right before the biggest move.
+ analogy: `Selling a covered call is like renting out a room in your house. You already own the house (stock), and the tenant pays you rent (premium) every month. The catch: if someone offers to buy the house at the agreed price, you have to sell. You get income, but you cap your upside.`,
+ nuance: `Don't Sell Before Catalysts: If earnings, an FDA decision, or a product launch could send your stock soaring, selling a covered call caps you right before the biggest move.
 Strike Selection: Sell calls 5-10% above the current price. Far enough to let the stock run a bit, close enough to collect meaningful premium.`,
-    example: `Scenario: You own 100 shares of TSLA at \$250.
+ example: `Scenario: You own 100 shares of TSLA at \$250.
 The Trade: Sell 1x \$260 call, 30 DTE, for \$5.00 (\$500 credit).
 Flat: TSLA stays at \$250. Call expires worthless. Keep \$500. Do it again next month.
 Rally: TSLA hits \$280. Shares called away at \$260. Total gain: \$10/share + \$5 premium = \$1,500. You missed \$20/share above \$260.
 Drop: TSLA falls to \$235. Keep \$500 premium, offsetting \$1,500 stock loss. Net loss: \$1,000 instead of \$1,500.`,
-    animalMetaphor: `The Dairy Cow
+ animalMetaphor: `The Dairy Cow
 A dairy cow provides steady, reliable income through regular milk production. You own the cow (the stock), and selling covered calls is like selling the milk—consistent premium income month after month. The cow won't make you rich overnight, but she pays her way reliably. The tradeoff: if someone offers a fortune for your cow (stock gets called away), you must sell at the agreed price, missing further upside. A strategy for patient farmers seeking income over excitement.`,
-  },
-  'express-risk-calc': {
-    analysis: `🚀
+ },
+ 'express-risk-calc': {
+ analysis: `
 Express Lane
 Position Sizing & Risk (10 min)
 The #1 rule of trading: Never risk more than you can afford to lose on a single trade.
-🎯 The 1-2% Rule
+ The 1-2% Rule
 Professional traders never risk more than 1-2% of their account on any single trade. This means:
 \$10,000 Account
 \$100 - \$200
@@ -1123,7 +1123,7 @@ Max risk per trade
 \$50,000 Account
 \$500 - \$1,000
 Max risk per trade
-🧮 Quick Position Size Calculator
+ Quick Position Size Calculator
 Your Account Size:
 \$25,000
 Risk Percentage:
@@ -1135,7 +1135,7 @@ Want precise control?
 Use the full Position Sizing Calculator in Tier 9 to dial in exact share counts based on your stop loss and account size.
 Launch Position Sizing Tool
 Strategy Tools → Tier 9 → Position Sizing
-✅ Pre-Trade Risk Checklist
+ Pre-Trade Risk Checklist
 1
 Calculate max loss: For long options = premium paid
 2
@@ -1149,19 +1149,19 @@ Use the full Risk/Reward Calculator in Strategy Tools to analyze your trades wit
 Launch Risk/Reward Calculator
 Features: Live IV, 1SD projections, Tier 1 logic checks, and Tier 2 scorecard
 ✓ You now understand: How to size positions and manage risk like a pro`,
-    analogy: `Position sizing is like a poker bankroll. Professional poker players never sit at a table where one bad hand wipes them out. They risk 1-2% of their bankroll per hand, so even a losing streak doesn't end the game. Same with options: survive first, profit second.`,
-    nuance: `The 1-2% Rule is Non-Negotiable: If your account is \$10,000, never risk more than \$100-200 on a single trade. This means your max loss (the premium paid) should be within that range.
+ analogy: `Position sizing is like a poker bankroll. Professional poker players never sit at a table where one bad hand wipes them out. They risk 1-2% of their bankroll per hand, so even a losing streak doesn't end the game. Same with options: survive first, profit second.`,
+ nuance: `The 1-2% Rule is Non-Negotiable: If your account is \$10,000, never risk more than \$100-200 on a single trade. This means your max loss (the premium paid) should be within that range.
 Know Your Max Loss Before Entry: If you can't instantly say 'my worst case is \$X,' you shouldn't be in the trade.`,
-    example: `Account Size: \$10,000. Max risk per trade: 2% = \$200.
+ example: `Account Size: \$10,000. Max risk per trade: 2% = \$200.
 Trade Check: You want to buy 1 AAPL \$185 call for \$3.50 (\$350). That's 3.5% of your account—too much.
 Fix: Either find a cheaper option (further OTM, shorter DTE) or wait for a better entry. Never bend the rule.`,
-  },
-  'express-paper-trading': {
-    analysis: `🚀
+ },
+ 'express-paper-trading': {
+ analysis: `
 Express Lane
 Paper Trading Practice (20 min)
 Practice placing trades with fake money before risking real capital.
-📝 Your Practice Assignment
+ Your Practice Assignment
 Using your broker's paper trading mode (or a demo account), execute these 4 trades:
 1
 Buy a Long Call
@@ -1187,58 +1187,58 @@ Sell a Covered Call
 • Select 30-60 days expiration
 • Choose a strike 5-10% above current price
 • Sell 1 contract (requires owning 100 shares)
-🎯
+
 Ready to Start Paper Trading?
 Use our full Paper Trading Simulator to track your practice trades, calculate P&L in real-time, and build your trading journal.
 Launch Paper Trading Tool
 Strategy Tools → Tier 9 → Paper Trading
 ✓ Complete all 4 paper trades before moving to your real first trade`,
-    analogy: `Paper trading is flight simulation for pilots. No airline puts a rookie in a cockpit with 200 passengers. They log hundreds of hours in a simulator first, making every mistake in a consequence-free environment. Your paper trading account is your simulator—crash all you want, learn from it, and graduate to the real thing.`,
-    nuance: `Treat It Like Real Money: The biggest mistake in paper trading is being reckless because it's 'not real.' If you wouldn't risk \$500 of real money on a trade, don't paper trade it either. Build habits, not fantasies.
+ analogy: `Paper trading is flight simulation for pilots. No airline puts a rookie in a cockpit with 200 passengers. They log hundreds of hours in a simulator first, making every mistake in a consequence-free environment. Your paper trading account is your simulator—crash all you want, learn from it, and graduate to the real thing.`,
+ nuance: `Treat It Like Real Money: The biggest mistake in paper trading is being reckless because it's 'not real.' If you wouldn't risk \$500 of real money on a trade, don't paper trade it either. Build habits, not fantasies.
 Complete All 4 Assignments: Buy a call, buy a put, sell a cash-secured put, sell a covered call. These four are the building blocks of everything else.`,
-    example: `Assignment 1: Buy a long call on a stock you're bullish on. 60-120 DTE, ATM or slightly OTM. Track it daily.
+ example: `Assignment 1: Buy a long call on a stock you're bullish on. 60-120 DTE, ATM or slightly OTM. Track it daily.
 Assignment 2: Buy a long put on a stock you think is overvalued. Same parameters.
 Assignment 3: Sell a cash-secured put on a stock you'd love to own cheaper.
 Assignment 4: Sell a covered call on a stock you already own (or simulate owning).`,
-  },
-  'express-preflight': {
-    analysis: `🚀
+ },
+ 'express-preflight': {
+ analysis: `
 Express Lane
 Pre-Flight Checklist (5 min)
 Before placing your first REAL trade, run through this checklist.
-✈️ Your First Trade Checklist
-📋 Before You Trade
+ Your First Trade Checklist
+ Before You Trade
 I understand the difference between calls and puts
 I understand the difference between buying and selling both calls and puts
 I understand implied volatility
 I know what Delta, Theta, and Vega mean
 I can read an options chain and place an order
 I've paper traded at least 3 times
-💰 Risk Management
+ Risk Management
 My position size is ≤ 2% of my account
 I know my max loss BEFORE entering
 I have a profit target (e.g., 50% gain)
 I have a stop loss plan (e.g., exit at 50% loss)
-🎯 Trade Setup
+ Trade Setup
 I have a clear thesis (bullish/bearish/neutral)
 I've chosen 60-120 days expiration
 I'm using a LIMIT order (not market order)
 I'm mentally prepared to lose this money
-⚠️ Common First-Trade Mistakes to Avoid
-❌ Trading too close to expiration
+⚠ Common First-Trade Mistakes to Avoid
+ Trading too close to expiration
 Theta decay accelerates. Stick to 60-120 days.
-❌ Buying too far OTM
+ Buying too far OTM
 Low probability of profit. Start ATM or near-ATM.
-❌ Using market orders
+ Using market orders
 You'll get bad fills. Always use LIMIT orders.
-❌ Risking too much
+ Risking too much
 One bad trade shouldn't hurt your account. 1-2% max.
-🎉 You're Ready!
+ You're Ready!
 If you've checked all boxes, you're prepared to place your first real options trade. Start small, stay disciplined, and welcome to the jungle.`,
-    analogy: `The pre-flight checklist is what separates commercial aviation (0.00001% crash rate) from amateur flying. Pilots don't skip steps because they 'feel confident.' Every single flight, they run the same checklist. Your pre-trade checklist should be just as sacred—it's the difference between professional trading and gambling.`,
-    nuance: `If You Can't Check Every Box, Don't Trade: A missing checkbox isn't a suggestion to reconsider—it's a hard stop. Unclear thesis? Don't trade. Can't define max loss? Don't trade. Haven't paper traded this setup? Don't trade.
+ analogy: `The pre-flight checklist is what separates commercial aviation (0.00001% crash rate) from amateur flying. Pilots don't skip steps because they 'feel confident.' Every single flight, they run the same checklist. Your pre-trade checklist should be just as sacred—it's the difference between professional trading and gambling.`,
+ nuance: `If You Can't Check Every Box, Don't Trade: A missing checkbox isn't a suggestion to reconsider—it's a hard stop. Unclear thesis? Don't trade. Can't define max loss? Don't trade. Haven't paper traded this setup? Don't trade.
 Common Beginner Traps: Buying weeklies (too much theta), chasing OTM lottery tickets (low probability), using market orders (overpaying), and risking too much per trade.`,
-    example: `Pre-Flight Example: You want to buy an NVDA \$800 call.
+ example: `Pre-Flight Example: You want to buy an NVDA \$800 call.
 ☑ Thesis: Bullish on AI spending, expect \$850+ in 60 days.
 ☑ DTE: 90 days (safe from theta cliff).
 ☑ Delta: 0.45 (balanced).
@@ -1247,9 +1247,9 @@ Common Beginner Traps: Buying weeklies (too much theta), chasing OTM lottery tic
 ☑ Profit Target: \$2,400 (2:1 reward-to-risk).
 ☑ Stop Loss: Close at 50% loss (\$600).
 All boxes checked. Clear for takeoff.`,
-  },
-  'market-time': {
-    analysis: `"Time is Relative"
+ },
+ 'market-time': {
+ analysis: `"Time is Relative"
 — Albert Einstein
 "The labels 'Bull' and 'Bear' are meaningless without a reference to Time Frame."
 The Physics of the Market
@@ -1285,12 +1285,12 @@ High emotional toll — constant decisions drain willpower
 Transaction costs add up — commissions and bid/ask spreads
 No time to recover — mistakes compound quickly
 The Jungle Truth: There is no "better" timeframe. There is only the timeframe that matches your personality, your capital, and your life.`,
-    analogy: `To a photon, time does not exist; it arrives instantly. To an option buyer, time is the ultimate enemy. To an option seller, time is the ultimate ally.`,
-    nuance: `Focus on your Frame: A Day Trader looking at a Monthly chart will freeze. An Investor looking at a 1-minute chart will panic. Pick your Time Frame and ignore the relativity of the others.`,
-    example: ``,
-  },
-  'four-frames': {
-    analysis: `The 4 Frames of Reference
+ analogy: `To a photon, time does not exist; it arrives instantly. To an option buyer, time is the ultimate enemy. To an option seller, time is the ultimate ally.`,
+ nuance: `Focus on your Frame: A Day Trader looking at a Monthly chart will freeze. An Investor looking at a 1-minute chart will panic. Pick your Time Frame and ignore the relativity of the others.`,
+ example: ``,
+ },
+ 'four-frames': {
+ analysis: `The 4 Frames of Reference
 Every trader operates in a different time dimension. Your frame of reference determines what you see, what you ignore, and how you react to market movements.
 Stay Flexible
 The market doesn't care about your bias. A badger trapped in one mindset becomes prey. The best traders adapt their timeframe to what the market is showing them—not what they want to see.
@@ -1368,13 +1368,13 @@ Long-term positions, multi-month
 DTE:
 90+ days (LEAPS)
 Strategy: LEAPS, Poor Man's Covered Call, diagonal spreads
-⚠️ WARNING: Don't mix frames. If you're a Week Trader, don't buy 7 DTE options—you don't have time to be right. Match your DTE to your timeframe or you'll constantly fight theta.`,
-    analogy: `Each timeframe is a different species. The Monthly trader is an elephant—slow, patient, unstoppable. The Minute trader is a hummingbird—fast, reactive, exhausting.`,
-    nuance: `Multiple Frame Analysis: The best traders check the higher frame for direction, then execute in their primary frame. Monthly sets the trend, Daily picks the entry.`,
-    example: ``,
-  },
-  'philosophy-of-risk': {
-    analysis: `The Jungle Dolphin Code
+⚠ WARNING: Don't mix frames. If you're a Week Trader, don't buy 7 DTE options—you don't have time to be right. Match your DTE to your timeframe or you'll constantly fight theta.`,
+ analogy: `Each timeframe is a different species. The Monthly trader is an elephant—slow, patient, unstoppable. The Minute trader is a hummingbird—fast, reactive, exhausting.`,
+ nuance: `Multiple Frame Analysis: The best traders check the higher frame for direction, then execute in their primary frame. Monthly sets the trend, Daily picks the entry.`,
+ example: ``,
+ },
+ 'philosophy-of-risk': {
+ analysis: `The Jungle Dolphin Code
 "The jungle doesn't reward the bold. It rewards the prepared."
 "The secret of reaping the greatest fruitfulness and the greatest enjoyment from life is to live dangerously."
 FN
@@ -1514,9 +1514,9 @@ Do Not Enter The Trade
 The Jungle's Final Lesson
 Risk management isn't about avoiding losses—it's about surviving them. The best traders in history didn't win because they never lost. They won because they controlled the size of their losses and let their winners run.
 "In the jungle, it's not the strongest who survive. It's those who manage their exposure to the predators."`,
-    analogy: `Risk is gravity. You can't eliminate it — you can only learn to work with it. A tightrope walker doesn't pretend the ground isn't there. They train their balance, use a safety net, and never take a step without knowing where the next foothold is. Trading is the same: respect the fall, size the net, and never walk blind.`,
-    nuance: `The Paradox: Accepting small losses is what allows big wins. Traders who refuse to take losses end up taking catastrophic ones. The market will force you to learn this lesson—either through discipline or through devastation.`,
-    example: `The Scenario: Two traders each have \$10,000. Trader A risks 10% per trade (\$1,000). Trader B risks 2% per trade (\$200).
+ analogy: `Risk is gravity. You can't eliminate it — you can only learn to work with it. A tightrope walker doesn't pretend the ground isn't there. They train their balance, use a safety net, and never take a step without knowing where the next foothold is. Trading is the same: respect the fall, size the net, and never walk blind.`,
+ nuance: `The Paradox: Accepting small losses is what allows big wins. Traders who refuse to take losses end up taking catastrophic ones. The market will force you to learn this lesson—either through discipline or through devastation.`,
+ example: `The Scenario: Two traders each have \$10,000. Trader A risks 10% per trade (\$1,000). Trader B risks 2% per trade (\$200).
 After 5 Losing Trades:
 Trader A: \$10,000 → \$5,905 (41% drawdown)
 Trader B: \$10,000 → \$9,039 (10% drawdown)
@@ -1524,9 +1524,9 @@ To Recover:
 Trader A needs +69% to break even
 Trader B needs +11% to break even
 Trader B stays in the game. Trader A is fighting for survival.`,
-  },
-  'the-greeks': {
-    analysis: `"Those Greeks were superficial—out of profundity!"
+ },
+ 'the-greeks': {
+ analysis: `"Those Greeks were superficial—out of profundity!"
 — Friedrich Nietzsche, The Gay Science
 Monkey
 The Monkey's Take
@@ -1551,12 +1551,12 @@ High Vega = Sensitive to fear.
 Long Vega benefits from rising IV.
 Nuance & Greeks
 Interaction: High Gamma usually means High Theta burn. It is the price you pay for the explosive potential.`,
-    analogy: `Before you get into the Formula 1 car, master the steering wheel, pedal, windshield, and brakes.`,
-    nuance: `Interaction: High Gamma usually means High Theta burn.`,
-    example: ``,
-  },
-  'option-pricing': {
-    analysis: `What is Implied Volatility?
+ analogy: `Before you get into the Formula 1 car, master the steering wheel, pedal, windshield, and brakes.`,
+ nuance: `Interaction: High Gamma usually means High Theta burn.`,
+ example: ``,
+ },
+ 'option-pricing': {
+ analysis: `What is Implied Volatility?
 The One-Sentence Definition:
 "Implied Volatility is the market's forecast of how much a stock will move—expressed as an annualized percentage."
 IV is not history—it's prophecy. Historical volatility tells you how much a stock has moved. Implied volatility tells you how much the market expects it to move. It's extracted backwards from option prices: given what traders are willing to pay for options, what level of future movement are they pricing in?
@@ -1631,39 +1631,39 @@ When an option seems "expensive" or "cheap," it's because IV differs from histor
 but measurable probabilities of time, price, and fear."
 "You don't need to understand the engine to drive the car.
 But knowing it runs on gas, not magic, keeps you from making foolish mistakes."`,
-    analogy: `Intrinsic is the house value. Extrinsic is the fire insurance premium. When a fire is near (Earnings), the premium spikes even if the house hasn't changed.`,
-    nuance: `IV Crush: Buying high IV options before earnings is like buying fire insurance while the house is already smoking.`,
-    example: ``,
-  },
-  'iv-rank-tool': {
-    analysis: `IV Rank & Percentile
+ analogy: `Intrinsic is the house value. Extrinsic is the fire insurance premium. When a fire is near (Earnings), the premium spikes even if the house hasn't changed.`,
+ nuance: `IV Crush: Buying high IV options before earnings is like buying fire insurance while the house is already smoking.`,
+ example: ``,
+ },
+ 'iv-rank-tool': {
+ analysis: `IV Rank & Percentile
 "The market's fear has a price. Know when it's cheap, know when it's expensive."`,
-    analogy: `A thermometer for fear. Just as you'd check the temperature before dressing, check IV before trading options.`,
-    nuance: `The Edge: IV Rank tells you if options are priced for a hurricane or a sunny day. Sell premium when fear is high, buy when complacency reigns.`,
-    example: ``,
-  },
-  'earnings-calendar': {
-    analysis: `Earnings Calendar & IV Crush Analyzer
+ analogy: `A thermometer for fear. Just as you'd check the temperature before dressing, check IV before trading options.`,
+ nuance: `The Edge: IV Rank tells you if options are priced for a hurricane or a sunny day. Sell premium when fear is high, buy when complacency reigns.`,
+ example: ``,
+ },
+ 'earnings-calendar': {
+ analysis: `Earnings Calendar & IV Crush Analyzer
 "The jungle feasts on those who buy premium before earnings."`,
-    analogy: `A weather forecast for volatility storms. Earnings are scheduled hurricanes—you know they're coming, so you can position accordingly.`,
-    nuance: `The Trap: IV crush destroys long option buyers even when they're right on direction. The smart money sells premium into earnings and profits from the collapse.`,
-    example: ``,
-  },
-  'iv-crush-calculator': {
-    analysis: `IV Crush Calculator
+ analogy: `A weather forecast for volatility storms. Earnings are scheduled hurricanes—you know they're coming, so you can position accordingly.`,
+ nuance: `The Trap: IV crush destroys long option buyers even when they're right on direction. The smart money sells premium into earnings and profits from the collapse.`,
+ example: ``,
+ },
+ 'iv-crush-calculator': {
+ analysis: `IV Crush Calculator
 "The market giveth volatility, and the market taketh away."`,
-    analogy: `A pressure gauge showing how much air will escape your balloon. When the event passes, the pressure releases—and your option deflates with it.`,
-    nuance: `The Hidden Cost: IV crush can turn a winning directional bet into a losing trade. Calculate exactly how much the stock must move just to break even after the volatility collapse.`,
-    example: ``,
-  },
-  'assignment-exercise': {
-    analysis: `Interactive assignment and exercise tutorial - click to open`,
-    analogy: `Exercise is cashing a winning lottery ticket. Assignment is being the lottery — sometimes you have to pay out, but you already collected the ticket price.`,
-    nuance: `Fear vs Reality: Most beginners fear assignment like it's a penalty. In reality, it's just the contract fulfilling its purpose. Many pro traders use assignment strategically.`,
-    example: ``,
-  },
-  'mkt-structure': {
-    analysis: `Chart by Brian Shannon (@alphatrends) - The 4 Stages of a Stock's Life Cycle
+ analogy: `A pressure gauge showing how much air will escape your balloon. When the event passes, the pressure releases—and your option deflates with it.`,
+ nuance: `The Hidden Cost: IV crush can turn a winning directional bet into a losing trade. Calculate exactly how much the stock must move just to break even after the volatility collapse.`,
+ example: ``,
+ },
+ 'assignment-exercise': {
+ analysis: `Interactive assignment and exercise tutorial - click to open`,
+ analogy: `Exercise is cashing a winning lottery ticket. Assignment is being the lottery — sometimes you have to pay out, but you already collected the ticket price.`,
+ nuance: `Fear vs Reality: Most beginners fear assignment like it's a penalty. In reality, it's just the contract fulfilling its purpose. Many pro traders use assignment strategically.`,
+ example: ``,
+ },
+ 'mkt-structure': {
+ analysis: `Chart by Brian Shannon (@alphatrends) - The 4 Stages of a Stock's Life Cycle
 STAGE 1
 Accumulation
 The 'Smart Money' buying phase. Price moves sideways in a range. Low volatility, low interest from the public. Patience is key.
@@ -1685,71 +1685,71 @@ Now that you understand market structure, here's how to trade it. Each stage req
 STAGE 1
 Accumulation
 Price is range-bound. Volatility is low. The smart money is quietly buying.
-✅ IDEAL STRATEGIES:
+ IDEAL STRATEGIES:
 ▸
 Iron Condor - Profit from the range with defined risk on both sides
 ▸
 Covered Call - Generate income while waiting for breakout
 ▸
 Cash-Secured Put - Get paid to wait for accumulation entry
-⚠️ AVOID: Directional bets (Long Calls/Puts). You're trying to predict the breakout—save that for Stage 2.
+⚠ AVOID: Directional bets (Long Calls/Puts). You're trying to predict the breakout—save that for Stage 2.
 STAGE 2
 Markup (Uptrend)
 Higher highs, higher lows. The trend is your friend. This is where you make money.
-✅ IDEAL STRATEGIES:
+ IDEAL STRATEGIES:
 ▸
 Long Call - Pure upside leverage with defined risk
 ▸
 Bull Put Spread - Sell fear at support levels, collect premium
 ▸
 Call Debit Spread - Cheaper than naked calls, still captures trend
-⚠️ AVOID: Selling calls (Covered Call, Bear Call Spread). Don't cap your upside in a strong trend.
+⚠ AVOID: Selling calls (Covered Call, Bear Call Spread). Don't cap your upside in a strong trend.
 STAGE 3
 Distribution
 Choppy, volatile, topping action. Smart money is selling to the euphoric public.
-✅ IDEAL STRATEGIES:
+ IDEAL STRATEGIES:
 ▸
 Iron Condor - Profit from volatility contraction as range forms
 ▸
 Bear Call Spread - Fade resistance, collect premium on rallies
 ▸
 Short Straddle/Strangle - Advanced: Sell inflated IV as fear peaks
-⚠️ AVOID: Naked directional bets. Whipsaws will destroy you. Wait for Stage 4 confirmation.
+⚠ AVOID: Naked directional bets. Whipsaws will destroy you. Wait for Stage 4 confirmation.
 STAGE 4
 Decline (Downtrend)
 Lower highs, lower lows. Fear dominates. This is where bears feast.
-✅ IDEAL STRATEGIES:
+ IDEAL STRATEGIES:
 ▸
 Long Put - Pure downside leverage with defined risk
 ▸
 Bear Call Spread - Sell rallies at resistance, collect premium
 ▸
 Put Debit Spread - Cheaper than naked puts, captures downside
-💰 OR: Just go to cash. No shame in sitting out Stage 4. Capital preservation > catching falling knives.
+ OR: Just go to cash. No shame in sitting out Stage 4. Capital preservation > catching falling knives.
 The Cardinal Rule
 Let the market tell you what stage it's in. Don't force a bullish strategy in Stage 4 because "it's cheap." Don't short a Stage 2 trend because "it's extended." The market can remain irrational longer than you can remain solvent. Trade the stage, not your opinion.`,
-    analogy: `The seasons of the market. You don't plant seeds in winter (Decline) and you don't harvest in spring (Accumulation). To everything there is a season.`,
-    nuance: `Wyckoff Logic: Study Wyckoff theory to spot the difference between Re-Accumulation (pause in trend) and Distribution (end of trend).`,
-    example: ``,
-  },
-  'support-resistance': {
-    analysis: `Support (Floor): A price level where buyers have historically stepped in. Demand exceeds supply.
+ analogy: `The seasons of the market. You don't plant seeds in winter (Decline) and you don't harvest in spring (Accumulation). To everything there is a season.`,
+ nuance: `Wyckoff Logic: Study Wyckoff theory to spot the difference between Re-Accumulation (pause in trend) and Distribution (end of trend).`,
+ example: ``,
+ },
+ 'support-resistance': {
+ analysis: `Support (Floor): A price level where buyers have historically stepped in. Demand exceeds supply.
 Resistance (Ceiling): A price level where sellers have historically stepped in. Supply exceeds demand.
 Why Markets Remember Price Levels
 Support and resistance aren't magic lines—they're psychological scars left on the market. When price bounces from a level, traders who missed the move place orders there, hoping for another chance. Institutional traders park large orders at round numbers. The more times a level is tested, the more "order memory" accumulates there. The market has a memory, and these levels are where it remembers.
 Why "More Tests = Stronger" Exists
-📚 The Textbook View
+ The Textbook View
 Textbooks and many education sites say that a support or resistance level is stronger the more times it has caused price to reverse, because this shows many participants are reacting to that zone. In that sense "stronger" really means "more widely recognized and therefore more relevant," not necessarily more likely to hold on the next test.
-📊 Order-Flow Perspective
+ Order-Flow Perspective
 Each time price tags support, resting buy orders get filled and some motivated buyers exhaust their demand, so the supply–demand imbalance that created the bounce is gradually reduced. Unless new buy orders keep appearing at that level, repeated tests typically thin out the bid and make a breakdown more likely—demand is being used up.
-🔄 Reconciling the Two Views
+ Reconciling the Two Views
 Multiple bounces both:
 ✓
 Confirm that a level matters—lots of traders see and trade it
 ✓
 Increase the odds of a break—on a later test, the defending side may run out of inventory
 Many experienced price-action traders treat a level with many recent, rapid tests as a good candidate for a breakout trade, not as "extra strong" support or resistance.
-💡 Practical Takeaway
+ Practical Takeaway
 For structuring trades, it's more robust to think: "More tests = more validated but increasingly fragile level." Read the tape around it—rejection size, volume, higher lows/lower highs—to decide whether to fade the level or trade the break.
 How to Find Support & Resistance
 Finding Support
@@ -1808,7 +1808,7 @@ You're betting support holds and collecting premium from fearful traders
 Real Example:
 SPY is at \$450 approaching strong support at \$445. You sell the \$445 put and buy the \$440 put for a \$1.50 credit.
 If SPY holds \$445, you keep the full \$150. Max risk: \$350 if support breaks completely.
-⚠️ RISK: If support breaks, you take the loss. Always use stops and never risk more than 2% of your account.
+⚠ RISK: If support breaks, you take the loss. Always use stops and never risk more than 2% of your account.
 Selling at Resistance
 When price rallies to strong resistance, greed increases. That greed = inflated call premiums = opportunity.
 Strategy: Bear Call Spread
@@ -1821,7 +1821,7 @@ You're betting resistance holds and fading the breakout attempt
 Real Example:
 AAPL rallies to \$180, a level that's rejected price 3 times. You sell the \$180 call and buy the \$185 call for a \$1.20 credit.
 If AAPL fails to break \$180, you keep the full \$120. Max risk: \$380 if it rips through resistance.
-⚠️ RISK: If resistance breaks (especially with volume), exit quickly. Breakouts can be explosive.
+⚠ RISK: If resistance breaks (especially with volume), exit quickly. Breakouts can be explosive.
 Golden Rules for Level Trading
 1.
 Trade WITH the trend. Bull Put Spreads work better in uptrends. Bear Call Spreads work better in downtrends.
@@ -1837,12 +1837,12 @@ Take profit at 50%. Made half your max profit? Close it. Don't be greedy. Theta 
 Honor your stops. If the level breaks with conviction, get out. Don't hope. Hope is not a strategy.
 Bottom Line: Support and resistance aren't just chart lines—they're trading opportunities. When you see a strong level being tested, ask yourself:
 "Can I sell premium here and get paid while the market decides?" That's the edge. That's how pros trade levels.`,
-    analogy: `A ball bouncing in a room. It hits the floor (Support) and bounces up. It hits the ceiling (Resistance) and bounces down. Eventually, if thrown hard enough, it breaks through one of them.`,
-    nuance: `Polarity Principle: When Resistance is broken, it often becomes Support (and vice-versa). The ceiling becomes the floor of the second story.`,
-    example: ``,
-  },
-  'avwap': {
-    analysis: `Three forces govern the jungle. Understanding how they interact is the difference between gambling and trading.
+ analogy: `A ball bouncing in a room. It hits the floor (Support) and bounces up. It hits the ceiling (Resistance) and bounces down. Eventually, if thrown hard enough, it breaks through one of them.`,
+ nuance: `Polarity Principle: When Resistance is broken, it often becomes Support (and vice-versa). The ceiling becomes the floor of the second story.`,
+ example: ``,
+ },
+ 'avwap': {
+ analysis: `Three forces govern the jungle. Understanding how they interact is the difference between gambling and trading.
 1. Price
 The consensus of value based on the equilibrium of supply and demand. The "WHAT".
 2. Volume
@@ -1956,26 +1956,26 @@ Above AVWAP? Only look for LONGS. Below AVWAP? Only look for SHORTS. Don't fight
 Best entries happen when price touches AVWAP and bounces (bullish) or rejects (bearish). That's where institutional orders sit.
 3. Crossover Exit
 If price crosses AVWAP against your trade (breaks above when you're short, or below when you're long), exit. The tide has turned.`,
-    analogy: `Imagine a tug-of-war started at a specific moment (the Anchor). AVWAP is the flag in the middle. It shows exactly who is winning the war regarding that specific battle.`,
-    nuance: `Relevance over Ritual: Don't just place anchors randomly. Anchor them to the 'Scene of the Crime'—where the high volume institutional activity occurred (e.g., the day of a massive gap up).`,
-    example: ``,
-  },
-  'avoid-biases': {
-    analysis: `Avoid Biases
+ analogy: `Imagine a tug-of-war started at a specific moment (the Anchor). AVWAP is the flag in the middle. It shows exactly who is winning the war regarding that specific battle.`,
+ nuance: `Relevance over Ritual: Don't just place anchors randomly. Anchor them to the 'Scene of the Crime'—where the high volume institutional activity occurred (e.g., the day of a massive gap up).`,
+ example: ``,
+ },
+ 'avoid-biases': {
+ analysis: `Avoid Biases
 Cognitive traps that sabotage your trading — and how to break free
 What is Anchoring Bias?
 Anchoring bias is a cognitive trap where investors fixate on a specific reference point — often an irrelevant number — and make all subsequent decisions based on that anchor instead of current market reality.
 First identified by psychologists Tversky and Kahneman, anchoring causes investors to place disproportionate weight on the first piece of information they encounter, even when that information has no predictive value for future price movements.
 Common Anchoring Traps
-💰
+
 Purchase Price Anchor
 You bought NVDA at \$500. It drops to \$300. You refuse to sell because you're anchored to your entry price, waiting to "get back to even."
 Reality: The stock doesn't know your cost basis. It may never return to \$500.
-📈
+
 All-Time High Anchor
 A stock peaked at \$200 and now trades at \$80. It feels "cheap" because you're comparing to the high.
 Reality: Price is only cheap relative to value, not to arbitrary historical levels.
-🎯
+
 Analyst Target Anchor
 An analyst sets a \$150 target. The stock hits \$145 and you hold for that last \$5, only to watch it collapse back to \$100.
 Reality: Analyst targets are opinions, not guarantees. Take profits when the trade thesis is fulfilled.
@@ -2004,19 +2004,19 @@ What is Confirmation Bias?
 Confirmation bias is the tendency to search for, interpret, and remember information in a way that confirms your pre-existing beliefs — while ignoring or dismissing evidence that contradicts them.
 In trading, this manifests as seeking out bullish news for stocks you own, following only analysts who agree with your thesis, and rationalizing away red flags. Your brain becomes a filter that only lets through what you want to see.
 Common Confirmation Traps
-🔍
+
 Selective Research
 You're bullish on TSLA, so you only read positive Tesla news and follow bull-case analysts. Negative reports? You scroll past them.
 Reality: You're building a case, not seeking truth. The bear thesis may have critical info you're missing.
-💬
+
 Echo Chamber Effect
 Your Twitter feed, Discord servers, and Reddit subs are all bullish on your positions. "Everyone agrees this is a winner!"
 Reality: Algorithms feed you what you engage with. You've built a bubble, not found consensus.
-🎯
+
 Thesis Rationalization
 Your stock misses earnings. "It's a buying opportunity!" It loses a major contract. "They'll find another!" Every negative becomes a positive.
 Reality: You're not analyzing—you're rationalizing. Your thesis should evolve with facts, not despite them.
-📊
+
 Chart Pattern Cherry-Picking
 You see a bullish pattern because you want to. You ignore the three bearish signals on the same chart because they don't fit your narrative.
 Reality: Technical analysis requires objectivity. If you only see what you want, you're not analyzing—you're hoping.
@@ -2041,19 +2041,19 @@ What is Loss Aversion?
 Loss aversion is the psychological phenomenon where the pain of losing is psychologically twice as powerful as the pleasure of gaining. A \$1,000 loss feels far worse than a \$1,000 gain feels good.
 Discovered by Kahneman and Tversky, loss aversion explains why traders hold losing positions too long (to avoid realizing the pain) and sell winners too early (to lock in the pleasure). It's the reason most traders do the exact opposite of what they should.
 How Loss Aversion Manifests
-😰
+
 Holding Losers Too Long
 Your stock drops 20%. Instead of cutting losses, you hold—because selling makes the loss "real." You'd rather live in denial than face the pain.
 Reality: The loss is already real. Your account balance doesn't care if you've "realized" it or not.
-🏃
+
 Selling Winners Too Early
 Your stock is up 15%. You sell immediately to "lock in gains" before they disappear. Meanwhile, the stock runs another 50%.
 Reality: You're trading to feel good, not to maximize returns. Winners should run; losers should be cut.
-🎰
+
 Revenge Trading
 After a loss, you immediately enter another trade to "make it back." You're not analyzing—you're trying to erase the pain as fast as possible.
 Reality: Emotional trades compound losses. The market doesn't owe you a recovery.
-📉
+
 Averaging Down Recklessly
 Your position is underwater, so you buy more to lower your average. "Now I only need it to go up 10% instead of 20% to break even!"
 Reality: You're doubling down on a losing thesis. Smart money cuts losers; it doesn't marry them.
@@ -2078,19 +2078,19 @@ What is Recency Bias?
 Recency bias is the tendency to overweight recent events and assume they'll continue indefinitely. What happened last week feels more important than what happened over the last decade.
 In trading, this manifests as chasing hot stocks after they've already run, panic selling after a dip, or assuming the current trend will last forever. Your brain treats the recent past as a crystal ball for the future—and it's almost always wrong.
 How Recency Bias Manifests
-🚀
+
 Chasing Performance
 A stock is up 50% this month. You pile in because "it's working." You buy at the top, right before the inevitable pullback.
 Reality: Past performance doesn't predict future returns. You're buying other people's gains.
-📉
+
 Panic After Dips
 The market drops 5% in a week. You sell everything because "it's crashing." A month later, it's at new highs without you.
 Reality: Volatility is normal. Selling after drops locks in losses and misses recoveries.
-🔥
+
 Hot Sector FOMO
 AI stocks are surging. You abandon your diversified portfolio to go all-in on the hot theme. When it rotates, you're left holding the bag.
 Reality: Sector rotations are unpredictable. Today's hot sector is often tomorrow's laggard.
-😴
+
 Complacency in Bull Markets
 Markets have been up for months. You increase leverage and ignore risk management because "stocks only go up."
 Reality: Bull markets end. The longer the calm, the more violent the correction often is.
@@ -2108,14 +2108,14 @@ Wait before acting — Implement a 48-hour rule for any trade triggered by recen
 Base decisions on data, not feelings — Use valuation metrics, not recent performance. A stock that's up 100% can still be cheap; one that's down 50% can still be expensive.
 "In the short run, the market is a voting machine. In the long run, it is a weighing machine."
 — Benjamin Graham`,
-    analogy: `Your brain is a broken compass with a faulty memory. Anchoring chains you to irrelevant numbers. Confirmation builds an echo chamber. Loss aversion doubles every pain. Recency makes yesterday feel like forever. These four biases form a perfect storm that sinks portfolios: you cling to old prices, hear only agreement, fear every loss, and chase whatever just happened. The antidote is systematic discipline that ignores what you feel.`,
-    nuance: `The Fatal Four: These biases compound. You're anchored to your entry, you only read bullish news, you can't stomach the loss, and the recent price action convinces you to hold. Quadruple-trapped. Or you chase a hot stock because it's been running, confirm your thesis with cherry-picked data, and refuse to sell when it turns because the loss hurts. The cure is rules-based trading that executes regardless of psychology.`,
-    example: `REAL SCENARIO:
+ analogy: `Your brain is a broken compass with a faulty memory. Anchoring chains you to irrelevant numbers. Confirmation builds an echo chamber. Loss aversion doubles every pain. Recency makes yesterday feel like forever. These four biases form a perfect storm that sinks portfolios: you cling to old prices, hear only agreement, fear every loss, and chase whatever just happened. The antidote is systematic discipline that ignores what you feel.`,
+ nuance: `The Fatal Four: These biases compound. You're anchored to your entry, you only read bullish news, you can't stomach the loss, and the recent price action convinces you to hold. Quadruple-trapped. Or you chase a hot stock because it's been running, confirm your thesis with cherry-picked data, and refuse to sell when it turns because the loss hurts. The cure is rules-based trading that executes regardless of psychology.`,
+ example: `REAL SCENARIO:
 You bought COIN at \$350 during the crypto hype. It crashes to \$50. Anchored to \$350, you refuse to sell, thinking "it'll come back." Meanwhile, you could have cut your loss at \$200, deployed capital into MSFT at \$250, and ridden it to \$400.
 The anchor cost you both the remaining COIN value AND the MSFT gains. Double penalty.`,
-  },
-  'risk-reward-calculator': {
-    analysis: `Wall Street Wildlife
+ },
+ 'risk-reward-calculator': {
+ analysis: `Wall Street Wildlife
 "Risk is not the enemy. Ignorance of risk is."
 Options Risk-Reward Calculator
 Before entering any trade, the jungle demands you know your numbers. Use this calculator to determine your position size, maximum risk, and reward potential.
@@ -2133,42 +2133,42 @@ Profit Targets
 Set realistic profit targets based on the probability of success and risk/reward ratio.
 Stop Losses
 Define your exit points before entering. The jungle punishes those without an escape plan.`,
-    analogy: `A compass in the jungle. Before you take a single step, you must know which direction leads to safety and which leads to quicksand.`,
-    nuance: `Pre-Trade Ritual: Never enter a trade without calculating your max loss first. If you can't define the risk, you can't manage it.`,
-    example: ``,
-  },
-  'position-sizing-calculator': {
-    analysis: `Position Sizing Calculator
+ analogy: `A compass in the jungle. Before you take a single step, you must know which direction leads to safety and which leads to quicksand.`,
+ nuance: `Pre-Trade Ritual: Never enter a trade without calculating your max loss first. If you can't define the risk, you can't manage it.`,
+ example: ``,
+ },
+ 'position-sizing-calculator': {
+ analysis: `Position Sizing Calculator
 "Size your positions like your portfolio depends on it—because it does."`,
-    analogy: `A measuring cup for risk. You wouldn't pour boiling water without knowing the volume—don't size a trade without knowing your exposure.`,
-    nuance: `The Math of Survival: Position sizing is the difference between a bad trade and a blown account. Size correctly and you can weather any storm.`,
-    example: ``,
-  },
-  'pop-calculator': {
-    analysis: `POP & Expected Value Calculator
+ analogy: `A measuring cup for risk. You wouldn't pour boiling water without knowing the volume—don't size a trade without knowing your exposure.`,
+ nuance: `The Math of Survival: Position sizing is the difference between a bad trade and a blown account. Size correctly and you can weather any storm.`,
+ example: ``,
+ },
+ 'pop-calculator': {
+ analysis: `POP & Expected Value Calculator
 "In the jungle, knowing your odds is the difference between predator and prey."`,
-    analogy: `A crystal ball that shows probability, not certainty. It tells you the odds before you step into the arena.`,
-    nuance: `The Edge: POP shows likelihood of profit. Expected Value shows long-term results. Together, they reveal whether your trade has an edge or is just gambling.`,
-    example: ``,
-  },
-  'expected-move': {
-    analysis: `Expected Move & Probability Cone
+ analogy: `A crystal ball that shows probability, not certainty. It tells you the odds before you step into the arena.`,
+ nuance: `The Edge: POP shows likelihood of profit. Expected Value shows long-term results. Together, they reveal whether your trade has an edge or is just gambling.`,
+ example: ``,
+ },
+ 'expected-move': {
+ analysis: `Expected Move & Probability Cone
 "The market whispers its expected range. Listen, and place your strikes wisely."`,
-    analogy: `A radar showing the probable path of a storm. The cone shows where the hurricane might go—your strikes should sit outside that cone to stay safe.`,
-    nuance: `The Edge: Selling strikes outside the expected move gives you statistical probability on your side. The market is telling you where it expects to stay—trade accordingly.`,
-    example: ``,
-  },
-  'options-screener': {
-    analysis: `Options Screener & Trade Discovery
+ analogy: `A radar showing the probable path of a storm. The cone shows where the hurricane might go—your strikes should sit outside that cone to stay safe.`,
+ nuance: `The Edge: Selling strikes outside the expected move gives you statistical probability on your side. The market is telling you where it expects to stay—trade accordingly.`,
+ example: ``,
+ },
+ 'options-screener': {
+ analysis: `Options Screener & Trade Discovery
 "The jungle is vast. The screener helps you find prey worth hunting."`,
-    analogy: `A metal detector on a beach of options. Instead of digging randomly, you scan for the buried treasure that matches your criteria.`,
-    nuance: `The Filter: High IV Rank + High Volume + Right Delta = opportunity. The screener surfaces trades that match YOUR strategy, not someone else's.`,
-    example: ``,
-  },
-  'options-taxes': {
-    analysis: `OPTIONS & TAXES
+ analogy: `A metal detector on a beach of options. Instead of digging randomly, you scan for the buried treasure that matches your criteria.`,
+ nuance: `The Filter: High IV Rank + High Volume + Right Delta = opportunity. The screener surfaces trades that match YOUR strategy, not someone else's.`,
+ example: ``,
+ },
+ 'options-taxes': {
+ analysis: `OPTIONS & TAXES
 The invisible costs that can destroy your profits. The IRS doesn't care about your clever strategy—they want their cut.
-⚠️ CRITICAL DISCLAIMER — U.S. TAX LAW ONLY
+⚠ CRITICAL DISCLAIMER — U.S. TAX LAW ONLY
 This is NOT tax advice. The rules below apply to United States federal tax law (IRS). If you trade from outside the U.S., your country will have different rules for capital gains, wash sales, and tax-advantaged accounts — consult a local tax professional. Even within the U.S., state taxes vary significantly. Always consult a qualified CPA or tax attorney before making trading decisions based on tax implications.
 Short-Term vs Long-Term Capital Gains
 Short-Term
@@ -2198,19 +2198,19 @@ How It Works (The Trap):
 Day 1: You buy 100 shares of SPY at \$450
 Day 15: SPY drops to \$440. You sell for a \$1,000 loss
 Day 20: SPY bounces to \$445. You buy it back thinking you're smart
-❌ WASH SALE: Your \$1,000 loss is DISALLOWED for this tax year
+ WASH SALE: Your \$1,000 loss is DISALLOWED for this tax year
 What happens to the loss? It gets added to the cost basis of your new position. You can eventually claim it when you sell the new position (outside the 30-day window). But for this year's taxes? Gone.
 Does Wash Sale Apply to Options?
 YES. The IRS considers options on the same underlying to be "substantially identical." Here's what triggers it:
-❌
+
 Sell SPY call at a loss → Buy another SPY call within 30 days = WASH SALE
-❌
+
 Sell AAPL shares at a loss → Buy AAPL call within 30 days = WASH SALE
 ✓
 Sell SPY call at a loss → Buy QQQ call = NOT a wash sale (different underlying)
 Section 1256 Contracts (The Tax Advantage)
 Section 1256 contracts get special tax treatment: 60% long-term / 40% short-term, regardless of holding period. This is HUGE for active traders.
-✅ Section 1256 Contracts
+ Section 1256 Contracts
 ▸
 Index Options (SPX, NDX, RUT - cash-settled)
 ▸
@@ -2218,7 +2218,7 @@ Futures Contracts (ES, NQ, /GC)
 ▸
 Futures Options
 Tax Math: \$10,000 profit = \$6,000 taxed at 15-20% (long-term) + \$4,000 taxed at your bracket. Effective rate: ~26%
-❌ NOT Section 1256
+ NOT Section 1256
 ▸
 Equity Options (AAPL, TSLA, SPY - stock options)
 ▸
@@ -2265,18 +2265,18 @@ Keep meticulous records. Your broker's 1099-B may be wrong for complex strategie
 Consult a CPA. Seriously. Tax law is complex and changes frequently.
 6.
 Plan ahead. Tax-loss harvesting, timing realizations, entity structure—all matter at scale.`,
-    analogy: `Taxes are the jungle's toll. You can hunt successfully, but if you don't pay the toll at the exit, the rangers will confiscate everything you caught—plus a penalty.`,
-    nuance: `The Mark-to-Market Election: Professional traders can elect 475(f) status to deduct all losses (no \$3,000 cap) and avoid wash sales. But it's irrevocable and complex. Get professional advice first.`,
-    example: ``,
-  },
-  'strike-expiration': {
-    analysis: `The Art of Selection
+ analogy: `Taxes are the jungle's toll. You can hunt successfully, but if you don't pay the toll at the exit, the rangers will confiscate everything you caught—plus a penalty.`,
+ nuance: `The Mark-to-Market Election: Professional traders can elect 475(f) status to deduct all losses (no \$3,000 cap) and avoid wash sales. But it's irrevocable and complex. Get professional advice first.`,
+ example: ``,
+ },
+ 'strike-expiration': {
+ analysis: `The Art of Selection
 "Choosing the wrong strike is like bringing a knife to a gunfight—you had the right idea, wrong weapon."
-⚠️
+⚠
 The Most Expensive Mistake
 New traders obsess over which stock to trade and which direction it will go. They spend 5 seconds picking a strike and expiration.
 This is backwards. Strike and expiration selection is where most trades are won or lost—before the market even opens.
-❌ The Rookie
+ The Rookie
 "AAPL is going up! Let me buy the cheapest call I can find... \$200 strike expiring Friday for \$0.15!"
 Needs AAPL to move 12% in 4 days. Probability: ~2%
 ✓ The Professional
@@ -2372,7 +2372,7 @@ Add 50% more time than you think you need. If your thesis is "2 weeks," buy 30-4
 5
 What's my exit plan?
 Define BEFORE entry: Take profit at what %? Cut losses at what level? Close at 21 DTE regardless? Write it down.
-💀 The Five Deadly Sins of Strike/Expiration Selection
+ The Five Deadly Sins of Strike/Expiration Selection
 1. Buying Cheap OTM Weeklies
 "It's only \$20!" — Famous last words. These have
 2. Ignoring the Expected Move
@@ -2394,22 +2394,22 @@ Selling Options
 • DTE: 30-45 days
 • Exit: 50% profit or 21 DTE
 • Check: Strike is beyond 1σ expected move`,
-    analogy: `Strike and expiration are like choosing the right tool for a job. A hammer is great for nails, useless for screws. The wrong strike/DTE combo means even a correct market prediction won't save you.`,
-    nuance: `The Time Tax: Every extra week of DTE costs premium, but every week too few accelerates your theta decay. Find the balance where time is on your side, not eating you alive.`,
-    example: `Scenario: You're bullish on MSFT at \$400 for a potential earnings beat in 3 weeks.
+ analogy: `Strike and expiration are like choosing the right tool for a job. A hammer is great for nails, useless for screws. The wrong strike/DTE combo means even a correct market prediction won't save you.`,
+ nuance: `The Time Tax: Every extra week of DTE costs premium, but every week too few accelerates your theta decay. Find the balance where time is on your side, not eating you alive.`,
+ example: `Scenario: You're bullish on MSFT at \$400 for a potential earnings beat in 3 weeks.
 Wrong: Buy \$420 call expiring in 2 weeks (0.15 delta). Need 5% move in 2 weeks just to break even.
 Right: Buy \$405 call expiring in 45 days (0.45 delta). Gives thesis time to play out, reasonable move needed, can exit at 21 DTE if wrong.`,
-  },
-  'exit-strategies': {
-    analysis: `The Art of the Exit
+ },
+ 'exit-strategies': {
+ analysis: `The Art of the Exit
 "Amateurs focus on entries. Professionals obsess over exits."
 "The general who advances without coveting fame and retreats without fearing disgrace, whose only thought is to protect his country, is the jewel of the kingdom."
 — Sun Tzu, The Art of War
-🎯
+
 The Exit Paradox
 You spent hours analyzing the trade. You picked the perfect strike, the right expiration, waited for your entry. Then what?
 Most traders have no exit plan. They watch winners turn to losers and let losers become disasters.
-❌ The Gambler
+ The Gambler
 "I'll just see what happens..." Watches 80% profit evaporate. Holds losers hoping for a miracle. No rules, pure emotion.
 ✓ The Professional
 "Profit target: 50%. Stop loss: 200%. Time stop: 21 DTE." Rules written BEFORE entry. Emotions removed from the equation.
@@ -2436,7 +2436,7 @@ Advanced
 Exit when your thesis is complete (earnings released, breakout confirmed), not at arbitrary %.
 Profit-Taking Decision Framework
 Struggling with "when do I take profit?" Here's your decision tree:
-📊 Step 1: Check Your Profit Level
+ Step 1: Check Your Profit Level
 →
 0-25% profit: Too early. Let it breathe. Set alert for 50%.
 →
@@ -2452,7 +2452,7 @@ Struggling with "when do I take profit?" Here's your decision tree:
 21-30 DTE: Theta is accelerating. If you're in profit, strong lean toward taking it.
 →
 Gamma danger zone. Close profitable positions. Don't get cute.
-🎯 Step 3: Check Your Thesis
+ Step 3: Check Your Thesis
 →
 Thesis complete: You traded earnings, it happened. Exit. Don't stick around.
 →
@@ -2532,7 +2532,7 @@ Specific catalyst play: If you entered for an event (earnings, FDA decision) tha
 Minimal capital at risk: If the position is already at 80%+ profit and you're just collecting crumbs, the math changes.
 Part 4: Winners vs Losers
 The Asymmetric Approach
-🏆
+
 Managing Winners
 →
 Take profits quickly. A bird in hand. Don't let winners turn into losers.
@@ -2542,7 +2542,7 @@ Scale out. Sell half, let half run. Locks in gains while keeping upside.
 Trail your stop. Move stop loss to breakeven once you're up 50%+.
 →
 Don't add to winners. Averaging up increases risk at worse prices.
-🩹
+
 Managing Losers
 →
 Cut losses early. Your first loss is your best loss. Hope is not a strategy.
@@ -2644,7 +2644,7 @@ Long Options
 • Costs a debit—only if conviction high
 Should I Exit Now? Decision Tree
 START: Am I in profit or loss?
-🟢 In Profit →
+ In Profit →
 If profit >50%: Take it or scale out 50%
 If profit 25-50%: Check DTE ↓
 • >30 DTE? Let it run
@@ -2653,7 +2653,7 @@ If profit Check thesis ↓
 • Thesis complete? Exit
 • Thesis intact? Hold
 • Approaching 21 DTE? Consider exit
-🔴 In Loss →
+ In Loss →
 If loss >50% (buyers) or >200% (sellers): CUT IT NOW
 If loss 25-50%: Thesis check ↓
 • Thesis broken? Close
@@ -2726,33 +2726,33 @@ Covered Calls |
 50-75% of premium |
 Roll or let assign |
 Expiration or roll at 21 DTE |`,
-    analogy: `Exit strategies are like knowing where the emergency exits are before the plane takes off. You hope you never need them, but when turbulence hits, you'll be glad you planned ahead.`,
-    nuance: `The Discipline Tax: Taking profits at 50% feels wrong when you 'could have made more.' But the traders who consistently take profits at targets outperform those who swing for the fences. Boring works.`,
-    example: `Scenario: You sold a put spread on AAPL for \$1.00 credit. It's now trading at \$0.45 (55% profit) with 25 DTE remaining.
+ analogy: `Exit strategies are like knowing where the emergency exits are before the plane takes off. You hope you never need them, but when turbulence hits, you'll be glad you planned ahead.`,
+ nuance: `The Discipline Tax: Taking profits at 50% feels wrong when you 'could have made more.' But the traders who consistently take profits at targets outperform those who swing for the fences. Boring works.`,
+ example: `Scenario: You sold a put spread on AAPL for \$1.00 credit. It's now trading at \$0.45 (55% profit) with 25 DTE remaining.
 Action: Close it. You've hit your 50% target and you're approaching the 21 DTE threshold. Take the \$55 profit, free up the capital, and find the next trade. Don't wait for the last \$45—that's where the risk lives.`,
-  },
-  'beginner-mistakes': {
-    analysis: `Interactive beginner mistakes guide - click to open`,
-    analogy: `Every trader pays tuition to the market. This module lets you learn from others' expensive lessons instead of paying your own.`,
-    nuance: `Survival First: These mistakes have blown up more accounts than bad market calls. Avoiding them is more important than finding winning trades.`,
-    example: ``,
-  },
-  'first-trade': {
-    analysis: `Interactive first trade walkthrough - click to open`,
-    analogy: `Your first solo flight. The instructor is gone, but the checklist keeps you safe. Follow the steps, and you'll land just fine.`,
-    nuance: `Mechanics Before Money: Your first trade isn't about profit—it's about learning the buttons, the fills, the feelings. Trade small, learn the cockpit, then scale up.`,
-    example: ``,
-  },
-  'patience': {
-    analysis: `"Patience, Grasshopper"
+ },
+ 'beginner-mistakes': {
+ analysis: `Interactive beginner mistakes guide - click to open`,
+ analogy: `Every trader pays tuition to the market. This module lets you learn from others' expensive lessons instead of paying your own.`,
+ nuance: `Survival First: These mistakes have blown up more accounts than bad market calls. Avoiding them is more important than finding winning trades.`,
+ example: ``,
+ },
+ 'first-trade': {
+ analysis: `Interactive first trade walkthrough - click to open`,
+ analogy: `Your first solo flight. The instructor is gone, but the checklist keeps you safe. Follow the steps, and you'll land just fine.`,
+ nuance: `Mechanics Before Money: Your first trade isn't about profit—it's about learning the buttons, the fills, the feelings. Trade small, learn the cockpit, then scale up.`,
+ example: ``,
+ },
+ 'patience': {
+ analysis: `"Patience, Grasshopper"
 — Ancient Wisdom
-🦗
+
 Before You Trade...
 You've learned the mechanics. You understand calls and puts. You know about strikes, expirations, and the Greeks.
 But knowledge without patience is a loaded gun with a hair trigger.
 The jungle doesn't reward the fastest hunter—it rewards the one who waits for the perfect moment to strike.
 Every great options trader knows that the best trade is often no trade at all.
-📜
+
 Return to the Rules
 Before placing your first real trade, revisit the Rules of the Jungle module.
 Pay special attention to the Patience law.
@@ -2767,27 +2767,27 @@ Don't anticipate. Let price action confirm your thesis before committing capital
 Wait for Your Trade
 Don't chase other people's trades. Your edge is your own. Trust your process.
 The Cost of Impatience
-💸
+
 Overtrading: Commissions, slippage, and poor fills eat your profits
-💸
+
 FOMO entries: Buying at the top because "it's running!"
-💸
+
 Revenge trading: Trying to "make back" losses with bigger, riskier bets
-💸
+
 Early exits: Cutting winners short because you can't sit still
 "The stock market is a device for transferring money from the impatient to the patient."
 — Warren Buffett
 You've learned the tools. Now master the mindset.
 When you're ready—truly ready—the strategies await. But never forget: patience is the ultimate edge.`,
-    analogy: `Patience is like a crocodile waiting by the riverbank. It doesn't chase every fish—it waits motionless for hours until the perfect prey wanders into striking range. One decisive snap. Meal secured.`,
-    nuance: `The Paradox: The more patient you become, the more opportunities you'll actually see. Impatience creates tunnel vision. Patience reveals the full landscape.`,
-    example: `Scenario: You're watching NVDA. It's been running for days and you want in. But your setup requires a pullback to the 20-day moving average.
+ analogy: `Patience is like a crocodile waiting by the riverbank. It doesn't chase every fish—it waits motionless for hours until the perfect prey wanders into striking range. One decisive snap. Meal secured.`,
+ nuance: `The Paradox: The more patient you become, the more opportunities you'll actually see. Impatience creates tunnel vision. Patience reveals the full landscape.`,
+ example: `Scenario: You're watching NVDA. It's been running for days and you want in. But your setup requires a pullback to the 20-day moving average.
 Patience Play: You wait. And wait. Three days later, it pulls back. You enter with conviction, knowing your setup is valid. The stock bounces and you're in profit immediately. That's the power of patience.`,
-  },
-  'long-call': {
-    analysis: `What This Strategy Does
+ },
+ 'long-call': {
+ analysis: `What This Strategy Does
 The fundamental bullish bet. You pay a small amount today for the right to buy shares at a fixed price later. If the stock rockets, you make multiples of your money. If it doesn't, you lose what you paid—nothing more.
-📖 Trade Walkthrough: 45 Days in the Life
+ Trade Walkthrough: 45 Days in the Life
 Let's follow a real trade from start to finish. No jargon yet—just watch what happens.
 The Setup
 You think NVDA (\$120) is going higher. Buying 100 shares costs \$12,000—too much risk. Instead, you pay \$400 for the right to buy 100 shares at \$125 anytime in the next 45 days. If NVDA never hits \$125, you lose \$400. If it explodes to \$150, you can buy at \$125 and immediately have \$25/share profit.
@@ -2811,24 +2811,24 @@ Day 20NVDA recovers to \$115. Call worth \$80. Still dying.
 Day 45NVDA at \$112. Call expires worthless.
 Result: Lost \$400 (100%). But here's the silver lining: if you'd bought 100 shares at \$120, you'd be down \$800 right now. The call let you be wrong with less pain.
 What You Just Learned (Without Realizing It)
-☑️ Notice how in Path A, a 20% stock move became a 425% option gain? That's leverage. Options amplify movement—in both directions.
-☑️ Notice how in Path B, you lost money even though the stock went UP? That's Theta (time decay). Every day, a piece of your option's value evaporates. You're not just betting on direction—you're racing a clock.
-☑️ Notice how Path B was worse than Path C emotionally? Being wrong about direction is expected. Being RIGHT about direction and still losing? That's the cruel lesson of options.
-☑️ The pattern: Long calls need the stock to move far enough and fast enough. Small, slow moves are the enemy. You're fighting two battles: price AND time.`,
-    analogy: `It's like renting a penthouse with an option to buy. If the market booms, your locked-in price makes you a genius. If it crashes, you just walk away from the lease—you lose your rent, but you don't get stuck with a depreciating asset.`,
-    nuance: `Delta as Probability: A 0.30 Delta call implies roughly a 30% chance the option expires In-The-Money. It is your approximate odds of profit.
+☑ Notice how in Path A, a 20% stock move became a 425% option gain? That's leverage. Options amplify movement—in both directions.
+☑ Notice how in Path B, you lost money even though the stock went UP? That's Theta (time decay). Every day, a piece of your option's value evaporates. You're not just betting on direction—you're racing a clock.
+☑ Notice how Path B was worse than Path C emotionally? Being wrong about direction is expected. Being RIGHT about direction and still losing? That's the cruel lesson of options.
+☑ The pattern: Long calls need the stock to move far enough and fast enough. Small, slow moves are the enemy. You're fighting two battles: price AND time.`,
+ analogy: `It's like renting a penthouse with an option to buy. If the market booms, your locked-in price makes you a genius. If it crashes, you just walk away from the lease—you lose your rent, but you don't get stuck with a depreciating asset.`,
+ nuance: `Delta as Probability: A 0.30 Delta call implies roughly a 30% chance the option expires In-The-Money. It is your approximate odds of profit.
 High Delta: Buying a 0.80 Delta call is a 'Stock Replacement' strategy. It moves almost dollar-for-dollar with the stock but requires less capital.`,
-    example: `Scenario: You believe TSLA (\$250) will beat earnings in 3 weeks. Buying 100 shares costs \$25,000 (too rich).
+ example: `Scenario: You believe TSLA (\$250) will beat earnings in 3 weeks. Buying 100 shares costs \$25,000 (too rich).
 The Trade: You buy one \$260 Strike Call expiring in 60 days for a premium of \$15.00 (\$1,500 total cost).
 Outcome A (Win): TSLA rips to \$300. Your Call is now \$40 ITM + time value, likely worth \$45.00 (\$4,500). Profit: \$3,000 (200%).
 Outcome B (Loss): TSLA drops to \$240. The option expires worthless. You lose the \$1,500 premium, but you saved the \$1,000 loss you would have had on shares.`,
-    animalMetaphor: `The Cheetah
+ animalMetaphor: `The Cheetah
 The cheetah is the fastest land animal, capable of explosive acceleration from 0 to 70 mph in seconds. A long call embodies this same explosive upside potential—when the underlying stock rockets higher, your profits accelerate without limit. Like a cheetah stalking prey, you pay a premium upfront (the energy to sprint), but if you time it right and the prey runs in your direction, the payoff is spectacular. Defined risk, unlimited reward.`,
-  },
-  'long-put': {
-    analysis: `What This Strategy Does
+ },
+ 'long-put': {
+ analysis: `What This Strategy Does
 The Long Put serves two masters. For the Speculator, it's a leveraged bet that a stock will crash—without the unlimited risk of shorting. For the Investor, it's insurance that locks in a floor price for shares you own.
-📖 Trade Walkthrough: 30 Days in the Life
+ Trade Walkthrough: 30 Days in the Life
 Let's follow a real trade from start to finish. No jargon yet—just watch what happens.
 The Setup
 You think META (\$500) is overvalued and due for a correction. Shorting 100 shares means unlimited risk if it keeps climbing. Instead, you pay \$600 for the right to sell 100 shares at \$490 anytime in the next 30 days. If META crashes to \$400, you can "sell" at \$490 even though it's worth \$400—instant \$90/share profit. If META goes up, you lose \$600 max.
@@ -2856,22 +2856,22 @@ Day 1META at \$500. Earnings tomorrow. Fear is HIGH. Put costs \$1,500 (inflated
 Day 2Earnings: META drops to \$480. You were RIGHT! But... put is only worth \$1,200.
 Result: Stock dropped \$20 in your favor... and you LOST \$300. Why? The "fear premium" that was baked into the option price vanished after earnings. This is called IV Crush—buying insurance when everyone else is panicking means you overpay.
 What You Just Learned (Without Realizing It)
-☑️ Notice how in Path A, a 16% stock drop became a 1,117% gain? That's leverage working in your favor. Puts accelerate as the stock falls (this is positive gamma).
-☑️ Notice how in Path B, the put acted as an ejection seat? That's the "insurance" use case. You paid \$600 to avoid \$6,400 in additional losses.
-☑️ Notice how Path C was a total loss but still better than shorting? Puts give you defined risk. You can never lose more than you paid, unlike shorting where losses are theoretically infinite.
-☑️ Notice Path D—the sneaky trap? You were RIGHT about direction but still lost money. That's IV Crush. When fear is high, options are expensive. When fear disappears (after the event), that premium evaporates—even if the stock moved your way.`,
-    analogy: `It serves two distinct functions depending on your portfolio. If you own the stock, a Put is Insurance—you pay a premium to guarantee a selling price. If you don't own the stock, a Put is Mercenary—a leveraged bet that the price will collapse.`,
-    nuance: `Negative Delta: You gain speed as it drops (Long Gamma).
+☑ Notice how in Path A, a 16% stock drop became a 1,117% gain? That's leverage working in your favor. Puts accelerate as the stock falls (this is positive gamma).
+☑ Notice how in Path B, the put acted as an ejection seat? That's the "insurance" use case. You paid \$600 to avoid \$6,400 in additional losses.
+☑ Notice how Path C was a total loss but still better than shorting? Puts give you defined risk. You can never lose more than you paid, unlike shorting where losses are theoretically infinite.
+☑ Notice Path D—the sneaky trap? You were RIGHT about direction but still lost money. That's IV Crush. When fear is high, options are expensive. When fear disappears (after the event), that premium evaporates—even if the stock moved your way.`,
+ analogy: `It serves two distinct functions depending on your portfolio. If you own the stock, a Put is Insurance—you pay a premium to guarantee a selling price. If you don't own the stock, a Put is Mercenary—a leveraged bet that the price will collapse.`,
+ nuance: `Negative Delta: You gain speed as it drops (Long Gamma).
 IV Crush Risk: Don't buy expensive insurance after the hurricane passes.`,
-    example: `Scenario A (The Speculator): You think RIVN (\$12) is going to \$8. You buy the \$11 Put for \$0.50. If it hits \$8, the Put is worth \$3.00 (500% gain).
+ example: `Scenario A (The Speculator): You think RIVN (\$12) is going to \$8. You buy the \$11 Put for \$0.50. If it hits \$8, the Put is worth \$3.00 (500% gain).
 Scenario B (The Protector): You own 1,000 shares of SPY (\$500) and fear a CPI print. You buy the \$495 Put to cap your losses.`,
-    animalMetaphor: `The Vulture
+ animalMetaphor: `The Vulture
 Vultures thrive when others fall. They circle patiently, waiting for weakness, then descend to profit from decline. A long put buyer profits when stocks collapse—the greater the carnage, the larger the feast. Like a vulture's keen eyesight spotting distress from miles away, put buyers identify overvalued or troubled companies. The premium paid is the cost of patience, but when the stock crashes, the payoff is substantial with limited downside risk.`,
-  },
-  'covered-call': {
-    analysis: `What This Strategy Does
+ },
+ 'covered-call': {
+ analysis: `What This Strategy Does
 Trade upside for income. By selling the call, you obligate yourself to sell your shares at the strike price. This caps your gains, but the premium collected offers a small buffer and steady income.
-📖 Trade Walkthrough: 30 Days in the Life
+ Trade Walkthrough: 30 Days in the Life
 Let's follow a real trade from start to finish. No jargon yet—just watch what happens.
 The Setup
 You own 100 shares of MSFT at \$400 (\$40,000 position). The stock has been stuck in a range for months. You're willing to sell at \$420, but you'd like to get paid while you wait. You agree to sell your shares at \$420 anytime in the next 30 days if someone wants them. In exchange, someone pays you \$350 upfront.
@@ -2894,24 +2894,24 @@ Day 15MSFT stabilizes at \$370. Shares -\$3,000. Call worth \$10. Net: -\$2,660.
 Day 30MSFT closes at \$365. Call expires worthless. You keep the \$350.
 Result: Shares lost \$3,500. Premium kept: \$350. Net loss: -\$3,150. The premium was a band-aid on a bullet wound. You still own the shares, but you're deep in the red.
 What You Just Learned (Without Realizing It)
-☑️ Notice how in Path A, the call melted away as days passed? That's Theta (time decay) working for you. You collected rent on shares you already owned.
-☑️ Notice how in Path B, your profit was "capped" even though the stock kept rising? That's the tradeoff—you sold your upside for guaranteed income. This is called being "short gamma"—big moves hurt you.
-☑️ Notice how in Path C, the \$350 barely helped? The covered call doesn't protect you from crashes. You still own the stock. The premium is income, not insurance.
-☑️ The pattern: This strategy wants the stock to be boring. Flat to slightly up = perfect. Big moves in either direction = problem.`,
-    analogy: `Think of it as renting out the attic of a house you own. You get steady rent (premium), but if someone offers you double what the house is worth, you can't sell to them because you have a tenant.`,
-    nuance: `Short Gamma: You want the stock to be boring.
+☑ Notice how in Path A, the call melted away as days passed? That's Theta (time decay) working for you. You collected rent on shares you already owned.
+☑ Notice how in Path B, your profit was "capped" even though the stock kept rising? That's the tradeoff—you sold your upside for guaranteed income. This is called being "short gamma"—big moves hurt you.
+☑ Notice how in Path C, the \$350 barely helped? The covered call doesn't protect you from crashes. You still own the stock. The premium is income, not insurance.
+☑ The pattern: This strategy wants the stock to be boring. Flat to slightly up = perfect. Big moves in either direction = problem.`,
+ analogy: `Think of it as renting out the attic of a house you own. You get steady rent (premium), but if someone offers you double what the house is worth, you can't sell to them because you have a tenant.`,
+ nuance: `Short Gamma: You want the stock to be boring.
 Assignment: Don't fall in love with your shares.`,
-    example: `Scenario: You own 100 shares of AMD (\$150). It's stuck in a range.
+ example: `Scenario: You own 100 shares of AMD (\$150). It's stuck in a range.
 The Trade: You Sell the \$165 Call (30 days out) for \$3.00 (\$300 income).
 Outcome A (Flat): AMD closes at \$160. The Call expires worthless. You keep your shares + the \$300 cash.
 Outcome B (Rocket): AMD flies to \$180. You are forced to sell at \$165. You miss out on the move from \$165 to \$180 (\$1,500 opportunity cost), but you still made max profit on the trade.`,
-    animalMetaphor: `The Dairy Cow
+ animalMetaphor: `The Dairy Cow
 A dairy cow provides steady, reliable income through regular milk production. You own the cow (the stock), and selling covered calls is like selling the milk—consistent premium income month after month. The cow won't make you rich overnight, but she pays her way reliably. The tradeoff: if someone offers a fortune for your cow (stock gets called away), you must sell at the agreed price, missing further upside. A strategy for patient farmers seeking income over excitement.`,
-  },
-  'cash-secured-put': {
-    analysis: `What This Strategy Does
+ },
+ 'cash-secured-put': {
+ analysis: `What This Strategy Does
 Get paid to wait for a discount. You set aside cash to buy a stock at the strike price. If the stock never drops to your price, you keep the cash and the premium.
-📖 Trade Walkthrough: 30 Days in the Life
+ Trade Walkthrough: 30 Days in the Life
 Let's follow a real trade from start to finish. No jargon yet—just watch what happens.
 The Setup
 You like AAPL at \$180, but you'd rather buy it at \$170. Instead of just waiting, you agree to buy 100 shares at \$170 if the price drops there in the next 30 days. In exchange for making this promise, someone pays you \$150 upfront. You set aside \$17,000 cash (just in case you have to buy).
@@ -2934,23 +2934,23 @@ Day 3Tech sector crashes. AAPL drops to \$155. Position: -\$1,200.
 Day 30AAPL never recovers. Closes at \$150. You're assigned at \$170.
 Result: You paid \$170 for a stock worth \$150. Even with the \$1.50 credit, you're down \$18.50/share (\$1,850 loss). This is the trap—you wanted AAPL at \$170, but now it's at \$150 and you're forced to buy high.
 What You Just Learned (Without Realizing It)
-☑️ Notice how in Path A, you made money just because time passed? That's called Theta—time decay. As a seller, time is your friend.
-☑️ Notice how in Path B, the big drop on Day 5 hurt, but then time helped heal it? Even when stocks dip, the clock keeps ticking in your favor.
-☑️ Notice how Path C was the only real disaster? The risk isn't small dips—it's crashes. This strategy wins small and often, but can lose big and suddenly.`,
-    analogy: `It's like placing a limit order to buy a stock, but getting paid for waiting in line. If the price never hits your level, you keep the cash. If it does, you get the stock you wanted on sale.`,
-    nuance: `Positive Theta: You are the casino here.
+☑ Notice how in Path A, you made money just because time passed? That's called Theta—time decay. As a seller, time is your friend.
+☑ Notice how in Path B, the big drop on Day 5 hurt, but then time helped heal it? Even when stocks dip, the clock keeps ticking in your favor.
+☑ Notice how Path C was the only real disaster? The risk isn't small dips—it's crashes. This strategy wins small and often, but can lose big and suddenly.`,
+ analogy: `It's like placing a limit order to buy a stock, but getting paid for waiting in line. If the price never hits your level, you keep the cash. If it does, you get the stock you wanted on sale.`,
+ nuance: `Positive Theta: You are the casino here.
 The Trap: The risk is that the stock crashes *far* below your strike.`,
-    example: `Scenario: PLTR is trading at \$25. You love the company but refuse to pay more than \$22.
+ example: `Scenario: PLTR is trading at \$25. You love the company but refuse to pay more than \$22.
 The Trade: You Sell the \$22 Put (30 days out) for \$0.50 (\$50 credit). You must keep \$2,200 cash as collateral.
 Outcome A (Dip): PLTR falls to \$21.50. You are assigned shares at \$22. Real cost basis is \$21.50 (\$22 - \$0.50).
 Outcome B (Rally): PLTR goes to \$30. The Put expires. You keep the \$50 and never get the stock.`,
-    animalMetaphor: `The Trapdoor Spider
+ animalMetaphor: `The Trapdoor Spider
 The trapdoor spider builds a burrow and waits patiently for prey to wander within striking distance. Selling cash-secured puts is identical—you set your trap (strike price) at a level where you'd happily own the stock, then wait. If the stock stumbles into your trap (falls to strike), you acquire shares at your desired discount. If it doesn't, you keep the premium. Patient, opportunistic, and always prepared to strike at the right price.`,
-  },
-  'protective-put': {
-    analysis: `What This Strategy Does
+ },
+ 'protective-put': {
+ analysis: `What This Strategy Does
 You own the stock AND buy insurance against a crash. You keep unlimited upside if the stock moons, but you have a guaranteed "floor" price where you can always sell—no matter how bad things get. It's peace of mind, but it costs money.
-📖 Trade Walkthrough: 60 Days in the Life
+ Trade Walkthrough: 60 Days in the Life
 Let's follow a real trade from start to finish. No jargon yet—just watch what happens.
 The Setup
 You buy 100 shares of TSLA at \$250 (\$25,000 investment). You're bullish long-term, but Elon tweets crazy things and earnings is coming up. You can't stomach losing more than 10%. So you pay \$800 for the right to sell your shares at \$225 anytime in the next 60 days. No matter what happens—even if TSLA goes to \$100—you can always sell at \$225.
@@ -2979,25 +2979,25 @@ Day 30You panic and exercise the put. Sell at \$225. Lock in \$2,500 loss + \$80
 Day 45TSLA recovers to \$270. You sold at \$225 and missed a \$6,000 rebound.
 Result: You had insurance for exactly this scenario... and you used it at the worst time. The put protected you, but panic made you eject before the recovery. Tools work—but only if you use them correctly.
 What You Just Learned (Without Realizing It)
-☑️ Notice how in Path A, you made money but "less" than if you hadn't bought the put? That's the cost of insurance. You pay a premium for peace of mind. It's not "wasted"—it's the price of sleeping at night.
-☑️ Notice how in Path B, nothing happened and you still lost? This is called "drag". Protective puts are expensive to maintain month after month. The stock needs to go UP just to break even.
-☑️ Notice how in Path C, your max loss was capped even though the stock collapsed 40%? That's the "floor". No matter how bad it gets, you can always sell at your strike price. This is why big institutions use protective puts around major events.
-☑️ Notice Path D—the psychology trap? Having the tool isn't enough. You need the discipline to use it correctly. Many people buy protection, then panic-sell at the bottom anyway.
-☑️ The pattern: Protective puts are expensive peace of mind. They shine in crashes, drag in flat markets, and slightly reduce gains in rallies. Use them around specific events (earnings, elections) rather than permanently.`,
-    analogy: `This is full coverage auto insurance on your Tesla. You drive it (own stock), enjoy the speed, but if you total it (market crash), the insurer writes you a check for the replacement value.`,
-    nuance: `Drag: Insurance costs money. Stock must rise to cover premium.
+☑ Notice how in Path A, you made money but "less" than if you hadn't bought the put? That's the cost of insurance. You pay a premium for peace of mind. It's not "wasted"—it's the price of sleeping at night.
+☑ Notice how in Path B, nothing happened and you still lost? This is called "drag". Protective puts are expensive to maintain month after month. The stock needs to go UP just to break even.
+☑ Notice how in Path C, your max loss was capped even though the stock collapsed 40%? That's the "floor". No matter how bad it gets, you can always sell at your strike price. This is why big institutions use protective puts around major events.
+☑ Notice Path D—the psychology trap? Having the tool isn't enough. You need the discipline to use it correctly. Many people buy protection, then panic-sell at the bottom anyway.
+☑ The pattern: Protective puts are expensive peace of mind. They shine in crashes, drag in flat markets, and slightly reduce gains in rallies. Use them around specific events (earnings, elections) rather than permanently.`,
+ analogy: `This is full coverage auto insurance on your Tesla. You drive it (own stock), enjoy the speed, but if you total it (market crash), the insurer writes you a check for the replacement value.`,
+ nuance: `Drag: Insurance costs money. Stock must rise to cover premium.
 Convexity: Position loves volatility.`,
-    example: `Scenario: You buy NVDA at \$900. It's volatile, and you can't stomach a loss > 10%.
+ example: `Scenario: You buy NVDA at \$900. It's volatile, and you can't stomach a loss > 10%.
 The Trade: You Buy a \$810 Put (10% OTM) for \$25.00. Total cost basis: \$925.
 Outcome A (Crash): NVDA drops to \$700. Your loss on stock is \$200, but Put is worth \$110. Net loss capped.
 Outcome B (Moon): NVDA hits \$1,200. Put expires worthless (-\$25), but stock gains \$300. Net profit \$275.`,
-    animalMetaphor: `The Porcupine
+ animalMetaphor: `The Porcupine
 The porcupine is optimistic enough to forage in the open but wise enough to carry protection. Its quills don't prevent it from living fully—they just ensure survival if attacked. A protective put works identically: you own stock (bullish exposure) but buy puts as insurance against catastrophe. The quills (put premium) cost something to maintain, but when a predator (market crash) strikes, you survive intact while unprotected animals perish.`,
-  },
-  'collar': {
-    analysis: `What This Strategy Does
+ },
+ 'collar': {
+ analysis: `What This Strategy Does
 You own stock, buy a put for downside protection, and sell a call to pay for it. The result: you can't lose much, but you can't win much either. Your outcome is "bracketed" between two prices. It's free (or cheap) insurance—but you give up big gains.
-📖 Trade Walkthrough: 45 Days in the Life
+ Trade Walkthrough: 45 Days in the Life
 Let's follow a real trade from start to finish. No jargon yet—just watch what happens.
 The Setup
 You own 100 shares of GOOGL at \$175 (\$17,500 position). You've got a nice gain and want to protect it through earnings—but you don't want to pay for insurance. So you:
@@ -3030,45 +3030,45 @@ Day 40GOOGL pulls back to \$178. Now you wish you had no collar at all.
 Day 45GOOGL closes at \$180. Both options expire. Gain: \$500.
 Result: You made \$500. But you spent 45 days alternating between "thank god I have protection" and "why did I cap my upside?" This is the emotional reality of collars—you're always a little bit wrong about something.
 What You Just Learned (Without Realizing It)
-☑️ Notice how the collar cost \$0 but still had a "cost"? The real price was giving up upside. You funded your insurance by selling your potential gains. There's no free lunch—just different ways to pay.
-☑️ Notice how in Path A, staying in the range was perfect? Collars are ideal when you expect moderate movement. Big moves in either direction trigger one of your "rails."
-☑️ Notice how Path B felt like a loss even though you made money? That's the psychology of collars. Capping your upside creates regret risk—watching gains you can't participate in.
-☑️ Notice how Path C was exactly what the collar was built for? Free crash protection. The put saved you \$3,000, paid for by giving up gains you never would have gotten anyway (since it crashed).
-☑️ The pattern: Collars are bumper bowling. You can't hit a gutter ball (crash), but you also can't get a strike (moonshot). Perfect for protecting gains you can't afford to lose—like before retirement, or when you need the money for something specific.`,
-    analogy: `It's financial bumper bowling. You put up the rails so you won't get a gutter ball (crash), but you also can't get a strike (huge gain). You stay safely in the middle lane.`,
-    nuance: `Zero-Cost Collar: The goal is to make the Call credit pay for the Put debit.
+☑ Notice how the collar cost \$0 but still had a "cost"? The real price was giving up upside. You funded your insurance by selling your potential gains. There's no free lunch—just different ways to pay.
+☑ Notice how in Path A, staying in the range was perfect? Collars are ideal when you expect moderate movement. Big moves in either direction trigger one of your "rails."
+☑ Notice how Path B felt like a loss even though you made money? That's the psychology of collars. Capping your upside creates regret risk—watching gains you can't participate in.
+☑ Notice how Path C was exactly what the collar was built for? Free crash protection. The put saved you \$3,000, paid for by giving up gains you never would have gotten anyway (since it crashed).
+☑ The pattern: Collars are bumper bowling. You can't hit a gutter ball (crash), but you also can't get a strike (moonshot). Perfect for protecting gains you can't afford to lose—like before retirement, or when you need the money for something specific.`,
+ analogy: `It's financial bumper bowling. You put up the rails so you won't get a gutter ball (crash), but you also can't get a strike (huge gain). You stay safely in the middle lane.`,
+ nuance: `Zero-Cost Collar: The goal is to make the Call credit pay for the Put debit.
 Skew Benefit: Often Puts are expensive, making perfect collars hard to price.`,
-    example: `Scenario: You own MSFT (\$400). You are protecting gains for tax reasons.
+ example: `Scenario: You own MSFT (\$400). You are protecting gains for tax reasons.
 The Trade: Buy \$380 Put (\$8.00 cost). Sell \$420 Call (\$8.00 credit). Net Cost: \$0.
 Outcome: You are locked in. If MSFT goes to \$300, you can sell at \$380. If MSFT goes to \$500, you must sell at \$420. Your outcome is range-bound between \$380 and \$420 no matter what.`,
-    animalMetaphor: `The Turtle
+ animalMetaphor: `The Turtle
 The turtle carries its home on its back—built-in protection that limits both danger and mobility. A collar wraps your stock position in a protective shell: the put protects downside, while the sold call caps upside (funding the protection). You won't outrun anyone, but you also won't get eaten. Perfect for investors who want to participate in markets while sleeping soundly. Slow, steady, protected—the turtle reaches the finish line.`,
-  },
-  'rolling-adjusting': {
-    analysis: `The Art of the Roll
+ },
+ 'rolling-adjusting': {
+ analysis: `The Art of the Roll
 Rolling is simply closing an existing trade and opening a new one in the same symbol, usually at the same time. You use it to "buy time," "move the goalposts," or lock in profits while maintaining exposure.
-↗️
+↗
 Rolling Up
 Moving your strike price higher. Usually done with Calls when the stock rallies. You close the lower strike and open a higher one.
-↘️
+↘
 Rolling Down
 Moving your strike price lower. Usually done with Puts when the stock drops. You close the higher strike and open a lower one.
-📅
+
 Rolling Out
 Moving your expiration further in time. Buying more time for your thesis to play out. Can be combined with rolling up or down.
 The Golden Rule of Rolling
 "Always try to roll for a credit. If you have to pay money to roll, take a hard look at whether you're just throwing good money after bad."`,
-    analogy: `Rolling is like asking for extra time on a test. You didn't fail yet, but you need more runway to get the right answer.`,
-    nuance: `The Credit Rule: Always try to roll for a credit. If you have to pay to roll, think twice — you're adding to a losing position.`,
-    example: `Scenario: You sold a \$100 Put. Stock drops to \$99. You're losing.
+ analogy: `Rolling is like asking for extra time on a test. You didn't fail yet, but you need more runway to get the right answer.`,
+ nuance: `The Credit Rule: Always try to roll for a credit. If you have to pay to roll, think twice — you're adding to a losing position.`,
+ example: `Scenario: You sold a \$100 Put. Stock drops to \$99. You're losing.
 The Roll: You buy back the \$100 Put (close it) and sell a \$98 Put for next month (open it).
 The Result: You lowered your obligation from \$100 to \$98, and bought 30 more days of time. That is a 'Roll Down and Out'.`,
-    animalMetaphor: `The Armadillo
+ animalMetaphor: `The Armadillo
 The armadillo survives not by fighting, but by rolling. When danger approaches, it tucks its vulnerable parts inside a hardened shell and becomes a moving fortress. Rolling an option is the trader's armor: when a position turns against you (danger), you don't panic. You roll. You close the threatened position and deploy a new one further away or further out in time. You take the hit, you tuck and roll, and you survive to trade another day.`,
-  },
-  'bull-call-spread': {
-    analysis: `Cheaper than a long call. You can cap your profit to lower your entry cost. It is a 'high probability' version of a Long Call.
-📖 Trade Walkthrough: 30 Days in the Life of a Bull Call Spread
+ },
+ 'bull-call-spread': {
+ analysis: `Cheaper than a long call. You can cap your profit to lower your entry cost. It is a 'high probability' version of a Long Call.
+ Trade Walkthrough: 30 Days in the Life of a Bull Call Spread
 The Setup
 You like SPY at \$500 and think it's heading to \$510-\$515 over the next month. But buying a call outright costs \$10 per share (\$1,000)—too expensive. Instead, you buy the \$500 Call for \$10.00 and sell the \$510 Call for \$4.00. Your net cost: \$6.00 per share (\$600 total).
 You've agreed to cap your profit at \$510 in exchange for paying less upfront.
@@ -3098,24 +3098,24 @@ Day 10: Bad economic data. SPY drops to \$490. Spread worth ~\$2.50.
 Day 20: SPY continues sliding to \$485. Spread worth ~\$0.80.
 Day 30: SPY \$480. Both calls expire worthless. Spread worth \$0. Loss: -\$600 (your max loss).
 The good news? You only lost \$600, not the \$1,000 you would have lost on a naked long call.
-💡 What You Just Learned
-☑️ Notice how you paid less upfront but capped your gains? That tradeoff is the essence of debit spreads. You sacrifice unlimited upside for cheaper entry and defined risk.
-☑️ Notice how time decay hurt both legs? Since both options are decaying, the effect is muted—your short call's decay partially offsets your long call's decay. This is called being theta-neutral.
-☑️ Notice Path B—you maxed out even though SPY went to \$530? That's because both options moved together once they were both ITM. The spread's max value is the width (\$10), no matter how high the stock goes.
-☑️ The pattern: Bull call spreads are defined-risk directional bets. You win if you're right about direction and magnitude. You lose less than a naked call if you're wrong. But you give up the moonshot.`,
-    analogy: `Like betting on a horse to win, but splitting the ticket with a friend who thinks the horse will only place. You pay less for the ticket, but you have to share the winnings if it wins big.`,
-    nuance: `Vol Dampener: Long and Short Vega cancel out.
+ What You Just Learned
+☑ Notice how you paid less upfront but capped your gains? That tradeoff is the essence of debit spreads. You sacrifice unlimited upside for cheaper entry and defined risk.
+☑ Notice how time decay hurt both legs? Since both options are decaying, the effect is muted—your short call's decay partially offsets your long call's decay. This is called being theta-neutral.
+☑ Notice Path B—you maxed out even though SPY went to \$530? That's because both options moved together once they were both ITM. The spread's max value is the width (\$10), no matter how high the stock goes.
+☑ The pattern: Bull call spreads are defined-risk directional bets. You win if you're right about direction and magnitude. You lose less than a naked call if you're wrong. But you give up the moonshot.`,
+ analogy: `Like betting on a horse to win, but splitting the ticket with a friend who thinks the horse will only place. You pay less for the ticket, but you have to share the winnings if it wins big.`,
+ nuance: `Vol Dampener: Long and Short Vega cancel out.
 Theta Neutrality: Time decay of the short option helps offset the decay of the long option.`,
-    example: `Scenario: SPY is at \$500. You think it goes to \$510, but buying the \$500 call costs \$10 (too expensive).
+ example: `Scenario: SPY is at \$500. You think it goes to \$510, but buying the \$500 call costs \$10 (too expensive).
 The Trade: Buy \$500 Call (\$10). Sell \$510 Call (\$4). Net Debit: \$6.00 (\$600).
 The Math: Max Profit is width (\$10) - cost (\$6) = \$400. Max Loss is \$600.
 Why? You reduced max risk from \$1,000 to \$600. Higher probability of profit due to lower breakeven.`,
-    animalMetaphor: `The Falcon
+ animalMetaphor: `The Falcon
 The falcon is a precision hunter—it doesn't chase prey across continents, but strikes a specific target with lethal accuracy. A bull call spread defines your profit zone precisely: you pay for the right to profit up to a specific ceiling. Like a falcon's calculated dive (limited energy expenditure for defined reward), you spend less than a naked long call but accept a capped profit. Efficient, targeted, disciplined.`,
-  },
-  'bear-put-spread': {
-    analysis: `Cheaper than a long put. The short put limits your profit but makes the trade much cheaper to enter.
-📖 Trade Walkthrough: 30 Days in the Life of a Bear Put Spread
+ },
+ 'bear-put-spread': {
+ analysis: `Cheaper than a long put. The short put limits your profit but makes the trade much cheaper to enter.
+ Trade Walkthrough: 30 Days in the Life of a Bear Put Spread
 The Setup
 You think COIN at \$200 is overvalued and heading down to \$170-\$180. But buying a put outright costs \$12 per share (\$1,200)—that's expensive for a speculative bet. Instead, you buy the \$200 Put for \$12.00 and sell the \$180 Put for \$5.00. Your net cost: \$7.00 per share (\$700 total).
 You've agreed to cap your profit at \$180 in exchange for paying less upfront.
@@ -3145,24 +3145,24 @@ Day 10: Bitcoin pumps. COIN rallies to \$220. Spread worth ~\$3.00.
 Day 20: COIN continues to \$240. Spread worth ~\$0.50.
 Day 30: COIN \$250. Both puts expire worthless. Spread worth \$0. Loss: -\$700 (your max loss).
 You were wrong about direction. But at least you only lost \$700, not the \$1,200 you would have lost on a naked long put.
-💡 What You Just Learned
-☑️ Notice how this is the mirror image of the Bull Call Spread? Same structure, opposite direction. You're betting on a decline instead of a rally. This is called a debit spread—you pay upfront for a directional bet with capped profit.
-☑️ Notice how Path B maxed out even though COIN collapsed to \$120? Once both puts are deep ITM, they move together. Your profit caps at the width of the spread (\$20), minus what you paid (\$7) = \$13 max profit per share.
-☑️ Notice how Path C lost money even though COIN dropped? You needed a big enough move to overcome your cost. The breakeven = strike - debit (\$200 - \$7 = \$193). Anything above that, you lose.
-☑️ The pattern: Bear put spreads are defined-risk bets on decline. Perfect when you think something is overvalued but don't want to pay full price for puts. You trade potential profit for cheaper entry.`,
-    analogy: `Shorting a stock with a built-in buy order to take profits automatically. You decide beforehand exactly how much profit is 'enough'.`,
-    nuance: `Defined Risk: Essential for portfolio management.
+ What You Just Learned
+☑ Notice how this is the mirror image of the Bull Call Spread? Same structure, opposite direction. You're betting on a decline instead of a rally. This is called a debit spread—you pay upfront for a directional bet with capped profit.
+☑ Notice how Path B maxed out even though COIN collapsed to \$120? Once both puts are deep ITM, they move together. Your profit caps at the width of the spread (\$20), minus what you paid (\$7) = \$13 max profit per share.
+☑ Notice how Path C lost money even though COIN dropped? You needed a big enough move to overcome your cost. The breakeven = strike - debit (\$200 - \$7 = \$193). Anything above that, you lose.
+☑ The pattern: Bear put spreads are defined-risk bets on decline. Perfect when you think something is overvalued but don't want to pay full price for puts. You trade potential profit for cheaper entry.`,
+ analogy: `Shorting a stock with a built-in buy order to take profits automatically. You decide beforehand exactly how much profit is 'enough'.`,
+ nuance: `Defined Risk: Essential for portfolio management.
 Pin Risk: Close spreads before expiration to avoid assignment headaches.`,
-    example: `Scenario: COIN is at \$200. Crypto looks weak.
+ example: `Scenario: COIN is at \$200. Crypto looks weak.
 The Trade: Buy \$190 Put (\$12). Sell \$170 Put (\$5). Net Debit: \$7.00.
 Outcome: If COIN drops to \$170 or lower, spread is worth \$20. Profit: \$20 - \$7 cost = \$13 (\$1,300).
 Comparison: A naked Put costs \$12. If COIN only drops to \$185, the naked put might barely break even, but the spread profits because the short leg decayed.`,
-    animalMetaphor: `The Hyena
+ animalMetaphor: `The Hyena
 Hyenas are opportunistic predators that profit from weakness without overcommitting resources. A bear put spread lets you bet on decline at a fraction of naked put cost—the short put funds part of your position. Like hyenas hunting in coordinated groups (spreading risk), this strategy defines both your maximum loss and maximum gain. You won't feast like a lion on a massive kill, but you'll profit efficiently from decline with controlled risk.`,
-  },
-  'bull-put-spread': {
-    analysis: `A 'Credit Spread'. You are selling insurance (the short put) and buying cheaper catastrophic insurance (the long put) for yourself.
-📖 Trade Walkthrough: 30 Days in the Life of a Bull Put Spread
+ },
+ 'bull-put-spread': {
+ analysis: `A 'Credit Spread'. You are selling insurance (the short put) and buying cheaper catastrophic insurance (the long put) for yourself.
+ Trade Walkthrough: 30 Days in the Life of a Bull Put Spread
 The Setup
 You think GOOGL at \$170 will hold above \$160 support over the next month. Instead of betting on a rally, you want to get paid for being patient. You sell the \$160 Put for \$2.00 and buy the \$155 Put for \$0.50. You receive \$1.50 per share (\$150 total) upfront.
 The money is already in your account. Now you just need GOOGL to stay above \$160 for 30 days.
@@ -3193,24 +3193,24 @@ Day 10: Antitrust ruling! GOOGL gaps to \$150. Your short put is \$10 in-the-mon
 Day 20: GOOGL continues to \$145. Spread worth \$5.00 (max width reached).
 Day 30: GOOGL \$140. Short put worth \$20. Long put worth \$15. Spread worth \$5. Loss: -\$350 (max loss).
 You risked \$350 to make \$150. One max loss wipes out 2.3 wins. This is the core tradeoff of credit spreads: high win rate, but asymmetric risk/reward.
-💡 What You Just Learned
-☑️ Notice how you got paid upfront? That's the defining feature of credit spreads. You receive money on day 1 and hope to keep it. Debit spreads are the opposite—you pay first and hope to profit.
-☑️ Notice how time decay was your friend? Every day that passed with GOOGL above \$160, both puts lost value. This decay went into your pocket. Credit spreads are theta-positive—time is on your side.
-☑️ Notice the asymmetric risk/reward? You risked \$350 to make \$150 (about 2.3:1 against you). But you win ~70-80% of the time if you pick strikes below support. The math can still work—but you must size appropriately.
-☑️ The pattern: Bull put spreads are income trades. You're selling insurance and collecting premium. You win when "nothing bad happens." It's the opposite mindset from debit spreads, which need "something good to happen."`,
-    analogy: `Like selling flood insurance to a house on a hill. It's a safe bet, but you buy a cheap re-insurance policy just in case a biblical flood actually happens.`,
-    nuance: `Theta Driver: Thrives on time decay.
+ What You Just Learned
+☑ Notice how you got paid upfront? That's the defining feature of credit spreads. You receive money on day 1 and hope to keep it. Debit spreads are the opposite—you pay first and hope to profit.
+☑ Notice how time decay was your friend? Every day that passed with GOOGL above \$160, both puts lost value. This decay went into your pocket. Credit spreads are theta-positive—time is on your side.
+☑ Notice the asymmetric risk/reward? You risked \$350 to make \$150 (about 2.3:1 against you). But you win ~70-80% of the time if you pick strikes below support. The math can still work—but you must size appropriately.
+☑ The pattern: Bull put spreads are income trades. You're selling insurance and collecting premium. You win when "nothing bad happens." It's the opposite mindset from debit spreads, which need "something good to happen."`,
+ analogy: `Like selling flood insurance to a house on a hill. It's a safe bet, but you buy a cheap re-insurance policy just in case a biblical flood actually happens.`,
+ nuance: `Theta Driver: Thrives on time decay.
 High Win Rate: You win small often, but one max loss can wipe out 5 wins.`,
-    example: `Scenario: GOOGL is \$170. You think it holds \$160 support.
+ example: `Scenario: GOOGL is \$170. You think it holds \$160 support.
 The Trade: Sell \$160 Put (\$2.00). Buy \$155 Put (\$0.50). Net Credit: \$1.50 (\$150).
 Max Loss: Width (\$5) - Credit (\$1.50) = \$3.50 (\$350).
 Outcome: As long as GOOGL stays above \$160, you keep the \$150. If it crashes to \$150, you lose \$350. Risk \$350 to make \$150 is a classic income setup.`,
-    animalMetaphor: `The Remora
+ animalMetaphor: `The Remora
 The remora attaches itself to larger creatures, feeding on scraps while the host does the heavy lifting. A bull put spread collects premium by attaching to a stock's neutral-to-bullish momentum—you profit from time decay and the stock not falling significantly. You're not the apex predator; you're surviving on the edges of someone else's movement. Defined risk, modest but consistent reward, minimal effort required.`,
-  },
-  'bear-call-spread': {
-    analysis: `You sell a Call and buy a higher strike Call for protection. You profit if the stock stays flat or drops. It is a bet against a rally.
-📖 Trade Walkthrough: 30 Days in the Life of a Bear Call Spread
+ },
+ 'bear-call-spread': {
+ analysis: `You sell a Call and buy a higher strike Call for protection. You profit if the stock stays flat or drops. It is a bet against a rally.
+ Trade Walkthrough: 30 Days in the Life of a Bear Call Spread
 The Setup
 You think RIVN at \$12 is overextended after a speculative rally. You don't think it'll break above \$13 resistance. Instead of shorting the stock, you sell the \$13 Call for \$0.80 and buy the \$15 Call for \$0.20. You receive \$0.60 per share (\$60 total) upfront.
 The money is in your account. Now you need RIVN to stay below \$13 for 30 days.
@@ -3242,149 +3242,149 @@ Day 8: Partnership announcement! RIVN gaps to \$16. Your short call is \$3 in-th
 Day 20: RIVN continues to \$18. Spread worth \$2.00 (max width reached).
 Day 30: RIVN \$20. Short call worth \$7. Long call worth \$5. Spread worth \$2. Loss: -\$140 (max loss).
 You risked \$140 to make \$60. One max loss wipes out 2.3 wins. But compare this to shorting the stock: you'd have lost \$800 as RIVN went from \$12 to \$20. The spread defined your risk.
-💡 What You Just Learned
-☑️ Notice how this is the mirror image of the Bull Put Spread? Same credit spread structure, opposite direction. Bull put spreads profit when stocks don't crash; bear call spreads profit when stocks don't rally. Both are bets on "nothing exciting happening."
-☑️ Notice how you're short delta without shorting stock? This spread has negative delta—you profit when the stock goes down. But unlike a short stock position, your loss is capped at \$140, not unlimited.
-☑️ Notice Path C—the spike to \$14 was scary but didn't matter? What counts is where the stock is at expiration, not the path it takes. As long as you sized correctly and didn't panic-close, the pullback saved you.
-☑️ The pattern: Bear call spreads are income trades betting against rallies. Perfect for overextended stocks you think will fade. You sell resistance levels and collect premium while waiting for gravity to do its work.`,
-    analogy: `Selling lottery tickets to optimists. You collect the cash upfront, hoping the ticket (stock price) never hits the jackpot numbers (your short strike).`,
-    nuance: `Short Delta: Negative Delta exposure without shorting stock.
+ What You Just Learned
+☑ Notice how this is the mirror image of the Bull Put Spread? Same credit spread structure, opposite direction. Bull put spreads profit when stocks don't crash; bear call spreads profit when stocks don't rally. Both are bets on "nothing exciting happening."
+☑ Notice how you're short delta without shorting stock? This spread has negative delta—you profit when the stock goes down. But unlike a short stock position, your loss is capped at \$140, not unlimited.
+☑ Notice Path C—the spike to \$14 was scary but didn't matter? What counts is where the stock is at expiration, not the path it takes. As long as you sized correctly and didn't panic-close, the pullback saved you.
+☑ The pattern: Bear call spreads are income trades betting against rallies. Perfect for overextended stocks you think will fade. You sell resistance levels and collect premium while waiting for gravity to do its work.`,
+ analogy: `Selling lottery tickets to optimists. You collect the cash upfront, hoping the ticket (stock price) never hits the jackpot numbers (your short strike).`,
+ nuance: `Short Delta: Negative Delta exposure without shorting stock.
 Early Assignment: Watch out for dividends if ITM.`,
-    example: `Scenario: RIVN is \$12. You think the rally is fake.
+ example: `Scenario: RIVN is \$12. You think the rally is fake.
 The Trade: Sell \$13 Call (\$0.80). Buy \$15 Call (\$0.20). Net Credit: \$0.60 (\$60).
 Risk Profile: Max Loss is Width (\$2) - Credit (\$0.60) = \$1.40 (\$140).
 Outcome: If RIVN fades to \$11, both calls expire worthless. You keep the \$60. Return on Risk: \$60/\$140 = 43%.`,
-    animalMetaphor: `The Jackal
+ animalMetaphor: `The Jackal
 Jackals scavenge and hunt opportunistically, profiting from overconfidence in others. When a stock has rallied too far too fast, the jackal (bear call spread seller) steps in to profit from the inevitable pullback or consolidation. You collect premium betting that euphoria fades. Like a jackal's quick strike and retreat, your risk is defined and your profit is the premium collected when exuberance dies.`,
-  },
-  'vertical-village': {
-    analysis: `The Vertical Village
+ },
+ 'vertical-village': {
+ analysis: `The Vertical Village
 Four spreads. Four personalities. One framework to rule them all.
 Welcome to the Village
 You've now learned all four vertical spread strategies. But here's the problem: they all sound similar until you see them side by side.
 This module is your visual field guide—a permanent reference to instantly recognize which spread fits your market outlook. Think of it as the Periodic Table of Verticals: each element has a distinct color, personality, and purpose.
-🚀 BULL CALL SPREAD
+ BULL CALL SPREAD
 DEBIT
-🎟️
+
 The Discounted Rocket Ticket
 You want to go to the moon, but the full ticket is too expensive. So you buy a ticket (Long Call) but agree to get off at the Space Station (Short Call) to reduce cost. You sacrifice infinite upside for a cheaper entry.
 Direction
-🟢 BULLISH (Needs UP)
+ BULLISH (Needs UP)
 Action
 Pay to Play
 Time Decay
-❌ Hurts You
+ Hurts You
 Best When
 Certain of rally, want cheaper cost
 Trade Example:
 Stock \$100 → Buy \$105 Call, Sell \$110 Call. Max gain if stock hits \$110+. You profit from targeted upside.
 ⚡ BEAR CALL SPREAD
 CREDIT
-🔌
+
 The Electric Ceiling
 You install an invisible electric ceiling (Short Call) above the stock. You bet it won't jump high enough to touch it. If Superman shows up, you have a helmet (Long Call) to cap losses.
 Direction
-🟠 NEUTRAL/BEARISH (Stay Low)
+ NEUTRAL/BEARISH (Stay Low)
 Action
 Get Paid to Wait
 Time Decay
-✅ Helps You
+ Helps You
 Best When
 Fading rallies, selling resistance
 Trade Example:
 Stock \$100 → Sell \$105 Call, Buy \$110 Call. Collect premium. Profit if stock stays below \$105. The ceiling holds.
-🪂 BEAR PUT SPREAD
+ BEAR PUT SPREAD
 DEBIT
-🪂
+
 The Subsidized Parachute
 You're betting on a crash. A gold parachute (Long Put) is expensive. You only need to survive to ground level, not the basement. So you sell the "basement rights" (Short Put) to pay for your chute.
 Direction
-🔴 BEARISH (Needs DOWN)
+ BEARISH (Needs DOWN)
 Action
 Pay to Play
 Time Decay
-❌ Hurts You
+ Hurts You
 Best When
 Certain of crash, want cheaper cost
 Trade Example:
 Stock \$100 → Buy \$95 Put, Sell \$90 Put. Max gain if stock hits \$90 or below. You profit from targeted downside.
-🌊 BULL PUT SPREAD
+ BULL PUT SPREAD
 CREDIT
-🏠
+
 Selling Flood Insurance on a Hill
 You sell flood insurance (Short Put) to a house on a high hill. You bet the water won't rise that high. You buy cheap reinsurance (Long Put) for the valley below to cap catastrophic risk.
 Direction
-🔵 NEUTRAL/BULLISH (Don't Drop)
+ NEUTRAL/BULLISH (Don't Drop)
 Action
 Get Paid to Wait
 Time Decay
-✅ Helps You
+ Helps You
 Best When
 Selling support, be the house
 Trade Example:
 Stock \$100 → Sell \$95 Put, Buy \$90 Put. Collect premium. Profit if stock stays above \$95. The floor holds.
 The Master Comparison Matrix
-💸 DEBIT SPREADS (Pay to Play)
-🚀
+ DEBIT SPREADS (Pay to Play)
+
 Bull Call Spread
 Bullish | Need stock to rally
-🪂
+
 Bear Put Spread
 Bearish | Need stock to crash
-⚠️ Shared Characteristics:
+⚠ Shared Characteristics:
 • You pay upfront (debit)
 • Time decay hurts you (Theta negative)
 • You NEED price movement to win
 • Directional conviction required
 • Lower capital requirement than naked options
-💰 CREDIT SPREADS (Get Paid to Wait)
+ CREDIT SPREADS (Get Paid to Wait)
 ⚡
 Bear Call Spread
 Neutral/Bearish | Stock stays low
-🌊
+
 Bull Put Spread
 Neutral/Bullish | Stock stays high
-✅ Shared Characteristics:
+ Shared Characteristics:
 • You collect premium upfront (credit)
 • Time decay helps you (Theta positive)
 • You WIN if nothing dramatic happens
 • "Selling insurance" mindset
 • High probability, limited reward
-🧭 The Decision Tree: Which Spread Do I Use?
+ The Decision Tree: Which Spread Do I Use?
 If you're BULLISH:
 → Bull Call Spread (Debit) if you're certain the stock will rally and want leveraged upside.
 → Bull Put Spread (Credit) if you just need the stock to not crash and want to collect premium.
 If you're BEARISH:
 → Bear Put Spread (Debit) if you're certain the stock will crash and want leveraged downside.
 → Bear Call Spread (Credit) if you just need the stock to not rally and want to collect premium.
-💡 The Golden Rule:
+ The Golden Rule:
 Debit Spreads = Directional Bets. You NEED movement. You're buying convexity (gamma) and paying for theta decay.
 Credit Spreads = Income Bets. You NEED stability. You're selling convexity and getting paid for theta decay.
-🎨 Memory Tricks: Never Forget Again
-🚀
+ Memory Tricks: Never Forget Again
+
 GREEN = Go Up (Bull Call)
 Neon green screams "launch." Aggressive upward bet. You're paying for a rocket ticket with a price cap at the space station.
-🪂
+
 RED = Stop/Danger (Bear Put)
 Neon red screams "crash." Aggressive downward bet. You're paying for a parachute but selling the basement landing rights.
-🌊
+
 CYAN = The Floor (Bull Put)
 Cool water rising but not flooding. You're selling insurance that the floor holds. Supportive, calm, theta-positive income.
 ⚡
 AMBER = The Ceiling (Bear Call)
 Caution sign: don't fly too high. Electric fence above. You're selling insurance that the ceiling holds. Resistance, theta-positive income.
-🏆 You Now Speak Vertical
+ You Now Speak Vertical
 Bookmark this module. Whenever you're confused about which spread to use, return to the Village.
 The colors will guide you. The metaphors will stick. And the matrix will give you the answer.
 "The best traders don't memorize formulas—they visualize frameworks."`,
-    analogy: `A village with four districts: The Rocket District (bull calls, aggressive upside), The Parachute District (bear puts, aggressive downside), The Insurance District (credit spreads selling protection), and The Ceiling/Floor District (neutral income plays).`,
-    nuance: `Debit = Direction: You pay for convexity. You NEED movement.
+ analogy: `A village with four districts: The Rocket District (bull calls, aggressive upside), The Parachute District (bear puts, aggressive downside), The Insurance District (credit spreads selling protection), and The Ceiling/Floor District (neutral income plays).`,
+ nuance: `Debit = Direction: You pay for convexity. You NEED movement.
 Credit = Theta: You sell convexity. You NEED stability.`,
-    example: ``,
-  },
-  'long-straddle': {
-    analysis: `The purest volatility play. You buy both a Call and a Put at the same strike. You just need the stock to move further than the cost of the premiums combined.
-📖 Trade Walkthrough: 14 Days in the Life of a Long Straddle
+ example: ``,
+ },
+ 'long-straddle': {
+ analysis: `The purest volatility play. You buy both a Call and a Put at the same strike. You just need the stock to move further than the cost of the premiums combined.
+ Trade Walkthrough: 14 Days in the Life of a Long Straddle
 The Setup
 NFLX is at \$600 with earnings in 2 weeks. You have no idea if it'll beat or miss, but you're convinced the market is underpricing the move. The expected move is \$30, but you think it could swing \$60+. You buy the \$600 Call for \$18 and buy the \$600 Put for \$17. Total cost: \$35 per share (\$3,500).
 You need NFLX to move more than \$35 in either direction to profit. Your breakevens: \$565 on the downside, \$635 on the upside.
@@ -3413,24 +3413,24 @@ Day 7: NFLX \$598. Straddle worth \$30. Both legs bleeding from theta.
 Day 14 (Earnings): NFLX reports in-line. Stock moves to \$605. IV collapses. Call worth \$6. Put worth \$0.
 Result: Straddle worth \$6. Loss: -\$2,900 (83% of investment).
 Double whammy: no movement + IV crush. This is why straddles are expensive—you're paying for the POSSIBILITY of a big move, and you lose if it doesn't happen.
-💡 What You Just Learned
-☑️ Notice how you didn't care about direction? That's the essence of volatility trading. You're not betting on up or down—you're betting on the SIZE of the move. Straddles are delta-neutral at entry.
-☑️ Notice Path C—the stock moved \$25 and you still lost? That's IV Crush. Before events like earnings, options are expensive because everyone expects a big move. After the event, uncertainty disappears and premiums collapse—even if the stock moved.
-☑️ Notice how both options decayed every day? Straddles have double theta decay—you're paying rent on TWO options. Time is your enemy until the move happens.
-☑️ The pattern: Long straddles are bets on chaos. You profit from explosions, panic, and surprise. You lose from boredom and "as expected" outcomes. Never buy straddles when everyone already knows a big move is coming—you're paying for old news.`,
-    analogy: `Lighting dynamite at both ends. You need a big bang to pay for the fuse.`,
-    nuance: `Double Theta: Burning time on two ends.
+ What You Just Learned
+☑ Notice how you didn't care about direction? That's the essence of volatility trading. You're not betting on up or down—you're betting on the SIZE of the move. Straddles are delta-neutral at entry.
+☑ Notice Path C—the stock moved \$25 and you still lost? That's IV Crush. Before events like earnings, options are expensive because everyone expects a big move. After the event, uncertainty disappears and premiums collapse—even if the stock moved.
+☑ Notice how both options decayed every day? Straddles have double theta decay—you're paying rent on TWO options. Time is your enemy until the move happens.
+☑ The pattern: Long straddles are bets on chaos. You profit from explosions, panic, and surprise. You lose from boredom and "as expected" outcomes. Never buy straddles when everyone already knows a big move is coming—you're paying for old news.`,
+ analogy: `Lighting dynamite at both ends. You need a big bang to pay for the fuse.`,
+ nuance: `Double Theta: Burning time on two ends.
 IV Crush: Never buy right before earnings unless you expect a MASSIVE move.`,
-    example: `Scenario: NFLX earnings tomorrow. Price \$600. Market implies \$30 move. You expect \$60.
+ example: `Scenario: NFLX earnings tomorrow. Price \$600. Market implies \$30 move. You expect \$60.
 The Trade: Buy \$600 Call (\$15) + Buy \$600 Put (\$15). Cost: \$30.00.
 Outcome A (Boring): NFLX moves to \$610. Call worth \$10, Put \$0. Loss: \$20 (\$2,000).
 Outcome B (Explosion): NFLX tanks to \$530. Put worth \$70. Profit: \$70 - \$30 cost = \$4,000.`,
-    animalMetaphor: `The Bat
+ animalMetaphor: `The Bat
 Bats thrive in chaos—they navigate through echolocation, profiting from turbulence that blinds other creatures. A long straddle buyer doesn't care which direction the stock moves, only that it moves explosively. Like a bat hunting in the dark, you're positioned for violent swings either way. Earnings announcements, FDA decisions, elections—anywhere chaos reigns, the bat thrives. Expensive to maintain (double premium), but devastating when volatility explodes.`,
-  },
-  'long-strangle': {
-    analysis: `Similar to a Straddle, but you buy OTM options. Cheaper to enter, but needs a bigger move to profit.
-📖 Trade Walkthrough: 30 Days in the Life of a Long Strangle
+ },
+ 'long-strangle': {
+ analysis: `Similar to a Straddle, but you buy OTM options. Cheaper to enter, but needs a bigger move to profit.
+ Trade Walkthrough: 30 Days in the Life of a Long Strangle
 The Setup
 MSTR is at \$1,500 and you think Bitcoin is about to make a major move. You don't know which direction, but you expect at least a 15% swing. A straddle costs \$200—too expensive. Instead, you buy the \$1,400 Put (7% OTM) for \$50 and buy the \$1,600 Call (7% OTM) for \$50. Total cost: \$100 per share (\$10,000).
 Your breakevens: \$1,300 on the downside, \$1,700 on the upside. You need a bigger move than a straddle, but you paid half the price.
@@ -3459,24 +3459,24 @@ Day 10: MSTR \$1,480. Strangle worth \$70. Both options decaying.
 Day 20: MSTR \$1,520. Strangle worth \$40. Time crushing both legs.
 Day 30: MSTR \$1,510. Both options expire worthless. Loss: -\$10,000 (100% loss).
 The "dead zone" between your strikes is where strangles go to die. Every day in this zone, you lose money.
-💡 What You Just Learned
-☑️ Notice how you paid half the price of a straddle? That's the tradeoff. Strangles are cheaper because both options are out-of-the-money. But you need a BIGGER move to profit—the stock must blast through one of your strikes.
-☑️ Notice Path C—the stock dropped 5% and you still lost everything? The "dead zone" between your strikes is the strangle's Achilles heel. A straddle would have captured some value, but your OTM options expired worthless.
-☑️ Notice the binary outcomes? Strangles tend to be all-or-nothing: 100% loss or 200%+ gain. There's less middle ground than with straddles. This is low delta at entry—both options barely react to small moves.
-☑️ The pattern: Long strangles are cheap lottery tickets on explosions. Best for highly volatile assets (crypto, meme stocks, biotechs) where 15%+ moves are plausible. Terrible for boring stocks that just chop around.`,
-    analogy: `A cheaper dynamite stick with a longer fuse. The explosion needs to be massive to bridge the gap between your strikes.`,
-    nuance: `Lower Delta: Needs significant move to gain value.
+ What You Just Learned
+☑ Notice how you paid half the price of a straddle? That's the tradeoff. Strangles are cheaper because both options are out-of-the-money. But you need a BIGGER move to profit—the stock must blast through one of your strikes.
+☑ Notice Path C—the stock dropped 5% and you still lost everything? The "dead zone" between your strikes is the strangle's Achilles heel. A straddle would have captured some value, but your OTM options expired worthless.
+☑ Notice the binary outcomes? Strangles tend to be all-or-nothing: 100% loss or 200%+ gain. There's less middle ground than with straddles. This is low delta at entry—both options barely react to small moves.
+☑ The pattern: Long strangles are cheap lottery tickets on explosions. Best for highly volatile assets (crypto, meme stocks, biotechs) where 15%+ moves are plausible. Terrible for boring stocks that just chop around.`,
+ analogy: `A cheaper dynamite stick with a longer fuse. The explosion needs to be massive to bridge the gap between your strikes.`,
+ nuance: `Lower Delta: Needs significant move to gain value.
 Binary Outcome: Often 100% loss or 500% gain.`,
-    example: `Scenario: MSTR is \$1,500. Bitcoin is volatile.
+ example: `Scenario: MSTR is \$1,500. Bitcoin is volatile.
 The Trade: Buy \$1,400 Put (\$50) + Buy \$1,600 Call (\$50). Total: \$100.
 Why? A Straddle might cost \$200. This is half price.
 Outcome: If MSTR stays at \$1,500, you lose \$100. If MSTR hits \$1,800, Call is worth \$200. Net Profit \$100 (100%).`,
-    animalMetaphor: `The Flying Squirrel
+ animalMetaphor: `The Flying Squirrel
 The flying squirrel is similar to the bat but more economical—it glides rather than truly flies, conserving energy for the same aerial advantage. A long strangle costs less than a straddle (out-of-the-money options) but requires a larger move to profit. You're betting on dramatic movement while spending less. Like the squirrel's efficient glide, you sacrifice some precision for cost savings, needing a bigger launch to reach your destination.`,
-  },
-  'short-straddle': {
-    analysis: `You sell both the Call and the Put. Massive premium collection, but you lose if the stock moves significantly in *either* direction.
-📖 Trade Walkthrough: 45 Days in the Life of a Short Straddle
+ },
+ 'short-straddle': {
+ analysis: `You sell both the Call and the Put. Massive premium collection, but you lose if the stock moves significantly in *either* direction.
+ Trade Walkthrough: 45 Days in the Life of a Short Straddle
 The Setup
 VZ (Verizon) is at \$40. It's the most boring stock in your universe—it never moves. You want to monetize that boredom. You sell the \$40 Call for \$1.50 and sell the \$40 Put for \$1.50. You collect \$3.00 per share (\$300) upfront.
 Your breakevens: \$37 on the downside, \$43 on the upside. As long as VZ stays between those levels, you profit. But if it breaks out in either direction... unlimited losses.
@@ -3508,24 +3508,24 @@ Day 12: BREAKING NEWS: VZ merging with T-Mobile. Stock gaps to \$52 overnight.
 Damage: Your short call is \$12 in-the-money. You owe \$1,200 on the call. Put expires worthless.
 Result: Collected \$300, pay \$1,200 = Loss -\$900.
 One event wiped out 3 months of potential wins. This is why short straddles are called "picking up pennies in front of a steamroller." If VZ had gone to \$60? Loss would be \$1,700. \$70? \$2,700. No limit.
-💡 What You Just Learned
-☑️ Notice how you're betting on boredom? Short straddles are the opposite of long straddles. You're short volatility—you profit when nothing happens and lose when there's excitement.
-☑️ Notice the unlimited risk? Unlike credit spreads, there's no cap on losses. The stock can theoretically go to infinity (call side) or zero (put side). This is why short straddles are considered advanced and dangerous.
-☑️ Notice Path D—one surprise erased multiple wins? This is short gamma in action. As the stock moves away from your strike, your losses accelerate. The position gets worse faster the more it moves.
-☑️ The pattern: Short straddles are income trades that require constant vigilance. Only use on the most boring, range-bound stocks. Always have a stop-loss plan. Never hold through binary events (earnings, FDA decisions, mergers).`,
-    analogy: `Picking up pennies in front of a steamroller. The pennies are shiny, but if the steamroller moves, you get flattened.`,
-    nuance: `Short Gamma: Losses accelerate as stock moves away.
+ What You Just Learned
+☑ Notice how you're betting on boredom? Short straddles are the opposite of long straddles. You're short volatility—you profit when nothing happens and lose when there's excitement.
+☑ Notice the unlimited risk? Unlike credit spreads, there's no cap on losses. The stock can theoretically go to infinity (call side) or zero (put side). This is why short straddles are considered advanced and dangerous.
+☑ Notice Path D—one surprise erased multiple wins? This is short gamma in action. As the stock moves away from your strike, your losses accelerate. The position gets worse faster the more it moves.
+☑ The pattern: Short straddles are income trades that require constant vigilance. Only use on the most boring, range-bound stocks. Always have a stop-loss plan. Never hold through binary events (earnings, FDA decisions, mergers).`,
+ analogy: `Picking up pennies in front of a steamroller. The pennies are shiny, but if the steamroller moves, you get flattened.`,
+ nuance: `Short Gamma: Losses accelerate as stock moves away.
 Management: Requires active rolling.`,
-    example: `Scenario: VZ (Verizon) is \$40. It never moves.
+ example: `Scenario: VZ (Verizon) is \$40. It never moves.
 The Trade: Sell \$40 Call + Sell \$40 Put. Collect \$2.00 total.
 Outcome: If VZ stays at \$40, you keep \$200.
 Risk: If VZ announces a merger and hits \$50, you lose \$8.00 (\$800) on the call side. Net loss \$800.`,
-    animalMetaphor: `The Anglerfish
+ animalMetaphor: `The Anglerfish
 The anglerfish dangles a glowing lure in the abyss, attracting prey that swim straight into its jaws. A short straddle seller dangles juicy premium, attracting buyers betting on movement—while profiting from stillness. You're betting nothing happens: no big moves up or down. The risk is enormous (unlimited in both directions), but in calm waters, the anglerfish feasts on premium decay. A predator of the patient variety, lethal if waters stay calm.`,
-  },
-  'short-strangle': {
-    analysis: `You sell OTM Call and Put. Higher probability of profit than Short Straddle, but lower premium.
-📖 Trade Walkthrough: 45 Days in the Life of a Short Strangle
+ },
+ 'short-strangle': {
+ analysis: `You sell OTM Call and Put. Higher probability of profit than Short Straddle, but lower premium.
+ Trade Walkthrough: 45 Days in the Life of a Short Strangle
 The Setup
 TLT (Bond ETF) is at \$95 and has been range-bound for months. You don't think it'll break \$90 or \$100 anytime soon. Instead of selling a straddle (too risky), you sell the \$90 Put (5% OTM) for \$0.80 and sell the \$100 Call (5% OTM) for \$0.70. You collect \$1.50 per share (\$150) upfront.
 Your breakevens: \$88.50 on the downside, \$101.50 on the upside. A much wider "safe zone" than a straddle—but less premium collected.
@@ -3557,23 +3557,23 @@ Day 18: Credit crisis headline. TLT gaps down to \$82 at open—8% overnight mov
 Damage: Your \$90 put is \$8 ITM. You owe \$800. Call expires worthless.
 Result: Collected \$150, pay \$800 = Loss -\$650.
 The gap bypassed your management plan. You couldn't close before the damage was done. This is the black swan risk of all short volatility strategies.
-💡 What You Just Learned
-☑️ Notice the tradeoff vs. a short straddle? You collected less premium (\$150 vs ~\$300 for a straddle) but got much wider breakevens. This is probability vs. premium—higher win rate, smaller wins.
-☑️ Notice Path B—touching your strike wasn't death? OTM options have more "runway." With a straddle, being \$1 ITM hurts immediately. With a strangle, you can be slightly ITM and still recover if the stock reverses.
-☑️ Notice the gap risk in Path D? Short strangles still have unlimited risk. The wider strikes help in normal markets, but can't protect you from overnight gaps or crashes.
-☑️ The pattern: Short strangles are the workhorse of premium sellers. Wider strikes = more forgiveness. Use on low-volatility, range-bound assets. Avoid around binary events. Always have a max loss threshold where you close.`,
-    analogy: `A wider road for the steamroller. You are safer, but the pennies are further apart.`,
-    nuance: `Margin Intensive: Brokers require significant buying power.
+ What You Just Learned
+☑ Notice the tradeoff vs. a short straddle? You collected less premium (\$150 vs ~\$300 for a straddle) but got much wider breakevens. This is probability vs. premium—higher win rate, smaller wins.
+☑ Notice Path B—touching your strike wasn't death? OTM options have more "runway." With a straddle, being \$1 ITM hurts immediately. With a strangle, you can be slightly ITM and still recover if the stock reverses.
+☑ Notice the gap risk in Path D? Short strangles still have unlimited risk. The wider strikes help in normal markets, but can't protect you from overnight gaps or crashes.
+☑ The pattern: Short strangles are the workhorse of premium sellers. Wider strikes = more forgiveness. Use on low-volatility, range-bound assets. Avoid around binary events. Always have a max loss threshold where you close.`,
+ analogy: `A wider road for the steamroller. You are safer, but the pennies are further apart.`,
+ nuance: `Margin Intensive: Brokers require significant buying power.
 Black Swan Risk: Infinite loss on upside.`,
-    example: `Scenario: TLT (Bonds) is \$95. Range bound.
+ example: `Scenario: TLT (Bonds) is \$95. Range bound.
 The Trade: Sell \$90 Put / Sell \$100 Call. Collect \$1.00.
 Outcome: You win if TLT stays between \$90 and \$100. It's a very wide profit zone.`,
-    animalMetaphor: `The Boa Constrictor
+ animalMetaphor: `The Boa Constrictor
 The boa constrictor wraps around its prey and squeezes slowly—not striking violently, but tightening with time. A short strangle profits as time (theta) compresses option value, squeezing premium from buyers who bet on movement that never came. The wider strikes give room to breathe (unlike the straddle's tighter grip), but the principle is identical: profit from stillness and patience. Unlimited risk if the prey thrashes violently, but usually, the slow squeeze wins.`,
-  },
-  'iron-condor': {
-    analysis: `Income for non-directional markets. Sell a strangle, buy wings for protection.
-📖 Trade Walkthrough: 30 Days in the Life of an Iron Condor
+ },
+ 'iron-condor': {
+ analysis: `Income for non-directional markets. Sell a strangle, buy wings for protection.
+ Trade Walkthrough: 30 Days in the Life of an Iron Condor
 The Setup
 SPY is at \$500 and the market is in a low-volatility chop. You want to sell premium but don't want unlimited risk. You build an Iron Condor:
 • Buy \$480 Put for \$0.50 (your downside protection)
@@ -3608,24 +3608,24 @@ Day 8: Market crash! SPY gaps to \$475. Your put spread is fully ITM.
 Damage: \$490/\$480 put spread is worth \$10 (max width). You owe \$10 but collected \$2.
 Day 30: SPY \$470. Max loss: -\$800 (collected \$200, paid \$1,000 on put spread).
 One max loss wipes out 4 winning condors. This is the math you must accept with defined-risk premium selling. But unlike short strangles, you KNEW your max loss going in—no nasty surprises beyond \$800.
-💡 What You Just Learned
-☑️ Notice the 4 legs working together? An iron condor is really two vertical spreads stacked: a bull put spread and a bear call spread. The long wings cap your risk; the short strikes generate premium.
-☑️ Notice the defined risk vs. short strangle? A short strangle at the same strikes would collect similar premium but have unlimited risk. The iron condor's wings cost you ~\$1.00 of premium but buy you peace of mind.
-☑️ Notice the win/loss ratio? You risk \$800 to make \$200 (4:1 against). But iron condors win ~70-80% of the time when placed at 1 standard deviation wings. The math works if you're disciplined about sizing.
-☑️ The pattern: Iron condors are the defined-risk workhorse of income traders. Perfect for low-volatility environments. Manage at 50% profit or 2x loss. Avoid around major events. Size so max loss doesn't sting.`,
-    analogy: `Building a fence around a cow. As long as it stays in the pasture, you get paid. If it breaks the fence, insurance pays.`,
-    nuance: `Theta Play: Want days to pass without news.
+ What You Just Learned
+☑ Notice the 4 legs working together? An iron condor is really two vertical spreads stacked: a bull put spread and a bear call spread. The long wings cap your risk; the short strikes generate premium.
+☑ Notice the defined risk vs. short strangle? A short strangle at the same strikes would collect similar premium but have unlimited risk. The iron condor's wings cost you ~\$1.00 of premium but buy you peace of mind.
+☑ Notice the win/loss ratio? You risk \$800 to make \$200 (4:1 against). But iron condors win ~70-80% of the time when placed at 1 standard deviation wings. The math works if you're disciplined about sizing.
+☑ The pattern: Iron condors are the defined-risk workhorse of income traders. Perfect for low-volatility environments. Manage at 50% profit or 2x loss. Avoid around major events. Size so max loss doesn't sting.`,
+ analogy: `Building a fence around a cow. As long as it stays in the pasture, you get paid. If it breaks the fence, insurance pays.`,
+ nuance: `Theta Play: Want days to pass without news.
 Legging In: Advanced technique to maximize premium.`,
-    example: `Scenario: RUT at 2000. Chopping sideways.
+ example: `Scenario: RUT at 2000. Chopping sideways.
 The Trade: Sell 1900/2100 Strangle. Buy 1850/2150 Wings. Credit \$2.00.
 The Zone: Profit between 1900 and 2100.
 Risk: Max loss is spread width (\$50) - credit (\$2) = \$48 loss if market crashes.`,
-    animalMetaphor: `The Spider
+ animalMetaphor: `The Spider
 The orb-weaver spider constructs an elegant web with defined boundaries—prey that flies within the web is captured; anything outside escapes. An iron condor builds a similar profit zone: sell a strangle, buy wings for protection, and profit if price stays within the web. Defined risk on both sides, maximum profit at the center. You're not hunting; you're waiting for the market to wander into your carefully constructed trap. Passive, patient, architecturally precise.`,
-  },
-  'iron-butterfly': {
-    analysis: `A Short Straddle with training wheels. Sell ATM, buy wings. Max profit at center strike.
-📖 Trade Walkthrough: 7 Days in the Life of an Iron Butterfly
+ },
+ 'iron-butterfly': {
+ analysis: `A Short Straddle with training wheels. Sell ATM, buy wings. Max profit at center strike.
+ Trade Walkthrough: 7 Days in the Life of an Iron Butterfly
 The Setup
 UBER is at \$75 on Monday. Friday is options expiration and you think UBER will "pin" to the \$75 strike—market makers often push stocks toward high-open-interest strikes at expiration. You build an Iron Butterfly:
 • Buy \$70 Put for \$0.30 (downside wing)
@@ -3662,24 +3662,24 @@ Friday Close: UBER \$85. Your \$75/\$80 call spread is fully max loss.
 Damage: Short \$75 call is \$10 ITM. Long \$80 call is \$5 ITM. Net loss on spread: \$5.
 Result: Collected \$3.00, pay \$5.00. Max loss: -\$200.
 Once past your wing (\$80), losses max out. The butterfly can never lose more than \$200—that's the "training wheels" protecting you from unlimited risk.
-💡 What You Just Learned
-☑️ Notice the unusual risk/reward? You risked \$200 to make \$300—that's 1.5:1 in your favor! Most options trades are the opposite. The catch? You need a precise pin to get max profit.
-☑️ Notice the "tent" shape of profits? Max profit at center (\$75), declining linearly as price moves away, max loss past the wings. This is the classic butterfly P&L curve.
-☑️ Notice this was a 7-day trade, not 30? Butterflies work best in the final week before expiration when theta decay is fastest. The ATM options (which you sold) decay rapidly in the last 5-7 days.
-☑️ The pattern: Iron butterflies are precision bets on a pin. Great for expected chop around a specific level. Use Friday expirations, target high open-interest strikes, and accept that you'll rarely get max profit—but the risk/reward is excellent.`,
-    analogy: `Throwing a dart. Highest score at the bullseye. Points decrease as you drift, until you hit the safety net.`,
-    nuance: `High Credit: You collect a large credit relative to risk.
+ What You Just Learned
+☑ Notice the unusual risk/reward? You risked \$200 to make \$300—that's 1.5:1 in your favor! Most options trades are the opposite. The catch? You need a precise pin to get max profit.
+☑ Notice the "tent" shape of profits? Max profit at center (\$75), declining linearly as price moves away, max loss past the wings. This is the classic butterfly P&L curve.
+☑ Notice this was a 7-day trade, not 30? Butterflies work best in the final week before expiration when theta decay is fastest. The ATM options (which you sold) decay rapidly in the last 5-7 days.
+☑ The pattern: Iron butterflies are precision bets on a pin. Great for expected chop around a specific level. Use Friday expirations, target high open-interest strikes, and accept that you'll rarely get max profit—but the risk/reward is excellent.`,
+ analogy: `Throwing a dart. Highest score at the bullseye. Points decrease as you drift, until you hit the safety net.`,
+ nuance: `High Credit: You collect a large credit relative to risk.
 Pinning: Market makers often pin stock to strikes at OpEx.`,
-    example: `Scenario: UBER is \$75. You think it pins here Friday.
+ example: `Scenario: UBER is \$75. You think it pins here Friday.
 The Trade: Sell \$75 Call/Put. Buy \$80 Call / \$70 Put. Credit: \$3.50.
 Risk: Spread is \$5 wide. Credit is \$3.50. Max risk is only \$1.50!
 Reward: If UBER is exactly \$75, you keep \$350. Almost 2.5x return on risk.`,
-    animalMetaphor: `The Praying Mantis
+ animalMetaphor: `The Praying Mantis
 The praying mantis is perfectly still, arms poised at the center, waiting for prey to land exactly where it stands. An iron butterfly concentrates maximum profit at a single strike price—you want the stock to land precisely at-the-money at expiration. More premium collected than the condor (tighter positioning), but less room for error. The mantis doesn't chase; it demands perfection of positioning. When prey lands exactly right, the strike is instant and total.`,
-  },
-  'calendar-spread': {
-    analysis: `You sell a short-term option to pay for a long-term option at the same strike. You are betting that the short-term option will decay (Theta) faster than the long-term option.
-📖 Trade Walkthrough: The Life of a Calendar Spread
+ },
+ 'calendar-spread': {
+ analysis: `You sell a short-term option to pay for a long-term option at the same strike. You are betting that the short-term option will decay (Theta) faster than the long-term option.
+ Trade Walkthrough: The Life of a Calendar Spread
 The Setup
 AMZN is at \$185. You think it will chop around this level for a few weeks. Instead of betting on direction, you want to exploit the difference in how fast options decay. You:
 • Sell the 2-week \$185 Call for \$4.00 (expires soon, decays fast)
@@ -3713,23 +3713,23 @@ Day 5: Fed meeting removes uncertainty. IV crashes to 25%.
 Impact: Front-month worth \$2.00. Back-month worth \$4.00. Both crushed, but the back-month lost MORE (it had more vega).
 Spread now worth: \$2.00. Loss: -\$100.
 The same "long vega" property that helps in Path B hurts you here. When IV drops, your longer-dated option loses more value than the short-dated one.
-💡 What You Just Learned
-☑️ Notice how you're trading TIME, not direction? Calendar spreads exploit theta differential—short-term options decay faster than long-term options. You're arbitraging this decay rate difference.
-☑️ Notice how volatility mattered more than you'd expect? Calendars are long vega. The back-month has more sensitivity to IV changes. Rising IV helps you; falling IV hurts you.
-☑️ Notice how the stock moving away killed the trade? Calendars have a "tent" P&L like butterflies. Max profit at the strike, declining as price drifts. The further from strike, the worse it gets.
-☑️ The pattern: Calendar spreads are bets on stability + rising IV. Best when you expect a stock to hover around a level while volatility stays elevated or rises. Terrible when stocks trend strongly or IV collapses.`,
-    analogy: `Subletting your apartment for a weekend. You pay monthly rent (long option), but you charge someone else a premium for the weekend (short option). You pocket the difference.`,
-    nuance: `Long Vega: Surprisingly, this is a Long Vega trade. If Volatility spikes, the back-month option (which has more Vega) gains more value than the front-month option.
+ What You Just Learned
+☑ Notice how you're trading TIME, not direction? Calendar spreads exploit theta differential—short-term options decay faster than long-term options. You're arbitraging this decay rate difference.
+☑ Notice how volatility mattered more than you'd expect? Calendars are long vega. The back-month has more sensitivity to IV changes. Rising IV helps you; falling IV hurts you.
+☑ Notice how the stock moving away killed the trade? Calendars have a "tent" P&L like butterflies. Max profit at the strike, declining as price drifts. The further from strike, the worse it gets.
+☑ The pattern: Calendar spreads are bets on stability + rising IV. Best when you expect a stock to hover around a level while volatility stays elevated or rises. Terrible when stocks trend strongly or IV collapses.`,
+ analogy: `Subletting your apartment for a weekend. You pay monthly rent (long option), but you charge someone else a premium for the weekend (short option). You pocket the difference.`,
+ nuance: `Long Vega: Surprisingly, this is a Long Vega trade. If Volatility spikes, the back-month option (which has more Vega) gains more value than the front-month option.
 Forward Volatility: You are essentially trading the 'term structure' of volatility. You want the front month Vol to be high and the back month Vol to be stable.`,
-    example: `Scenario: AMZN (\$180) earnings in 3 weeks.
+ example: `Scenario: AMZN (\$180) earnings in 3 weeks.
 The Trade: Sell next week's \$180 Call (\$2.00). Buy next month's \$180 Call (\$5.00). Net Debit: \$3.00.
 Win: AMZN holds \$180. Short call dies. You own the long call (worth \$4.50 due to earnings IV) for net \$3.00.`,
-    animalMetaphor: `The Cicada
+ animalMetaphor: `The Cicada
 Cicadas are masters of time—some species emerge only every 13 or 17 years, perfectly timed to overwhelm predators. A calendar spread exploits time differentials: sell the near-term option (which decays faster) while owning the longer-term option. You're harvesting the accelerated decay of short-dated options while your long option retains value. Like the cicada's impeccable timing of emergence, you profit from understanding that not all time passes equally.`,
-  },
-  'pmcc': {
-    analysis: `Instead of buying 100 shares of stock (expensive), you buy one deep In-The-Money LEAPS call (cheap stock substitute). Then you sell short-term calls against it.
-📖 Trade Walkthrough: 12 Months in the Life of a Poor Man's Covered Call
+ },
+ 'pmcc': {
+ analysis: `Instead of buying 100 shares of stock (expensive), you buy one deep In-The-Money LEAPS call (cheap stock substitute). Then you sell short-term calls against it.
+ Trade Walkthrough: 12 Months in the Life of a Poor Man's Covered Call
 The Setup
 XOM is at \$110. You're bullish and want covered call income, but \$11,000 for 100 shares is too much capital. Instead, you build a PMCC:
 • Buy Jan 2026 \$80 Call (LEAPS) for \$33.00 — This is your "stock substitute." It's deep ITM with 0.85 delta, meaning it moves nearly 1:1 with the stock.
@@ -3764,23 +3764,23 @@ Your LEAPS (\$80 strike): Now nearly worthless at \$3 (was \$33). Deep OTM.
 Premium collected: \$150. But LEAPS lost \$30.
 Result: Loss: -\$2,850 (lost nearly all of \$3,150 investment).
 If XOM had crashed while you held stock, you'd have lost \$3,500 on 100 shares. The PMCC lost slightly less, but it's still painful. PMCC doesn't protect against crashes—it just uses less capital.
-💡 What You Just Learned
-☑️ Notice the capital efficiency? You controlled \$11,000 of stock exposure with \$3,150. That's roughly 3.5:1 leverage. Your returns (and losses) are amplified relative to capital deployed.
-☑️ Notice why the LEAPS must be deep ITM? You need high delta (0.80+) so it moves like stock. An ATM LEAPS would have only 0.50 delta—half the movement—and more theta decay eating your position.
-☑️ Notice the debit risk in Path B? If the stock rallies and your short call goes ITM, you must ensure the spread width (short strike - LEAPS strike) exceeds your total debit. Otherwise, max profit is negative—a "debit trap."
-☑️ The pattern: PMCC is leveraged covered call income. Best for slow grinders you're mildly bullish on. Avoid on volatile stocks. Always check that your max profit (at short strike) is positive. Roll short calls up/out when threatened.`,
-    analogy: `Renting a house on a 2-year lease (LEAPS) and listing it on Airbnb weekly. You don't own the deed, but you control the asset enough to generate cash flow.`,
-    nuance: `Capital Efficiency: You might control \$10,000 of stock for \$2,000. This is 5:1 leverage.
+ What You Just Learned
+☑ Notice the capital efficiency? You controlled \$11,000 of stock exposure with \$3,150. That's roughly 3.5:1 leverage. Your returns (and losses) are amplified relative to capital deployed.
+☑ Notice why the LEAPS must be deep ITM? You need high delta (0.80+) so it moves like stock. An ATM LEAPS would have only 0.50 delta—half the movement—and more theta decay eating your position.
+☑ Notice the debit risk in Path B? If the stock rallies and your short call goes ITM, you must ensure the spread width (short strike - LEAPS strike) exceeds your total debit. Otherwise, max profit is negative—a "debit trap."
+☑ The pattern: PMCC is leveraged covered call income. Best for slow grinders you're mildly bullish on. Avoid on volatile stocks. Always check that your max profit (at short strike) is positive. Roll short calls up/out when threatened.`,
+ analogy: `Renting a house on a 2-year lease (LEAPS) and listing it on Airbnb weekly. You don't own the deed, but you control the asset enough to generate cash flow.`,
+ nuance: `Capital Efficiency: You might control \$10,000 of stock for \$2,000. This is 5:1 leverage.
 Debit Risk: Ensure the width between your strikes is greater than the debt paid. Otherwise, if the stock rockets up, you could actually lock in a loss.`,
-    example: `Scenario: XOM is \$110. You want income but \$11k is too much.
+ example: `Scenario: XOM is \$110. You want income but \$11k is too much.
 The Trade: Buy Jan 2026 \$80 Call for \$32. Sell Monthly \$115 Call for \$1.50. Cost \$3,050.
 Yield: You generate \$150/month on a \$3k investment (5% monthly yield) if XOM stays flat.`,
-    animalMetaphor: `The Hermit Crab
+ animalMetaphor: `The Hermit Crab
 The hermit crab doesn't grow its own shell—it borrows a larger creature's discarded home, gaining protection at a fraction of the biological cost. A Poor Man's Covered Call replaces 100 shares of stock with a deep-in-the-money LEAPS call, then sells calls against it—covered call mechanics at a fraction of the capital. You're leveraging someone else's 'shell' (the LEAPS' delta exposure) to generate income. Scrappy, efficient, capital-light.`,
-  },
-  'diagonal-spread': {
-    analysis: `A diagonal spread combines a calendar spread and a vertical spread. You buy a longer-dated option at one strike and sell a shorter-dated option at a different strike. This gives you both time decay arbitrage AND directional exposure.
-📖 Trade Walkthrough: The Life of a Diagonal Spread
+ },
+ 'diagonal-spread': {
+ analysis: `A diagonal spread combines a calendar spread and a vertical spread. You buy a longer-dated option at one strike and sell a shorter-dated option at a different strike. This gives you both time decay arbitrage AND directional exposure.
+ Trade Walkthrough: The Life of a Diagonal Spread
 The Setup
 MSFT is at \$420. You're mildly bullish and want to profit from both time decay and a move higher. You build a Call Diagonal:
 • Buy the 45-day \$410 Call for \$18.00 (slightly ITM, longer-dated)
@@ -3813,11 +3813,11 @@ Day 7: Tech selloff. MSFT drops to \$395.
 Front-month \$430 call: Worth \$0.30 (nearly dead). Back-month \$410 call: Worth \$7.00 (OTM now, bleeding).
 Spread value: \$6.70. Loss: -\$830.
 Your loss is defined—you can never lose more than the \$1,500 debit. The short call premium (\$300) reduced your loss slightly, but a big move against you still hurts.
-💡 What You Just Learned
-☑️ Notice how you're trading BOTH time and direction? A diagonal is a hybrid strategy. The different expirations give you theta arbitrage (like a calendar). The different strikes give you delta exposure (like a vertical).
-☑️ Notice how Path C didn't lose money? The short call's decay offset the long call's decay. Diagonals are more forgiving than naked long calls when you're wrong about timing.
-☑️ Notice the "sweet spot" is the short strike? Max profit occurs when the stock lands exactly at your short strike at front-month expiration. You capture full decay on the short AND have an ITM long call with time remaining.
-☑️ The pattern: Diagonals are directional bets with a theta cushion. Use them when you have a target price AND believe it will take time to get there. The short option funds your patience.
+ What You Just Learned
+☑ Notice how you're trading BOTH time and direction? A diagonal is a hybrid strategy. The different expirations give you theta arbitrage (like a calendar). The different strikes give you delta exposure (like a vertical).
+☑ Notice how Path C didn't lose money? The short call's decay offset the long call's decay. Diagonals are more forgiving than naked long calls when you're wrong about timing.
+☑ Notice the "sweet spot" is the short strike? Max profit occurs when the stock lands exactly at your short strike at front-month expiration. You capture full decay on the short AND have an ITM long call with time remaining.
+☑ The pattern: Diagonals are directional bets with a theta cushion. Use them when you have a target price AND believe it will take time to get there. The short option funds your patience.
 Call Diagonal vs Put Diagonal
 Call Diagonal (Bullish)
 Buy longer-dated call (lower strike)
@@ -3827,18 +3827,18 @@ Put Diagonal (Bearish)
 Buy longer-dated put (higher strike)
 Sell shorter-dated put (lower strike)
 Profit if stock falls toward short strike`,
-    analogy: `Buying a 6-month gym membership at a good rate, then selling day passes to tourists. You profit from the time difference AND you're betting the gym gets more popular (stock rises) so those day passes become more valuable to sell.`,
-    nuance: `Strike Selection: The wider the strikes, the more directional the trade. Narrow strikes = more like a calendar (neutral). Wide strikes = more like a vertical (directional).
+ analogy: `Buying a 6-month gym membership at a good rate, then selling day passes to tourists. You profit from the time difference AND you're betting the gym gets more popular (stock rises) so those day passes become more valuable to sell.`,
+ nuance: `Strike Selection: The wider the strikes, the more directional the trade. Narrow strikes = more like a calendar (neutral). Wide strikes = more like a vertical (directional).
 Delta Consideration: Buy the long option with 0.60-0.70 delta for good directional exposure. Sell the short option with 0.30-0.40 delta for good premium.`,
-    example: `Scenario: MSFT (\$420) You expect a slow grind to \$440 over the next month.
+ example: `Scenario: MSFT (\$420) You expect a slow grind to \$440 over the next month.
 The Trade: Buy 45-DTE \$410 Call (\$18). Sell 14-DTE \$435 Call (\$2.50). Net Debit: \$15.50.
 Target: MSFT at \$435 in 2 weeks. Short call expires worthless. Long call worth ~\$28. Profit: \$12.50 (\$1,250).`,
-    animalMetaphor: `The Chameleon
+ animalMetaphor: `The Chameleon
 The chameleon adapts to its environment, changing colors to suit conditions while its slow-moving tongue waits for the perfect moment. A diagonal spread combines directional bias (different strikes) with time exploitation (different expirations). You're adapting to both where you think price will go AND when. The chameleon doesn't just wait—it positions itself with adaptive camouflage, profiting from multiple dimensions of the market simultaneously.`,
-  },
-  'double-diagonal': {
-    analysis: `A double diagonal combines a call diagonal and a put diagonal into one position. You buy longer-dated options at wider strikes and sell shorter-dated options at narrower strikes. This creates a theta-positive, vega-positive structure that profits from time decay AND potential volatility expansion.
-📖 Trade Walkthrough: The Volatility Harvester
+ },
+ 'double-diagonal': {
+ analysis: `A double diagonal combines a call diagonal and a put diagonal into one position. You buy longer-dated options at wider strikes and sell shorter-dated options at narrower strikes. This creates a theta-positive, vega-positive structure that profits from time decay AND potential volatility expansion.
+ Trade Walkthrough: The Volatility Harvester
 The Setup
 SPY is at \$450. You expect it to stay range-bound in the near term but want exposure to a potential volatility spike. You build a Double Diagonal:
 • Buy 45-day \$460 Call for \$4.00 (OTM, longer-dated)
@@ -3874,11 +3874,11 @@ Day 3: Black swan event—SPY gaps to \$420.
 All puts deep ITM: Short \$445 put worth ~\$25. Long \$440 put worth ~\$20. Spread underwater by \$5.
 Result: Loss: ~\$500-800 depending on how fast you exit.
 When price blows through both strikes on one side, you have a losing spread. The loss is still defined (difference between strikes minus premium), but it hurts. This is why position sizing matters.
-💡 What You Just Learned
-☑️ Double diagonals are "theta + vega" plays. You collect time decay from short options while maintaining exposure to volatility through longer-dated longs.
-☑️ They're like iron condors with an escape hatch. If the stock moves big, your long options can profit from the vol spike. Iron condors just lose.
-☑️ Management is key. Plan to roll the tested side or close for partial profits. These aren't set-and-forget trades.
-☑️ Best environment: Range-bound with potential for a breakout, elevated IV in front month relative to back month (IV term structure in backwardation).
+ What You Just Learned
+☑ Double diagonals are "theta + vega" plays. You collect time decay from short options while maintaining exposure to volatility through longer-dated longs.
+☑ They're like iron condors with an escape hatch. If the stock moves big, your long options can profit from the vol spike. Iron condors just lose.
+☑ Management is key. Plan to roll the tested side or close for partial profits. These aren't set-and-forget trades.
+☑ Best environment: Range-bound with potential for a breakout, elevated IV in front month relative to back month (IV term structure in backwardation).
 Double Diagonal vs Similar Strategies
 Double Diagonal
 Different expirations + Different strikes
@@ -3889,19 +3889,19 @@ Theta positive, Vega negative. Pure decay play, hurt by vol.
 Double Calendar
 Different expirations + Same strikes
 Theta positive, Vega positive. Less directional flexibility.`,
-    analogy: `Running two rental properties at different price points. You have a short-term Airbnb (front-month shorts) generating quick cash, backed by long-term leases (back-month longs) that appreciate if the neighborhood gets hot. You profit from the steady rental income, but if property values spike, your long-term holdings win big.`,
-    nuance: `Strike Width: Keep short strikes 5-10 points from ATM for good premium. Keep long strikes 5-10 points beyond shorts for defined risk.
+ analogy: `Running two rental properties at different price points. You have a short-term Airbnb (front-month shorts) generating quick cash, backed by long-term leases (back-month longs) that appreciate if the neighborhood gets hot. You profit from the steady rental income, but if property values spike, your long-term holdings win big.`,
+ nuance: `Strike Width: Keep short strikes 5-10 points from ATM for good premium. Keep long strikes 5-10 points beyond shorts for defined risk.
 DTE Selection: Sell 14-21 DTE options, buy 45-60 DTE options. This maximizes the theta differential.
 IV Consideration: Best entered when front-month IV is elevated relative to back-month (backwardation). The shorts decay faster than the longs.`,
-    example: `Scenario: SPY (\$450) Trading range-bound before earnings season.
+ example: `Scenario: SPY (\$450) Trading range-bound before earnings season.
 The Trade: Buy 45-DTE \$460C (\$4), Sell 14-DTE \$455C (\$2.50), Buy 45-DTE \$440P (\$4), Sell 14-DTE \$445P (\$2.50). Net Debit: \$3.00 (\$300).
 Target: SPY stays between \$445-\$455. Short options expire worthless. Long options worth \$6-7. Profit: \$300-400.`,
-    animalMetaphor: `The Octopus
+ animalMetaphor: `The Octopus
 The octopus is the ultimate multi-tasker—eight arms working independently, solving multiple problems simultaneously. A double diagonal runs diagonals on both sides: different strikes, different expirations, call side and put side. You're harvesting time decay, hedging direction, and managing volatility across multiple dimensions. Like the octopus squeezing through impossible spaces and manipulating multiple objects, the double diagonal adapts to complex market environments with defined risk.`,
-  },
-  'ratio-spread': {
-    analysis: `You buy one option and sell two further out. Usually done for a 'credit' or zero cost. You want the stock to rise to your short strike, but not past it.
-📖 Trade Walkthrough: The Gold Creep
+ },
+ 'ratio-spread': {
+ analysis: `You buy one option and sell two further out. Usually done for a 'credit' or zero cost. You want the stock to rise to your short strike, but not past it.
+ Trade Walkthrough: The Gold Creep
 The Setup
 Gold (GLD) is at \$200. You think it will slowly drift up to \$210 over the next month, but you don't expect a massive rally. You want to make money if you're right—ideally for free.
 You buy 1 call at the \$200 strike (costs \$4.00) and sell 2 calls at \$210 (each pays \$2.00). Net cost: \$0. You've entered for free.
@@ -3921,24 +3921,24 @@ Path D: The Blowout (GLD rockets to \$240 on geopolitical crisis)
 Day 1-5: War headlines. Gold gaps from \$200 to \$225. Your long call is up \$25. But each short is now \$15 in the money—\$30 total loss on shorts. Net: -\$5.
 Day 6-30: Gold keeps running to \$240. Your long makes \$40. But the two shorts cost you \$30 each = \$60 total. Net loss: \$20.
 Result: You lose \$2,000. And if gold had hit \$260? You'd lose \$4,000. Every dollar past your "break-even ceiling" costs you \$100. This is the trap springing on you.
-💡 What You Just Learned
-☑️ That "free entry" with downside protection? This is why traders call ratios "zero-cost" trades. If the stock goes down or nowhere, you lose nothing.
-☑️ That perfect sweet spot at \$210? This is your max profit point—where the longs are fully profitable and shorts expire worthless.
-☑️ That accelerating loss in Path D? This is naked call risk. You sold 2 calls but only have 1 to cover. One call is "naked"—unlimited loss potential.
-☑️ The pattern: Ratio spreads are precision instruments. Perfect for "I think it moves TO here, not THROUGH here." The ceiling becomes a trap if broken.`,
-    analogy: `A trap. You set bait (long call) but if the prey is too big (massive rally), it breaks the trap (the 2 short calls) and you owe money on the damage.`,
-    nuance: `Naked Risk: You are naked short 1 call. If the stock gaps up on takeover news, you have unlimited risk.
+ What You Just Learned
+☑ That "free entry" with downside protection? This is why traders call ratios "zero-cost" trades. If the stock goes down or nowhere, you lose nothing.
+☑ That perfect sweet spot at \$210? This is your max profit point—where the longs are fully profitable and shorts expire worthless.
+☑ That accelerating loss in Path D? This is naked call risk. You sold 2 calls but only have 1 to cover. One call is "naked"—unlimited loss potential.
+☑ The pattern: Ratio spreads are precision instruments. Perfect for "I think it moves TO here, not THROUGH here." The ceiling becomes a trap if broken.`,
+ analogy: `A trap. You set bait (long call) but if the prey is too big (massive rally), it breaks the trap (the 2 short calls) and you owe money on the damage.`,
+ nuance: `Naked Risk: You are naked short 1 call. If the stock gaps up on takeover news, you have unlimited risk.
 The 'Free' Trade: If done for a credit, you have no downside risk. If the stock falls, all options expire worthless and you keep the initial credit.`,
-    example: `Scenario: GLD is \$200. Creep up to \$210 likely.
+ example: `Scenario: GLD is \$200. Creep up to \$210 likely.
 The Trade: Buy 1x \$200 Call. Sell 2x \$210 Calls. Net Cost \$0.
 Perfect: GLD hits \$210. Long call makes \$10. Shorts expire. Profit \$1,000.
 Disaster: GLD hits \$250. You lose unlimited money on the naked leg.`,
-    animalMetaphor: `The Crocodile
+ animalMetaphor: `The Crocodile
 The crocodile is nature's ultimate ambush predator—it lies motionless for hours, waiting for prey to wander into the perfect strike zone. A ratio spread works the same way: you set your trap at a specific price target and wait. If the stock drifts into your zone, the payoff is devastating (for the prey). But if the target is too large—a massive rally that blows through your short strikes—the crocodile's jaws can't contain it, and the trade turns against you. Patient, precise, and lethal within range. Overextend, and the hunter becomes the hunted.`,
-  },
-  'call-backspread': {
-    analysis: `You sell one expensive ATM option to buy two cheaper OTM options. You want a massive move. If the stock drops, you are safe (hedged by the short). If it rallies, you have double leverage.
-📖 Trade Walkthrough: The NVDA Moonshot
+ },
+ 'call-backspread': {
+ analysis: `You sell one expensive ATM option to buy two cheaper OTM options. You want a massive move. If the stock drops, you are safe (hedged by the short). If it rallies, you have double leverage.
+ Trade Walkthrough: The NVDA Moonshot
 The Setup
 NVDA is at \$800 before earnings. You believe the move will be explosive—either it moons or crashes. You don't want to just buy calls because they're expensive. You want leveraged upside exposure for free.
 You sell 1 call at \$800 strike (collect \$40) and buy 2 calls at \$850 strike (pay \$22.50 each = \$45). Net debit: \$5 (\$500). You've set up a "moonshot catcher" for a small upfront cost.
@@ -3958,24 +3958,24 @@ Path D: The Moderate Rally (NVDA rises to \$875)
 Earnings Week: Solid beat. NVDA moves from \$800 to \$860.
 Expiration: NVDA ends at \$875. Your short \$800 call costs you \$75. Your two \$850 calls are each worth \$25—that's \$50 total on the longs.
 Result: -\$75 (short) + \$50 (longs) - \$5 (initial cost) = -\$3,000 loss. Better than the valley of death, but still painful. The move wasn't explosive enough.
-💡 What You Just Learned
-☑️ That zero-cost entry? This is a backspread—selling expensive options to buy cheap ones. You finance your bet with someone else's premium.
-☑️ That double leverage when NVDA hit \$1,000? This is gamma acceleration. Two calls means 2x delta. Eventually the longs overpower the short.
-☑️ That max pain point at \$850? Traders call this the valley of death—where your longs are worthless and your short is fully against you. It's the break-even that never breaks.
-☑️ The pattern: Backspreads are volatility bets. You want the stock to move BIG or not at all. The middle is murder. Best before earnings, FDA decisions, or binary events.`,
-    analogy: `Reverse trap. You pay a small fee (\$5 per contract) to set it up, but if the market explodes, you have double the buckets to catch the rain.`,
-    nuance: `Gamma Explosion: As the stock rallies, your short call hurts you (linear), but your two long calls help you (exponential). Eventually, the longs overpower the short.
+ What You Just Learned
+☑ That zero-cost entry? This is a backspread—selling expensive options to buy cheap ones. You finance your bet with someone else's premium.
+☑ That double leverage when NVDA hit \$1,000? This is gamma acceleration. Two calls means 2x delta. Eventually the longs overpower the short.
+☑ That max pain point at \$850? Traders call this the valley of death—where your longs are worthless and your short is fully against you. It's the break-even that never breaks.
+☑ The pattern: Backspreads are volatility bets. You want the stock to move BIG or not at all. The middle is murder. Best before earnings, FDA decisions, or binary events.`,
+ analogy: `Reverse trap. You pay a small fee (\$5 per contract) to set it up, but if the market explodes, you have double the buckets to catch the rain.`,
+ nuance: `Gamma Explosion: As the stock rallies, your short call hurts you (linear), but your two long calls help you (exponential). Eventually, the longs overpower the short.
 The 'Valley of Death': Your max loss is if the stock sits exactly at your long strike at expiration.`,
-    example: `Scenario: NVDA at \$800. You think it hits \$1000.
+ example: `Scenario: NVDA at \$800. You think it hits \$1000.
 The Trade: Sell \$800 Call (\$40). Buy 2x \$850 Calls (\$22.50 each). Net Debit \$5 (\$500).
 Outcome: If NVDA sits at \$850, you lose \$50 on the short, longs are worthless, plus \$5 initial cost. Max Loss \$5,500.
 Win: NVDA hits \$1,000. Short loses \$200. Longs make \$150x2 = \$300. Minus \$5 cost = Net Profit \$9,500.`,
-    animalMetaphor: `The Kangaroo
+ animalMetaphor: `The Kangaroo
 The kangaroo stores explosive energy in its hind legs—two powerful limbs that launch it forward with breathtaking force. A call backspread mirrors this perfectly: your two long calls are those two massive legs, coiled and ready to launch when the stock explodes higher. The single short call finances the setup, like the kangaroo conserving energy before the leap. Small hops (moderate moves) leave you stuck in the "valley of death," but when the market truly launches, nothing catches a kangaroo in full flight. Built for the moonshot.`,
-  },
-  'put-backspread': {
-    analysis: `Sell ATM Put, Buy 2 OTM Puts. Crash insurance paid by the short put.
-📖 Trade Walkthrough: The Crash Lottery
+ },
+ 'put-backspread': {
+ analysis: `Sell ATM Put, Buy 2 OTM Puts. Crash insurance paid by the short put.
+ Trade Walkthrough: The Crash Lottery
 The Setup
 SPY is at \$500 and the market feels fragile. You want crash protection, but buying puts outright is expensive. What if you could get paid to own insurance?
 You sell 1 put at \$500 (collect \$12) and buy 2 puts at \$480 (pay \$6.50 each = \$13). Net debit: \$1.00 (\$100). You pay a small fee for crash insurance with leveraged downside.
@@ -3995,23 +3995,23 @@ Path D: The Moderate Dip (SPY drops to \$490)
 Week 1-3: Choppy market. SPY bounces between \$490-\$505.
 Expiration: SPY ends at \$490. Your short put costs you \$10. Your long \$480 puts are OTM and expire worthless.
 Result: -\$10 (short) + \$0 (longs) - \$1 (debit) = -\$1,100 loss. Not catastrophic, but the market didn't move enough in either direction.
-💡 What You Just Learned
-☑️ That small debit you paid? This is leveraged crash insurance. You pay a tiny premium (\$100) for massive downside exposure. If nothing happens, you lose the premium. If crashes happen, you profit big.
-☑️ That explosive gain in Path A? Two puts means 2x downside leverage. As the market crashes, your gains accelerate while your short loss is linear. Eventually the longs overpower.
-☑️ That max pain at \$480? The valley of death again—where your insurance activates but never pays out. Moderate moves are the enemy.
-☑️ The pattern: Put backspreads are tail risk hedges. They pay you to wait for catastrophe. Best when you're nervous but don't want to pay for puts. You need BIG moves or nothing.`,
-    analogy: `Paying a small fee to buy two lottery tickets for the apocalypse.`,
-    nuance: `Leveraged Crash Protection: Small debit for massive downside exposure.`,
-    example: `Scenario: Market looks shaky. SPY \$500.
+ What You Just Learned
+☑ That small debit you paid? This is leveraged crash insurance. You pay a tiny premium (\$100) for massive downside exposure. If nothing happens, you lose the premium. If crashes happen, you profit big.
+☑ That explosive gain in Path A? Two puts means 2x downside leverage. As the market crashes, your gains accelerate while your short loss is linear. Eventually the longs overpower.
+☑ That max pain at \$480? The valley of death again—where your insurance activates but never pays out. Moderate moves are the enemy.
+☑ The pattern: Put backspreads are tail risk hedges. They pay you to wait for catastrophe. Best when you're nervous but don't want to pay for puts. You need BIG moves or nothing.`,
+ analogy: `Paying a small fee to buy two lottery tickets for the apocalypse.`,
+ nuance: `Leveraged Crash Protection: Small debit for massive downside exposure.`,
+ example: `Scenario: Market looks shaky. SPY \$500.
 The Trade: Sell \$500 Put (\$12). Buy 2x \$480 Puts (\$6.50 each). Net Debit \$1.00 (\$100).
 Crash: SPY hits \$400. Short loses \$100. Longs make \$80x2 = \$160. Minus \$1 debit = Profit \$59 (\$5,900).
 Rally: SPY hits \$550. All expire worthless. Loss: \$100 (debit paid).`,
-    animalMetaphor: `The Wolf
+ animalMetaphor: `The Wolf
 The wolf pack thrives in chaos—when winter storms hit and prey weakens, the pack's coordinated assault becomes unstoppable. A put backspread unleashes two wolves (your two long puts) that hunt together in a market crash, their combined force overwhelming any resistance. The single short put funds the pack's operation, like the alpha conserving the group's energy during calm periods. In quiet markets, the pack rests. But when panic strikes and the herd stampedes, two wolves hunting in tandem deliver devastating results. Built for the crash.`,
-  },
-  'zebra': {
-    analysis: `Zero Extrinsic Back Ratio. By buying 2 ITM and selling 1 ATM, you cancel out all the 'time value'. The result is a position that moves 1:1 with the stock (100 Delta) but costs half as much.
-📖 Trade Walkthrough: The Budget MSFT Position
+ },
+ 'zebra': {
+ analysis: `Zero Extrinsic Back Ratio. By buying 2 ITM and selling 1 ATM, you cancel out all the 'time value'. The result is a position that moves 1:1 with the stock (100 Delta) but costs half as much.
+ Trade Walkthrough: The Budget MSFT Position
 The Setup
 You want to own 100 shares of Microsoft at \$400, but that's \$40,000 you don't have. You could buy a call, but every day it loses value from time decay. What if you could own the stock movement without the "rent payment"?
 You buy 2 deep ITM calls at the \$370 strike (each costs \$35 = \$70 total) and sell 1 ATM call at \$400 (collect \$5). Net cost: \$65 = \$6,500. You now control the equivalent of 100 shares.
@@ -4031,23 +4031,23 @@ Path D: The Crash (MSFT drops to \$360)
 Week 1: Massive tech correction. MSFT gaps from \$400 to \$370.
 Expiration: MSFT ends at \$360—below your long strike. All your calls expire worthless. Your short was free money, but your longs are toast.
 Result: -\$6,500 (total loss). BUT—if you had bought the stock outright, you'd be down \$4,000. Here's the thing: your max loss was capped at your investment. You can never lose more than \$6,500. Stock owners could theoretically lose \$40,000.
-💡 What You Just Learned
-☑️ That 1:1 movement with the stock? This is 100 delta. Two ITM calls (each ~50 delta) minus one ATM call (~50 delta) = 100 delta. You move dollar-for-dollar with the stock.
-☑️ That "no time decay" magic? The extrinsic value of your short call offsets the extrinsic of your longs. This is called zero extrinsic—hence ZEBRA.
-☑️ That capped max loss? Unlike actual stock ownership, your worst case is losing your initial investment. This is the defined risk benefit of options.
-☑️ The pattern: ZEBRA is synthetic stock ownership for those who can't afford (or don't want to commit) full capital. Best for high-conviction, longer-term bullish plays where you need capital efficiency.`,
-    analogy: `Synthetic stock ownership. It behaves exactly like the stock—no time decay drag—but you don't pay full price for the shares.`,
-    nuance: `Stock Replacement: This is the only option strategy that truly mimics stock without the Theta decay headache.
+ What You Just Learned
+☑ That 1:1 movement with the stock? This is 100 delta. Two ITM calls (each ~50 delta) minus one ATM call (~50 delta) = 100 delta. You move dollar-for-dollar with the stock.
+☑ That "no time decay" magic? The extrinsic value of your short call offsets the extrinsic of your longs. This is called zero extrinsic—hence ZEBRA.
+☑ That capped max loss? Unlike actual stock ownership, your worst case is losing your initial investment. This is the defined risk benefit of options.
+☑ The pattern: ZEBRA is synthetic stock ownership for those who can't afford (or don't want to commit) full capital. Best for high-conviction, longer-term bullish plays where you need capital efficiency.`,
+ analogy: `Synthetic stock ownership. It behaves exactly like the stock—no time decay drag—but you don't pay full price for the shares.`,
+ nuance: `Stock Replacement: This is the only option strategy that truly mimics stock without the Theta decay headache.
 Liquidity Warning: Exiting a multi-leg deep ITM strategy can be hard. The bid-ask spreads might be wide.`,
-    example: `Scenario: Want MSFT exposure (\$400) but short on cash.
+ example: `Scenario: Want MSFT exposure (\$400) but short on cash.
 The Trade: Buy 2x \$370 Calls. Sell 1x \$400 Call. The extrinsic value of the short covers the extrinsic of the longs.
 Result: You control 100 shares of MSFT for roughly \$3,000 instead of \$40,000, and you don't pay daily 'rent' (theta).`,
-    animalMetaphor: `The Zebra
+ animalMetaphor: `The Zebra
 The zebra's black-and-white stripes leave no room for grey areas—every line is sharp, defined, and unmistakable. The ZEBRA (Zero Extrinsic Back Ratio) embodies this binary clarity: by canceling out all time value, your position is pure stock-like movement with zero extrinsic fuzz. No theta decay bleeding in the background, no vega surprises, no grey area between profit and loss—just clean, dollar-for-dollar tracking. Like the zebra's stripes that evolved for absolute visual precision, this strategy strips away every ambiguity until only the raw directional move remains.`,
-  },
-  'broken-wing-butterfly': {
-    analysis: `A Butterfly where you skip a strike on the protective wing to get a credit. You take slightly more risk on one side to ensure you make money if nothing happens.
-📖 Trade Walkthrough: The Lopsided Bet
+ },
+ 'broken-wing-butterfly': {
+ analysis: `A Butterfly where you skip a strike on the protective wing to get a credit. You take slightly more risk on one side to ensure you make money if nothing happens.
+ Trade Walkthrough: The Lopsided Bet
 The Setup
 NVDA is at \$500. You're neutral to slightly bearish—you think it stays flat or drifts down slightly. A regular butterfly would cost you money and only wins if NVDA pins exactly at your target. What if you could get paid to place the bet, with the only risk being a massive rally?
 You buy the \$490 call (\$15), sell 2x \$500 calls (\$10 each = \$20), and buy the \$520 call (\$4)—skipping the \$510 strike. Net credit: \$1.00. You just got paid \$100 to enter.
@@ -4067,23 +4067,23 @@ Path D: The Blowout (NVDA rockets to \$540)
 Week 1: Massive AI announcement. NVDA gaps from \$500 to \$525.
 Expiration: NVDA ends at \$540. Your \$490 call is worth \$50. Your two \$500 calls cost you \$40 each = \$80. Your \$520 call is worth \$20.
 Result: \$50 + \$20 - \$80 + \$1 = -\$900 loss. This is your max loss zone—past the upper wing. The broken wing means you have less protection on the upside. But notice: max loss is capped at \$900 no matter how high NVDA goes.
-💡 What You Just Learned
-☑️ That credit you received? By "breaking" the wing (skipping a strike), you collected more premium. Normal butterflies cost money; this one pays you.
-☑️ That free money when NVDA dropped? This is the directional bias. If wrong on the downside, you keep the credit. The lopsided structure only hurts you on one side.
-☑️ That capped max loss in Path D? Even though you "broke" the upper wing, your long \$520 call still provides protection. Loss is defined, just larger than a symmetric fly.
-☑️ The pattern: Broken wing butterflies are directional income trades. Best when you have a mild directional bias and want to get paid for being right—or wrong on one side. Trade-off: more risk in the direction of the broken wing.`,
-    analogy: `A jagged fence. One side is lower than the other. If the cow jumps the low side, you lose a bit more, but you got paid upfront to build it.`,
-    nuance: `Free Trade: If the stock moves away from the risk side, you keep the credit.
+ What You Just Learned
+☑ That credit you received? By "breaking" the wing (skipping a strike), you collected more premium. Normal butterflies cost money; this one pays you.
+☑ That free money when NVDA dropped? This is the directional bias. If wrong on the downside, you keep the credit. The lopsided structure only hurts you on one side.
+☑ That capped max loss in Path D? Even though you "broke" the upper wing, your long \$520 call still provides protection. Loss is defined, just larger than a symmetric fly.
+☑ The pattern: Broken wing butterflies are directional income trades. Best when you have a mild directional bias and want to get paid for being right—or wrong on one side. Trade-off: more risk in the direction of the broken wing.`,
+ analogy: `A jagged fence. One side is lower than the other. If the cow jumps the low side, you lose a bit more, but you got paid upfront to build it.`,
+ nuance: `Free Trade: If the stock moves away from the risk side, you keep the credit.
 Directional Bias: Unlike a regular fly, this is directional.`,
-    example: `Scenario: NVDA is \$500. You are neutral to slightly bearish.
+ example: `Scenario: NVDA is \$500. You are neutral to slightly bearish.
 The Trade: Buy \$490 Call, Sell 2x \$500 Calls, Buy \$520 Call (skipping \$510). Credit \$1.00.
 Outcome: If NVDA stays under \$500, you make money. Max loss is only if NVDA rips through \$520.`,
-    animalMetaphor: `The Broken-Wing Butterfly
+ animalMetaphor: `The Broken-Wing Butterfly
 Picture a butterfly with one tattered, asymmetric wing—lopsided, imperfect, yet somehow still airborne. That's exactly what a broken-wing butterfly trade looks like on a payoff diagram: one side is deliberately shorter than the other, creating an unbalanced shape that shouldn't fly but does. By skipping a strike on one wing, you enter for a credit—getting paid to put on a trade that profits if the stock goes nowhere. The broken wing sacrifices symmetry for income, trading elegance for pragmatism. It's not pretty, but it flies, it earns, and it defines its risk on the damaged side.`,
-  },
-  'long-call-butterfly': {
-    analysis: `The classic neutral strategy. Buy one lower call, sell two at-the-money calls, buy one higher call. Max profit when stock pins exactly at the middle strike. Low cost, high reward if you nail the price target.
-📖 Trade Walkthrough: The Precision Strike
+ },
+ 'long-call-butterfly': {
+ analysis: `The classic neutral strategy. Buy one lower call, sell two at-the-money calls, buy one higher call. Max profit when stock pins exactly at the middle strike. Low cost, high reward if you nail the price target.
+ Trade Walkthrough: The Precision Strike
 The Setup
 SPY is at \$500 with monthly expiration in 14 days. You believe SPY will pin around \$500 for opex. Instead of betting on direction, you bet on location.
 Buy 1x \$495 call (\$8), sell 2x \$500 calls (\$5.50 each = \$11), buy 1x \$505 call (\$3.50). Net debit: \$0.50 (\$50 total).
@@ -4099,22 +4099,22 @@ Result: \$20 + \$10 - \$30 - \$0.50 = -\$0.50 loss (\$50). Beyond the upper wing
 Path D: The Selloff (SPY drops to \$490)
 Expiration: SPY tanks to \$490. All calls expire worthless.
 Result: -\$0.50 loss (\$50). This is your max loss—just the debit paid. Below the lower wing, everything expires worthless.
-💡 What You Just Learned
-☑️ That 900% potential return? Butterflies are lottery tickets with defined risk. Small cost, huge payout if the stock lands exactly where you predict.
-☑️ That tiny max loss? No matter what happens, you can only lose your initial debit. This is the appeal for pinning plays.
-☑️ The pattern: Long butterflies are precision bets. Best for opex pinning plays or when you have high conviction on a specific price target. Low cost of entry makes them great for speculation.`,
-    analogy: `Throwing a dart at a bullseye. Miss by a little and you still score. Miss by a lot and you lose your entry fee—nothing more.`,
-    nuance: `Pinning Plays: Best used when you expect a stock to settle at a specific price. Max pain, opex, or support/resistance levels.
+ What You Just Learned
+☑ That 900% potential return? Butterflies are lottery tickets with defined risk. Small cost, huge payout if the stock lands exactly where you predict.
+☑ That tiny max loss? No matter what happens, you can only lose your initial debit. This is the appeal for pinning plays.
+☑ The pattern: Long butterflies are precision bets. Best for opex pinning plays or when you have high conviction on a specific price target. Low cost of entry makes them great for speculation.`,
+ analogy: `Throwing a dart at a bullseye. Miss by a little and you still score. Miss by a lot and you lose your entry fee—nothing more.`,
+ nuance: `Pinning Plays: Best used when you expect a stock to settle at a specific price. Max pain, opex, or support/resistance levels.
 Time Decay: Theta works for you as expiration approaches if stock is near the center.`,
-    example: `Scenario: SPY at \$500. You expect pinning at \$500 for opex.
+ example: `Scenario: SPY at \$500. You expect pinning at \$500 for opex.
 The Trade: Buy \$495/\$500/\$505 call butterfly for \$0.50 debit.
 Outcome: Max profit \$450 if SPY pins at \$500. Max loss \$50 anywhere else.`,
-    animalMetaphor: `The Butterfly
+ animalMetaphor: `The Butterfly
 The butterfly lands on one precise flower with symmetrical wings perfectly balanced on either side—not fluttering aimlessly, but pinned to a single exact target. A long call butterfly is its namesake: two symmetrical wings (the outer strikes) flanking a central body (the short strikes), designed to extract maximum nectar from one pinpoint price. The cost of entry is tiny—like the butterfly's weightless landing—and the reward for nailing the pin is enormous. Drift too far in either direction and the butterfly simply lifts off, losing only its small investment. Precision, symmetry, and an outsized feast from a delicate touch.`,
-  },
-  'long-put-butterfly': {
-    analysis: `The put version of the classic butterfly. Buy one higher put, sell two at-the-money puts, buy one lower put. Identical payoff to the call butterfly—use whichever has better liquidity or pricing.
-📖 Trade Walkthrough: The Put Alternative
+ },
+ 'long-put-butterfly': {
+ analysis: `The put version of the classic butterfly. Buy one higher put, sell two at-the-money puts, buy one lower put. Identical payoff to the call butterfly—use whichever has better liquidity or pricing.
+ Trade Walkthrough: The Put Alternative
 The Setup
 AAPL is at \$200. You're neutral and expect it to stay around \$200. The call butterfly has wide spreads, so you check the puts—tighter markets!
 Buy 1x \$205 put (\$7), sell 2x \$200 puts (\$4.50 each = \$9), buy 1x \$195 put (\$2.50). Net debit: \$0.50 (\$50).
@@ -4130,21 +4130,21 @@ Result: -\$0.50 loss (\$50). Max loss—your initial debit.
 Path D: Crash (AAPL to \$185)
 Expiration: All puts deep ITM. \$205 put = \$20, \$200 puts = \$15 each (\$30), \$195 put = \$10.
 Result: \$20 + \$10 - \$30 - \$0.50 = -\$0.50 (\$50 loss). Gains cancel beyond the wings.
-💡 When to Use Put vs Call Butterfly
-☑️ Liquidity: Check open interest and bid-ask spreads. Use whichever is tighter.
-☑️ Skew: Put skew can make put butterflies cheaper when expecting the stock to stay flat.
-☑️ Parity: At expiration, both produce identical payoffs. The choice is purely tactical.`,
-    analogy: `Same dart game, different colored darts. The target and scoring are identical—pick the color with the better grip.`,
-    nuance: `Put-Call Parity: At the same strikes, put and call butterflies have identical risk/reward profiles. Choose based on liquidity and pricing.`,
-    example: `Scenario: AAPL at \$200. Put spreads are tighter than calls.
+ When to Use Put vs Call Butterfly
+☑ Liquidity: Check open interest and bid-ask spreads. Use whichever is tighter.
+☑ Skew: Put skew can make put butterflies cheaper when expecting the stock to stay flat.
+☑ Parity: At expiration, both produce identical payoffs. The choice is purely tactical.`,
+ analogy: `Same dart game, different colored darts. The target and scoring are identical—pick the color with the better grip.`,
+ nuance: `Put-Call Parity: At the same strikes, put and call butterflies have identical risk/reward profiles. Choose based on liquidity and pricing.`,
+ example: `Scenario: AAPL at \$200. Put spreads are tighter than calls.
 The Trade: Buy \$205/\$200/\$195 put butterfly for \$0.50.
 Outcome: Max profit \$450 at \$200. Max loss \$50.`,
-    animalMetaphor: `The Butterfly
+ animalMetaphor: `The Butterfly
 Same species, same symmetrical wings, same single-flower precision—but this butterfly is built with different wing scales. The long put butterfly uses puts instead of calls yet produces the exact same payoff as its call-based twin, just as a monarch and a painted lady share identical flight mechanics despite different coloring. Put-call parity guarantees the payoff is a mirror image: same tiny cost, same enormous reward at the pin, same gentle exit if the flower isn't there. Choose whichever wing has better liquidity—the butterfly doesn't care which pigment you use, only that the wings are balanced.`,
-  },
-  'jade-lizard': {
-    analysis: `A short strangle with upside protection. Sell an OTM put, sell an OTM call, buy a further OTM call. Collect premium with NO upside risk if structured properly. The lizard's magic: you can't lose on rallies.
-📖 Trade Walkthrough: The No-Upside-Risk Income Trade
+ },
+ 'jade-lizard': {
+ analysis: `A short strangle with upside protection. Sell an OTM put, sell an OTM call, buy a further OTM call. Collect premium with NO upside risk if structured properly. The lizard's magic: you can't lose on rallies.
+ Trade Walkthrough: The No-Upside-Risk Income Trade
 The Setup
 AMZN is at \$185. You're neutral to slightly bullish. You want income but are terrified of a squeeze to the upside. Enter the Jade Lizard.
 Sell 1x \$180 put (\$3.50), sell 1x \$190 call (\$2.50), buy 1x \$195 call (\$1.00). Net credit: \$5.00 (\$500). Key: Your credit (\$5) must exceed the call spread width (\$5). This eliminates upside risk!
@@ -4160,22 +4160,22 @@ Result: \$5 credit - \$2 put loss = \$3 profit (\$300). Still profitable even wi
 Path D: The Crash (AMZN craters to \$160)
 Expiration: AMZN crashes to \$160. Your \$180 put costs \$20. Calls expire worthless.
 Result: \$5 credit - \$20 put = -\$15 loss (\$1,500). This is the danger zone. Downside risk is real and significant—the lizard only protects you from rallies.
-💡 The Jade Lizard Rules
-☑️ The Golden Rule: Credit received MUST exceed the width of the call spread. If call spread is \$5 wide, collect at least \$5.01. This guarantees no upside loss.
-☑️ Directional Bias: Best for neutral-to-bullish outlook. You're betting the stock doesn't crash.
-☑️ The Pattern: Jade Lizards are short strangles with insurance on one side. Perfect when you fear squeezes but want premium income.`,
-    analogy: `A bouncer who only checks IDs at the back door. Anyone can enter through the front (upside), but the basement (downside) is where the trouble is.`,
-    nuance: `No Upside Risk: If credit ≥ call spread width, you cannot lose money on rallies.
+ The Jade Lizard Rules
+☑ The Golden Rule: Credit received MUST exceed the width of the call spread. If call spread is \$5 wide, collect at least \$5.01. This guarantees no upside loss.
+☑ Directional Bias: Best for neutral-to-bullish outlook. You're betting the stock doesn't crash.
+☑ The Pattern: Jade Lizards are short strangles with insurance on one side. Perfect when you fear squeezes but want premium income.`,
+ analogy: `A bouncer who only checks IDs at the back door. Anyone can enter through the front (upside), but the basement (downside) is where the trouble is.`,
+ nuance: `No Upside Risk: If credit ≥ call spread width, you cannot lose money on rallies.
 Downside Exposed: Acts like a naked put on the downside—significant risk if stock crashes.`,
-    example: `Scenario: AMZN at \$185. Neutral-bullish view.
+ example: `Scenario: AMZN at \$185. Neutral-bullish view.
 The Trade: Sell \$180 put, sell \$190 call, buy \$195 call. Credit: \$5.00.
 Outcome: Max profit \$500 between \$180-\$190. Zero loss on any rally. Downside risk like naked put.`,
-    animalMetaphor: `The Lizard
+ animalMetaphor: `The Lizard
 Picture a jade-green lizard basking safely on a sun-warmed rock—invincible from above, with its armored back deflecting every aerial threat, yet exposing a soft, vulnerable belly to anything that strikes from below. The jade lizard strategy mirrors this reptilian design perfectly: when structured correctly (credit exceeding the call spread width), you literally cannot lose money on rallies. The upside is your armored back—nothing gets through. But the naked put on the downside is the lizard's exposed underbelly. If the stock crashes, there's no scale or shell to protect you. Bask confidently in neutral markets, but never forget what lurks beneath the rock.`,
-  },
-  'long-synthetic-future': {
-    analysis: `Buy a call, sell a put at the same strike. The position moves exactly like owning 100 shares of stock. You control stock for little or no capital, but you have the same risk as a stockholder.
-📖 Trade Walkthrough: Owning Stock Without Buying Stock
+ },
+ 'long-synthetic-future': {
+ analysis: `Buy a call, sell a put at the same strike. The position moves exactly like owning 100 shares of stock. You control stock for little or no capital, but you have the same risk as a stockholder.
+ Trade Walkthrough: Owning Stock Without Buying Stock
 The Setup
 META is at \$500. You want 100-share exposure but don't want to tie up \$50,000. Using options, you can control the same position for almost nothing upfront.
 Buy 1x \$500 call (\$15), sell 1x \$500 put (\$14). Net debit: \$1.00 (\$100). You now have 100 delta—identical to owning 100 shares.
@@ -4188,24 +4188,24 @@ Result: -\$1 loss (\$100). The small debit is your only cost for standing still�
 Path C: The Crash (META drops to \$450)
 Expiration: META crashes to \$450. Your call expires worthless. Your short \$500 put costs \$50.
 Result: -\$50 - \$1 = -\$51 loss (\$5,100). Stock dropped \$50, you lost \$5,100. This is the catch—you have full downside exposure just like a stockholder. The short put can be assigned.
-💡 Synthetic vs Actual Stock
-☑️ Capital Efficiency: Control \$50,000 worth of stock for \$100. Massive leverage.
-☑️ Same Risk: If assigned on the put, you own the stock at the strike. Unlimited downside risk.
-☑️ No Dividends: You don't receive dividends like an actual stockholder would.
-☑️ The Pattern: Synthetics are leverage tools. Use when you want stock exposure without capital commitment, but respect the risk.`,
-    analogy: `Renting a mansion instead of buying it. You get all the benefits of living there, but if it burns down, you're still on the hook for the damage.`,
-    nuance: `100 Delta: Moves dollar-for-dollar with stock.
+ Synthetic vs Actual Stock
+☑ Capital Efficiency: Control \$50,000 worth of stock for \$100. Massive leverage.
+☑ Same Risk: If assigned on the put, you own the stock at the strike. Unlimited downside risk.
+☑ No Dividends: You don't receive dividends like an actual stockholder would.
+☑ The Pattern: Synthetics are leverage tools. Use when you want stock exposure without capital commitment, but respect the risk.`,
+ analogy: `Renting a mansion instead of buying it. You get all the benefits of living there, but if it burns down, you're still on the hook for the damage.`,
+ nuance: `100 Delta: Moves dollar-for-dollar with stock.
 Assignment Risk: If stock drops, you may be assigned on the short put and forced to buy shares.
 Margin Required: Broker requires margin for the short put.`,
-    example: `Scenario: META at \$500. You want exposure but not \$50K outlay.
+ example: `Scenario: META at \$500. You want exposure but not \$50K outlay.
 The Trade: Buy \$500 call, sell \$500 put. Net cost: \$1.00.
 Outcome: Acts exactly like owning 100 shares. Full upside, full downside.`,
-    animalMetaphor: `The Lion
+ animalMetaphor: `The Lion
 The lion commands its entire territory with absolute authority—every rise and fall of the savanna is its domain, and it claims full exposure to both the rewards and dangers of the wild. A long synthetic future embodies this regal dominance: with 100 delta, you move dollar-for-dollar with the stock, commanding the full territory of price movement. Like the lion, you don't hedge or hide—you claim the entire landscape. When the hunt succeeds, the feast is yours completely. But when the savanna turns hostile, there's no retreat. The king of the jungle accepts all outcomes. Full exposure, full conviction.`,
-  },
-  'strap': {
-    analysis: `A bullish straddle. Buy 2 ATM calls and 1 ATM put. You're betting on a big move, but you think UP is more likely than down. If right about direction, you make 2x on the rally.
-📖 Trade Walkthrough: The Bullish Volatility Bet
+ },
+ 'strap': {
+ analysis: `A bullish straddle. Buy 2 ATM calls and 1 ATM put. You're betting on a big move, but you think UP is more likely than down. If right about direction, you make 2x on the rally.
+ Trade Walkthrough: The Bullish Volatility Bet
 The Setup
 TSLA is at \$250 ahead of earnings. You expect a big move. Your gut says UP is more likely, but you're not sure. A regular straddle pays equally for up or down—but you want extra juice on rallies.
 Buy 2x \$250 calls (\$12 each = \$24), buy 1x \$250 put (\$11). Total debit: \$35 (\$3,500).
@@ -4221,22 +4221,22 @@ Result: \$30 - \$35 = -\$5 loss (\$500). Small move wasn't enough to cover the h
 Path D: The Pin (TSLA stays at \$250)
 Expiration: TSLA pins at \$250. All options expire worthless.
 Result: -\$35 loss (\$3,500). Max loss—you paid for volatility that never came.
-💡 Strap vs Straddle
-☑️ Higher Premium: You pay more upfront (3 options vs 2). Breakeven is further out.
-☑️ Directional Bias: Unlike a straddle, you're expressing a view: "I think it moves, probably up."
-☑️ Exotic Classification: Less common than straddles. Use when you have conviction about direction but still want crash protection.`,
-    analogy: `Betting on a horse race where you put 2 chips on horse A and 1 chip on horse B. You win either way, but you're rooting for A.`,
-    nuance: `Asymmetric Payoff: 2:1 ratio means rallies pay double what drops pay.
+ Strap vs Straddle
+☑ Higher Premium: You pay more upfront (3 options vs 2). Breakeven is further out.
+☑ Directional Bias: Unlike a straddle, you're expressing a view: "I think it moves, probably up."
+☑ Exotic Classification: Less common than straddles. Use when you have conviction about direction but still want crash protection.`,
+ analogy: `Betting on a horse race where you put 2 chips on horse A and 1 chip on horse B. You win either way, but you're rooting for A.`,
+ nuance: `Asymmetric Payoff: 2:1 ratio means rallies pay double what drops pay.
 Higher Cost: Costs more than a straddle, so you need a bigger move to profit.`,
-    example: `Scenario: TSLA at \$250. Earnings tomorrow, bullish lean.
+ example: `Scenario: TSLA at \$250. Earnings tomorrow, bullish lean.
 The Trade: Buy 2x \$250 calls, 1x \$250 put. Debit: \$35.
 Outcome: Rally to \$300 = \$6,500 profit. Drop to \$200 = \$1,500 profit. Pin = \$3,500 loss.`,
-    animalMetaphor: `The Bull
+ animalMetaphor: `The Bull
 The bull charges forward with two massive horns and one powerful hoof—built to attack upward with overwhelming force. A strap mirrors this anatomy perfectly: two calls (the horns) are your primary weapons for an upside charge, while one put (the hoof) gives you a solid kick if the market reverses. The bull doesn't just stand in the arena—it was born to charge. If the stock rockets higher, both horns gore the target for double the payout. If it drops, the single hoof still delivers a blow. Only standing still defeats the bull—that's when the matador (time decay) wins.`,
-  },
-  'strip': {
-    analysis: `A bearish straddle. Buy 1 ATM call and 2 ATM puts. You expect a big move, but think DOWN is more likely. If right about direction, you make 2x on the crash.
-📖 Trade Walkthrough: The Bearish Volatility Bet
+ },
+ 'strip': {
+ analysis: `A bearish straddle. Buy 1 ATM call and 2 ATM puts. You expect a big move, but think DOWN is more likely. If right about direction, you make 2x on the crash.
+ Trade Walkthrough: The Bearish Volatility Bet
 The Setup
 NFLX at \$600 reporting earnings. You smell trouble. If they miss, it crashes. But if they beat, it might rally. You want to profit from volatility with a bearish lean.
 Buy 1x \$600 call (\$18), buy 2x \$600 puts (\$17 each = \$34). Total debit: \$52 (\$5,200).
@@ -4252,22 +4252,22 @@ Result: \$50 - \$52 = -\$2 loss (\$200). Needed a slightly bigger move to profit
 Path D: The Pin (NFLX stays at \$600)
 Expiration: NFLX closes at \$600. All options expire worthless.
 Result: -\$52 loss (\$5,200). Max loss—no movement means total loss of premium.
-💡 When to Use a Strip
-☑️ Bearish Lean: You expect volatility but think down is more likely. Earnings misses, guidance cuts, macro fears.
-☑️ Crash Insurance: The 2 puts give you 2x exposure to drops—perfect for "I smell blood" moments.
-☑️ Still Protected: If you're wrong and it rallies, the single call still makes money.`,
-    analogy: `Betting on a fight where you put 2 chips on the underdog knockout and 1 chip on the favorite winning. You think the upset is coming.`,
-    nuance: `Inverse of Strap: 1:2 ratio means crashes pay double what rallies pay.
+ When to Use a Strip
+☑ Bearish Lean: You expect volatility but think down is more likely. Earnings misses, guidance cuts, macro fears.
+☑ Crash Insurance: The 2 puts give you 2x exposure to drops—perfect for "I smell blood" moments.
+☑ Still Protected: If you're wrong and it rallies, the single call still makes money.`,
+ analogy: `Betting on a fight where you put 2 chips on the underdog knockout and 1 chip on the favorite winning. You think the upset is coming.`,
+ nuance: `Inverse of Strap: 1:2 ratio means crashes pay double what rallies pay.
 Higher Breakeven: Costs more than a straddle due to extra put.`,
-    example: `Scenario: NFLX at \$600. Expecting volatility, bearish lean.
+ example: `Scenario: NFLX at \$600. Expecting volatility, bearish lean.
 The Trade: Buy 1x \$600 call, 2x \$600 puts. Debit: \$52.
 Outcome: Crash to \$520 = \$10,800 profit. Rally to \$680 = \$2,800 profit.`,
-    animalMetaphor: `The Bear
+ animalMetaphor: `The Bear
 The grizzly bear attacks with two devastating claws swiping downward and one crushing bite—built to bring prey to the ground with overwhelming force. A strip mirrors this perfectly: two puts (the claws) slash profits from a market crash, while one call (the bite) still draws blood if the market unexpectedly rallies. The bear doesn't hope for decline—it's engineered for it. When the market collapses, both claws rip through for double the damage. If it rallies instead, the single bite still hurts. Only calm markets leave the bear hungry, pacing and burning premium with nothing to maul.`,
-  },
-  'covered-short-straddle': {
-    analysis: `Own 100 shares and sell both an ATM call AND an ATM put. Collect massive premium. Covered on the upside, but naked exposure on the downside if stock crashes. High income, high risk.
-📖 Trade Walkthrough: The Maximum Premium Play
+ },
+ 'covered-short-straddle': {
+ analysis: `Own 100 shares and sell both an ATM call AND an ATM put. Collect massive premium. Covered on the upside, but naked exposure on the downside if stock crashes. High income, high risk.
+ Trade Walkthrough: The Maximum Premium Play
 The Setup
 You own 100 shares of MSFT at \$400. You want maximum income and expect the stock to stay flat. A covered call isn't enough—you want to sell a put too.
 Long 100 shares (\$40,000), sell 1x \$400 call (\$12), sell 1x \$400 put (\$11). Total credit: \$23 (\$2,300).
@@ -4283,22 +4283,22 @@ Result: Stock loss: -\$15/share on original + \$23 premium = +\$8 net on first 1
 Path D: The Crash (MSFT craters to \$320)
 Expiration: MSFT crashes to \$320. Put assigned—you buy 100 more at \$400. You now own 200 shares at \$400, worth \$320.
 Result: \$23 premium - \$80/share loss x 200 = massive loss. This is the danger—the short put doubles your exposure in a crash.
-💡 Why This Is Advanced
-☑️ Double Exposure: If assigned on the put, you own 200 shares. A crash hurts 2x as much.
-☑️ Premium is Compensation: You get paid handsomely because you're taking real risk.
-☑️ Best For: High conviction that stock stays flat. Willing to own more shares at current price. Strong stomachs only.`,
-    analogy: `Running a hotel where you rent out the penthouse AND the basement. Great income when occupancy is perfect, but if both tenants trash the place, you're paying double repairs.`,
-    nuance: `Covered Call + Naked Put: The call is covered by shares. The put is naked—if assigned, you buy more shares.
+ Why This Is Advanced
+☑ Double Exposure: If assigned on the put, you own 200 shares. A crash hurts 2x as much.
+☑ Premium is Compensation: You get paid handsomely because you're taking real risk.
+☑ Best For: High conviction that stock stays flat. Willing to own more shares at current price. Strong stomachs only.`,
+ analogy: `Running a hotel where you rent out the penthouse AND the basement. Great income when occupancy is perfect, but if both tenants trash the place, you're paying double repairs.`,
+ nuance: `Covered Call + Naked Put: The call is covered by shares. The put is naked—if assigned, you buy more shares.
 Double Down Risk: In a crash, you end up owning 200 shares at the strike price.`,
-    example: `Scenario: MSFT at \$400. You own 100 shares, want max income.
+ example: `Scenario: MSFT at \$400. You own 100 shares, want max income.
 The Trade: Sell \$400 call + \$400 put. Credit: \$23.
 Outcome: Pin at \$400 = \$2,300 pure profit. Rally = shares called away. Crash = you own 200 shares.`,
-    animalMetaphor: `The Walrus
+ animalMetaphor: `The Walrus
 The Walrus is defined by its blubber—thick layers of insulation that allow it to sit comfortably in freezing conditions where others would perish. A covered short straddle is built on the same principle: you sell both calls and puts to collect massive premium (blubber) that insulates you from minor drops. You sit immovable, letting time decay feed you. But this weight is a double-edged sword—if the ice breaks (a market crash), the walrus is too heavy to escape quickly. You are committed to the ground you stand on, protected by your premium, but vulnerable to the deep freeze if the floor falls out.`,
-  },
-  'short-synthetic-future': {
-    analysis: `Sell a call, buy a put at the same strike. The position moves exactly like being SHORT 100 shares. You profit from drops, lose from rallies. No borrowing fees, but full directional risk.
-📖 Trade Walkthrough: Shorting Without Borrowing
+ },
+ 'short-synthetic-future': {
+ analysis: `Sell a call, buy a put at the same strike. The position moves exactly like being SHORT 100 shares. You profit from drops, lose from rallies. No borrowing fees, but full directional risk.
+ Trade Walkthrough: Shorting Without Borrowing
 The Setup
 NVDA is at \$800 and you're bearish. Borrowing shares is expensive (high short interest). Instead, you create a synthetic short using options.
 Sell 1x \$800 call (\$45), buy 1x \$800 put (\$42). Net credit: \$3 (\$300). You now have -100 delta—identical to being short 100 shares.
@@ -4311,24 +4311,24 @@ Result: Keep \$3 credit (\$300). No borrow costs paid. Better than actual short 
 Path C: The Squeeze (NVDA rockets to \$900)
 Expiration: NVDA squeezes to \$900. Your short \$800 call costs \$100. Your put expires worthless.
 Result: -\$100 + \$3 = -\$97 loss (\$9,700). Unlimited risk on the upside. Just like being short shares, a squeeze destroys you.
-💡 Synthetic Short vs Actual Short
-☑️ No Borrow Fees: Hard-to-borrow stocks often have 20-50% annual borrow rates. Synthetics avoid this.
-☑️ No Locate Needed: Some stocks are impossible to borrow. Synthetics let you short anyway.
-☑️ Same Risk: Unlimited upside loss. Margin required for the short call.
-☑️ Assignment Risk: If the call goes ITM, you may be assigned and forced to deliver shares.`,
-    analogy: `Renting out your house while secretly hoping it burns down. You collect rent but if the neighborhood improves, property values rise and you owe the difference.`,
-    nuance: `-100 Delta: Moves opposite to stock, dollar-for-dollar.
+ Synthetic Short vs Actual Short
+☑ No Borrow Fees: Hard-to-borrow stocks often have 20-50% annual borrow rates. Synthetics avoid this.
+☑ No Locate Needed: Some stocks are impossible to borrow. Synthetics let you short anyway.
+☑ Same Risk: Unlimited upside loss. Margin required for the short call.
+☑ Assignment Risk: If the call goes ITM, you may be assigned and forced to deliver shares.`,
+ analogy: `Renting out your house while secretly hoping it burns down. You collect rent but if the neighborhood improves, property values rise and you owe the difference.`,
+ nuance: `-100 Delta: Moves opposite to stock, dollar-for-dollar.
 Unlimited Risk: If stock rallies, losses are theoretically unlimited.
 No Dividends: You don't pay dividends like an actual short seller would.`,
-    example: `Scenario: NVDA at \$800. Bearish, borrow rate is 30%.
+ example: `Scenario: NVDA at \$800. Bearish, borrow rate is 30%.
 The Trade: Sell \$800 call, buy \$800 put. Net credit: \$3.
 Outcome: Acts exactly like shorting 100 shares. No borrow fees.`,
-    animalMetaphor: `The Panther
+ animalMetaphor: `The Panther
 The black panther is a silent stalker—it hunts from the shadows, invisible in the darkness, profiting when others can't see the danger coming. A short synthetic future embodies this nocturnal predator: you profit as prices fall into shadow, moving dollar-for-dollar with decline while remaining nearly invisible to the market (no shares borrowed, no locate needed). Like the panther, your power comes from darkness and descent. But if the prey fights back—a sudden rally catching you exposed—the panther's stealth means nothing against brute upward force. Silent, lethal, and fully exposed if the light turns on.`,
-  },
-  'seagull': {
-    analysis: `A zero-cost collar with a twist. Buy a put spread for downside protection, sell an OTM call to pay for it. You get crash protection for free, but cap your upside. Named for its payoff shape—looks like a seagull in flight.
-📖 Trade Walkthrough: Free Insurance, Capped Gains
+ },
+ 'seagull': {
+ analysis: `A zero-cost collar with a twist. Buy a put spread for downside protection, sell an OTM call to pay for it. You get crash protection for free, but cap your upside. Named for its payoff shape—looks like a seagull in flight.
+ Trade Walkthrough: Free Insurance, Capped Gains
 The Setup
 You own GOOGL at \$175 with nice gains. You want to protect profits but don't want to pay for puts. The seagull gives you protection financed by selling upside.
 Buy 1x \$170 put (\$4), sell 1x \$165 put (\$2), sell 1x \$180 call (\$2.50). Net credit: \$0.50 (\$50). Protection from \$170-\$165 costs nothing—you even get paid!
@@ -4344,23 +4344,23 @@ Result: Stock loss of \$7 + put gain of \$2 + \$0.50 credit = -\$4.50 net. The p
 Path D: The Crash (GOOGL craters to \$155)
 Expiration: GOOGL crashes to \$155. \$170 put worth \$15, short \$165 put costs \$10. Net put spread value: \$5.
 Result: Stock loss of \$20 + put spread gain of \$5 + \$0.50 credit = -\$14.50 net. Without the seagull, you'd be down \$20. You saved \$5.50. But: below \$165, no more protection (put spread maxes out).
-💡 The Seagull in Practice
-☑️ Zero-Cost (or Credit): The sold call finances the put spread. Often done for net zero or small credit.
-☑️ Limited Protection: Unlike a collar with a full put, your protection stops at the short put strike.
-☑️ Exotic Name, Simple Concept: It's just a put spread + short call. The "seagull" comes from the payoff diagram shape.
-☑️ Best For: Protecting gains when you're moderately worried but don't expect a complete crash.`,
-    analogy: `An umbrella with a hole in the handle. Protects you from light rain (moderate drops), but in a hurricane (crash), water still gets through. And you can't fully stretch your arms (capped upside).`,
-    nuance: `Three-Leg Structure: Long put + short put (spread) + short call. The call finances the put spread.
+ The Seagull in Practice
+☑ Zero-Cost (or Credit): The sold call finances the put spread. Often done for net zero or small credit.
+☑ Limited Protection: Unlike a collar with a full put, your protection stops at the short put strike.
+☑ Exotic Name, Simple Concept: It's just a put spread + short call. The "seagull" comes from the payoff diagram shape.
+☑ Best For: Protecting gains when you're moderately worried but don't expect a complete crash.`,
+ analogy: `An umbrella with a hole in the handle. Protects you from light rain (moderate drops), but in a hurricane (crash), water still gets through. And you can't fully stretch your arms (capped upside).`,
+ nuance: `Three-Leg Structure: Long put + short put (spread) + short call. The call finances the put spread.
 Gap in Protection: Below the short put strike, you're exposed again.`,
-    example: `Scenario: GOOGL at \$175. Want to protect gains for free.
+ example: `Scenario: GOOGL at \$175. Want to protect gains for free.
 The Trade: Buy \$170P, sell \$165P, sell \$180C. Net credit: \$0.50.
 Outcome: Protected from \$170-\$165. Capped at \$180. Free insurance.`,
-    animalMetaphor: `The Seagull
+ animalMetaphor: `The Seagull
 The seagull glides effortlessly along the coastline—three wings of wind (long put, short put, short call) carry it at zero cost, providing smooth protection against moderate storms. It rides the updrafts for free but can never soar past a certain altitude—the sold call caps its flight ceiling. In light rain (small dips), the put spread wing keeps it dry. But in a full hurricane (crash below the short put), even the seagull gets tossed. Named for its payoff diagram that resembles a bird in flight, this three-legged structure is nature's zero-cost insurance: elegant, free, and effective within its altitude range.`,
-  },
-  'bull-call-ladder': {
-    analysis: `A bull call spread with an extra short call above. Buy one lower call, sell one middle call, sell one higher call. Reduces cost but creates unlimited risk if stock rockets too high. A "free" spread with a catch.
-📖 Trade Walkthrough: The Subsidized Spread
+ },
+ 'bull-call-ladder': {
+ analysis: `A bull call spread with an extra short call above. Buy one lower call, sell one middle call, sell one higher call. Reduces cost but creates unlimited risk if stock rockets too high. A "free" spread with a catch.
+ Trade Walkthrough: The Subsidized Spread
 The Setup
 AMD is at \$150. You're moderately bullish—expecting a move to \$155-160, but not a moonshot. A regular bull call spread costs \$3. You want it cheaper.
 Buy 1x \$145 call (\$8), sell 1x \$150 call (\$5), sell 1x \$155 call (\$3). Net debit: \$0 (free entry!). The extra short call finances your spread.
@@ -4376,22 +4376,22 @@ Result: \$25 - \$20 - \$15 = -\$10 loss (\$1,000). Here's the catch—above \$16
 Path D: The Drop (AMD falls to \$140)
 Expiration: AMD drops to \$140. All calls expire worthless.
 Result: \$0. You entered for free, you exit for free. No loss on the downside.
-💡 Why It's Exotic
-☑️ Free Entry, Hidden Risk: The zero-cost entry comes at a price—unlimited loss potential above the top strike.
-☑️ Goldilocks Zone: You need the stock to rise "just enough" but not too much. Precision required.
-☑️ Best For: When you have a specific price target and are confident the stock won't explode past it.`,
-    analogy: `A ladder where the top rung is missing. Climb partway and you're golden. Climb too high and you fall through the gap.`,
-    nuance: `Naked Short Call: The top short call is uncovered. If stock rockets, losses are unlimited.
+ Why It's Exotic
+☑ Free Entry, Hidden Risk: The zero-cost entry comes at a price—unlimited loss potential above the top strike.
+☑ Goldilocks Zone: You need the stock to rise "just enough" but not too much. Precision required.
+☑ Best For: When you have a specific price target and are confident the stock won't explode past it.`,
+ analogy: `A ladder where the top rung is missing. Climb partway and you're golden. Climb too high and you fall through the gap.`,
+ nuance: `Naked Short Call: The top short call is uncovered. If stock rockets, losses are unlimited.
 Breakeven Analysis: Upper breakeven = sum of strikes minus premium received. Know your danger zone.`,
-    example: `Scenario: AMD at \$150. Bullish to \$155-160, not higher.
+ example: `Scenario: AMD at \$150. Bullish to \$155-160, not higher.
 The Trade: Buy \$145C, sell \$150C, sell \$155C. Net: \$0.
 Outcome: Max profit \$500 at \$150-155. Unlimited loss above \$160.`,
-    animalMetaphor: `The Fox
+ animalMetaphor: `The Fox
 The fox is the cleverest navigator in the forest—it threads through moderate terrain with agility and cunning, finding profit in the Goldilocks zone where others see nothing. A bull call ladder mirrors this cunning: free entry (the fox never overpays), maximum profit in the moderate zone (the fox's home turf), and zero loss if the prey runs the other way. But catch the fox in open ground—a massive rally with nowhere to hide—and the naked short call exposes it completely. The fox thrives on precision and moderation. It's not built for the stampede.`,
-  },
-  'bear-put-ladder': {
-    analysis: `A bear put spread with an extra short put below. Buy one higher put, sell one middle put, sell one lower put. Low or zero cost entry, but creates unlimited risk if stock crashes too far. The bearish ladder.
-📖 Trade Walkthrough: The Controlled Descent
+ },
+ 'bear-put-ladder': {
+ analysis: `A bear put spread with an extra short put below. Buy one higher put, sell one middle put, sell one lower put. Low or zero cost entry, but creates unlimited risk if stock crashes too far. The bearish ladder.
+ Trade Walkthrough: The Controlled Descent
 The Setup
 COIN is at \$200. You're bearish—expecting a pullback to \$190-195, but not a complete collapse. You want cheap downside exposure.
 Buy 1x \$205 put (\$9), sell 1x \$200 put (\$6), sell 1x \$195 put (\$4). Net credit: \$1 (\$100). You get PAID to put on a bearish position.
@@ -4407,22 +4407,22 @@ Result: \$35 - \$30 - \$25 + \$1 = -\$19 loss (\$1,900). The naked short put bit
 Path D: Rally (COIN rises to \$215)
 Expiration: COIN rallies to \$215. All puts expire worthless.
 Result: Keep \$1 credit (\$100). Wrong direction but you still make money. This is the ladder advantage.
-💡 The Ladder Trap
-☑️ Credit Entry: You often get paid to enter. But that payment comes with hidden risk.
-☑️ Crash Risk: If stock collapses completely, the naked short put creates massive losses.
-☑️ Target Zone: Best when you expect a moderate move to a specific area—not a complete meltdown.`,
-    analogy: `A safety net with a hole in the middle. Catch a small fall and you're fine. Fall too far and you go right through.`,
-    nuance: `Naked Short Put: The bottom short put is uncovered. Stock crash = unlimited loss potential.
+ The Ladder Trap
+☑ Credit Entry: You often get paid to enter. But that payment comes with hidden risk.
+☑ Crash Risk: If stock collapses completely, the naked short put creates massive losses.
+☑ Target Zone: Best when you expect a moderate move to a specific area—not a complete meltdown.`,
+ analogy: `A safety net with a hole in the middle. Catch a small fall and you're fine. Fall too far and you go right through.`,
+ nuance: `Naked Short Put: The bottom short put is uncovered. Stock crash = unlimited loss potential.
 Margin Heavy: Brokers require significant margin for the naked put.`,
-    example: `Scenario: COIN at \$200. Bearish to \$195 area, not lower.
+ example: `Scenario: COIN at \$200. Bearish to \$195 area, not lower.
 The Trade: Buy \$205P, sell \$200P, sell \$195P. Net credit: \$1.
 Outcome: Max profit \$600 at \$195-200. Danger below \$190.`,
-    animalMetaphor: `The Owl
+ animalMetaphor: `The Owl
 The owl hunts with controlled precision—a silent descent from above, calculating the exact swoop needed to catch prey at a specific altitude. A bear put ladder mirrors this calculated descent: you profit from a moderate drop to your target zone, collecting your reward with surgical accuracy. Like the owl, you get paid to enter (credit) and lose nothing if the prey escapes upward. But swoop too deep—a market crash through your lower strike—and the owl hits the ground. The naked short put at the bottom creates accelerating losses on violent crashes. Precision descent, not a nosedive.`,
-  },
-  'long-call-condor': {
-    analysis: `A butterfly with a flat top. Four strikes: buy lowest, sell two middle (different strikes), buy highest. Wider profit zone than a butterfly, but lower max profit. The condor soars in range-bound markets.
-📖 Trade Walkthrough: The Wide Profit Zone
+ },
+ 'long-call-condor': {
+ analysis: `A butterfly with a flat top. Four strikes: buy lowest, sell two middle (different strikes), buy highest. Wider profit zone than a butterfly, but lower max profit. The condor soars in range-bound markets.
+ Trade Walkthrough: The Wide Profit Zone
 The Setup
 SPY is at \$500. You expect it to stay in a \$490-\$510 range for the next 3 weeks. A butterfly requires pinning at one strike—too precise. You want a wider target.
 Buy 1x \$490 call (\$14), sell 1x \$495 call (\$10), sell 1x \$505 call (\$4), buy 1x \$510 call (\$2). Net debit: \$2 (\$200).
@@ -4438,22 +4438,22 @@ Result: \$30 - \$25 - \$15 + \$10 - \$2 = -\$2 (\$200 loss). Beyond the wings, g
 Path D: Selloff (SPY drops to \$480)
 Expiration: SPY tanks to \$480. All calls expire worthless.
 Result: -\$2 (\$200 loss). Max loss = initial debit. Below the lowest strike, everything is worthless.
-💡 Condor vs Butterfly
-☑️ Wider Profit Zone: Butterfly needs exact pin. Condor profits across a range.
-☑️ Lower Max Profit: The tradeoff—wider zone means smaller max gain.
-☑️ Same Max Loss: Both strategies risk only the initial debit.`,
-    analogy: `A hammock strung between two trees. Lie anywhere in the middle and you're comfortable. Roll off either side and you fall (but not far).`,
-    nuance: `Four Strikes Required: Creates a flat profit plateau between the middle strikes.
+ Condor vs Butterfly
+☑ Wider Profit Zone: Butterfly needs exact pin. Condor profits across a range.
+☑ Lower Max Profit: The tradeoff—wider zone means smaller max gain.
+☑ Same Max Loss: Both strategies risk only the initial debit.`,
+ analogy: `A hammock strung between two trees. Lie anywhere in the middle and you're comfortable. Roll off either side and you fall (but not far).`,
+ nuance: `Four Strikes Required: Creates a flat profit plateau between the middle strikes.
 Cost vs Probability: Costs more than a butterfly but wins more often.`,
-    example: `Scenario: SPY at \$500. Expecting \$495-505 range.
+ example: `Scenario: SPY at \$500. Expecting \$495-505 range.
 The Trade: Buy \$490C, sell \$495C, sell \$505C, buy \$510C. Debit: \$2.
 Outcome: Max profit \$300 anywhere from \$495-505. Max loss \$200.`,
-    animalMetaphor: `The Condor
+ animalMetaphor: `The Condor
 The Andean condor soars with the widest wingspan of any land bird—it doesn't flap, it doesn't chase, it simply glides between thermals with effortless patience over a broad range of territory. A long call condor is its financial namesake: four strikes create a wide, flat profit plateau that spans an entire range instead of pinning to a single point. Like the condor riding updrafts without burning energy, this strategy costs little to enter and profits anywhere within its glide path. If the stock drifts outside the thermals, the defined-risk wings limit the fall to your tiny initial debit. Soar wide, soar patient, soar cheap.`,
-  },
-  'long-put-condor': {
-    analysis: `The put version of the condor. Same payoff structure—use whichever has better liquidity. Buy highest put, sell two middle puts at different strikes, buy lowest put. Wide profit zone, defined risk.
-📖 Trade Walkthrough: The Put Alternative
+ },
+ 'long-put-condor': {
+ analysis: `The put version of the condor. Same payoff structure—use whichever has better liquidity. Buy highest put, sell two middle puts at different strikes, buy lowest put. Wide profit zone, defined risk.
+ Trade Walkthrough: The Put Alternative
 The Setup
 IWM (Russell 2000 ETF) at \$220. You expect sideways action. Call condor has wide spreads, so you check puts—much better liquidity.
 Buy 1x \$230 put (\$12), sell 1x \$225 put (\$8), sell 1x \$215 put (\$3), buy 1x \$210 put (\$1.50). Net debit: \$2.50 (\$250).
@@ -4469,21 +4469,21 @@ Result: -\$2.50 (\$250 loss). Initial debit lost.
 Path D: Crash (IWM to \$200)
 Expiration: All puts deep ITM. Gains and losses cancel beyond the wings.
 Result: -\$2.50 (\$250 loss). Same max loss—the structure protects you.
-💡 Choosing Calls vs Puts
-☑️ Identical Payoff: At expiration, call and put condors at same strikes produce the same P&L.
-☑️ Liquidity Rules: Choose whichever side has tighter bid-ask spreads.
-☑️ Skew Consideration: Put skew can make put condors slightly cheaper in some markets.`,
-    analogy: `Same hammock, different rope. The comfort zone is identical—just pick the rope that's easier to tie.`,
-    nuance: `Put-Call Parity: Identical risk/reward to call condor at same strikes. Choose based on execution quality.`,
-    example: `Scenario: IWM at \$220. Put spreads tighter than calls.
+ Choosing Calls vs Puts
+☑ Identical Payoff: At expiration, call and put condors at same strikes produce the same P&L.
+☑ Liquidity Rules: Choose whichever side has tighter bid-ask spreads.
+☑ Skew Consideration: Put skew can make put condors slightly cheaper in some markets.`,
+ analogy: `Same hammock, different rope. The comfort zone is identical—just pick the rope that's easier to tie.`,
+ nuance: `Put-Call Parity: Identical risk/reward to call condor at same strikes. Choose based on execution quality.`,
+ example: `Scenario: IWM at \$220. Put spreads tighter than calls.
 The Trade: Buy \$230P, sell \$225P, sell \$215P, buy \$210P. Debit: \$2.50.
 Outcome: Max profit \$250 from \$215-225. Max loss \$250.`,
-    animalMetaphor: `The Condor
+ animalMetaphor: `The Condor
 Same condor, same magnificent glide, same broad thermal range—but this one wears different feathers. The long put condor uses puts instead of calls yet traces the exact same flight path as its call-based twin, just as two condors from different subspecies share identical wingspans and soaring mechanics. Put-call parity guarantees the payoff is a mirror image: same low entry cost, same wide profit plateau, same gentle descent if the stock drifts outside the thermals. Choose whichever feather pattern (calls or puts) offers tighter spreads and better liquidity—the condor glides identically either way.`,
-  },
-  'long-guts': {
-    analysis: `Buy an ITM call AND an ITM put. Like a straddle but using in-the-money options. Higher cost but more intrinsic value. You're betting on a massive move in either direction—the "guts" to go big.
-📖 Trade Walkthrough: The ITM Volatility Play
+ },
+ 'long-guts': {
+ analysis: `Buy an ITM call AND an ITM put. Like a straddle but using in-the-money options. Higher cost but more intrinsic value. You're betting on a massive move in either direction—the "guts" to go big.
+ Trade Walkthrough: The ITM Volatility Play
 The Setup
 SHOP is at \$100 before a major product launch. You expect a huge move but have no idea which direction. ATM straddle is expensive. You try an ITM guts for different Greeks exposure.
 Buy 1x \$95 call (\$8 - includes \$5 intrinsic), buy 1x \$105 put (\$9 - includes \$5 intrinsic). Total debit: \$17 (\$1,700). The intrinsic value is \$10, so time value paid is only \$7.
@@ -4499,23 +4499,23 @@ Result: \$13 - \$17 = -\$4 (\$400 loss). Didn't move enough. You needed a bigger
 Path D: The Pin (SHOP stays at \$100)
 Expiration: SHOP pins at \$100. \$95 call = \$5 (intrinsic). \$105 put = \$5 (intrinsic).
 Result: \$5 + \$5 - \$17 = -\$7 (\$700 loss). Max loss. You lose all the time value paid. But you keep the \$10 intrinsic.
-💡 Guts vs Straddle
-☑️ Higher Delta: ITM options have higher delta. The position moves faster with the stock initially.
-☑️ Lower Vega: Less sensitive to IV crush since you're buying intrinsic, not just time value.
-☑️ Guaranteed Value: Even at max loss, you keep the intrinsic value. Straddle can go to zero.
-☑️ Capital Intensive: Costs more upfront due to intrinsic value component.`,
-    analogy: `Buying two insurance policies that both pay out immediately if you die—one from your spouse, one from your doctor. Overlap means double cost but guaranteed partial payout.`,
-    nuance: `Intrinsic Floor: Unlike straddles, guts can't go to zero. The overlapping ITM strikes guarantee some value at expiration.
+ Guts vs Straddle
+☑ Higher Delta: ITM options have higher delta. The position moves faster with the stock initially.
+☑ Lower Vega: Less sensitive to IV crush since you're buying intrinsic, not just time value.
+☑ Guaranteed Value: Even at max loss, you keep the intrinsic value. Straddle can go to zero.
+☑ Capital Intensive: Costs more upfront due to intrinsic value component.`,
+ analogy: `Buying two insurance policies that both pay out immediately if you die—one from your spouse, one from your doctor. Overlap means double cost but guaranteed partial payout.`,
+ nuance: `Intrinsic Floor: Unlike straddles, guts can't go to zero. The overlapping ITM strikes guarantee some value at expiration.
 Higher Capital: Requires more buying power than ATM straddle.`,
-    example: `Scenario: SHOP at \$100. Major event, expecting huge move.
+ example: `Scenario: SHOP at \$100. Major event, expecting huge move.
 The Trade: Buy \$95 call + \$105 put. Debit: \$17.
 Outcome: Need move beyond \$83 or \$117 to profit. Max loss \$700 if pins at \$100.`,
-    animalMetaphor: `The Panicking Deer
+ animalMetaphor: `The Panicking Deer
 The giant panda is expensive to maintain—it needs 40 pounds of bamboo daily just to survive—but it always retains its value as one of the world's most prized animals. A long guts works the same way: the ITM options cost more upfront (like feeding a panda), but the intrinsic value floor means your position can never go to zero. Even at maximum loss, you keep the overlap value—the panda never becomes worthless. And when the panda finally moves with explosive force (rare but devastating), the power is undeniable. Capital-intensive, always valuable, and terrifyingly powerful when momentum strikes.`,
-  },
-  'short-guts': {
-    analysis: `Sell an ITM call AND an ITM put. Collect massive premium including intrinsic value. You're betting the stock stays between the strikes. Unlimited risk on both sides—this is aggressive income generation.
-📖 Trade Walkthrough: Maximum Premium Collection
+ },
+ 'short-guts': {
+ analysis: `Sell an ITM call AND an ITM put. Collect massive premium including intrinsic value. You're betting the stock stays between the strikes. Unlimited risk on both sides—this is aggressive income generation.
+ Trade Walkthrough: Maximum Premium Collection
 The Setup
 WMT is at \$60. It's the most boring stock on the planet—hasn't moved 5% in a year. You want maximum premium income. Short strangle isn't enough—go short guts.
 Sell 1x \$55 call (\$7 - \$5 intrinsic + \$2 extrinsic), sell 1x \$65 put (\$8 - \$5 intrinsic + \$3 extrinsic). Total credit: \$15 (\$1,500). That's \$10 intrinsic + \$5 time value.
@@ -4531,23 +4531,23 @@ Result: \$15 - \$17 = -\$2 (\$200 loss). Beyond \$70, losses accelerate. Unlimit
 Path D: Crash (WMT craters to \$45)
 Expiration: WMT crashes to \$45. \$55 call = \$0. \$65 put = \$20 (costs you).
 Result: \$15 - \$20 = -\$5 (\$500 loss). Losses compound on big drops. Unlimited risk both directions.
-💡 Why It's Exotic (and Dangerous)
-☑️ Assignment Guaranteed: Both options are ITM. You WILL be assigned on at least one side.
-☑️ Margin Intensive: Brokers require substantial margin for naked ITM options.
-☑️ Unlimited Risk: Stock crash or rally = unlimited loss potential.
-☑️ Best For: Ultra-boring stocks with no catalysts. Still dangerous if something unexpected happens.`,
-    analogy: `Selling fire insurance on a house made of brick (the stock is boring). Collect fat premiums because fires are rare. But if lightning strikes, you're paying for the whole house.`,
-    nuance: `ITM = Certain Assignment: Unlike short strangles, short guts guarantee assignment on at least one leg. Plan for it.
+ Why It's Exotic (and Dangerous)
+☑ Assignment Guaranteed: Both options are ITM. You WILL be assigned on at least one side.
+☑ Margin Intensive: Brokers require substantial margin for naked ITM options.
+☑ Unlimited Risk: Stock crash or rally = unlimited loss potential.
+☑ Best For: Ultra-boring stocks with no catalysts. Still dangerous if something unexpected happens.`,
+ analogy: `Selling fire insurance on a house made of brick (the stock is boring). Collect fat premiums because fires are rare. But if lightning strikes, you're paying for the whole house.`,
+ nuance: `ITM = Certain Assignment: Unlike short strangles, short guts guarantee assignment on at least one leg. Plan for it.
 Max Profit = Time Value: You only keep the extrinsic portion collected.`,
-    example: `Scenario: WMT at \$60. Ultra-stable, expecting nothing.
+ example: `Scenario: WMT at \$60. Ultra-stable, expecting nothing.
 The Trade: Sell \$55 call + \$65 put. Credit: \$15.
 Outcome: Max profit \$500 between \$55-65. Unlimited risk outside that range.`,
-    animalMetaphor: `The Hippopotamus
+ animalMetaphor: `The Hippopotamus
 The Hippopotamus spends its life submerged deep in the water (deep ITM options), appearing lazy and slow as it grazes on massive amounts of vegetation (premium). To the observer, it looks like an easy, heavy target. A Short Guts strategy mimics this deceptive calm: you sell deep ITM calls and puts, collecting a massive "weight" of premium to sit still. But do not mistake this heaviness for docility. The Hippo is aggressively territorial. If the market moves too far and violates its territory (breakout), the Hippo wakes up—and it is the deadliest force in the river. Unlimited risk lies beneath the calm surface.`,
-  },
-  'twisted-sister': {
-    analysis: `Buy a longer-dated ATM call, sell two shorter-dated OTM calls. A ratio spread meets a calendar. If the stock rallies moderately, both shorts expire worthless and you keep the long. If it rallies too much, the naked short call hurts.
-📖 Trade Walkthrough: The Time-Twisted Ratio
+ },
+ 'twisted-sister': {
+ analysis: `Buy a longer-dated ATM call, sell two shorter-dated OTM calls. A ratio spread meets a calendar. If the stock rallies moderately, both shorts expire worthless and you keep the long. If it rallies too much, the naked short call hurts.
+ Trade Walkthrough: The Time-Twisted Ratio
 The Setup
 PLTR is at \$25. You're bullish but want a cheap entry. Earnings are in 2 weeks (front month expiry). You expect a pop to \$27-28, then continued upside.
 Buy 1x \$25 call 45-day (\$3.50), sell 2x \$27.50 calls 14-day (\$1 each = \$2). Net debit: \$1.50 (\$150). The short calls finance most of your long.
@@ -4563,54 +4563,54 @@ Result: \$8 - \$9 - \$1.50 = -\$2.50 (\$250 loss). One short call is covered by 
 Path D: Crash (PLTR drops to \$22)
 Front Expiration: PLTR at \$22. All calls expire worthless. Your long \$25 call worth ~\$0.50.
 Result: \$0.50 - \$1.50 = -\$1 (\$100 loss). Downside limited to debit paid (mostly).
-💡 The "Twist"
-☑️ Calendar + Ratio: The time difference (longer long, shorter shorts) creates the "twist." You benefit from front-month decay.
-☑️ One Naked Leg: Selling 2 calls against 1 long means one is uncovered. That's your unlimited risk zone.
-☑️ Named After: The 80s hair metal band. Because this trade has big hair energy—flashy but can blow up in your face.`,
-    analogy: `A catapult with a counterweight. Moderate wind sends the projectile perfectly. A hurricane sends it right back at you.`,
-    nuance: `Two Time Frames: The front-month shorts decay faster than your back-month long. Time works for you initially.
+ The "Twist"
+☑ Calendar + Ratio: The time difference (longer long, shorter shorts) creates the "twist." You benefit from front-month decay.
+☑ One Naked Leg: Selling 2 calls against 1 long means one is uncovered. That's your unlimited risk zone.
+☑ Named After: The 80s hair metal band. Because this trade has big hair energy—flashy but can blow up in your face.`,
+ analogy: `A catapult with a counterweight. Moderate wind sends the projectile perfectly. A hurricane sends it right back at you.`,
+ nuance: `Two Time Frames: The front-month shorts decay faster than your back-month long. Time works for you initially.
 Naked Exposure: Above the short strike, one call is uncovered. Manage or roll before it gets dangerous.`,
-    example: `Scenario: PLTR at \$25. Bullish, want cheap exposure.
+ example: `Scenario: PLTR at \$25. Bullish, want cheap exposure.
 The Trade: Buy 45-day \$25C, sell 2x 14-day \$27.50C. Debit: \$1.50.
 Outcome: Best if PLTR at \$27-28 at front expiry. Risk if it explodes past \$30.`,
-    animalMetaphor: `The Scorpion
+ animalMetaphor: `The Scorpion
 The scorpion's segmented tail twists across multiple sections, storing venom patiently before striking with lethal precision. A twisted sister operates the same way—it spans two time frames (front-month shorts and back-month long), twisting across temporal segments like the scorpion's articulated tail. The front-month options decay rapidly (the scorpion storing energy), and when they expire worthless, the back-month long strikes with concentrated power. But if the prey is too large (massive rally), the naked short call—like overextending the tail—leaves the scorpion vulnerable. Patient, segmented, and devastatingly precise.`,
-  },
-  'event-horizons-course': {
-    analysis: `Event Horizons Course - click to open`,
-    analogy: `Master event-driven trading with Cameron the Chameleon. 8 comprehensive lessons covering prediction markets, earnings plays, and volatility events.`,
-    nuance: `Structured Learning: Progress through 8 lessons with quizzes and case studies. Learn from three expert mentors: Chameleon, Cheetah, and Owl.`,
-    example: ``,
-  },
-  'event-horizons': {
-    analysis: `Event Horizons - click to open`,
-    analogy: `Access the Event Horizons toolkit: Prediction Scanner, Gap Analyzer, Event Replay, Paper Trading, and AI Signal Synthesizer.`,
-    nuance: `Event-Driven Trading: Combine options knowledge with prediction market signals. Understand IV crush, earnings straddles, and how to position around known catalysts.`,
-    example: ``,
-  },
-  'strategy-builder': {
-    analysis: `Strategy Lab
+ },
+ 'event-horizons-course': {
+ analysis: `Event Horizons Course - click to open`,
+ analogy: `Master event-driven trading with Cameron the Chameleon. 8 comprehensive lessons covering prediction markets, earnings plays, and volatility events.`,
+ nuance: `Structured Learning: Progress through 8 lessons with quizzes and case studies. Learn from three expert mentors: Chameleon, Cheetah, and Owl.`,
+ example: ``,
+ },
+ 'event-horizons': {
+ analysis: `Event Horizons - click to open`,
+ analogy: `Access the Event Horizons toolkit: Prediction Scanner, Gap Analyzer, Event Replay, Paper Trading, and AI Signal Synthesizer.`,
+ nuance: `Event-Driven Trading: Combine options knowledge with prediction market signals. Understand IV crush, earnings straddles, and how to position around known catalysts.`,
+ example: ``,
+ },
+ 'strategy-builder': {
+ analysis: `Strategy Lab
 "Every battle is won before it is ever fought."
 — Sun Tzu, The Art of War`,
-    analogy: `A trading architect's workshop. Build custom strategies leg by leg, compare them side-by-side, and see how each decision changes the payoff landscape.`,
-    nuance: `Build & Compare: Construct your own multi-leg strategies and instantly compare them. See how each leg affects the payoff diagram in real-time. The right strategy for the wrong situation is the wrong strategy—the Lab helps you find the perfect match.`,
-    example: ``,
-  },
-  'paper-trading': {
-    analysis: `Paper Trading Simulator
+ analogy: `A trading architect's workshop. Build custom strategies leg by leg, compare them side-by-side, and see how each decision changes the payoff landscape.`,
+ nuance: `Build & Compare: Construct your own multi-leg strategies and instantly compare them. See how each leg affects the payoff diagram in real-time. The right strategy for the wrong situation is the wrong strategy—the Lab helps you find the perfect match.`,
+ example: ``,
+ },
+ 'paper-trading': {
+ analysis: `Paper Trading Simulator
 "Practice in the sandbox before you play in the jungle."`,
-    analogy: `A flight simulator for traders. Pilots don't learn to fly with passengers on board—they practice until the controls become second nature.`,
-    nuance: `Risk-Free Learning: Make mistakes with fake money. Track your wins and losses. Build confidence before risking real capital.`,
-    example: ``,
-  },
-  'encyclopedia': {
-    analysis: `Encyclopedia Loading...`,
-    analogy: `The complete taxonomy of trading strategies.`,
-    nuance: `Reference: 58 strategies mapped and detailed.`,
-    example: ``,
-  },
-  'options-flow': {
-    analysis: `Options Flow — Follow the Smart Money
+ analogy: `A flight simulator for traders. Pilots don't learn to fly with passengers on board—they practice until the controls become second nature.`,
+ nuance: `Risk-Free Learning: Make mistakes with fake money. Track your wins and losses. Build confidence before risking real capital.`,
+ example: ``,
+ },
+ 'encyclopedia': {
+ analysis: `Encyclopedia Loading...`,
+ analogy: `The complete taxonomy of trading strategies.`,
+ nuance: `Reference: 58 strategies mapped and detailed.`,
+ example: ``,
+ },
+ 'options-flow': {
+ analysis: `Options Flow — Follow the Smart Money
 "In the jungle, the biggest footprints tell you where the apex predators are headed."
 What Is Options Flow?
 Options flow is the real-time stream of every options order being executed across all exchanges. It's the raw data feed of who is buying and selling options, how much they're paying, and at what strikes and expirations.
@@ -4693,12 +4693,12 @@ Flow is not a crystal ball. Institutions are wrong too. Large options trades can
 You see the trade, not the portfolio. A massive call purchase might be part of a collar strategy or a hedge against a short position. A single flow entry never tells the full story.
 Timing is everything. By the time flow data reaches retail platforms, the initial move may have already happened. Flow is a research tool for thesis development, not a real-time trade signal.
 Confirmation bias is real. If you're already bullish on a stock, you'll notice the bullish flow and ignore the bearish flow. Always look at both sides.`,
-    analogy: `Tracking animal footprints in the jungle. Retail traders leave mouse tracks — invisible and meaningless. Institutions leave elephant footprints. You can't hide a \$2 million options bet. Follow the biggest footprints to find where the smart money is headed.`,
-    nuance: `The Edge: You'll never have the same information as institutions. But you can see what they DO with that information. Options flow is the closest thing retail traders have to reading the smart money's playbook in real time.`,
-    example: ``,
-  },
-  'mirror-archetypes': {
-    analysis: `The 10 Investor Archetypes
+ analogy: `Tracking animal footprints in the jungle. Retail traders leave mouse tracks — invisible and meaningless. Institutions leave elephant footprints. You can't hide a \$2 million options bet. Follow the biggest footprints to find where the smart money is headed.`,
+ nuance: `The Edge: You'll never have the same information as institutions. But you can see what they DO with that information. Options flow is the closest thing retail traders have to reading the smart money's playbook in real time.`,
+ example: ``,
+ },
+ 'mirror-archetypes': {
+ analysis: `The 10 Investor Archetypes
 Every investor carries unconscious patterns — fear responses, cognitive shortcuts, philosophical blind spots. Which archetype are you?
 The Panicking Deer
 Freezes in the headlights, then bolts at the worst possible moment.
@@ -4802,12 +4802,12 @@ Philosophical Mentor: Charlie Munger
 Mental models and multidisciplinary thinking
 Which One Are You?
 Take the 20-question assessment in the next module to discover your primary archetype, shadow archetype, and personalized growth path.`,
-    analogy: `We are what we repeatedly do. — Aristotle`,
-    nuance: ``,
-    example: ``,
-  },
-  'mirror-quiz': {
-    analysis: `Discover Your Investor Archetype
+ analogy: `We are what we repeatedly do. — Aristotle`,
+ nuance: ``,
+ example: ``,
+ },
+ 'mirror-quiz': {
+ analysis: `Discover Your Investor Archetype
 20 honest questions. No right answers. Discover which of the 10 archetypes drives your investment decisions.
 Question 1 of 20
 Your largest holding drops 15% in a single day on no news. What happens in your body before your brain catches up?
@@ -5104,12 +5104,12 @@ Go Deeper
 Explore the full Bias Encyclopedia, Trading Journal, and Pre-Trade Ritual in the modules below to master your archetype's blind spots.
 Pro modules below ↓
 Retake Quiz`,
-    analogy: `Know thyself. — Inscribed at the Temple of Apollo at Delphi`,
-    nuance: ``,
-    example: ``,
-  },
-  'mirror-biases': {
-    analysis: `The Bias Encyclopedia
+ analogy: `Know thyself. — Inscribed at the Temple of Apollo at Delphi`,
+ nuance: ``,
+ example: ``,
+ },
+ 'mirror-biases': {
+ analysis: `The Bias Encyclopedia
 31 cognitive biases that silently destroy portfolios. Each one mapped to a philosophical antidote from history&apos;s greatest thinkers.
 How to use this: Don&apos;t try to memorize them all. Find your archetype first (previous module), then study the 3-4 biases that map to your type. Those are your blind spots — the ones costing you money right now.
 8
@@ -5246,24 +5246,24 @@ In investing: You made a reckless, undiversified bet on a single stock and it tr
 Antidote: Housel teaches that good decisions can have bad outcomes and bad decisions can have good outcomes. The quality of your decision-making reveals itself only over hundreds of trades. Judge your process, not any single result.
 "The first principle is that you must not fool yourself — and you are the easiest person to fool."
 — Richard Feynman`,
-    analogy: `The eye sees only what the mind is prepared to comprehend. — Robertson Davies`,
-    nuance: ``,
-    example: ``,
-  },
-  'mirror-journal': {
-    analysis: `The Trading Journal
+ analogy: `The eye sees only what the mind is prepared to comprehend. — Robertson Davies`,
+ nuance: ``,
+ example: ``,
+ },
+ 'mirror-journal': {
+ analysis: `The Trading Journal
 The most powerful tool in investing isn't a screener or a scanner. It's a mirror — a record of your decisions, your emotions, and the biases that drove them.
 Why Journal?
-📊
+
 Pattern Recognition
 After 30 entries, patterns emerge. You'll see that you always panic-sell on Mondays, or chase after seeing green for 3 days straight.
-🧠
+
 Bias Awareness
 Tag each trade with the bias you suspect was active. Over time, your top 3 biases become undeniable.
-🎯
+
 Accountability
 Writing down your thesis before entering forces clarity. If you can't write it, you don't understand it.
-📈
+
 Performance Review
 Review weekly. Not just P&L — review the quality of your decisions independent of outcomes.
 The Journal Template
@@ -5281,12 +5281,12 @@ After Exit
 Ready to Start Journaling?
 Put these principles into practice with our full-featured Trade Journal — track entries, exits, emotions, and biases. Add purpose, time horizon, and guided prompts to every trade.
 Open the Trade Journal`,
-    analogy: `The palest ink is better than the best memory. — Chinese Proverb`,
-    nuance: ``,
-    example: ``,
-  },
-  'mirror-ritual': {
-    analysis: `The Pre-Trade Ritual
+ analogy: `The palest ink is better than the best memory. — Chinese Proverb`,
+ nuance: ``,
+ example: ``,
+ },
+ 'mirror-ritual': {
+ analysis: `The Pre-Trade Ritual
 Surgeons scrub in. Pilots run checklists. Elite investors have rituals. This is yours — a philosophical circuit-breaker between impulse and execution.
 The 5-Step Ritual
 1
@@ -5311,24 +5311,24 @@ Ask yourself: "If I woke up tomorrow and this position was gone, would I enter i
 "What, if some day or night a demon were to steal after you and say: this life as you now live it, you will have to live once more — would you throw yourself down and curse the demon, or would you say: never have I heard anything more divine?" — Nietzsche
 The Ritual Takes 2 Minutes
 It will save you thousands. Not because it makes you smarter — because it makes you slower. And in markets, slow is fast.`,
-    analogy: `Between stimulus and response there is a space. In that space is our freedom. — Viktor Frankl`,
-    nuance: ``,
-    example: ``,
-  },
-  'mirror-wisdom': {
-    analysis: `Market Insight`,
-    analogy: `A daily moment of philosophical clarity before you check the markets.`,
-    nuance: `Less is more. A single well-chosen quote cuts deeper than a wall of wisdom.`,
-    example: ``,
-  },
-  'mirror-insights': {
-    analysis: `🪞
+ analogy: `Between stimulus and response there is a space. In that space is our freedom. — Viktor Frankl`,
+ nuance: ``,
+ example: ``,
+ },
+ 'mirror-wisdom': {
+ analysis: `Market Insight`,
+ analogy: `A daily moment of philosophical clarity before you check the markets.`,
+ nuance: `Less is more. A single well-chosen quote cuts deeper than a wall of wisdom.`,
+ example: ``,
+ },
+ 'mirror-insights': {
+ analysis: `
 The Mirror
 Weekly philosophical insights into investor psychology
 Week of Feb 10, 2026
-🦌
+
 When Fear Becomes the Only Signal
-Panicking Deer 🦌
+Panicking Deer 
 The deer freezes not because it lacks intelligence, but because its threat-detection system overwhelms all other processing. In markets, this manifests as the investor who watches their portfolio decline and becomes paralyzed — unable to sell, unable to buy more, unable to think clearly.
 Loss aversion tells us that losses hurt roughly twice as much as equivalent gains feel good. Combined with recency bias — the tendency to weight recent events disproportionately — a single bad week can rewrite your entire market narrative. Yesterday's rational thesis dissolves into today's panic.
 The antidote isn't fearlessness. It's recognizing that fear is data, not directive.
@@ -5341,9 +5341,9 @@ Recency Bias
 Actionable Takeaway
 Start a fear journal. When panic strikes, write down exactly what you're afraid of — specific numbers, specific outcomes. Review past entries monthly. You'll find that most feared scenarios never materialized, and the ones that did were survivable.
 Week of Feb 3, 2026
-🦍
+
 The Illusion of Knowing
-Overconfident Gorilla 🦍
+Overconfident Gorilla 
 The gorilla beats its chest not to communicate strength, but to convince itself. In trading, overconfidence follows a winning streak like a shadow — invisible until it trips you. Self-attribution bias whispers that your gains came from skill while your losses were bad luck.
 Nietzsche warned about the danger of gazing too long into the abyss. But the greater danger for traders is gazing too long at their P&L. Three green trades in a row and suddenly you're sizing up, skipping your checklist, trading on instinct rather than process.
 True confidence is quiet. It doesn't need to prove itself with bigger bets.
@@ -5356,9 +5356,9 @@ Self-Attribution
 Actionable Takeaway
 Keep a decision journal. Before each trade, write your confidence level (1-10) and thesis. After the trade closes, compare your prediction with reality. Over time, you'll calibrate your confidence to match your actual edge.
 Week of Jan 27, 2026
-🦬
+
 The Comfort of the Crowd
-Herd Buffalo 🦬
+Herd Buffalo 
 Buffalo survive by moving together. There's evolutionary logic in it — the herd provides safety, warmth, direction. But markets aren't the savanna. In markets, the herd moves together right up until the cliff edge, and then it's too late to turn.
 Social proof is perhaps the most insidious bias because it feels like research. Reading five bullish takes on Twitter isn't due diligence — it's confirmation seeking dressed as analysis. Kierkegaard understood: the crowd is untruth, not because individuals are wrong, but because the crowd removes individual responsibility for thinking.
 The contrarian doesn't disagree for sport. They disagree because they've done the work the crowd skipped.
@@ -5371,9 +5371,9 @@ Social Proof
 Actionable Takeaway
 Practice contrarian thinking weekly. Take your strongest conviction trade and argue the opposite side for 5 minutes. If you can't construct a compelling bear case, you don't understand the trade well enough to be in it.
 Week of Jan 20, 2026
-🐘
+
 Anchored to Yesterday's Prices
-Nostalgic Elephant 🐘
+Nostalgic Elephant 
 Elephants never forget. In markets, that's a curse. The price you bought at. The high it used to trade at. The "fair value" you calculated six months ago. These numbers anchor your brain and distort every decision that follows.
 Anchoring bias means the first number you see becomes a gravitational center for all subsequent judgments. Status quo bias compounds this — once you're in a position, the default becomes holding, regardless of whether the original thesis still holds.
 Shakespeare knew: what's past is prologue. But the market doesn't care about your cost basis. It never did.
@@ -5388,19 +5388,19 @@ Do the clean-slate exercise monthly. For every position: ignore your cost basis,
 Get Your Weekly Mirror
 Personalized philosophical insights delivered every Sunday
 Coming Soon — Subscribe at investors-mirror.com`,
-    analogy: `The Mirror reflects your trading psychology through the lens of philosophy — showing you the ancient patterns behind modern market mistakes.`,
-    nuance: `Weekly AI-generated insights match your investor archetype with philosophical wisdom to reveal blind spots.`,
-    example: `A Panicking Deer reading Seneca on imagined suffering realizes their portfolio fear is worse than the actual drawdown.`,
-  },
+ analogy: `The Mirror reflects your trading psychology through the lens of philosophy — showing you the ancient patterns behind modern market mistakes.`,
+ nuance: `Weekly AI-generated insights match your investor archetype with philosophical wisdom to reveal blind spots.`,
+ example: `A Panicking Deer reading Seneca on imagined suffering realizes their portfolio fear is worse than the actual drawdown.`,
+ },
 };
 
 /** Get rich content for a strategy by ID */
 export const getStrategyContent = (id: string): StrategyContentMobile | undefined => {
-  return STRATEGY_CONTENT[id];
+ return STRATEGY_CONTENT[id];
 };
 
 /** Get all strategy IDs that have content */
 export const getStrategyContentIds = (): string[] => {
-  return Object.keys(STRATEGY_CONTENT);
+ return Object.keys(STRATEGY_CONTENT);
 };
 

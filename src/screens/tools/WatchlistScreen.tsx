@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { GlassCard, GradientText, GlowButton } from '../../components/ui';
 
@@ -121,7 +122,7 @@ const WatchlistScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <GradientText style={styles.headerTitle}>Watchlist</GradientText>
         <TouchableOpacity onPress={() => setShowAddModal(true)} style={styles.addButton}>
@@ -254,7 +255,7 @@ const WatchlistScreen: React.FC = () => {
                     </View>
                     {item.nextEarnings && (
                       <View style={styles.earningsBadge}>
-                        <Text style={styles.earningsIcon}>📅</Text>
+                        <Ionicons name="calendar-outline" size={12} color={colors.neon.yellow} />
                       </View>
                     )}
                     {item.alerts > 0 && (
@@ -298,7 +299,7 @@ const WatchlistScreen: React.FC = () => {
 
         {filteredWatchlist.length === 0 && (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyEmoji}>📋</Text>
+            <Ionicons name="clipboard-outline" size={48} color={colors.text.muted} style={{ marginBottom: spacing.md }} />
             <Text style={styles.emptyTitle}>
               {searchQuery ? 'No matches found' : 'Watchlist is empty'}
             </Text>
@@ -310,7 +311,7 @@ const WatchlistScreen: React.FC = () => {
 
         {/* Tip */}
         <View style={styles.tipContainer}>
-          <Text style={styles.tipIcon}>💡</Text>
+          <Ionicons name="bulb-outline" size={16} color={colors.neon.cyan} style={{ marginRight: spacing.sm }} />
           <Text style={styles.tipText}>Long-press any symbol to remove it from your watchlist.</Text>
         </View>
       </ScrollView>
@@ -373,10 +374,6 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 24,
-    color: colors.text.primary,
   },
   headerTitle: {
     ...typography.styles.h4,
@@ -563,9 +560,6 @@ const styles = StyleSheet.create({
     top: spacing.xs,
     left: spacing.xs,
   },
-  earningsIcon: {
-    fontSize: 12,
-  },
   alertBadge: {
     position: 'absolute',
     top: spacing.xs,
@@ -628,10 +622,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: spacing['2xl'],
   },
-  emptyEmoji: {
-    fontSize: 48,
-    marginBottom: spacing.md,
-  },
   emptyTitle: {
     ...typography.styles.h5,
     color: colors.text.secondary,
@@ -648,10 +638,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.overlay.neonCyan,
     borderRadius: borderRadius.md,
     marginTop: spacing.lg,
-  },
-  tipIcon: {
-    fontSize: 16,
-    marginRight: spacing.sm,
   },
   tipText: {
     ...typography.styles.caption,

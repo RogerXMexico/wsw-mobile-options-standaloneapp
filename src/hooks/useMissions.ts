@@ -78,7 +78,7 @@ export const DAILY_MISSIONS: Mission[] = [
     period: 'daily',
     difficulty: 'easy',
     requirement: { type: 'any' },
-    icon: '🌅',
+    icon: 'sunny-outline',
   },
   {
     id: 'daily-quiz',
@@ -89,7 +89,7 @@ export const DAILY_MISSIONS: Mission[] = [
     period: 'daily',
     difficulty: 'medium',
     requirement: { type: 'count', target: 1 },
-    icon: '📝',
+    icon: 'create-outline',
   },
   {
     id: 'daily-study',
@@ -100,7 +100,7 @@ export const DAILY_MISSIONS: Mission[] = [
     period: 'daily',
     difficulty: 'easy',
     requirement: { type: 'count', target: 1 },
-    icon: '📚',
+    icon: 'book-outline',
   },
   {
     id: 'daily-trade',
@@ -111,7 +111,7 @@ export const DAILY_MISSIONS: Mission[] = [
     period: 'daily',
     difficulty: 'medium',
     requirement: { type: 'count', target: 1 },
-    icon: '📊',
+    icon: 'bar-chart-outline',
   },
   {
     id: 'daily-xp',
@@ -122,7 +122,7 @@ export const DAILY_MISSIONS: Mission[] = [
     period: 'daily',
     difficulty: 'medium',
     requirement: { type: 'count', target: 100 },
-    icon: '⚡',
+    icon: 'flash-outline',
   },
   {
     id: 'daily-like',
@@ -133,7 +133,7 @@ export const DAILY_MISSIONS: Mission[] = [
     period: 'daily',
     difficulty: 'easy',
     requirement: { type: 'count', target: 1 },
-    icon: '❤️',
+    icon: 'heart-outline',
   },
   {
     id: 'daily-comment',
@@ -144,7 +144,7 @@ export const DAILY_MISSIONS: Mission[] = [
     period: 'daily',
     difficulty: 'medium',
     requirement: { type: 'count', target: 1 },
-    icon: '💬',
+    icon: 'chatbubble-outline',
   },
   {
     id: 'daily-follow',
@@ -155,7 +155,7 @@ export const DAILY_MISSIONS: Mission[] = [
     period: 'daily',
     difficulty: 'easy',
     requirement: { type: 'count', target: 1 },
-    icon: '🤝',
+    icon: 'people-outline',
   },
 ];
 
@@ -169,7 +169,7 @@ export const WEEKLY_MISSIONS: Mission[] = [
     period: 'weekly',
     difficulty: 'medium',
     requirement: { type: 'count', target: 5 },
-    icon: '🎯',
+    icon: 'locate-outline',
   },
   {
     id: 'weekly-trades',
@@ -180,7 +180,7 @@ export const WEEKLY_MISSIONS: Mission[] = [
     period: 'weekly',
     difficulty: 'medium',
     requirement: { type: 'count', target: 3 },
-    icon: '💹',
+    icon: 'trending-up',
   },
   {
     id: 'weekly-strategies',
@@ -191,7 +191,7 @@ export const WEEKLY_MISSIONS: Mission[] = [
     period: 'weekly',
     difficulty: 'medium',
     requirement: { type: 'count', target: 5 },
-    icon: '🔬',
+    icon: 'flask-outline',
   },
   {
     id: 'weekly-streak',
@@ -202,7 +202,7 @@ export const WEEKLY_MISSIONS: Mission[] = [
     period: 'weekly',
     difficulty: 'hard',
     requirement: { type: 'streak', days: 5 },
-    icon: '🔥',
+    icon: 'flame-outline',
   },
   {
     id: 'weekly-share',
@@ -213,7 +213,7 @@ export const WEEKLY_MISSIONS: Mission[] = [
     period: 'weekly',
     difficulty: 'easy',
     requirement: { type: 'count', target: 1 },
-    icon: '📢',
+    icon: 'megaphone-outline',
   },
   {
     id: 'weekly-xp',
@@ -224,7 +224,7 @@ export const WEEKLY_MISSIONS: Mission[] = [
     period: 'weekly',
     difficulty: 'hard',
     requirement: { type: 'count', target: 500 },
-    icon: '🏆',
+    icon: 'trophy-outline',
   },
 ];
 

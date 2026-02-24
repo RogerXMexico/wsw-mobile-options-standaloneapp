@@ -107,7 +107,7 @@ const OptionsScreenerScreen: React.FC = () => {
       <SafeAreaView style={styles.container} edges={['top']}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Text style={styles.backIcon}>←</Text>
+            <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
           </TouchableOpacity>
           <GradientText style={styles.headerTitle}>Options Screener</GradientText>
           <View style={{ width: 40 }} />
@@ -130,11 +130,11 @@ const OptionsScreenerScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <GradientText style={styles.headerTitle}>Options Screener</GradientText>
         <TouchableOpacity onPress={() => setShowFilters(!showFilters)} style={styles.filterButton}>
-          <Text style={styles.filterIcon}>⚙</Text>
+          <Ionicons name="settings-outline" size={24} color={colors.text.secondary} />
         </TouchableOpacity>
       </View>
 
@@ -351,7 +351,7 @@ const OptionsScreenerScreen: React.FC = () => {
 
         {filteredResults.length === 0 && (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyEmoji}>🔍</Text>
+            <Ionicons name="search-outline" size={48} color={colors.text.muted} style={{ marginBottom: spacing.md }} />
             <Text style={styles.emptyTitle}>No Results</Text>
             <Text style={styles.emptySubtitle}>Try adjusting your filters</Text>
           </View>
@@ -379,10 +379,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backIcon: {
-    fontSize: 24,
-    color: colors.text.primary,
-  },
   headerTitle: {
     ...typography.styles.h4,
   },
@@ -391,10 +387,6 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  filterIcon: {
-    fontSize: 24,
-    color: colors.text.secondary,
   },
   scrollView: {
     flex: 1,
@@ -640,10 +632,6 @@ const styles = StyleSheet.create({
   emptyState: {
     alignItems: 'center',
     paddingVertical: spacing['2xl'],
-  },
-  emptyEmoji: {
-    fontSize: 48,
-    marginBottom: spacing.md,
   },
   emptyTitle: {
     ...typography.styles.h5,

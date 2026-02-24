@@ -26,6 +26,7 @@ import { getQuotesForStrategy, getRandomQuote, getCourseQuotes } from '../../dat
 import { useSubscription } from '../../hooks';
 import { useTradierOptionsData } from '../../hooks/useTradierOptionsData';
 import { PremiumModal } from '../../components/ui';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 import { getStrategyContent } from '../../data/strategyContentMobile';
 import { getJungleStrategiesForCoreStrategy } from '../../data/jungleStrategies';
 
@@ -185,7 +186,7 @@ const StrategyDetailScreen: React.FC = () => {
           <Text style={styles.backButtonText}> Back</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.bookmarkButton}>
-          <Text style={styles.bookmarkIcon}></Text>
+          <Ionicons name="bookmark-outline" size={20} color={colors.text.secondary} />
         </TouchableOpacity>
       </View>
 
@@ -256,7 +257,7 @@ const StrategyDetailScreen: React.FC = () => {
           />
           <View style={styles.mentorContent}>
             <View style={styles.mentorHeader}>
-              <Text style={styles.mentorEmoji}>{mentor.emoji}</Text>
+              <InlineIcon emoji={mentor.emoji} size={20} color={mentor.colors.primary} />
               <Text style={[styles.mentorName, { color: mentor.colors.primary }]}>
                 {mentor.characterName}
               </Text>
@@ -347,7 +348,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.education?.whatItDoes ? (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>📖</Text>
+                  <Ionicons name="book-outline" size={20} color={colors.neon.cyan} />
                   <Text style={styles.cardTitle}>What It Does</Text>
                 </View>
                 <Text style={styles.cardText}>{strategy.education.whatItDoes}</Text>
@@ -355,7 +356,7 @@ const StrategyDetailScreen: React.FC = () => {
             ) : (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>📖</Text>
+                  <Ionicons name="book-outline" size={20} color={colors.neon.cyan} />
                   <Text style={styles.cardTitle}>Overview</Text>
                 </View>
                 <Text style={styles.cardText}>{strategy.description}</Text>
@@ -366,7 +367,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.education?.realWorldExample && (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>💹</Text>
+                  <Ionicons name="trending-up" size={20} color={colors.bullish} />
                   <Text style={styles.cardTitle}>Real Example</Text>
                 </View>
                 <View style={styles.exampleGrid}>
@@ -394,7 +395,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.whenToUse && (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>🎯</Text>
+                  <Ionicons name="disc-outline" size={20} color={colors.neon.green} />
                   <Text style={styles.cardTitle}>When to Use</Text>
                 </View>
                 <Text style={styles.cardText}>{strategy.whenToUse}</Text>
@@ -553,7 +554,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.education?.keyLessons && strategy.education.keyLessons.length > 0 && (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>💡</Text>
+                  <Ionicons name="bulb-outline" size={20} color={colors.neon.yellow} />
                   <Text style={styles.cardTitle}>Key Lessons</Text>
                 </View>
                 <View style={styles.lessonsList}>
@@ -571,7 +572,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.analogy && (
               <View style={[styles.card, styles.analogyCard]}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>🎭</Text>
+                  <Ionicons name="color-palette-outline" size={20} color={colors.neon.purple} />
                   <Text style={styles.cardTitle}>Think of it like...</Text>
                 </View>
                 <Text style={styles.analogyText}>{strategy.analogy}</Text>
@@ -582,7 +583,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.nuance && (
               <View style={[styles.card, styles.nuanceCard]}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>⚡</Text>
+                  <Ionicons name="flash-outline" size={20} color={colors.neon.cyan} />
                   <Text style={styles.cardTitle}>The Nuance</Text>
                 </View>
                 <Text style={styles.nuanceText}>{strategy.nuance}</Text>
@@ -622,7 +623,7 @@ const StrategyDetailScreen: React.FC = () => {
                 {jungleStrategy.tips.length > 0 && (
                   <View style={styles.card}>
                     <View style={styles.cardHeader}>
-                      <Text style={styles.cardEmoji}>{mentor.emoji}</Text>
+                      <InlineIcon emoji={mentor.emoji} size={20} color={mentor.colors.primary} />
                       <Text style={styles.cardTitle}>Pro Tips</Text>
                     </View>
                     <View style={styles.lessonsList}>
@@ -639,13 +640,13 @@ const StrategyDetailScreen: React.FC = () => {
                 {jungleStrategy.commonMistakes.length > 0 && (
                   <View style={[styles.card, { borderColor: 'rgba(239, 68, 68, 0.2)' }]}>
                     <View style={styles.cardHeader}>
-                      <Text style={styles.cardEmoji}>{'⚠️'}</Text>
+                      <Ionicons name="warning-outline" size={20} color={colors.bearish} />
                       <Text style={styles.cardTitle}>Common Mistakes</Text>
                     </View>
                     <View style={styles.lessonsList}>
                       {jungleStrategy.commonMistakes.map((mistake, i) => (
                         <View key={i} style={styles.lessonItem}>
-                          <Text style={[styles.lessonBullet, { color: colors.bearish }]}>✗</Text>
+                          <Ionicons name="close" size={16} color={colors.bearish} />
                           <Text style={styles.lessonText}>{mistake}</Text>
                         </View>
                       ))}
@@ -663,7 +664,7 @@ const StrategyDetailScreen: React.FC = () => {
             {/* Full Analysis */}
             <View style={styles.card}>
               <View style={styles.cardHeader}>
-                <Text style={styles.cardEmoji}>📚</Text>
+                <Ionicons name="library-outline" size={20} color={colors.neon.cyan} />
                 <Text style={styles.cardTitle}>Full Lesson</Text>
               </View>
               <Text style={styles.cardText}>
@@ -692,7 +693,7 @@ const StrategyDetailScreen: React.FC = () => {
             {richContent.analogy ? (
               <View style={[styles.card, styles.analogyCard]}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>🎭</Text>
+                  <Ionicons name="color-palette-outline" size={20} color={colors.neon.purple} />
                   <Text style={styles.cardTitle}>Think of it like...</Text>
                 </View>
                 <Text style={styles.analogyText}>{richContent.analogy}</Text>
@@ -703,7 +704,7 @@ const StrategyDetailScreen: React.FC = () => {
             {richContent.nuance ? (
               <View style={[styles.card, styles.nuanceCard]}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>⚡</Text>
+                  <Ionicons name="flash-outline" size={20} color={colors.neon.cyan} />
                   <Text style={styles.cardTitle}>The Nuance</Text>
                 </View>
                 <Text style={styles.nuanceText}>{richContent.nuance}</Text>
@@ -714,7 +715,7 @@ const StrategyDetailScreen: React.FC = () => {
             {richContent.example ? (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>🧮</Text>
+                  <Ionicons name="calculator-outline" size={20} color={colors.neon.green} />
                   <Text style={styles.cardTitle}>Worked Example</Text>
                 </View>
                 <Text style={styles.cardText}>{richContent.example}</Text>
@@ -725,7 +726,7 @@ const StrategyDetailScreen: React.FC = () => {
             {richContent.animalMetaphor ? (
               <View style={[styles.card, { borderColor: `${colors.neon.purple}40` }]}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>🦁</Text>
+                  <InlineIcon name="lion" size={20} />
                   <Text style={styles.cardTitle}>Animal Metaphor</Text>
                 </View>
                 <Text style={styles.cardText}>{richContent.animalMetaphor}</Text>
@@ -840,7 +841,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.nuance && (
               <View style={[styles.card, styles.nuanceCard]}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>⚡</Text>
+                  <Ionicons name="flash-outline" size={20} color={colors.neon.cyan} />
                   <Text style={styles.cardTitle}>Key Insight</Text>
                 </View>
                 <Text style={styles.nuanceText}>{strategy.nuance}</Text>
@@ -862,7 +863,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.greeks && (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>Δ</Text>
+                  <Ionicons name="analytics-outline" size={20} color={colors.neon.cyan} />
                   <Text style={styles.cardTitle}>The Greeks</Text>
                 </View>
                 <View style={styles.greeksGrid}>
@@ -890,7 +891,7 @@ const StrategyDetailScreen: React.FC = () => {
             {strategy.education?.greekInsights && (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>🧠</Text>
+                  <Ionicons name="bulb-outline" size={20} color={colors.neon.purple} />
                   <Text style={styles.cardTitle}>Greek Insights</Text>
                 </View>
                 <View style={styles.insightsContainer}>
@@ -941,7 +942,7 @@ const StrategyDetailScreen: React.FC = () => {
             {!strategy.greeks && !strategy.education?.greekInsights && (
               <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardEmoji}>📚</Text>
+                  <Ionicons name="library-outline" size={20} color={colors.text.secondary} />
                   <Text style={styles.cardTitle}>Greeks</Text>
                 </View>
                 <Text style={styles.cardText}>
@@ -955,7 +956,7 @@ const StrategyDetailScreen: React.FC = () => {
         {/* Quiz CTA */}
         {!isLocked && <View style={styles.quizCta}>
           <View style={styles.quizCtaContent}>
-            <Text style={styles.quizCtaEmoji}></Text>
+            <Ionicons name="help-circle-outline" size={32} color={colors.neon.purple} />
             <View>
               <Text style={styles.quizCtaTitle}>Test Your Knowledge</Text>
               <Text style={styles.quizCtaText}>Take the quiz to earn XP</Text>

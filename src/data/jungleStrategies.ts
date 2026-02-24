@@ -1468,9 +1468,9 @@ export const JUNGLE_STRATEGIES: JungleStrategy[] = [
     "animalId": "octopus",
     "difficulty": 5,
     "description": "The most dangerous options strategy - selling calls without owning stock.",
-    "overview": "⚠️ EXTREME DANGER: This strategy is presented for EDUCATIONAL PURPOSES ONLY.\n\nThe Naked Call is selling a call option without owning the underlying stock. If the stock rockets up, your losses are theoretically UNLIMITED. This has blown up entire accounts and even firms.\n\nOscar includes this so you understand it, not so you use it. Even with eight arms, he rarely touches this one.",
+    "overview": "WARNING — EXTREME DANGER: This strategy is presented for EDUCATIONAL PURPOSES ONLY.\n\nThe Naked Call is selling a call option without owning the underlying stock. If the stock rockets up, your losses are theoretically UNLIMITED. This has blown up entire accounts and even firms.\n\nOscar includes this so you understand it, not so you use it. Even with eight arms, he rarely touches this one.",
     "keyPoints": [
-      "⚠️ UNLIMITED LOSS POTENTIAL",
+      "WARNING: UNLIMITED LOSS POTENTIAL",
       "Sell a call without owning the underlying shares",
       "If assigned, you must buy shares at market price and sell at strike",
       "A stock squeeze or gap up can be catastrophic",
@@ -1495,7 +1495,7 @@ export const JUNGLE_STRATEGIES: JungleStrategy[] = [
       }
     },
     "tips": [
-      "⚠️ DO NOT USE THIS STRATEGY",
+      "WARNING: DO NOT USE THIS STRATEGY",
       "If you must understand it, know that professionals use strict risk limits",
       "Always have a stop-loss in place",
       "Consider defined-risk alternatives like bear call spreads"

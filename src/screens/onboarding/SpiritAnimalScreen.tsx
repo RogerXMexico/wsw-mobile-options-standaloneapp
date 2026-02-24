@@ -14,7 +14,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 
 const { width, height } = Dimensions.get('window');
 
@@ -26,7 +28,6 @@ const EXPERIENCE_LEVELS = [
     description: 'New to options, learning the basics',
     animal: 'turtle',
     animalName: 'The Turtle',
-    emoji: '🐢',
     color: '#10B981', // Emerald
     philosophy: 'Slow and steady wins the race. Protection first.',
     startTier: 0,
@@ -37,7 +38,6 @@ const EXPERIENCE_LEVELS = [
     description: 'Understand calls & puts, some experience',
     animal: 'sloth',
     animalName: 'The Sloth',
-    emoji: '🦥',
     color: '#8B5CF6', // Purple
     philosophy: 'Patience is profitable. Let time work for you.',
     startTier: 1,
@@ -48,7 +48,6 @@ const EXPERIENCE_LEVELS = [
     description: 'Trade spreads, understand Greeks',
     animal: 'owl',
     animalName: 'The Owl',
-    emoji: '🦉',
     color: '#6366F1', // Indigo
     philosophy: 'Wisdom comes from watching. Knowledge is edge.',
     startTier: 3,
@@ -59,7 +58,6 @@ const EXPERIENCE_LEVELS = [
     description: 'Multi-leg strategies, volatility plays',
     animal: 'fox',
     animalName: 'The Fox',
-    emoji: '🦊',
     color: '#F59E0B', // Amber
     philosophy: 'Adapt and thrive. Every situation has opportunity.',
     startTier: 5,
@@ -70,7 +68,6 @@ const EXPERIENCE_LEVELS = [
     description: 'Master of complex strategies & risk',
     animal: 'cheetah',
     animalName: 'The Cheetah',
-    emoji: '🐆',
     color: '#EF4444', // Red
     philosophy: 'Strike with precision. Speed meets preparation.',
     startTier: 7,
@@ -181,9 +178,12 @@ const SpiritAnimalScreen: React.FC<Props> = ({ onComplete, onBack }) => {
             />
           </View>
 
-          <Text style={[styles.resultAnimalName, { color: selectedData.color }]}>
-            {selectedData.emoji} {selectedData.animalName}
-          </Text>
+          <View style={styles.resultAnimalNameRow}>
+            <InlineIcon name={selectedData.animal} size={28} />
+            <Text style={[styles.resultAnimalName, { color: selectedData.color }]}>
+              {selectedData.animalName}
+            </Text>
+          </View>
 
           <Text style={styles.resultPhilosophy}>
             "{selectedData.philosophy}"
@@ -267,10 +267,10 @@ const SpiritAnimalScreen: React.FC<Props> = ({ onComplete, onBack }) => {
                 <Text style={styles.optionDescription}>{level.description}</Text>
               </View>
               <View style={styles.optionRight}>
-                <Text style={styles.optionEmoji}>{level.emoji}</Text>
+                <InlineIcon name={level.animal} size={24} />
                 {selectedLevel === level.id && (
                   <View style={[styles.checkmark, { backgroundColor: level.color }]}>
-                    <Text style={styles.checkmarkText}>✓</Text>
+                    <Ionicons name="checkmark" size={12} color="#fff" />
                   </View>
                 )}
               </View>
@@ -463,9 +463,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  resultAnimalNameRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginTop: spacing.lg,
+  },
   resultAnimalName: {
     ...typography.styles.h2,
-    marginTop: spacing.lg,
   },
   resultPhilosophy: {
     ...typography.styles.body,

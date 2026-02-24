@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 
 const PositionSizingScreen: React.FC = () => {
@@ -69,7 +70,7 @@ const PositionSizingScreen: React.FC = () => {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backButtonText}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <View>
           <Text style={styles.headerTitle}>Position Sizing</Text>
@@ -211,7 +212,7 @@ const PositionSizingScreen: React.FC = () => {
 
         {/* Risk Warning */}
         <View style={styles.warningCard}>
-          <Text style={styles.warningEmoji}>⚠️</Text>
+          <Ionicons name="warning-outline" size={24} color={colors.warning} style={{ marginRight: spacing.md }} />
           <View style={styles.warningContent}>
             <Text style={styles.warningTitle}>Risk Management Tips</Text>
             <Text style={styles.warningText}>
@@ -292,10 +293,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background.secondary,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 24,
-    color: colors.text.primary,
   },
   headerTitle: {
     ...typography.styles.h3,
@@ -442,9 +439,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.neon.yellow + '30',
     gap: spacing.md,
-  },
-  warningEmoji: {
-    fontSize: 24,
   },
   warningContent: {
     flex: 1,

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 
 interface Position {
@@ -174,7 +175,7 @@ const PaperTradingScreen: React.FC = () => {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backButtonText}>←</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <View>
           <Text style={styles.headerTitle}>Paper Trading</Text>
@@ -222,7 +223,7 @@ const PaperTradingScreen: React.FC = () => {
 
           {positions.length === 0 ? (
             <View style={styles.emptyState}>
-              <Text style={styles.emptyEmoji}>📊</Text>
+              <Ionicons name="bar-chart-outline" size={32} color={colors.text.muted} style={{ marginBottom: spacing.sm }} />
               <Text style={styles.emptyText}>No open positions</Text>
             </View>
           ) : (
@@ -290,7 +291,7 @@ const PaperTradingScreen: React.FC = () => {
 
           {trades.length === 0 ? (
             <View style={styles.emptyState}>
-              <Text style={styles.emptyEmoji}>📜</Text>
+              <Ionicons name="document-text-outline" size={32} color={colors.text.muted} style={{ marginBottom: spacing.sm }} />
               <Text style={styles.emptyText}>No trade history</Text>
             </View>
           ) : (
@@ -365,7 +366,7 @@ const PaperTradingScreen: React.FC = () => {
                     styles.toggleButtonText,
                     newTrade.type === 'call' && styles.toggleButtonTextActive,
                   ]}>
-                    📈 CALL
+                    CALL
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -379,7 +380,7 @@ const PaperTradingScreen: React.FC = () => {
                     styles.toggleButtonText,
                     newTrade.type === 'put' && styles.toggleButtonTextActive,
                   ]}>
-                    📉 PUT
+                    PUT
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -498,10 +499,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backButtonText: {
-    fontSize: 24,
-    color: colors.text.primary,
-  },
   headerTitle: {
     ...typography.styles.h3,
     color: colors.text.primary,
@@ -567,10 +564,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.border.default,
-  },
-  emptyEmoji: {
-    fontSize: 32,
-    marginBottom: spacing.sm,
   },
   emptyText: {
     ...typography.styles.body,

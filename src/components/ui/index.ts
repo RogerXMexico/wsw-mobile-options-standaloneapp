@@ -11,3 +11,5 @@ export { RankChangeToast } from './RankChangeToast';
 export type { RankChangeToastProps } from './RankChangeToast';
 export { ShareTradeModal } from './ShareTradeModal';
 export type { ShareTradeModalProps, TradeData } from './ShareTradeModal';
+export { InlineIcon } from './InlineIcon';
+export type { InlineIconProps } from './InlineIcon';

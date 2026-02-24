@@ -11,6 +11,7 @@ import {
   Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 
 interface Props {
@@ -59,15 +60,15 @@ const WelcomeScreen: React.FC<Props> = ({ onNext }) => {
         {/* Features preview */}
         <View style={styles.featuresRow}>
           <View style={styles.featureChip}>
-            <Text style={styles.featureEmoji}>📚</Text>
+            <Ionicons name="book-outline" size={16} color={colors.neon.green} style={{ marginRight: spacing.xs }} />
             <Text style={styles.featureText}>11 Tiers</Text>
           </View>
           <View style={styles.featureChip}>
-            <Text style={styles.featureEmoji}>🛠️</Text>
+            <Ionicons name="build-outline" size={16} color={colors.neon.cyan} style={{ marginRight: spacing.xs }} />
             <Text style={styles.featureText}>Pro Tools</Text>
           </View>
           <View style={styles.featureChip}>
-            <Text style={styles.featureEmoji}>📝</Text>
+            <Ionicons name="create-outline" size={16} color={colors.neon.purple} style={{ marginRight: spacing.xs }} />
             <Text style={styles.featureText}>Practice</Text>
           </View>
         </View>
@@ -81,7 +82,7 @@ const WelcomeScreen: React.FC<Props> = ({ onNext }) => {
           activeOpacity={0.8}
         >
           <Text style={styles.startButtonText}>Begin Your Journey</Text>
-          <Text style={styles.startButtonArrow}>→</Text>
+          <Ionicons name="arrow-forward" size={20} color={colors.background.primary} />
         </TouchableOpacity>
 
         <Text style={styles.footerText}>
@@ -166,10 +167,6 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.full,
     marginHorizontal: spacing.xs,
   },
-  featureEmoji: {
-    fontSize: 16,
-    marginRight: spacing.xs,
-  },
   featureText: {
     ...typography.styles.caption,
     color: colors.text.secondary,
@@ -191,11 +188,6 @@ const styles = StyleSheet.create({
   startButtonText: {
     ...typography.styles.button,
     color: colors.background.primary,
-  },
-  startButtonArrow: {
-    fontSize: 20,
-    color: colors.background.primary,
-    fontWeight: '600',
   },
   footerText: {
     ...typography.styles.caption,

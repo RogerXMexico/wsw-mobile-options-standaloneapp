@@ -14,7 +14,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../theme';
+import { InlineIcon } from '../../components/ui/InlineIcon';
 import { LearnStackParamList } from '../../navigation/types';
 import {
   getQuizByLessonId,
@@ -33,17 +35,17 @@ const MENTOR_STYLES = {
   chameleon: {
     gradient: ['#8b5cf6', '#14b8a6'] as [string, string],
     color: '#8b5cf6',
-    emoji: '🦎',
+    animal: 'chameleon',
   },
   cheetah: {
     gradient: ['#f59e0b', '#ef4444'] as [string, string],
     color: '#f59e0b',
-    emoji: '🐆',
+    animal: 'cheetah',
   },
   owl: {
     gradient: ['#3b82f6', '#8b5cf6'] as [string, string],
     color: '#3b82f6',
-    emoji: '🦉',
+    animal: 'owl',
   },
 };
 
@@ -66,7 +68,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.errorContainer}>
-          <Text style={styles.errorEmoji}>📚</Text>
+          <Ionicons name="book-outline" size={64} color={colors.text.muted} />
           <Text style={styles.errorText}>No quiz available for this lesson</Text>
           <TouchableOpacity
             style={styles.backButtonLarge}
@@ -165,7 +167,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
             colors={passed ? ['rgba(16, 185, 129, 0.3)', 'transparent'] : ['rgba(239, 68, 68, 0.3)', 'transparent']}
             style={styles.resultsHeader}
           >
-            <Text style={styles.resultsEmoji}>{passed ? '🎉' : '📚'}</Text>
+            <Ionicons name={passed ? 'trophy' : 'book-outline'} size={64} color={passed ? '#f59e0b' : colors.text.muted} />
             <Text style={styles.resultsTitle}>
               {passed ? 'Quiz Passed!' : 'Keep Learning'}
             </Text>
@@ -197,7 +199,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
               <View style={styles.scoreRow}>
                 <Text style={styles.scoreDetailLabel}>Status:</Text>
                 <Text style={[styles.scoreDetailValue, { color: passed ? '#10b981' : '#ef4444' }]}>
-                  {passed ? '✓ Passed' : '✗ Not Passed'}
+                  {passed ? 'Passed' : 'Not Passed'}
                 </Text>
               </View>
             </View>
@@ -206,7 +208,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
           {/* XP Earned */}
           {passed && (
             <View style={styles.xpCard}>
-              <Text style={styles.xpEmoji}>⚡</Text>
+              <Ionicons name="flash" size={32} color="#39ff14" />
               <View>
                 <Text style={styles.xpTitle}>+150 XP Earned!</Text>
                 <Text style={styles.xpSubtitle}>Quiz completion bonus</Text>
@@ -226,7 +228,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
                   setQuizComplete(false);
                 }}
               >
-                <Text style={styles.retryButtonText}>🔄 Try Again</Text>
+                <Text style={styles.retryButtonText}><Ionicons name="refresh" size={16} color={colors.text.secondary} /> Try Again</Text>
               </TouchableOpacity>
             )}
             <TouchableOpacity
@@ -254,9 +256,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
               return (
                 <View key={q.id} style={styles.reviewItem}>
                   <View style={styles.reviewHeader}>
-                    <Text style={[styles.reviewStatus, { color: isCorrect ? '#10b981' : '#ef4444' }]}>
-                      {isCorrect ? '✓' : '✗'}
-                    </Text>
+                    <Ionicons name={isCorrect ? 'checkmark' : 'close'} size={18} color={isCorrect ? '#10b981' : '#ef4444'} />
                     <Text style={styles.reviewQuestion} numberOfLines={2}>
                       Q{index + 1}: {q.question}
                     </Text>
@@ -284,7 +284,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
           style={styles.closeButton}
           onPress={() => navigation.goBack()}
         >
-          <Text style={styles.closeButtonText}>✕</Text>
+          <Ionicons name="close" size={18} color={colors.text.secondary} />
         </TouchableOpacity>
         <View style={styles.headerCenter}>
           <Text style={styles.headerTitle}>{quiz.title}</Text>
@@ -293,7 +293,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
           </Text>
         </View>
         <View style={[styles.mentorBadge, { backgroundColor: `${mentorStyle.color}30` }]}>
-          <Text style={styles.mentorEmoji}>{mentorStyle.emoji}</Text>
+          <InlineIcon name={mentorStyle.animal} size={20} />
         </View>
       </View>
 
@@ -364,10 +364,10 @@ const EventHorizonsQuizScreen: React.FC = () => {
                     {option.text}
                   </Text>
                   {showResult && option.isCorrect && (
-                    <Text style={styles.checkmark}>✓</Text>
+                    <Ionicons name="checkmark" size={20} color="#10b981" style={{ marginLeft: spacing.sm }} />
                   )}
                   {isSelected && !option.isCorrect && (
-                    <Text style={styles.crossmark}>✗</Text>
+                    <Ionicons name="close" size={20} color="#ef4444" style={{ marginLeft: spacing.sm }} />
                   )}
                 </TouchableOpacity>
               );
@@ -382,7 +382,7 @@ const EventHorizonsQuizScreen: React.FC = () => {
                 style={styles.explanationGradient}
               >
                 <View style={styles.explanationHeader}>
-                  <Text style={styles.explanationEmoji}>{mentorStyle.emoji}</Text>
+                  <InlineIcon name={mentorStyle.animal} size={24} />
                   <Text style={[styles.explanationTitle, { color: mentorStyle.color }]}>
                     {selectedAnswers[currentQuestion.id] ===
                     currentQuestion.options.find((o) => o.isCorrect)?.id
