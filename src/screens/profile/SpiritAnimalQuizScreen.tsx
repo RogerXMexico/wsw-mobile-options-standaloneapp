@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
+import { Ionicons } from '@expo/vector-icons';
 import { GlassCard, GlowButton } from '../../components/ui';
 import { ProfileStackParamList } from '../../navigation/types';
 import {
@@ -148,7 +149,7 @@ const SpiritAnimalQuizScreen: React.FC = () => {
         style={styles.introGradient}
       >
         <View style={styles.introContent}>
-          <Text style={styles.introEmoji}></Text>
+          <Ionicons name="paw-outline" size={48} color={colors.neon.green} />
           <Text style={styles.introTitle}>Discover Your{'\n'}Spirit Animal</Text>
           <Text style={styles.introSubtitle}>
             Answer 15 questions about your trading style to find your perfect animal mentor
@@ -160,19 +161,19 @@ const SpiritAnimalQuizScreen: React.FC = () => {
         <Text style={styles.introCardTitle}>What You'll Learn</Text>
         <View style={styles.introList}>
           <View style={styles.introListItem}>
-            <Text style={styles.introListEmoji}></Text>
+            <Ionicons name="shield-outline" size={20} color={colors.neon.green} />
             <Text style={styles.introListText}>Your natural risk tolerance</Text>
           </View>
           <View style={styles.introListItem}>
-            <Text style={styles.introListEmoji}></Text>
+            <Ionicons name="analytics-outline" size={20} color={colors.neon.green} />
             <Text style={styles.introListText}>Ideal trading strategies for you</Text>
           </View>
           <View style={styles.introListItem}>
-            <Text style={styles.introListEmoji}></Text>
+            <Ionicons name="flash-outline" size={20} color={colors.neon.green} />
             <Text style={styles.introListText}>Your trading strengths</Text>
           </View>
           <View style={styles.introListItem}>
-            <Text style={styles.introListEmoji}></Text>
+            <Ionicons name="map-outline" size={20} color={colors.neon.green} />
             <Text style={styles.introListText}>Personalized learning path</Text>
           </View>
         </View>
@@ -487,10 +488,6 @@ const styles = StyleSheet.create({
   introContent: {
     alignItems: 'center',
   },
-  introEmoji: {
-    fontSize: 64,
-    marginBottom: spacing.md,
-  },
   introTitle: {
     fontFamily: typography.fonts.bold,
     fontSize: typography.sizes['3xl'],
@@ -523,10 +520,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-  },
-  introListEmoji: {
-    fontSize: 20,
-    width: 28,
   },
   introListText: {
     fontFamily: typography.fonts.regular,

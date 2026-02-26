@@ -12,6 +12,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlassCard } from '../../components/ui';
 
@@ -159,7 +160,7 @@ const RollingAdjustingScreen: React.FC = () => {
       >
         {/* Hero */}
         <View style={styles.hero}>
-          <Text style={styles.heroEmoji}></Text>
+          <Ionicons name="refresh-outline" size={48} color={colors.neon.green} style={{ marginBottom: spacing.sm }} />
           <Text style={styles.heroTitle}>Manage Your Trades</Text>
           <Text style={styles.heroSubtitle}>
             Learn to adjust positions instead of taking losses
@@ -173,7 +174,7 @@ const RollingAdjustingScreen: React.FC = () => {
             Rolling is closing your current option position and simultaneously opening a new one with different terms (strike, expiration, or both). It's a way to manage trades that haven't gone as planned.
           </Text>
           <View style={styles.keyPoint}>
-            <Text style={styles.keyPointEmoji}></Text>
+            <Ionicons name="key-outline" size={24} color="#f59e0b" style={{ marginRight: spacing.sm }} />
             <Text style={styles.keyPointText}>
               Rolling is NOT a magic fix - it's a tool for managing risk and giving trades more time to work.
             </Text>
@@ -272,7 +273,7 @@ const RollingAdjustingScreen: React.FC = () => {
 
         {/* Bottom Warning */}
         <View style={styles.warningBox}>
-          <Text style={styles.warningEmoji}></Text>
+          <Ionicons name="warning-outline" size={24} color="#f59e0b" style={{ marginBottom: spacing.sm }} />
           <Text style={styles.warningTitle}>Don't Roll Forever</Text>
           <Text style={styles.warningText}>
             Rolling a losing trade indefinitely is a common trap. Set a maximum number of rolls and a point where you accept the loss. Sometimes the best adjustment is to close the position.
@@ -323,10 +324,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: spacing.lg,
   },
-  heroEmoji: {
-    fontSize: 48,
-    marginBottom: spacing.sm,
-  },
   heroTitle: {
     fontFamily: typography.fonts.bold,
     fontSize: typography.sizes['2xl'],
@@ -360,10 +357,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(251, 191, 36, 0.1)',
     borderRadius: borderRadius.md,
     padding: spacing.md,
-  },
-  keyPointEmoji: {
-    fontSize: 16,
-    marginRight: spacing.sm,
   },
   keyPointText: {
     flex: 1,
@@ -570,10 +563,6 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     alignItems: 'center',
     marginBottom: spacing.lg,
-  },
-  warningEmoji: {
-    fontSize: 32,
-    marginBottom: spacing.sm,
   },
   warningTitle: {
     fontFamily: typography.fonts.bold,

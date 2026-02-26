@@ -108,7 +108,7 @@ const BadgesScreen: React.FC = () => {
         <GlassCard style={styles.summaryCard}>
           <View style={styles.summaryContent}>
             <View style={styles.summaryLeft}>
-              <Text style={styles.summaryEmoji}></Text>
+              <Ionicons name="trophy-outline" size={28} color={colors.neon.green} />
               <View>
                 <Text style={styles.summaryTitle}>Badge Collection</Text>
                 <Text style={styles.summarySubtitle}>
@@ -351,9 +351,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-  },
-  summaryEmoji: {
-    fontSize: 36,
   },
   summaryTitle: {
     fontFamily: typography.fonts.bold,

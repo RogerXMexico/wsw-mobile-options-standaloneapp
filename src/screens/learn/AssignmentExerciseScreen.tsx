@@ -12,6 +12,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlassCard } from '../../components/ui';
 
@@ -178,7 +179,7 @@ const AssignmentExerciseScreen: React.FC = () => {
             </View>
 
             <View style={styles.tipBox}>
-              <Text style={styles.tipEmoji}></Text>
+              <Ionicons name="bulb-outline" size={24} color="#f59e0b" style={{ marginRight: spacing.sm }} />
               <Text style={styles.tipText}>{scenario.tip}</Text>
             </View>
           </View>
@@ -200,7 +201,7 @@ const AssignmentExerciseScreen: React.FC = () => {
 
       {/* Hero */}
       <View style={styles.hero}>
-        <Text style={styles.heroEmoji}></Text>
+        <Ionicons name="clipboard-outline" size={48} color={colors.neon.green} style={{ marginBottom: spacing.sm }} />
         <Text style={styles.heroTitle}>Know Your Obligations</Text>
         <Text style={styles.heroSubtitle}>
           What happens when options are exercised or assigned
@@ -244,13 +245,13 @@ const AssignmentExerciseScreen: React.FC = () => {
         <GlassCard style={styles.conceptsCard}>
           <View style={styles.conceptRow}>
             <View style={styles.concept}>
-              <Text style={styles.conceptEmoji}></Text>
+              <Ionicons name="swap-horizontal-outline" size={24} color={colors.text.secondary} style={{ marginBottom: spacing.xs }} />
               <Text style={styles.conceptTitle}>Exercise</Text>
               <Text style={styles.conceptDesc}>Buyer uses their right</Text>
             </View>
             <View style={styles.conceptDivider} />
             <View style={styles.concept}>
-              <Text style={styles.conceptEmoji}></Text>
+              <Ionicons name="document-text-outline" size={24} color={colors.text.secondary} style={{ marginBottom: spacing.xs }} />
               <Text style={styles.conceptTitle}>Assignment</Text>
               <Text style={styles.conceptDesc}>Seller fulfills obligation</Text>
             </View>
@@ -357,10 +358,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: spacing.lg,
   },
-  heroEmoji: {
-    fontSize: 48,
-    marginBottom: spacing.sm,
-  },
   heroTitle: {
     fontFamily: typography.fonts.bold,
     fontSize: typography.sizes['2xl'],
@@ -414,10 +411,6 @@ const styles = StyleSheet.create({
   concept: {
     flex: 1,
     alignItems: 'center',
-  },
-  conceptEmoji: {
-    fontSize: 32,
-    marginBottom: spacing.xs,
   },
   conceptTitle: {
     fontFamily: typography.fonts.bold,
@@ -517,10 +510,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(16, 185, 129, 0.1)',
     borderRadius: borderRadius.md,
     padding: spacing.md,
-  },
-  tipEmoji: {
-    fontSize: 16,
-    marginRight: spacing.sm,
   },
   tipText: {
     flex: 1,

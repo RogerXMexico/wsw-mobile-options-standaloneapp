@@ -12,6 +12,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlassCard } from '../../components/ui';
 
@@ -227,7 +228,7 @@ const BeginnerMistakesScreen: React.FC = () => {
       >
         {/* Hero */}
         <View style={styles.hero}>
-          <Text style={styles.heroEmoji}></Text>
+          <Ionicons name="alert-circle-outline" size={48} color="#ef4444" style={{ marginBottom: spacing.sm }} />
           <Text style={styles.heroTitle}>Learn From Others</Text>
           <Text style={styles.heroSubtitle}>
             {COMMON_MISTAKES.length} common mistakes that destroy trading accounts
@@ -253,7 +254,7 @@ const BeginnerMistakesScreen: React.FC = () => {
         {/* Critical Mistakes */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionEmoji}></Text>
+            <Ionicons name="warning-outline" size={24} color={colors.text.secondary} style={{ marginRight: spacing.sm }} />
             <Text style={[styles.sectionTitle, { color: colors.error }]}>Account Killers</Text>
           </View>
           <Text style={styles.sectionSubtitle}>
@@ -265,7 +266,7 @@ const BeginnerMistakesScreen: React.FC = () => {
         {/* Major Mistakes */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionEmoji}></Text>
+            <Ionicons name="close-circle-outline" size={24} color={colors.text.secondary} style={{ marginRight: spacing.sm }} />
             <Text style={[styles.sectionTitle, { color: colors.neon.orange }]}>Serious Mistakes</Text>
           </View>
           <Text style={styles.sectionSubtitle}>
@@ -277,7 +278,7 @@ const BeginnerMistakesScreen: React.FC = () => {
         {/* Moderate Mistakes */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionEmoji}></Text>
+            <Ionicons name="shield-outline" size={24} color={colors.text.secondary} style={{ marginRight: spacing.sm }} />
             <Text style={[styles.sectionTitle, { color: colors.neon.yellow }]}>Common Mistakes</Text>
           </View>
           <Text style={styles.sectionSubtitle}>
@@ -288,7 +289,7 @@ const BeginnerMistakesScreen: React.FC = () => {
 
         {/* Bottom Tip */}
         <GlassCard style={styles.tipCard} withGlow glowColor={colors.neon.green}>
-          <Text style={styles.tipEmoji}></Text>
+          <Ionicons name="bulb-outline" size={24} color="#f59e0b" style={{ marginBottom: spacing.sm }} />
           <Text style={styles.tipTitle}>Pro Tip</Text>
           <Text style={styles.tipText}>
             The best traders aren't the ones who never make mistakes - they're the ones who make small mistakes and learn quickly. Start with paper trading to make your mistakes with fake money.
@@ -339,10 +340,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: spacing.lg,
   },
-  heroEmoji: {
-    fontSize: 56,
-    marginBottom: spacing.sm,
-  },
   heroTitle: {
     fontFamily: typography.fonts.bold,
     fontSize: typography.sizes['2xl'],
@@ -385,10 +382,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: spacing.xs,
-  },
-  sectionEmoji: {
-    fontSize: 24,
-    marginRight: spacing.sm,
   },
   sectionTitle: {
     fontFamily: typography.fonts.bold,
@@ -492,10 +485,6 @@ const styles = StyleSheet.create({
   tipCard: {
     alignItems: 'center',
     marginTop: spacing.md,
-  },
-  tipEmoji: {
-    fontSize: 40,
-    marginBottom: spacing.sm,
   },
   tipTitle: {
     fontFamily: typography.fonts.bold,

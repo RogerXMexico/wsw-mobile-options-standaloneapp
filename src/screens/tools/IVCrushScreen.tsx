@@ -26,16 +26,16 @@ type PositionType = 'long-call' | 'long-put' | 'long-straddle' | 'short-straddle
 interface PositionInfo {
   id: PositionType;
   name: string;
-  emoji: string;
+  icon: keyof typeof Ionicons.glyphMap;
   vegaSign: 'positive' | 'negative';
 }
 
 const POSITIONS: PositionInfo[] = [
-  { id: 'long-call', name: 'Long Call', emoji: '', vegaSign: 'positive' },
-  { id: 'long-put', name: 'Long Put', emoji: '', vegaSign: 'positive' },
-  { id: 'long-straddle', name: 'Long Straddle', emoji: '', vegaSign: 'positive' },
-  { id: 'short-straddle', name: 'Short Straddle', emoji: '', vegaSign: 'negative' },
-  { id: 'iron-condor', name: 'Iron Condor', emoji: '', vegaSign: 'negative' },
+  { id: 'long-call', name: 'Long Call', icon: 'trending-up', vegaSign: 'positive' },
+  { id: 'long-put', name: 'Long Put', icon: 'trending-down', vegaSign: 'positive' },
+  { id: 'long-straddle', name: 'Long Straddle', icon: 'swap-vertical-outline', vegaSign: 'positive' },
+  { id: 'short-straddle', name: 'Short Straddle', icon: 'remove-outline', vegaSign: 'negative' },
+  { id: 'iron-condor', name: 'Iron Condor', icon: 'shield-outline', vegaSign: 'negative' },
 ];
 
 const IVCrushScreen: React.FC = () => {
@@ -219,7 +219,7 @@ const IVCrushScreen: React.FC = () => {
               style={[styles.positionPill, position === p.id && styles.positionPillActive]}
               onPress={() => setPosition(p.id)}
             >
-              <Text style={styles.positionEmoji}>{p.emoji}</Text>
+              <Ionicons name={p.icon} size={24} color={position === p.id ? colors.neon.green : colors.text.secondary} style={{ marginBottom: spacing.xs }} />
               <Text style={[styles.positionName, position === p.id && styles.positionNameActive]}>
                 {p.name}
               </Text>
@@ -353,9 +353,12 @@ const IVCrushScreen: React.FC = () => {
 
         {/* Position Impact */}
         <GlassCard style={styles.impactCard}>
-          <Text style={styles.impactTitle}>
-            {positionInfo.emoji} {positionInfo.name} Impact
-          </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: spacing.sm }}>
+            <Ionicons name={positionInfo.icon} size={20} color={colors.neon.green} style={{ marginRight: spacing.xs }} />
+            <Text style={[styles.impactTitle, { marginBottom: 0 }]}>
+              {positionInfo.name} Impact
+            </Text>
+          </View>
           <Text style={styles.impactText}>
             {positionInfo.vegaSign === 'positive'
               ? `As a long vega position, you LOSE money when IV drops. The ${Math.abs(calculations.ivChange)}% IV crush would cost approximately $${Math.abs(calculations.pnlDollars).toFixed(0)} per contract.`
@@ -380,7 +383,7 @@ const IVCrushScreen: React.FC = () => {
 
         {/* Info Box */}
         <GlassCard style={styles.infoBox}>
-          <Text style={styles.infoEmoji}></Text>
+          <Ionicons name="information-circle-outline" size={32} color={colors.text.secondary} style={{ marginBottom: spacing.sm }} />
           <Text style={styles.infoTitle}>What is IV Crush?</Text>
           <Text style={styles.infoText}>
             IV Crush occurs when implied volatility drops sharply after an anticipated event (like earnings). Options lose value even if the stock moves in your favor. This is why selling options before earnings can be profitable, while buying options is risky.
@@ -503,10 +506,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.overlay.neonGreen,
     borderColor: colors.neon.green,
   },
-  positionEmoji: {
-    fontSize: 24,
-    marginBottom: spacing.xs,
-  },
   positionName: {
     fontFamily: typography.fonts.medium,
     fontSize: typography.sizes.sm,
@@ -606,10 +605,6 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     alignItems: 'center',
-  },
-  infoEmoji: {
-    fontSize: 32,
-    marginBottom: spacing.sm,
   },
   infoTitle: {
     fontFamily: typography.fonts.bold,

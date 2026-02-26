@@ -136,35 +136,35 @@ const StrategiesScreen: React.FC = () => {
                 style={styles.tutorialItem}
                 onPress={() => navigation.navigate('OptionsVocabulary')}
               >
-                <Text style={styles.tutorialEmoji}></Text>
+                <Ionicons name="book-outline" size={28} color={colors.neon.green} />
                 <Text style={styles.tutorialName}>Vocabulary</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.tutorialItem}
                 onPress={() => navigation.navigate('FirstTradeTutorial')}
               >
-                <Text style={styles.tutorialEmoji}></Text>
+                <Ionicons name="trending-up" size={28} color={colors.neon.green} />
                 <Text style={styles.tutorialName}>First Trade</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.tutorialItem}
                 onPress={() => navigation.navigate('BeginnerMistakes')}
               >
-                <Text style={styles.tutorialEmoji}></Text>
+                <Ionicons name="warning-outline" size={28} color={colors.neon.green} />
                 <Text style={styles.tutorialName}>Mistakes</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.tutorialItem}
                 onPress={() => navigation.navigate('AssignmentExercise')}
               >
-                <Text style={styles.tutorialEmoji}></Text>
+                <Ionicons name="clipboard-outline" size={28} color={colors.neon.green} />
                 <Text style={styles.tutorialName}>Assignment</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.tutorialItem}
                 onPress={() => navigation.navigate('RollingAdjusting')}
               >
-                <Text style={styles.tutorialEmoji}></Text>
+                <Ionicons name="refresh-outline" size={28} color={colors.neon.green} />
                 <Text style={styles.tutorialName}>Rolling</Text>
               </TouchableOpacity>
             </ScrollView>
@@ -377,7 +377,7 @@ const StrategiesScreen: React.FC = () => {
         {/* Upgrade Banner */}
         {subscriptionTier === 'free' && (
           <GlassCard style={styles.upgradeBanner} withGlow glowColor={colors.neon.yellow}>
-            <Text style={styles.upgradeBannerEmoji}></Text>
+            <Ionicons name="rocket-outline" size={32} color="#fbbf24" />
             <Text style={styles.upgradeBannerTitle}>Unlock All Strategies</Text>
             <Text style={styles.upgradeBannerText}>
               Get access to all {strategyCounts.total}+ strategies, quizzes, and tools
@@ -474,10 +474,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     minWidth: 80,
     marginRight: spacing.sm,
-  },
-  tutorialEmoji: {
-    fontSize: 28,
-    marginBottom: spacing.xs,
   },
   tutorialName: {
     ...typography.styles.caption,
@@ -626,10 +622,6 @@ const styles = StyleSheet.create({
     padding: spacing.xl,
     alignItems: 'center',
     marginTop: spacing.lg,
-  },
-  upgradeBannerEmoji: {
-    fontSize: 40,
-    marginBottom: spacing.md,
   },
   upgradeBannerTitle: {
     ...typography.styles.h4,

@@ -26,17 +26,17 @@ type StrategyType = 'long-call' | 'long-put' | 'short-call' | 'short-put' | 'cre
 interface StrategyInfo {
   id: StrategyType;
   name: string;
-  emoji: string;
+  icon: keyof typeof Ionicons.glyphMap;
   description: string;
 }
 
 const STRATEGIES: StrategyInfo[] = [
-  { id: 'long-call', name: 'Long Call', emoji: '', description: 'Buy call option' },
-  { id: 'long-put', name: 'Long Put', emoji: '', description: 'Buy put option' },
-  { id: 'short-call', name: 'Short Call', emoji: '', description: 'Sell call option' },
-  { id: 'short-put', name: 'Short Put', emoji: '', description: 'Sell put option' },
-  { id: 'credit-spread', name: 'Credit Spread', emoji: '', description: 'Sell spread for credit' },
-  { id: 'debit-spread', name: 'Debit Spread', emoji: '', description: 'Buy spread for debit' },
+  { id: 'long-call', name: 'Long Call', icon: 'trending-up', description: 'Buy call option' },
+  { id: 'long-put', name: 'Long Put', icon: 'trending-down', description: 'Buy put option' },
+  { id: 'short-call', name: 'Short Call', icon: 'arrow-down-outline', description: 'Sell call option' },
+  { id: 'short-put', name: 'Short Put', icon: 'arrow-up-outline', description: 'Sell put option' },
+  { id: 'credit-spread', name: 'Credit Spread', icon: 'cash-outline', description: 'Sell spread for credit' },
+  { id: 'debit-spread', name: 'Debit Spread', icon: 'card-outline', description: 'Buy spread for debit' },
 ];
 
 // Simplified normal CDF approximation
@@ -243,7 +243,7 @@ const POPCalculatorScreen: React.FC = () => {
               style={[styles.strategyPill, strategy === s.id && styles.strategyPillActive]}
               onPress={() => setStrategy(s.id)}
             >
-              <Text style={styles.strategyEmoji}>{s.emoji}</Text>
+              <Ionicons name={s.icon} size={16} color={strategy === s.id ? colors.neon.green : colors.text.secondary} />
               <Text style={[styles.strategyName, strategy === s.id && styles.strategyNameActive]}>
                 {s.name}
               </Text>
@@ -373,7 +373,7 @@ const POPCalculatorScreen: React.FC = () => {
 
         {/* Info Box */}
         <GlassCard style={styles.infoBox}>
-          <Text style={styles.infoEmoji}></Text>
+          <Ionicons name="information-circle-outline" size={32} color={colors.text.secondary} style={{ marginBottom: spacing.sm }} />
           <Text style={styles.infoTitle}>What is POP?</Text>
           <Text style={styles.infoText}>
             Probability of Profit (POP) estimates the likelihood that your trade will be profitable at expiration. Higher POP trades typically have lower max profit potential, while lower POP trades offer higher potential returns but with more risk.
@@ -489,9 +489,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.overlay.neonGreen,
     borderColor: colors.neon.green,
   },
-  strategyEmoji: {
-    fontSize: 16,
-  },
   strategyName: {
     fontFamily: typography.fonts.medium,
     fontSize: typography.sizes.sm,
@@ -550,10 +547,6 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     alignItems: 'center',
-  },
-  infoEmoji: {
-    fontSize: 32,
-    marginBottom: spacing.sm,
   },
   infoTitle: {
     fontFamily: typography.fonts.bold,

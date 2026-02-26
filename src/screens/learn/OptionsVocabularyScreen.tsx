@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import {
   VOCABULARY_TERMS,
@@ -61,7 +62,7 @@ const OptionsVocabularyScreen: React.FC = () => {
 
       {/* Hero */}
       <View style={styles.hero}>
-        <Text style={styles.heroEmoji}></Text>
+        <Ionicons name="book-outline" size={48} color={colors.neon.green} style={{ marginBottom: spacing.sm }} />
         <Text style={styles.heroTitle}>Master the Language</Text>
         <Text style={styles.heroSubtitle}>
           {VOCABULARY_COUNT} essential options terms
@@ -180,7 +181,7 @@ const OptionsVocabularyScreen: React.FC = () => {
 
         {filteredTerms.length === 0 && (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyEmoji}></Text>
+            <Ionicons name="search-outline" size={48} color={colors.text.muted} style={{ marginBottom: spacing.md }} />
             <Text style={styles.emptyText}>No terms found</Text>
             <Text style={styles.emptySubtext}>Try a different search</Text>
           </View>
@@ -223,10 +224,6 @@ const styles = StyleSheet.create({
   hero: {
     alignItems: 'center',
     paddingVertical: spacing.lg,
-  },
-  heroEmoji: {
-    fontSize: 48,
-    marginBottom: spacing.sm,
   },
   heroTitle: {
     fontFamily: typography.fonts.bold,
@@ -421,10 +418,6 @@ const styles = StyleSheet.create({
   emptyState: {
     alignItems: 'center',
     paddingVertical: spacing['2xl'],
-  },
-  emptyEmoji: {
-    fontSize: 48,
-    marginBottom: spacing.md,
   },
   emptyText: {
     fontFamily: typography.fonts.bold,

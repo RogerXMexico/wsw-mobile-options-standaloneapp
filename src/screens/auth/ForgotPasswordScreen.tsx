@@ -12,6 +12,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { colors, typography, spacing, borderRadius, layout } from '../../theme';
@@ -45,7 +46,7 @@ const ForgotPasswordScreen: React.FC = () => {
       <SafeAreaView style={styles.container}>
         <View style={styles.successContent}>
           <View style={styles.successIcon}>
-            <Text style={styles.successEmoji}></Text>
+            <Ionicons name="mail-outline" size={48} color="#39ff14" />
           </View>
           <Text style={styles.successTitle}>Check Your Email</Text>
           <Text style={styles.successText}>
@@ -237,9 +238,6 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xl,
     borderWidth: 2,
     borderColor: colors.neon.green,
-  },
-  successEmoji: {
-    fontSize: 40,
   },
   successTitle: {
     ...typography.styles.h3,

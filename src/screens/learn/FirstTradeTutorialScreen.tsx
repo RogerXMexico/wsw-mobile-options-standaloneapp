@@ -13,6 +13,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { GlassCard, GlowButton } from '../../components/ui';
 
@@ -257,7 +258,7 @@ const FirstTradeTutorialScreen: React.FC = () => {
           {/* Warning */}
           {step.warning && (
             <View style={styles.warningBox}>
-              <Text style={styles.warningEmoji}></Text>
+              <Ionicons name="warning-outline" size={24} color="#f59e0b" style={{ marginRight: spacing.sm }} />
               <Text style={styles.warningText}>{step.warning}</Text>
             </View>
           )}
@@ -266,7 +267,7 @@ const FirstTradeTutorialScreen: React.FC = () => {
         {/* Quick Reference */}
         {currentStep === TUTORIAL_STEPS.length - 1 && completedSteps.length >= TUTORIAL_STEPS.length - 1 && (
           <GlassCard style={styles.completionCard} withGlow glowColor={colors.neon.green}>
-            <Text style={styles.completionEmoji}></Text>
+            <Ionicons name="checkmark-circle" size={48} color={colors.neon.green} style={{ marginBottom: spacing.md }} />
             <Text style={styles.completionTitle}>You're Ready!</Text>
             <Text style={styles.completionText}>
               You've learned the basics of placing your first options trade. Remember to start small and paper trade first!
@@ -458,10 +459,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(245, 158, 11, 0.3)',
   },
-  warningEmoji: {
-    fontSize: 20,
-    marginRight: spacing.sm,
-  },
   warningText: {
     flex: 1,
     fontFamily: typography.fonts.medium,
@@ -471,10 +468,6 @@ const styles = StyleSheet.create({
   },
   completionCard: {
     alignItems: 'center',
-    marginBottom: spacing.md,
-  },
-  completionEmoji: {
-    fontSize: 56,
     marginBottom: spacing.md,
   },
   completionTitle: {

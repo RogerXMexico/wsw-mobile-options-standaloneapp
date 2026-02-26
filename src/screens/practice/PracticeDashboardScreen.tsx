@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, createNeonGlow } from '../../theme';
 import { APP_CONFIG } from '../../data/constants';
 import { PracticeStackParamList } from '../../navigation/types';
@@ -97,7 +98,7 @@ const PracticeDashboardScreen: React.FC = () => {
             onPress={() => navigation.navigate('PaperTrading')}
           >
             <View style={[styles.actionIcon, { backgroundColor: colors.overlay.neonGreen }]}>
-              <Text style={styles.actionEmoji}></Text>
+              <Ionicons name="bar-chart-outline" size={28} color={colors.neon.green} />
             </View>
             <View style={styles.actionContent}>
               <Text style={styles.actionTitle}>Paper Trading</Text>
@@ -105,7 +106,7 @@ const PracticeDashboardScreen: React.FC = () => {
                 Practice with $10K virtual money
               </Text>
             </View>
-            <Text style={styles.actionChevron}></Text>
+            <Ionicons name="chevron-forward" size={20} color={colors.text.muted} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -113,7 +114,7 @@ const PracticeDashboardScreen: React.FC = () => {
             onPress={() => navigation.navigate('StrategyBuilder')}
           >
             <View style={[styles.actionIcon, { backgroundColor: colors.overlay.neonCyan }]}>
-              <Text style={styles.actionEmoji}></Text>
+              <Ionicons name="construct-outline" size={28} color={colors.neon.green} />
             </View>
             <View style={styles.actionContent}>
               <Text style={styles.actionTitle}>Strategy Builder</Text>
@@ -121,7 +122,7 @@ const PracticeDashboardScreen: React.FC = () => {
                 Build and visualize custom strategies
               </Text>
             </View>
-            <Text style={styles.actionChevron}></Text>
+            <Ionicons name="chevron-forward" size={20} color={colors.text.muted} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -129,7 +130,7 @@ const PracticeDashboardScreen: React.FC = () => {
             onPress={() => navigation.navigate('TradeJournal')}
           >
             <View style={[styles.actionIcon, { backgroundColor: 'rgba(139, 92, 246, 0.1)' }]}>
-              <Text style={styles.actionEmoji}></Text>
+              <Ionicons name="create-outline" size={28} color={colors.neon.green} />
             </View>
             <View style={styles.actionContent}>
               <Text style={styles.actionTitle}>Trade Journal</Text>
@@ -137,7 +138,7 @@ const PracticeDashboardScreen: React.FC = () => {
                 Track and analyze your trades
               </Text>
             </View>
-            <Text style={styles.actionChevron}></Text>
+            <Ionicons name="chevron-forward" size={20} color={colors.text.muted} />
           </TouchableOpacity>
         </View>
 
@@ -145,7 +146,7 @@ const PracticeDashboardScreen: React.FC = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Recent Trades</Text>
           <View style={styles.emptyState}>
-            <Text style={styles.emptyEmoji}></Text>
+            <Ionicons name="albums-outline" size={48} color={colors.text.muted} style={{ marginBottom: spacing.md }} />
             <Text style={styles.emptyTitle}>No trades yet</Text>
             <Text style={styles.emptyText}>
               Start paper trading to see your history here
@@ -296,9 +297,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  actionEmoji: {
-    fontSize: 24,
-  },
   actionContent: {
     flex: 1,
   },
@@ -309,10 +307,6 @@ const styles = StyleSheet.create({
   actionDescription: {
     ...typography.styles.caption,
     color: colors.text.secondary,
-  },
-  actionChevron: {
-    fontSize: 16,
-    color: colors.text.muted,
   },
   section: {
     marginBottom: spacing.lg,
@@ -329,10 +323,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.border.default,
-  },
-  emptyEmoji: {
-    fontSize: 40,
-    marginBottom: spacing.md,
   },
   emptyTitle: {
     ...typography.styles.label,

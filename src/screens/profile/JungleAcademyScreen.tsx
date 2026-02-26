@@ -15,6 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
+import { Ionicons } from '@expo/vector-icons';
 import { GlassCard, GlowButton } from '../../components/ui';
 import { ProfileStackParamList } from '../../navigation/types';
 import { useAuth } from '../../contexts';
@@ -89,7 +90,7 @@ const JungleAcademyScreen: React.FC = () => {
           style={styles.heroGradient}
         >
           <View style={styles.heroContent}>
-            <Text style={styles.heroEmoji}></Text>
+            <Ionicons name="school-outline" size={48} color={colors.neon.green} />
             <Text style={styles.heroTitle}>Jungle Trading Academy</Text>
             <Text style={styles.heroSubtitle}>
               Master options trading with guidance from animal mentors
@@ -179,7 +180,7 @@ const JungleAcademyScreen: React.FC = () => {
                 colors={['rgba(16, 185, 129, 0.2)', 'rgba(16, 185, 129, 0.1)']}
                 style={styles.discoverGradient}
               >
-                <Text style={styles.discoverEmoji}></Text>
+                <Ionicons name="paw-outline" size={32} color="#10b981" />
                 <Text style={styles.discoverTitle}>Discover Your Trading Spirit Animal</Text>
                 <Text style={styles.discoverSubtitle}>
                   Take a quick quiz to find your trading style match
@@ -214,9 +215,11 @@ const JungleAcademyScreen: React.FC = () => {
                 style={[styles.missionItem, mission.completed && styles.missionCompleted]}
               >
                 <View style={[styles.missionIcon, mission.completed && styles.missionIconCompleted]}>
-                  <Text style={styles.missionEmoji}>
-                    {mission.completed ? '' : mission.icon}
-                  </Text>
+                  <Ionicons
+                    name={(mission.completed ? 'checkmark' : mission.icon) as keyof typeof Ionicons.glyphMap}
+                    size={20}
+                    color={mission.completed ? colors.neon.green : colors.text.secondary}
+                  />
                 </View>
                 <View style={styles.missionContent}>
                   <Text style={[styles.missionTitle, mission.completed && styles.missionTitleCompleted]}>
@@ -245,7 +248,7 @@ const JungleAcademyScreen: React.FC = () => {
               colors={['rgba(251, 191, 36, 0.2)', 'rgba(251, 191, 36, 0.05)']}
               style={styles.actionGradient}
             >
-              <Text style={styles.actionEmoji}></Text>
+              <Ionicons name="podium-outline" size={28} color="#fbbf24" />
               <Text style={styles.actionTitle}>Leaderboard</Text>
               <Text style={styles.actionSubtitle}>See top traders</Text>
             </LinearGradient>
@@ -259,7 +262,7 @@ const JungleAcademyScreen: React.FC = () => {
               colors={['rgba(168, 85, 247, 0.2)', 'rgba(168, 85, 247, 0.05)']}
               style={styles.actionGradient}
             >
-              <Text style={styles.actionEmoji}></Text>
+              <Ionicons name="ribbon-outline" size={28} color="#a855f7" />
               <Text style={styles.actionTitle}>Badges</Text>
               <Text style={styles.actionSubtitle}>{mockProgress.badgesEarned.length} earned</Text>
             </LinearGradient>
@@ -273,7 +276,7 @@ const JungleAcademyScreen: React.FC = () => {
               colors={['rgba(59, 130, 246, 0.2)', 'rgba(59, 130, 246, 0.05)']}
               style={styles.actionGradient}
             >
-              <Text style={styles.actionEmoji}></Text>
+              <Ionicons name="people-outline" size={28} color="#3b82f6" />
               <Text style={styles.actionTitle}>Tribes</Text>
               <Text style={styles.actionSubtitle}>{mockProgress.tribeId ? 'View tribe' : 'Join one!'}</Text>
             </LinearGradient>
@@ -287,7 +290,7 @@ const JungleAcademyScreen: React.FC = () => {
               colors={['rgba(16, 185, 129, 0.2)', 'rgba(16, 185, 129, 0.05)']}
               style={styles.actionGradient}
             >
-              <Text style={styles.actionEmoji}></Text>
+              <Ionicons name="flag-outline" size={28} color="#10b981" />
               <Text style={styles.actionTitle}>Missions</Text>
               <Text style={styles.actionSubtitle}>{completedMissions}/5 today</Text>
             </LinearGradient>
@@ -297,7 +300,7 @@ const JungleAcademyScreen: React.FC = () => {
         {/* Streak */}
         <GlassCard style={styles.streakCard}>
           <View style={styles.streakContent}>
-            <Text style={styles.streakEmoji}></Text>
+            <Ionicons name="flame-outline" size={32} color="#f59e0b" />
             <View style={styles.streakInfo}>
               <Text style={styles.streakTitle}>{mockProgress.streak} Day Streak!</Text>
               <Text style={styles.streakSubtitle}>Keep learning to earn bonus XP</Text>
@@ -356,10 +359,6 @@ const styles = StyleSheet.create({
   },
   heroContent: {
     alignItems: 'center',
-  },
-  heroEmoji: {
-    fontSize: 48,
-    marginBottom: spacing.sm,
   },
   heroTitle: {
     fontFamily: typography.fonts.bold,
@@ -559,10 +558,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(16, 185, 129, 0.3)',
     borderRadius: borderRadius.lg,
   },
-  discoverEmoji: {
-    fontSize: 48,
-    marginBottom: spacing.sm,
-  },
   discoverTitle: {
     fontFamily: typography.fonts.bold,
     fontSize: typography.sizes.lg,
@@ -637,9 +632,6 @@ const styles = StyleSheet.create({
   missionIconCompleted: {
     backgroundColor: 'rgba(16, 185, 129, 0.2)',
   },
-  missionEmoji: {
-    fontSize: 20,
-  },
   missionContent: {
     flex: 1,
     marginLeft: spacing.sm,
@@ -692,10 +684,6 @@ const styles = StyleSheet.create({
     borderColor: colors.glass.border,
     borderRadius: borderRadius.lg,
   },
-  actionEmoji: {
-    fontSize: 28,
-    marginBottom: spacing.xs,
-  },
   actionTitle: {
     fontFamily: typography.fonts.semiBold,
     fontSize: typography.sizes.md,
@@ -713,9 +701,6 @@ const styles = StyleSheet.create({
   streakContent: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  streakEmoji: {
-    fontSize: 32,
   },
   streakInfo: {
     flex: 1,

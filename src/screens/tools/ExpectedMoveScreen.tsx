@@ -261,7 +261,7 @@ const ExpectedMoveScreen: React.FC = () => {
         <Text style={styles.sectionTitle}>Move Analysis</Text>
         <View style={styles.resultsGrid}>
           <GlassCard style={styles.resultCard}>
-            <Text style={styles.resultEmoji}></Text>
+            <Ionicons name="analytics-outline" size={24} color={colors.neon.green} style={{ marginBottom: spacing.xs }} />
             <Text style={styles.resultLabel}>1 SD Move</Text>
             <Text style={[styles.resultValue, { color: colors.neon.green }]}>
               {calculations.percentMove1SD.toFixed(1)}%
@@ -270,7 +270,7 @@ const ExpectedMoveScreen: React.FC = () => {
           </GlassCard>
 
           <GlassCard style={styles.resultCard}>
-            <Text style={styles.resultEmoji}></Text>
+            <Ionicons name="swap-horizontal-outline" size={24} color={colors.neon.purple} style={{ marginBottom: spacing.xs }} />
             <Text style={styles.resultLabel}>2 SD Move</Text>
             <Text style={[styles.resultValue, { color: colors.neon.purple }]}>
               {calculations.percentMove2SD.toFixed(1)}%
@@ -279,7 +279,7 @@ const ExpectedMoveScreen: React.FC = () => {
           </GlassCard>
 
           <GlassCard style={styles.resultCard}>
-            <Text style={styles.resultEmoji}></Text>
+            <Ionicons name="trending-up" size={24} color={colors.neon.cyan} style={{ marginBottom: spacing.xs }} />
             <Text style={styles.resultLabel}>Daily Move</Text>
             <Text style={[styles.resultValue, { color: colors.neon.cyan }]}>
               ${calculations.dailyMove.toFixed(2)}
@@ -290,7 +290,7 @@ const ExpectedMoveScreen: React.FC = () => {
           </GlassCard>
 
           <GlassCard style={styles.resultCard}>
-            <Text style={styles.resultEmoji}></Text>
+            <Ionicons name="calendar-outline" size={24} color={colors.neon.yellow} style={{ marginBottom: spacing.xs }} />
             <Text style={styles.resultLabel}>Annual Move</Text>
             <Text style={[styles.resultValue, { color: colors.neon.yellow }]}>
               ${calculations.annualizedMove.toFixed(2)}
@@ -324,7 +324,7 @@ const ExpectedMoveScreen: React.FC = () => {
 
         {/* Info Box */}
         <GlassCard style={styles.infoBox}>
-          <Text style={styles.infoEmoji}></Text>
+          <Ionicons name="information-circle-outline" size={32} color={colors.text.secondary} style={{ marginBottom: spacing.sm }} />
           <Text style={styles.infoTitle}>Expected Move Formula</Text>
           <Text style={styles.infoFormula}>
             EM = Stock Price x IV x {'\u221A'}(Days / 365)
@@ -514,10 +514,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: spacing.md,
   },
-  resultEmoji: {
-    fontSize: 24,
-    marginBottom: spacing.xs,
-  },
   resultLabel: {
     fontFamily: typography.fonts.medium,
     fontSize: typography.sizes.xs,
@@ -567,10 +563,6 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     alignItems: 'center',
-  },
-  infoEmoji: {
-    fontSize: 32,
-    marginBottom: spacing.sm,
   },
   infoTitle: {
     fontFamily: typography.fonts.bold,

@@ -39,7 +39,6 @@ interface IVAnalysis {
   ivPercentile: number;
   interpretation: string;
   strategy: string;
-  emoji: string;
 }
 
 const IVRankToolScreen: React.FC = () => {
@@ -69,28 +68,22 @@ const IVRankToolScreen: React.FC = () => {
 
     let interpretation = '';
     let strategy = '';
-    let emoji = '';
 
     if (ivRank < 20) {
       interpretation = 'IV is very low relative to its 52-week range. Options are cheap.';
       strategy = 'Consider buying options (long calls, long puts, straddles). Premium is discounted.';
-      emoji = '';
     } else if (ivRank < 40) {
       interpretation = 'IV is below average. Options are relatively inexpensive.';
       strategy = 'Lean towards buying strategies. Good time for debit spreads.';
-      emoji = '';
     } else if (ivRank < 60) {
       interpretation = 'IV is around its average. Options are fairly priced.';
       strategy = 'Either buying or selling can work. Focus on directional thesis.';
-      emoji = '';
     } else if (ivRank < 80) {
       interpretation = 'IV is elevated. Options are expensive.';
       strategy = 'Lean towards selling premium. Credit spreads and iron condors favored.';
-      emoji = '';
     } else {
       interpretation = 'IV is very high. Options are expensive. Fear is elevated.';
       strategy = 'Strong edge in selling premium. Be aware of potential large moves.';
-      emoji = '';
     }
 
     return {
@@ -98,7 +91,6 @@ const IVRankToolScreen: React.FC = () => {
       ivPercentile: Math.max(0, Math.min(100, ivPercentile)),
       interpretation,
       strategy,
-      emoji,
     };
   }, [ivValues]);
 
@@ -152,7 +144,12 @@ const IVRankToolScreen: React.FC = () => {
           <Text style={styles.mainLabel}>
             {mode === 'presets' ? selectedStock.symbol : 'Custom'} IV Rank
           </Text>
-          <Text style={styles.mainEmoji}>{analysis.emoji}</Text>
+          <Ionicons
+            name={analysis.ivRank < 30 ? 'trending-down' : analysis.ivRank < 70 ? 'swap-horizontal-outline' : 'trending-up'}
+            size={40}
+            color={getIVRankColor(analysis.ivRank)}
+            style={{ marginBottom: spacing.xs }}
+          />
           <Text style={[styles.mainValue, { color: getIVRankColor(analysis.ivRank) }]}>
             {analysis.ivRank.toFixed(0)}%
           </Text>
@@ -356,7 +353,7 @@ const IVRankToolScreen: React.FC = () => {
 
         {/* Info Box */}
         <GlassCard style={styles.infoBox}>
-          <Text style={styles.infoEmoji}></Text>
+          <Ionicons name="information-circle-outline" size={32} color={colors.text.secondary} style={{ marginBottom: spacing.sm }} />
           <Text style={styles.infoTitle}>IV Rank vs IV Percentile</Text>
           <Text style={styles.infoText}>
             <Text style={styles.infoBold}>IV Rank</Text> shows where current IV sits in the 52-week high/low range.{'\n\n'}
@@ -413,10 +410,6 @@ const styles = StyleSheet.create({
     fontFamily: typography.fonts.medium,
     fontSize: typography.sizes.sm,
     color: colors.text.muted,
-    marginBottom: spacing.xs,
-  },
-  mainEmoji: {
-    fontSize: 40,
     marginBottom: spacing.xs,
   },
   mainValue: {
@@ -660,10 +653,6 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     alignItems: 'center',
-  },
-  infoEmoji: {
-    fontSize: 32,
-    marginBottom: spacing.sm,
   },
   infoTitle: {
     fontFamily: typography.fonts.bold,

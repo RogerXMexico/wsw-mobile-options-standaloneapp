@@ -16,7 +16,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
-import { InlineIcon } from '../../components/ui/InlineIcon';
 
 const { width, height } = Dimensions.get('window');
 
@@ -178,12 +177,9 @@ const SpiritAnimalScreen: React.FC<Props> = ({ onComplete, onBack }) => {
             />
           </View>
 
-          <View style={styles.resultAnimalNameRow}>
-            <InlineIcon name={selectedData.animal} size={28} />
-            <Text style={[styles.resultAnimalName, { color: selectedData.color }]}>
-              {selectedData.animalName}
-            </Text>
-          </View>
+          <Text style={[styles.resultAnimalName, { color: selectedData.color, marginTop: spacing.lg }]}>
+            {selectedData.animalName}
+          </Text>
 
           <Text style={styles.resultPhilosophy}>
             "{selectedData.philosophy}"
@@ -267,7 +263,6 @@ const SpiritAnimalScreen: React.FC<Props> = ({ onComplete, onBack }) => {
                 <Text style={styles.optionDescription}>{level.description}</Text>
               </View>
               <View style={styles.optionRight}>
-                <InlineIcon name={level.animal} size={24} />
                 {selectedLevel === level.id && (
                   <View style={[styles.checkmark, { backgroundColor: level.color }]}>
                     <Ionicons name="checkmark" size={12} color="#fff" />
@@ -396,12 +391,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   checkmark: {
-    position: 'absolute',
-    bottom: -5,
-    right: -5,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -462,12 +454,6 @@ const styles = StyleSheet.create({
   resultAnimalImage: {
     width: '100%',
     height: '100%',
-  },
-  resultAnimalNameRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    marginTop: spacing.lg,
   },
   resultAnimalName: {
     ...typography.styles.h2,
