@@ -14,12 +14,21 @@ export interface UserProgress {
   completedStrategies: string[];
 }
 
+export interface DailyLimits {
+  tradeCount: number;
+  tradeDate: string | null;
+  postCount: number;
+  postDate: string | null;
+}
+
 export interface UserProfile {
   id: string | null;
   email: string | null;
   displayName: string | null;
   avatarAnimal: string;
   subscriptionTier: 'free' | 'premium' | 'pro';
+  purchasedTiers: number[];
+  purchasedPacks: string[];
   tribeId: string | null;
   createdAt: string | null;
 }
@@ -63,6 +72,9 @@ interface UserState {
   // Preferences
   preferences: UserPreferences;
 
+  // Daily Limits
+  dailyLimits: DailyLimits;
+
   // Actions - Profile
   setProfile: (profile: Partial<UserProfile>) => void;
   setAuthenticated: (value: boolean) => void;
@@ -78,6 +90,10 @@ interface UserState {
   updateStreak: () => void;
   resetProgress: () => void;
 
+  // Actions - Daily Limits
+  incrementTradeCount: () => boolean;
+  getDailyTradesRemaining: (max: number) => number;
+
   // Actions - Preferences
   setPreference: <K extends keyof UserPreferences>(key: K, value: UserPreferences[K]) => void;
   setNotificationPreference: (key: keyof UserPreferences['notifications'], value: boolean) => void;
@@ -90,8 +106,17 @@ const initialProfile: UserProfile = {
   displayName: null,
   avatarAnimal: 'monkey',
   subscriptionTier: 'free',
+  purchasedTiers: [],
+  purchasedPacks: [],
   tribeId: null,
   createdAt: null,
+};
+
+const initialDailyLimits: DailyLimits = {
+  tradeCount: 0,
+  tradeDate: null,
+  postCount: 0,
+  postDate: null,
 };
 
 const initialProgress: UserProgress = {
@@ -153,6 +178,7 @@ export const useUserStore = create<UserState>()(
       isLoading: true,
       progress: initialProgress,
       preferences: initialPreferences,
+      dailyLimits: initialDailyLimits,
 
       // Profile actions
       setProfile: (profile) =>
@@ -265,6 +291,34 @@ export const useUserStore = create<UserState>()(
 
       resetProgress: () => set({ progress: initialProgress }),
 
+      // Daily Limits actions
+      incrementTradeCount: () => {
+        const today = new Date().toISOString().split('T')[0];
+        const state = get();
+        const limits = state.dailyLimits;
+
+        // Reset if new day
+        if (limits.tradeDate !== today) {
+          set({
+            dailyLimits: { ...limits, tradeCount: 1, tradeDate: today },
+          });
+          return true;
+        }
+
+        // Increment (caller checks against max before calling)
+        set({
+          dailyLimits: { ...limits, tradeCount: limits.tradeCount + 1 },
+        });
+        return true;
+      },
+
+      getDailyTradesRemaining: (max: number) => {
+        const today = new Date().toISOString().split('T')[0];
+        const limits = get().dailyLimits;
+        if (limits.tradeDate !== today) return max;
+        return Math.max(0, max - limits.tradeCount);
+      },
+
       // Preferences actions
       setPreference: (key, value) =>
         set((state) => ({
@@ -292,6 +346,7 @@ export const useUserStore = create<UserState>()(
         isAuthenticated: state.isAuthenticated,
         progress: state.progress,
         preferences: state.preferences,
+        dailyLimits: state.dailyLimits,
       }),
     }
   )

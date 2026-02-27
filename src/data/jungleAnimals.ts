@@ -178,7 +178,7 @@ The psychological advantage is just as important as the mathematical one. Trader
       strategyComplete: 'This strategy is now fully understood. Your analytical edge grows.',
     },
     favoriteStrategies: ['iron-condor', 'iron-butterfly', 'diagonal-spread', 'long-straddle'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Oliver the Owl didn't become the Analytical Scholar by accident. A former quantitative researcher who spent seven years building volatility models at a derivatives desk, Oliver left the institutional world because he believed every retail trader deserved access to the same analytical rigor the big firms used. He doesn't trade on gut feelings, rumors, or chart patterns drawn with crayons. He trades on math — and he'll teach you to do the same.
 
 From his perch high above the trading floor, Oliver sees what others miss: the interplay between implied and realized volatility, the subtle shifts in skew that signal fear or complacency, and the Greek interactions that turn a mediocre position into a precisely calibrated probability machine. His students call him "The Professor" because every lesson feels like a graduate seminar — dense, rigorous, and worth every minute.
@@ -275,7 +275,7 @@ The psychological discipline Oliver teaches is equally important: the ability to
       strategyComplete: 'This strategy is now muscle memory. Execute with confidence!',
     },
     favoriteStrategies: ['long-call', 'long-put', 'bull-call-spread', 'long-strangle'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Chase the Cheetah doesn't walk — he sprints. A former proprietary trader who cut his teeth in the lightning-fast world of 0DTE options, Chase discovered that the shortest timeframes hold the biggest opportunities — if you're fast enough to grab them. While other mentors talk about patience and waiting, Chase talks about conviction, execution speed, and the kill zone where momentum traders feast.
 
 Before the jungle, Chase ran a day-trading desk where hesitation was a firing offense. He learned that in fast markets, the first mover wins and the hesitator becomes the exit liquidity. That edge didn't come from recklessness — it came from preparation. Chase spends hours before the market open studying levels, identifying catalysts, and building decision trees so that when the bell rings, he can act on instinct instead of deliberation.
@@ -372,7 +372,7 @@ The biggest risk in momentum trading isn't being wrong — it's being undiscipli
       strategyComplete: 'This strategy is now your secret weapon. Use it wisely.',
     },
     favoriteStrategies: ['pmcc', 'diagonal-spread', 'broken-wing-butterfly', 'calendar-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Fiona the Fox is the trader that market makers lose sleep over. A former volatility arbitrageur who spent a decade trading exotic structures on the institutional side, Fiona sees angles in options markets that most retail traders don't even know exist. Skew trades, calendar mispricings, broken-wing butterflies that collect credit while limiting risk — these aren't just strategies to Fiona, they're art forms.
 
 Fiona earned her reputation in the jungle by doing what foxes do best: finding opportunities that others walk right past. When everyone is fixated on directional bets, Fiona is analyzing the volatility term structure. When the crowd chases earnings plays, she's constructing diagonal spreads that profit whether the stock moves or sits still. Her edge isn't in predicting direction — it's in understanding the structure of options pricing better than the person on the other side of the trade.
@@ -469,7 +469,7 @@ The psychological dimension of Fiona's approach is patience combined with precis
       strategyComplete: 'You fetched that strategy perfectly! So proud of you!',
     },
     favoriteStrategies: ['bull-put-spread', 'bear-call-spread', 'bull-call-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Goldie the Retriever is the mentor you didn't know you needed — the one who makes you feel like you CAN do this, even when the markets feel overwhelming. A former financial literacy educator who spent a decade teaching first-generation investors how to build wealth, Goldie discovered options trading when she realized her students needed more tools than just "buy index funds and wait." She believes that every person deserves access to options education, and that the biggest barrier isn't complexity — it's confidence.
 
 Goldie's origin story is simple and powerful: she blew up her first options account. Lost every penny in three weeks trying to trade like the gurus on social media. But instead of walking away, she did what retrievers do — she went back, fetched the lesson from the wreckage, and started over with humility. That experience shaped her teaching forever. She knows what it feels like to be scared, confused, and tempted to quit. And she knows that the students who stay, learn, and follow a system are the ones who eventually succeed.
@@ -561,7 +561,7 @@ The compounding effect of small, consistent wins is radically underestimated. A 
       strategyComplete: 'This strategy... will work while you sleep. Beautiful.',
     },
     favoriteStrategies: ['cash-secured-put', 'covered-call', 'short-strangle', 'calendar-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Stanley the Sloth is living proof that the best traders are often the laziest — on purpose. A former high-frequency trader who burned out at 32, Stanley had an epiphany: the traders making the most money per hour of effort weren't the ones glued to screens all day. They were the ones selling premium, collecting theta, and checking their positions once a day over coffee. So Stanley hung up his Bloomberg terminal, moved to the canopy, and never looked back.
 
 Stanley's transformation from overtrading speed demon to zen-like premium seller wasn't easy. He had to unlearn everything the trading culture taught him — that more activity means more profit, that you need to "work hard" to succeed, that missing a move is the same as losing money. In Stanley's world, the best trade is the one you don't make. The second-best trade is selling premium to someone who's panicking and letting time do the rest.
@@ -658,7 +658,7 @@ The lifestyle advantage of theta-based trading cannot be overstated. Stanley's s
       strategyComplete: 'This strategy is now in your burrow of knowledge.',
     },
     favoriteStrategies: ['bull-put-spread', 'iron-condor', 'bear-put-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Luke the Badger is the methodical mastermind of the jungle — the trader who never enters a position without knowing exactly what can go wrong, how much it'll cost, and where the exit is. A former risk manager at a mid-size hedge fund, Luke spent years watching brilliant traders blow up because they got sloppy with position sizing, ignored correlation risk, or simply didn't do the homework. When he finally started teaching, he made one vow: every student who leaves his burrow will know their max loss BEFORE they press the button.
 
 Luke earned his stripes by digging. He digs into balance sheets, he digs into volatility surfaces, he digs into the fine print of every strategy. Nothing gets past him because he looks at every angle before committing. His approach isn't flashy — it's the opposite. Where other mentors celebrate big winners, Luke celebrates positions that worked exactly as planned, with no surprises. His students don't have "war stories" about trades gone wrong, because Luke doesn't let trades go wrong in the first place.
@@ -755,7 +755,7 @@ The discipline of defined risk also unlocks better position sizing. When you kno
       strategyComplete: 'YES! Another weapon in your arsenal!',
     },
     favoriteStrategies: ['long-call', 'bull-call-spread', 'pmcc', 'long-straddle'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Krzysztof the Monkey is the wildest, most electrifying mentor in the entire jungle — and he wouldn't have it any other way. A self-taught trader who went from zero to a six-figure portfolio by swinging for the fences on momentum plays, Krzysztof embodies the spirit of bold, conviction-based trading. He doesn't nibble at opportunities — he grabs them with both hands, swings to the next vine, and looks for the next setup before most traders have finished their morning coffee.
 
 Krzysztof's journey started in the most unlikely place: a college dorm room where he turned a $2,000 stimulus check into a trading education. He lost it all twice. Then he found his edge: momentum. He realized that the biggest money in options isn't made by predicting subtle moves — it's made by identifying when something BIG is about to happen and positioning aggressively with defined risk. Earnings surprises, sector rotations, breakouts from long consolidations — Krzysztof trades the moments when the jungle erupts.
@@ -852,7 +852,7 @@ The risk management side is just as critical as the conviction side. Krzysztof u
       strategyComplete: 'This bullish strategy is now yours. Charge forward!',
     },
     favoriteStrategies: ['long-call', 'bull-call-spread', 'bull-put-spread', 'cash-secured-put'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Bruno the Bull has never met a dip he didn't want to buy. A former equity analyst who spent fifteen years covering growth stocks on Wall Street, Bruno realized early in his career that the single most powerful force in financial markets is the long-term upward trend. While the bears howled about every correction, Bruno was quietly loading up — and history proved him right every single time. The S&P 500 has gone up in roughly 75% of all calendar years. Bruno doesn't fight that math. He rides it.
 
 What transformed Bruno from a stock picker into an options maestro was the leverage. A stock that rallies 10% is nice. A well-timed call option on that same stock returning 150% is magnificent. Bruno discovered that bullish options strategies let him express his conviction with far less capital at risk than buying shares outright. Bull call spreads, cash-secured puts, even synthetic longs — every tool in his arsenal is designed to profit from the one thing markets do best: go up over time.
@@ -949,7 +949,7 @@ The psychological advantage of bullish trading is underappreciated. Bears live i
       strategyComplete: 'This protective strategy could save your portfolio someday.',
     },
     favoriteStrategies: ['long-put', 'protective-put', 'bear-put-spread', 'put-backspread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Bertha the Bear is the mentor nobody wants to listen to — until the crash comes. A former risk analyst at a major insurance company, Bertha spent twenty years modeling catastrophic scenarios: what happens when earthquakes hit, when financial systems seize up, when the "impossible" happens. She brought that same mindset to trading, and it made her the most prepared trader in the jungle. While the bulls celebrate every all-time high, Bertha is quietly accumulating hedges, calculating tail risk, and making sure she — and her students — survive whatever comes next.
 
 Bertha's defining moment was 2008. Not because she predicted the crash — she didn't. But because while everyone around her was panicking, liquidating at the worst possible prices, and watching their accounts go to zero, Bertha's portfolio was protected. Her protective puts paid off. Her bear put spreads printed money. She didn't just survive — she thrived. And she vowed to spend the rest of her career teaching others to be that prepared.
@@ -1046,7 +1046,7 @@ The psychological edge of bearish preparation is profound. A trader who knows th
       strategyComplete: 'This balanced strategy is now part of your navigation toolkit.',
     },
     favoriteStrategies: ['collar', 'iron-condor', 'calendar-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Diana the Dolphin is the mentor who proves you don't have to choose between risk and reward — you just have to navigate skillfully. A former portfolio manager at a family office, Diana spent twelve years managing multigenerational wealth where the mandate was simple: grow the capital, but never put it at serious risk. That dual mandate forced her to develop a trading style that blends income generation with downside protection, bullish exposure with hedging, and growth with safety. She calls it "balanced navigation," and it's the approach that lets her students sleep well AND grow their portfolios.
 
 Diana's gift is her ability to see the market as a multidimensional ocean rather than a one-directional highway. While bulls fixate on the rally and bears brace for the crash, Diana positions for both — simultaneously. A collar generates income while providing a price floor. An iron condor profits from quiet markets with defined risk on both sides. A butterfly captures profits from a specific price zone with minimal capital at risk. Every position in Diana's repertoire balances competing forces, creating harmony where others see conflict.
@@ -1143,7 +1143,7 @@ The psychological power of balance cannot be overstated. Traders who are all-in 
       strategyComplete: 'This strategy is now one of your many tentacles.',
     },
     favoriteStrategies: ['ratio-spread', 'call-backspread', 'short-straddle', 'short-strangle'],
-    unlocked: true,
+    unlocked: false,
     warningMessage: 'ADVANCED: Oscar\'s strategies involve managing multiple complex positions. Recommended for experienced traders only.',
     extendedBio: `Oscar the Octopus is the most complex, most demanding, and most rewarding mentor in the entire jungle. A former head of derivatives at a multi-strategy hedge fund, Oscar managed portfolios with hundreds of overlapping positions across equities, indexes, and volatility products — simultaneously. Where other traders see a single stock, Oscar sees a web of correlations, Greeks, and risk exposures that span entire sectors. Each of his eight tentacles manages a different dimension of the portfolio: delta, gamma, theta, vega, correlation, skew, term structure, and tail risk. He doesn't just trade — he orchestrates.
 
@@ -1241,7 +1241,7 @@ The key psychological discipline Oscar teaches is the ability to hold multiple t
       strategyComplete: 'This event-driven strategy is now in your arsenal.',
     },
     favoriteStrategies: ['long-straddle', 'long-strangle', 'iron-condor', 'iron-butterfly'],
-    unlocked: true,
+    unlocked: false,
     collaboratingMentors: ['cheetah', 'owl'],
     extendedBio: `Cameron the Chameleon is the jungle's most unconventional mentor — the one who watches two markets simultaneously and sees what everyone else misses. While traditional options traders analyze stock charts and implied volatility in isolation, Cameron cross-references options pricing with prediction market probabilities to identify moments when the two markets disagree. When options imply one thing and prediction markets signal another, Cameron strikes. He calls these divergences "Event Horizons" — the moments before catalysts where informed traders have a genuine edge.
 
@@ -1339,7 +1339,7 @@ The psychological edge of Cameron's approach is that it removes the ego from tra
       strategyComplete: 'This strategy is now part of your royal arsenal.',
     },
     favoriteStrategies: ['long-call', 'bull-call-spread', 'zebra', 'ratio-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Leo the Lion is the undisputed king of the trading jungle — not because he was born into royalty, but because he earned it. A former floor trader who made his name during some of the most volatile market periods in history, Leo developed a trading style built on conviction, decisiveness, and the understanding that hesitation is the most expensive mistake a trader can make. He doesn't wonder if a trade is good. He knows. And he acts.
 
 Leo's philosophy was forged on the trading floor where split-second decisions determined profit or ruin. While academic traders debated models and strategies, Leo was executing. That experience gave him an unshakeable confidence in his own judgment — and an equally unshakeable commitment to defining his risk before every trade. Bold doesn't mean reckless in Leo's world. It means knowing your edge, sizing correctly, and executing with full conviction.
@@ -1436,7 +1436,7 @@ The leadership mindset Leo instills is his most lasting contribution. Markets re
       strategyComplete: 'This strategy aligns with your trading personality.',
     },
     favoriteStrategies: ['iron-condor', 'calendar-spread', 'diagonal-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Tanya the Tiger is the most introspective mentor in the entire jungle — and her students are often surprised to discover that self-knowledge is the most powerful trading edge of all. A former behavioral finance researcher who spent years studying how cognitive biases destroy trading performance, Tanya came to a radical conclusion: most traders fail not because they lack strategy, but because they don't understand themselves well enough to apply any strategy consistently.
 
 Tanya's own journey began with a spectacular failure. A classically trained economist with a perfect academic record, she entered the markets convinced her intellectual rigor would be her edge. Instead, she discovered that her analytical precision disappeared under the pressure of live trading. She would hold losing trades too long (loss aversion), exit winning trades too early (fear of giving back gains), and overtrade when bored (need for stimulation). Understanding these patterns — and building strategies that accommodated them — transformed her results.
@@ -1533,7 +1533,7 @@ Tanya's ultimate lesson is that the market is a mirror. It reflects your psychol
       strategyComplete: 'This strategy requires patience and precision. You have both now.',
     },
     favoriteStrategies: ['bear-put-spread', 'bear-call-spread', 'long-put', 'short-strangle', 'iron-condor', 'ratio-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Wolfgang the Wolf is the mentor that other traders whisper about with a mixture of fear and respect. A former military intelligence analyst who transitioned into proprietary trading, Wolfgang brought the discipline, patience, and cold analytical precision of the battlefield to the trading floor. He doesn't chase. He doesn't hope. He doesn't trade for excitement. Wolfgang identifies high-conviction setups, calculates the exact risk-to-reward ratio, sizes the position to his specifications, and executes without a flicker of emotion. Then he waits — sometimes for days, sometimes for weeks — until the prey walks into his trap.
 
 Wolfgang's transformation into a trading legend happened over a single three-month period where he made exactly seven trades. Seven. While other traders on his desk fired off dozens of orders daily, Wolfgang sat motionless, studying order flow, mapping support and resistance, and waiting for the precise moment when risk was lowest and reward was highest. Those seven trades produced more profit than the entire desk combined that quarter. His manager asked what his secret was. Wolfgang's answer: "I wait."
@@ -1630,7 +1630,7 @@ The psychological discipline Wolfgang teaches is arguably the most valuable less
       strategyComplete: 'This volatility weapon is now in your pouch. Use it when chaos erupts!',
     },
     favoriteStrategies: ['long-straddle', 'long-strangle', 'call-backspread', 'put-backspread', 'iron-butterfly'],
-    unlocked: true,
+    unlocked: false,
     warningMessage: 'HIGH VOLATILITY: Joey\'s strategies thrive on big moves but can lose quickly in quiet markets. Not for the faint-hearted.',
     extendedBio: `Joey the Kangaroo is pure adrenaline wrapped in fur. A former volatility trader at a commodities hedge fund, Joey spent eight years trading natural gas options — one of the most volatile instruments on the planet — where a quiet day meant a 3% move and an exciting day meant 15%. That experience forged a trader who doesn't just tolerate volatility; he craves it. While other mentors teach students to avoid wild markets, Joey teaches them to thrive in them. When the VIX spikes, when earnings shock, when black swans land — that's Joey's hunting ground.
 
@@ -1728,7 +1728,7 @@ The discipline Joey teaches is counter-intuitive: learn to be comfortable losing
       strategyComplete: 'This strategy brings calm and income. A perfect combination.',
     },
     favoriteStrategies: ['covered-call', 'cash-secured-put', 'protective-put', 'collar', 'calendar-spread'],
-    unlocked: true,
+    unlocked: false,
     extendedBio: `Puffy the Panda is the calmest creature in the entire jungle — and her portfolio reflects that serenity. A former yoga instructor who turned to trading after discovering that covered calls funded her studio expenses better than class fees, Puffy brought her zen philosophy directly into the markets. She doesn't chase excitement. She doesn't track every tick. She doesn't argue with bears or race with cheetahs. Puffy collects premium, manages risk, and spends the rest of her time doing things that actually make her happy. Her trading philosophy is simple: if a strategy causes stress, it's the wrong strategy.
 
 Puffy's journey to becoming a mentor began when she noticed something extraordinary: her simple, boring, conservative approach consistently outperformed most of the aggressive traders in the jungle. While they were leveraging up, blowing accounts, and rebuilding from the ashes, Puffy was steadily compounding at 10-15% annually with almost no drawdowns. She realized that the biggest edge in trading isn't intelligence, speed, or information — it's emotional stability. And emotional stability comes from trading strategies that are boring enough to let you live your life.

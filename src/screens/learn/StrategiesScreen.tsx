@@ -18,6 +18,7 @@ import { TIER_INFO } from '../../data/constants';
 import { strategies, strategyCounts, getStrategiesByTierLazy, preloadTier } from '../../data/strategies';
 import { Strategy } from '../../data/types';
 import { useAuth } from '../../contexts';
+import { useSubscription } from '../../hooks';
 import { GlassCard, GlowButton, GradientText, PremiumModal } from '../../components/ui';
 
 type NavigationProp = LearnStackScreenProps<'Strategies'>['navigation'];
@@ -68,17 +69,11 @@ const StrategiesScreen: React.FC = () => {
     return () => { cancelled = true; };
   }, [expandedTier]);
 
-  const subscriptionTier = user?.subscriptionTier || 'free';
-  const freeAccessTiers = [0, 0.5];
+  const { subscriptionTier, isPremium, getTierAccessLevel, canAccessStrategy } = useSubscription();
 
   // Synchronous helper – used for search filtering (needs all strategies)
   const getStrategiesForTier = (tier: number) => {
     return strategies.filter(s => s.tier === tier);
-  };
-
-  const isStrategyLocked = (tier: number) => {
-    if (subscriptionTier === 'premium' || subscriptionTier === 'pro') return false;
-    return !freeAccessTiers.includes(tier);
   };
 
   const getLocalOutlookColor = (outlook: string) => {
@@ -189,7 +184,8 @@ const StrategiesScreen: React.FC = () => {
 
         {filteredTiers.map((tier) => {
           const tierStrategies = getStrategiesForTier(tier.tier);
-          const isLocked = isStrategyLocked(tier.tier);
+          const accessLevel = getTierAccessLevel(tier.tier);
+          const isLocked = accessLevel === 'locked';
           const isExpanded = expandedTier === tier.tier;
 
           if (searchQuery) {
@@ -212,30 +208,36 @@ const StrategiesScreen: React.FC = () => {
                   </View>
                 </View>
                 <View style={styles.strategiesList}>
-                  {filtered.map((strategy) => (
-                    <TouchableOpacity
-                      key={strategy.id}
-                      style={styles.strategyItem}
-                      onPress={() => navigation.navigate('StrategyDetail', { strategyId: strategy.id })}
-                      disabled={isLocked}
-                    >
-                      <View style={styles.strategyLeft}>
-                        <Text style={[styles.strategyName, isLocked && styles.lockedText]}>
-                          {strategy.name}
-                        </Text>
-                        <View style={[styles.outlookBadge, { backgroundColor: `${getLocalOutlookColor(strategy.outlook)}20` }]}>
-                          <Text style={[styles.outlookText, { color: getLocalOutlookColor(strategy.outlook) }]}>
-                            {strategy.outlook}
+                  {filtered.map((strategy) => {
+                    const stratIndex = tierStrategies.findIndex(s => s.id === strategy.id);
+                    const stratLocked = !canAccessStrategy(strategy.id, tier.tier, stratIndex);
+                    return (
+                      <TouchableOpacity
+                        key={strategy.id}
+                        style={styles.strategyItem}
+                        onPress={() => stratLocked
+                          ? setShowPremiumModal(true)
+                          : navigation.navigate('StrategyDetail', { strategyId: strategy.id })
+                        }
+                      >
+                        <View style={styles.strategyLeft}>
+                          <Text style={[styles.strategyName, stratLocked && styles.lockedText]}>
+                            {strategy.name}
                           </Text>
+                          <View style={[styles.outlookBadge, { backgroundColor: `${getLocalOutlookColor(strategy.outlook)}20` }]}>
+                            <Text style={[styles.outlookText, { color: getLocalOutlookColor(strategy.outlook) }]}>
+                              {strategy.outlook}
+                            </Text>
+                          </View>
                         </View>
-                      </View>
-                      {isLocked ? (
-                        <Text style={styles.lockIcon}></Text>
-                      ) : (
-                        <Text style={styles.chevron}></Text>
-                      )}
-                    </TouchableOpacity>
-                  ))}
+                        {stratLocked ? (
+                          <Ionicons name="lock-closed" size={16} color={colors.text.muted} />
+                        ) : (
+                          <Ionicons name="chevron-forward" size={16} color={colors.text.muted} />
+                        )}
+                      </TouchableOpacity>
+                    );
+                  })}
                 </View>
               </GlassCard>
             );
@@ -273,7 +275,7 @@ const StrategiesScreen: React.FC = () => {
                     <View style={styles.tierTitleRow}>
                       <Text style={styles.tierName}>{tier.name}</Text>
                       <Ionicons name="pulse-outline" size={16} color="#8b5cf6" />
-                      {isLocked && <Text style={styles.lockIcon}></Text>}
+                      {isLocked && <Ionicons name="lock-closed" size={14} color={colors.text.muted} />}
                     </View>
                     <Text style={styles.tierDescription}>
                       Prediction markets + options analysis
@@ -311,7 +313,12 @@ const StrategiesScreen: React.FC = () => {
                 <View style={styles.tierInfo}>
                   <View style={styles.tierTitleRow}>
                     <Text style={styles.tierName}>{tier.name}</Text>
-                    {isLocked && <Text style={styles.lockIcon}></Text>}
+                    {accessLevel === 'first-lesson' && (
+                      <View style={styles.firstLessonBadge}>
+                        <Text style={styles.firstLessonBadgeText}>1 FREE LESSON</Text>
+                      </View>
+                    )}
+                    {isLocked && <Ionicons name="lock-closed" size={14} color={colors.text.muted} />}
                   </View>
                   <Text style={styles.tierDescription}>
                     {tierStrategies.length} strategies
@@ -348,26 +355,43 @@ const StrategiesScreen: React.FC = () => {
                     <View style={styles.tierLoadingContainer}>
                       <ActivityIndicator size="small" color={colors.neon.cyan} />
                     </View>
-                  ) : lazyTierStrategies.map((strategy) => (
-                    <TouchableOpacity
-                      key={strategy.id}
-                      style={styles.strategyItem}
-                      onPress={() => navigation.navigate('StrategyDetail', { strategyId: strategy.id })}
-                      disabled={isLocked}
-                    >
-                      <View style={styles.strategyLeft}>
-                        <Text style={[styles.strategyName, isLocked && styles.lockedText]}>
-                          {strategy.name}
-                        </Text>
-                        <View style={[styles.outlookBadge, { backgroundColor: `${getLocalOutlookColor(strategy.outlook)}20` }]}>
-                          <Text style={[styles.outlookText, { color: getLocalOutlookColor(strategy.outlook) }]}>
-                            {strategy.outlook}
-                          </Text>
+                  ) : lazyTierStrategies.map((strategy, index) => {
+                    const stratLocked = !canAccessStrategy(strategy.id, tier.tier, index);
+                    const isFreeLesson = accessLevel === 'first-lesson' && index === 0;
+                    return (
+                      <TouchableOpacity
+                        key={strategy.id}
+                        style={styles.strategyItem}
+                        onPress={() => stratLocked
+                          ? setShowPremiumModal(true)
+                          : navigation.navigate('StrategyDetail', { strategyId: strategy.id })
+                        }
+                      >
+                        <View style={styles.strategyLeft}>
+                          <View style={styles.strategyNameRow}>
+                            <Text style={[styles.strategyName, stratLocked && styles.lockedText]}>
+                              {strategy.name}
+                            </Text>
+                            {isFreeLesson && (
+                              <View style={styles.freeTag}>
+                                <Text style={styles.freeTagText}>FREE</Text>
+                              </View>
+                            )}
+                          </View>
+                          <View style={[styles.outlookBadge, { backgroundColor: `${getLocalOutlookColor(strategy.outlook)}20` }]}>
+                            <Text style={[styles.outlookText, { color: getLocalOutlookColor(strategy.outlook) }]}>
+                              {strategy.outlook}
+                            </Text>
+                          </View>
                         </View>
-                      </View>
-                      <Text style={styles.chevron}></Text>
-                    </TouchableOpacity>
-                  ))}
+                        {stratLocked ? (
+                          <Ionicons name="lock-closed" size={16} color={colors.text.muted} />
+                        ) : (
+                          <Ionicons name="chevron-forward" size={16} color={colors.text.muted} />
+                        )}
+                      </TouchableOpacity>
+                    );
+                  })}
                 </View>
               )}
             </GlassCard>
@@ -378,12 +402,12 @@ const StrategiesScreen: React.FC = () => {
         {subscriptionTier === 'free' && (
           <GlassCard style={styles.upgradeBanner} withGlow glowColor={colors.neon.yellow}>
             <Ionicons name="rocket-outline" size={32} color="#fbbf24" />
-            <Text style={styles.upgradeBannerTitle}>Unlock All Strategies</Text>
+            <Text style={styles.upgradeBannerTitle}>Get Jungle Pass</Text>
             <Text style={styles.upgradeBannerText}>
-              Get access to all {strategyCounts.total}+ strategies, quizzes, and tools
+              Unlock all {strategyCounts.total}+ strategies, tools, mentors & unlimited trading — $9.99/mo or $99.99/yr
             </Text>
             <GlowButton
-              title="Go Premium"
+              title="Get Jungle Pass"
               onPress={() => setShowPremiumModal(true)}
               variant="secondary"
               size="md"
@@ -527,6 +551,37 @@ const styles = StyleSheet.create({
   lockIcon: {
     fontSize: 16,
     color: colors.text.muted,
+  },
+  firstLessonBadge: {
+    backgroundColor: colors.neon.cyan + '20',
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 2,
+    borderRadius: borderRadius.sm,
+    borderWidth: 1,
+    borderColor: colors.neon.cyan + '40',
+  },
+  firstLessonBadgeText: {
+    ...typography.styles.caption,
+    color: colors.neon.cyan,
+    fontWeight: '700',
+    fontSize: 9,
+  },
+  strategyNameRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  freeTag: {
+    backgroundColor: colors.neon.green + '20',
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 1,
+    borderRadius: borderRadius.sm,
+  },
+  freeTagText: {
+    ...typography.styles.caption,
+    color: colors.neon.green,
+    fontWeight: '700',
+    fontSize: 9,
   },
   strategiesList: {
     borderTopWidth: 1,

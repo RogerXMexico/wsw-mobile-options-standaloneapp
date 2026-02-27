@@ -200,60 +200,33 @@ export const getLevelFromXP = (xp: number): { level: number; title: string; prog
   };
 };
 
-// Subscription tiers
-export const SUBSCRIPTION_TIERS = {
-  free: {
-    name: 'Free',
-    price: 0,
-    features: [
-      'Tier 1 & 2 strategies',
-      'Options Vocabulary',
-      'Basic calculators',
-      'Limited paper trading (5 trades/day)',
-      '1 daily mission',
-    ],
-    accessibleTiers: [0, 0.5, 1, 2, 3],
-  },
-  premium: {
-    name: 'Premium',
-    monthlyPrice: 14.99,
-    yearlyPrice: 99.99,
-    features: [
-      'All 90+ strategies',
-      'All tutorials',
-      'All calculators',
-      'Unlimited paper trading',
-      'Real-time market data',
-      'Options screener',
-      'Watchlist with alerts',
-      'Full quiz access',
-      'Unlimited daily missions',
-      'Leaderboard access',
-      'Badge collection',
-    ],
-    accessibleTiers: [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  },
-  pro: {
-    name: 'Pro',
-    monthlyPrice: 29.99,
-    yearlyPrice: 199.99,
-    features: [
-      'Everything in Premium',
-      'AI-powered recommendations',
-      'Advanced 3D visualizations',
-      'Trade journal with analytics',
-      'Priority support',
-      'Early access to new features',
-      'Jungle Tribes (social)',
-      'Social Trading Feed',
-    ],
-    accessibleTiers: [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  },
+// Free tier access rules
+export const FREE_ACCESS = {
+  fullAccessTiers: [0, 0.5] as number[],
+  firstLessonFreeTiers: [1, 2] as number[],
+  maxDailyTradesFree: 2,
+  freeTools: ['greeks', 'position-sizing'] as string[],
+  freeMentorId: 'turtle',
+};
+
+// Jungle Pass pricing (mobile-specific)
+export const JUNGLE_PASS_PRICING = {
+  monthly: { price: 9.99, label: '$9.99/mo' },
+  annual: { price: 99.99, label: '$99.99/yr', savings: 20 },
+};
+
+// A la carte pricing
+export const ALA_CARTE_PRICING = {
+  individualTier: { min: 4.99, max: 9.99 },
+  toolPack: 14.99,
+  mentorPack: 9.99,
+  communityPack: 7.99,
 };
 
 // App configuration
 export const APP_CONFIG = {
   paperTradingStartingBalance: 10000,
+  maxDailyTradesFree: 2,
   maxDailyMissionsFree: 1,
   maxDailyMissionsPremium: 5,
   quizPassingScore: 70, // percentage

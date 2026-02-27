@@ -65,7 +65,7 @@ const StrategyDetailScreen: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<'overview' | 'lesson' | 'walkthrough' | 'setup' | 'greeks'>('overview');
   const [showPremiumModal, setShowPremiumModal] = useState(false);
-  const { isPremium, canAccessTier } = useSubscription();
+  const { isPremium, canAccessStrategy, getStrategyIndexInTier, canAccessMentor } = useSubscription();
 
   // Load strategy data
   const strategy = useMemo(() => getStrategyById(strategyId), [strategyId]);
@@ -110,7 +110,8 @@ const StrategyDetailScreen: React.FC = () => {
   const outlookColor = getOutlookColor(strategy.outlook);
 
   // Check if strategy is locked behind premium
-  const isLocked = strategy.isPremium && !isPremium;
+  const strategyIndex = getStrategyIndexInTier(strategyId, strategy.tier);
+  const isLocked = !canAccessStrategy(strategyId, strategy.tier, strategyIndex);
 
   // Get mentor for this strategy
   const mentor = useMemo(() => getMentorForStrategy(strategyId), [strategyId]);
@@ -248,25 +249,48 @@ const StrategyDetailScreen: React.FC = () => {
           </View>
         )}
 
-        {/* Mentor Card - hidden when locked */}
-        {!isLocked && <View style={[styles.mentorCard, { borderColor: mentor.colors.primary }]}>
-          <Image
-            source={mentorImage}
-            style={styles.mentorAvatar}
-            resizeMode="contain"
-          />
-          <View style={styles.mentorContent}>
-            <View style={styles.mentorHeader}>
-              <InlineIcon emoji={mentor.emoji} size={20} color={mentor.colors.primary} />
-              <Text style={[styles.mentorName, { color: mentor.colors.primary }]}>
-                {mentor.characterName}
-              </Text>
-              <Text style={styles.mentorTitle}>{mentor.name}</Text>
+        {/* Mentor Card - gated by access */}
+        {!isLocked && canAccessMentor(mentor.id) && (
+          <View style={[styles.mentorCard, { borderColor: mentor.colors.primary }]}>
+            <Image
+              source={mentorImage}
+              style={styles.mentorAvatar}
+              resizeMode="contain"
+            />
+            <View style={styles.mentorContent}>
+              <View style={styles.mentorHeader}>
+                <InlineIcon emoji={mentor.emoji} size={20} color={mentor.colors.primary} />
+                <Text style={[styles.mentorName, { color: mentor.colors.primary }]}>
+                  {mentor.characterName}
+                </Text>
+                <Text style={styles.mentorTitle}>{mentor.name}</Text>
+              </View>
+              <Text style={styles.mentorGreeting}>{mentor.dialogues.greeting}</Text>
+              <Text style={styles.mentorCatchphrase}>"{mentor.catchphrase}"</Text>
             </View>
-            <Text style={styles.mentorGreeting}>{mentor.dialogues.greeting}</Text>
-            <Text style={styles.mentorCatchphrase}>"{mentor.catchphrase}"</Text>
           </View>
-        </View>}
+        )}
+        {!isLocked && !canAccessMentor(mentor.id) && (
+          <TouchableOpacity
+            style={[styles.mentorCard, { borderColor: colors.text.muted, opacity: 0.6 }]}
+            onPress={() => setShowPremiumModal(true)}
+          >
+            <View style={[styles.mentorAvatar, { alignItems: 'center', justifyContent: 'center', backgroundColor: colors.background.tertiary }]}>
+              <Ionicons name="lock-closed" size={28} color={colors.text.muted} />
+            </View>
+            <View style={styles.mentorContent}>
+              <View style={styles.mentorHeader}>
+                <InlineIcon emoji={mentor.emoji} size={20} color={colors.text.muted} />
+                <Text style={[styles.mentorName, { color: colors.text.muted }]}>
+                  {mentor.characterName}
+                </Text>
+              </View>
+              <Text style={[styles.mentorGreeting, { color: colors.text.muted }]}>
+                Unlock with Jungle Pass to learn from this mentor
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
 
         {/* Wisdom Quote (if available) */}
         {!isLocked && displayQuote && (

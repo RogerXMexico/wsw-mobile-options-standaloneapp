@@ -14,6 +14,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { useAuth } from '../../contexts';
+import { useSubscription } from '../../hooks';
 import { ToolsStackParamList } from '../../navigation/types';
 import { GlassCard, GlowButton, GradientText, PremiumModal } from '../../components/ui';
 
@@ -31,12 +32,12 @@ const TOOLS: ToolItem[] = [
   { id: 'pop', name: 'POP Calculator', description: 'Probability of profit analysis', icon: 'disc-outline', isPremium: true },
   { id: 'expected-move', name: 'Expected Move', description: 'Calculate implied range', icon: 'trending-up-outline', isPremium: true },
   { id: 'iv-crush', name: 'IV Crush Calculator', description: 'Earnings volatility impact', icon: 'flash-outline', isPremium: true },
-  { id: 'risk-reward', name: 'Risk/Reward Module', description: 'Analyze trade risk profiles', icon: 'scale-outline', isPremium: false },
+  { id: 'risk-reward', name: 'Risk/Reward Module', description: 'Analyze trade risk profiles', icon: 'scale-outline', isPremium: true },
   { id: 'iv-rank', name: 'IV Rank Tool', description: 'Compare volatility levels', icon: 'trending-down-outline', isPremium: true },
   { id: 'screener', name: 'Options Screener', description: 'Find trading opportunities', icon: 'search-outline', isPremium: true },
-  { id: 'watchlist', name: 'Watchlist', description: 'Track your favorites', icon: 'star-outline', isPremium: false },
+  { id: 'watchlist', name: 'Watchlist', description: 'Track your favorites', icon: 'star-outline', isPremium: true },
   { id: '3d-surface', name: 'IV Surface', description: 'Visualize volatility in 3D', icon: 'globe-outline', isPremium: true },
-  { id: 'profit-calculator', name: 'Profit Calculator', description: 'Calculate options P&L', icon: 'calculator-outline', isPremium: false },
+  { id: 'profit-calculator', name: 'Profit Calculator', description: 'Calculate options P&L', icon: 'calculator-outline', isPremium: true },
 ];
 
 type ToolsNavProp = NativeStackNavigationProp<ToolsStackParamList>;
@@ -44,13 +45,13 @@ type ToolsNavProp = NativeStackNavigationProp<ToolsStackParamList>;
 const ToolsDashboardScreen: React.FC = () => {
   const navigation = useNavigation<ToolsNavProp>();
   const { user } = useAuth();
-  const isPremium = user?.subscriptionTier === 'premium' || user?.subscriptionTier === 'pro';
+  const { isPremium, canAccessTool } = useSubscription();
 
   const [showPremiumModal, setShowPremiumModal] = useState(false);
   const [selectedToolName, setSelectedToolName] = useState<string>('');
 
   const handleToolPress = (tool: ToolItem) => {
-    if (tool.isPremium && !isPremium) {
+    if (!canAccessTool(tool.id)) {
       setSelectedToolName(tool.name);
       setShowPremiumModal(true);
       return;
@@ -116,7 +117,7 @@ const ToolsDashboardScreen: React.FC = () => {
         {/* Tools Grid */}
         <View style={styles.toolsGrid}>
           {TOOLS.map((tool) => {
-            const isLocked = tool.isPremium && !isPremium;
+            const isLocked = !canAccessTool(tool.id);
 
             return (
               <TouchableOpacity
@@ -162,10 +163,10 @@ const ToolsDashboardScreen: React.FC = () => {
             <Ionicons name="rocket-outline" size={40} color={colors.neon.cyan} />
             <Text style={styles.upgradeBannerTitle}>Unlock All Tools</Text>
             <Text style={styles.upgradeBannerText}>
-              Get access to real-time data and premium calculators
+              Get Jungle Pass for all calculators, real-time data & premium tools — $9.99/mo
             </Text>
             <GlowButton
-              title="Go Premium"
+              title="Get Jungle Pass"
               onPress={handleGoPremium}
               variant="secondary"
               size="md"

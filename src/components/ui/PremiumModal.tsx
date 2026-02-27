@@ -1,5 +1,5 @@
-// PremiumModal - Modal shown when users try to access premium content
-// Redirects to WallStreetWildlifeOptions.com for payment
+// PremiumModal - Jungle Pass paywall modal
+// Shows when users try to access premium content
 import React from 'react';
 import {
   View,
@@ -12,24 +12,55 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { GlowButton } from './GlowButton';
+import { JUNGLE_PASS_PRICING, ALA_CARTE_PRICING } from '../../data/constants';
 
 const WEBSITE_URL = 'https://WallStreetWildlifeOptions.com/pricing';
+
+export type PremiumModalContext = 'general' | 'tier' | 'tool' | 'mentor';
 
 interface PremiumModalProps {
   visible: boolean;
   onClose: () => void;
   featureName?: string;
+  context?: PremiumModalContext;
+  tierNumber?: number;
 }
+
+const getContextIcon = (context: PremiumModalContext): keyof typeof Ionicons.glyphMap => {
+  switch (context) {
+    case 'tier': return 'book-outline';
+    case 'tool': return 'construct-outline';
+    case 'mentor': return 'paw-outline';
+    default: return 'lock-closed';
+  }
+};
+
+const getContextDescription = (context: PremiumModalContext, featureName: string): string => {
+  switch (context) {
+    case 'tier':
+      return `Unlock ${featureName} and all 90+ strategies, tools, mentors, and unlimited paper trading with Jungle Pass.`;
+    case 'tool':
+      return `${featureName} is a Jungle Pass feature. Get access to all premium calculators, analyzers, and tools.`;
+    case 'mentor':
+      return `Unlock all 16 animal mentors with Jungle Pass. Each mentor offers unique strategies and trading insights.`;
+    default:
+      return `Get full access to all strategies, tools, mentors, and unlimited paper trading with Jungle Pass.`;
+  }
+};
 
 export const PremiumModal: React.FC<PremiumModalProps> = ({
   visible,
   onClose,
   featureName = 'This Feature',
+  context = 'general',
+  tierNumber,
 }) => {
   const handleSubscribe = () => {
     Linking.openURL(WEBSITE_URL);
     onClose();
   };
+
+  const monthlySavings = JUNGLE_PASS_PRICING.annual.savings;
 
   return (
     <Modal
@@ -45,40 +76,62 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
             <Ionicons name="close" size={24} color={colors.text.secondary} />
           </TouchableOpacity>
 
-          {/* Lock icon */}
+          {/* Icon */}
           <View style={styles.iconContainer}>
-            <Ionicons name="lock-closed" size={48} color={colors.neon.green} />
+            <Ionicons name={getContextIcon(context)} size={48} color={colors.neon.green} />
           </View>
 
           {/* Title */}
-          <Text style={styles.title}>Unlock {featureName}</Text>
+          <Text style={styles.title}>
+            {context === 'general' ? 'Get Jungle Pass' : `Unlock ${featureName}`}
+          </Text>
 
           {/* Description */}
           <Text style={styles.description}>
-            Subscribe to Wall Street Wildlife Premium to access {featureName.toLowerCase()}, all 70+ strategies, real-time data, and premium tools.
+            {getContextDescription(context, featureName)}
           </Text>
 
           {/* Pricing */}
-          <View style={styles.pricingRow}>
-            <Text style={styles.price}>$49/mo</Text>
-            <Text style={styles.priceSeparator}>or</Text>
-            <Text style={styles.price}>$470/yr</Text>
-            <View style={styles.saveBadge}>
-              <Text style={styles.saveText}>Save $118</Text>
+          <View style={styles.pricingContainer}>
+            <View style={styles.pricingOption}>
+              <Text style={styles.pricingLabel}>Monthly</Text>
+              <Text style={styles.pricingPrice}>{JUNGLE_PASS_PRICING.monthly.label}</Text>
+            </View>
+            <View style={styles.pricingDivider} />
+            <View style={styles.pricingOption}>
+              <Text style={styles.pricingLabel}>Annual</Text>
+              <Text style={styles.pricingPrice}>{JUNGLE_PASS_PRICING.annual.label}</Text>
+              <View style={styles.saveBadge}>
+                <Text style={styles.saveText}>Save ${monthlySavings}</Text>
+              </View>
             </View>
           </View>
 
+          {/* A la carte option for tier context */}
+          {context === 'tier' && tierNumber !== undefined && (
+            <View style={styles.alaCarteRow}>
+              <Text style={styles.alaCarteText}>
+                Or unlock just this tier for ${ALA_CARTE_PRICING.individualTier.min}–${ALA_CARTE_PRICING.individualTier.max}
+              </Text>
+            </View>
+          )}
+
           {/* Subscribe Button */}
           <GlowButton
-            title="Subscribe on WallStreetWildlifeOptions.com"
+            title="Get Jungle Pass"
             onPress={handleSubscribe}
             variant="primary"
             fullWidth
           />
 
+          {/* Restore purchase */}
+          <TouchableOpacity style={styles.restoreLink}>
+            <Text style={styles.restoreText}>Restore Purchase</Text>
+          </TouchableOpacity>
+
           {/* Note */}
           <Text style={styles.note}>
-            Subscriptions are managed through our website to offer you the best price. Your premium access syncs automatically to this app.
+            Subscriptions managed through our website. Premium access syncs automatically to this app.
           </Text>
         </View>
       </View>
@@ -140,25 +193,41 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: spacing.lg,
   },
-  pricingRow: {
+  pricingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: spacing.lg,
-    gap: spacing.sm,
+    backgroundColor: colors.background.secondary,
+    borderRadius: borderRadius.lg,
+    padding: spacing.md,
+    marginBottom: spacing.md,
+    width: '100%',
   },
-  price: {
-    ...typography.styles.label,
-    color: colors.neon.green,
+  pricingOption: {
+    flex: 1,
+    alignItems: 'center',
   },
-  priceSeparator: {
+  pricingLabel: {
     ...typography.styles.caption,
     color: colors.text.muted,
+    marginBottom: 2,
+  },
+  pricingPrice: {
+    ...typography.styles.label,
+    color: colors.neon.green,
+    fontWeight: '700',
+  },
+  pricingDivider: {
+    width: 1,
+    height: 40,
+    backgroundColor: colors.glass.border,
+    marginHorizontal: spacing.sm,
   },
   saveBadge: {
     backgroundColor: colors.neon.green,
     paddingHorizontal: spacing.sm,
     paddingVertical: 2,
     borderRadius: borderRadius.sm,
+    marginTop: 4,
   },
   saveText: {
     ...typography.styles.caption,
@@ -166,11 +235,28 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 10,
   },
+  alaCarteRow: {
+    marginBottom: spacing.md,
+  },
+  alaCarteText: {
+    ...typography.styles.caption,
+    color: colors.neon.cyan,
+    textAlign: 'center',
+  },
+  restoreLink: {
+    paddingVertical: spacing.sm,
+    marginTop: spacing.xs,
+  },
+  restoreText: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+    textDecorationLine: 'underline',
+  },
   note: {
     ...typography.styles.caption,
     color: colors.text.muted,
     textAlign: 'center',
-    marginTop: spacing.md,
+    marginTop: spacing.sm,
     lineHeight: 16,
   },
 });

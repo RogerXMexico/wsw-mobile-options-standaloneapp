@@ -14,6 +14,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../theme';
+import { useSubscription } from '../../hooks';
+import { useUserStore } from '../../stores';
 
 interface Position {
   id: string;
@@ -41,6 +43,8 @@ interface Trade {
 
 const PaperTradingScreen: React.FC = () => {
   const navigation = useNavigation();
+  const { isPremium, canPlaceTrade, dailyTradesRemaining } = useSubscription();
+  const incrementTradeCount = useUserStore(s => s.incrementTradeCount);
   const [balance, setBalance] = useState(10000);
   const [positions, setPositions] = useState<Position[]>([
     {
@@ -101,6 +105,18 @@ const PaperTradingScreen: React.FC = () => {
       return;
     }
 
+    // Check daily trade limit for free users
+    if (!canPlaceTrade()) {
+      Alert.alert(
+        'Daily Limit Reached',
+        'Free accounts can place 2 trades per day. Upgrade to Jungle Pass for unlimited trading!',
+        [
+          { text: 'OK', style: 'cancel' },
+        ]
+      );
+      return;
+    }
+
     const tradeCost = parseFloat(newTrade.price) * parseInt(newTrade.quantity) * 100;
 
     if (newTrade.side === 'long' && tradeCost > balance) {
@@ -122,6 +138,7 @@ const PaperTradingScreen: React.FC = () => {
 
     setPositions([...positions, position]);
     setBalance(prev => newTrade.side === 'long' ? prev - tradeCost : prev + tradeCost);
+    incrementTradeCount();
     setShowNewTrade(false);
     setNewTrade({
       symbol: '',
@@ -177,10 +194,17 @@ const PaperTradingScreen: React.FC = () => {
         >
           <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text style={styles.headerTitle}>Paper Trading</Text>
           <Text style={styles.headerSubtitle}>Practice with virtual money</Text>
         </View>
+        {!isPremium && (
+          <View style={styles.tradeCounterBadge}>
+            <Text style={styles.tradeCounterText}>
+              {dailyTradesRemaining === Infinity ? '' : `${dailyTradesRemaining} left today`}
+            </Text>
+          </View>
+        )}
       </View>
 
       <ScrollView
@@ -506,6 +530,20 @@ const styles = StyleSheet.create({
   headerSubtitle: {
     ...typography.styles.caption,
     color: colors.text.secondary,
+  },
+  tradeCounterBadge: {
+    backgroundColor: colors.neon.yellow + '20',
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: borderRadius.md,
+    borderWidth: 1,
+    borderColor: colors.neon.yellow + '40',
+  },
+  tradeCounterText: {
+    ...typography.styles.caption,
+    color: colors.neon.yellow,
+    fontWeight: '600',
+    fontSize: 11,
   },
   scrollView: {
     flex: 1,

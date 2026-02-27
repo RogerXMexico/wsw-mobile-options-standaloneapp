@@ -1,6 +1,6 @@
 // Stores - Export all Zustand stores
 export { useUserStore } from './userStore';
-export type { UserProfile, UserProgress, UserPreferences } from './userStore';
+export type { UserProfile, UserProgress, UserPreferences, DailyLimits } from './userStore';
 
 export { useWatchlistStore } from './watchlistStore';
 export type { WatchlistItem, WatchlistAlert } from './watchlistStore';

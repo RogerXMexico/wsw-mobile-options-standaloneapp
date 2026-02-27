@@ -1,4 +1,4 @@
-// Subscription Screen for Wall Street Wildlife Mobile
+// Subscription Screen for Wall Street Wildlife Mobile — Jungle Pass
 import React, { useState } from 'react';
 import {
   View,
@@ -15,6 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { GlassCard, GradientText, GlowButton } from '../../components/ui';
 import { useAuth } from '../../contexts';
+import { JUNGLE_PASS_PRICING, ALA_CARTE_PRICING } from '../../data/constants';
 
 const WEBSITE_PRICING_URL = 'https://WallStreetWildlifeOptions.com/pricing';
 
@@ -37,47 +38,53 @@ const PRICING_OPTIONS: PricingOption[] = [
   {
     id: 'monthly',
     name: 'Monthly',
-    price: '$49',
-    pricePerMonth: '$49',
+    price: `$${JUNGLE_PASS_PRICING.monthly.price}`,
+    pricePerMonth: `$${JUNGLE_PASS_PRICING.monthly.price}`,
     period: '/month',
   },
   {
     id: 'annual',
     name: 'Annual',
-    price: '$470',
-    pricePerMonth: '$39.17',
+    price: `$${JUNGLE_PASS_PRICING.annual.price}`,
+    pricePerMonth: `$${(JUNGLE_PASS_PRICING.annual.price / 12).toFixed(2)}`,
     period: '/year',
-    savings: 'Save $118',
+    savings: `Save $${JUNGLE_PASS_PRICING.annual.savings}`,
     bestValue: true,
   },
 ];
 
 const FREE_FEATURES: PlanFeature[] = [
-  { text: 'Tier 0 & 0.5 strategy lessons', included: true },
-  { text: '5 practice trades per day', included: true },
-  { text: 'Basic quizzes', included: true },
-  { text: 'Community access', included: true },
-  { text: 'All strategy tiers (1-10)', included: false },
-  { text: 'Real-time market data', included: false },
-  { text: 'Advanced calculators & tools', included: false },
-  { text: 'AI Signal Analyzer', included: false },
-  { text: 'Options Flow data', included: false },
+  { text: 'Tier 0 & 0.5 full access', included: true },
+  { text: 'First lesson free in Tiers 1 & 2', included: true },
+  { text: '2 paper trades per day', included: true },
+  { text: 'Greeks calculator & Position sizer', included: true },
+  { text: '1 animal mentor (Turtle)', included: true },
+  { text: 'Community read access', included: true },
+  { text: 'Tiers 3–10 strategies', included: false },
+  { text: 'All premium tools & calculators', included: false },
   { text: 'Unlimited paper trading', included: false },
+  { text: '16 animal mentors', included: false },
 ];
 
 const PREMIUM_FEATURES: PlanFeature[] = [
-  { text: 'All 70+ strategy lessons (Tiers 0-10)', included: true },
+  { text: 'All 90+ strategy lessons (Tiers 0-10)', included: true },
   { text: 'Unlimited paper trading', included: true },
   { text: 'All quizzes, badges & challenges', included: true },
+  { text: 'All calculators & premium tools', included: true },
+  { text: '16 animal mentor guides', included: true },
   { text: 'Real-time market data', included: true },
-  { text: 'All calculators & tools', included: true },
-  { text: 'AI Signal Analyzer', included: true },
-  { text: 'Options Flow data', included: true },
+  { text: 'Options Flow & AI tools', included: true },
   { text: 'Earnings Calendar', included: true },
-  { text: '16 Animal Mentor guides', included: true },
   { text: 'Tribe chat & social trading', included: true },
   { text: 'Challenge Paths', included: true },
-  { text: 'Priority community access', included: true },
+  { text: 'Full community access', included: true },
+];
+
+const ALA_CARTE_ITEMS = [
+  { name: 'Individual Tier', price: `$${ALA_CARTE_PRICING.individualTier.min}–$${ALA_CARTE_PRICING.individualTier.max}`, icon: 'book-outline' as const },
+  { name: 'Tool Pack', price: `$${ALA_CARTE_PRICING.toolPack}`, icon: 'construct-outline' as const },
+  { name: 'Mentor Pack', price: `$${ALA_CARTE_PRICING.mentorPack}`, icon: 'paw-outline' as const },
+  { name: 'Community Pack', price: `$${ALA_CARTE_PRICING.communityPack}`, icon: 'people-outline' as const },
 ];
 
 const SubscriptionScreen: React.FC = () => {
@@ -99,7 +106,7 @@ const SubscriptionScreen: React.FC = () => {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <GradientText style={styles.headerTitle}>Subscription</GradientText>
+        <GradientText style={styles.headerTitle}>Jungle Pass</GradientText>
         <View style={styles.headerSpacer} />
       </View>
 
@@ -112,7 +119,7 @@ const SubscriptionScreen: React.FC = () => {
         <GlassCard style={styles.currentPlanCard} withGlow glowColor={isPremium ? colors.neon.green : colors.text.muted}>
           <Text style={styles.currentPlanLabel}>Current Plan</Text>
           <Text style={[styles.currentPlanName, !isPremium && { color: colors.text.secondary }]}>
-            {isPremium ? 'Premium' : 'Free'}
+            {isPremium ? 'Jungle Pass' : 'Free'}
           </Text>
           {isPremium && (
             <Text style={styles.renewalNote}>
@@ -127,7 +134,7 @@ const SubscriptionScreen: React.FC = () => {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Unlock the Full Jungle</Text>
               <Text style={styles.sectionSubtitle}>
-                Get access to all 70+ strategies, real-time data, and premium tools
+                All 90+ strategies, tools, mentors & unlimited trading
               </Text>
             </View>
 
@@ -206,7 +213,7 @@ const SubscriptionScreen: React.FC = () => {
 
             {/* Subscribe on Web Button */}
             <GlowButton
-              title="Subscribe on WallStreetWildlifeOptions.com"
+              title="Get Jungle Pass"
               onPress={handleSubscribeOnWeb}
               variant="primary"
               fullWidth
@@ -215,22 +222,31 @@ const SubscriptionScreen: React.FC = () => {
 
             <Text style={styles.webOnlyNote}>
               Subscriptions are managed through our website to offer you the best price.
-              Your premium access syncs automatically to this app.
+              Your Jungle Pass syncs automatically to this app.
             </Text>
 
-            {/* Patreon Discount */}
-            <GlassCard style={styles.patreonCard}>
-              <View style={styles.patreonHeader}>
-                <Text style={styles.patreonTitle}>Patreon Members</Text>
-                <View style={styles.discountBadge}>
-                  <Text style={styles.discountText}>30% OFF</Text>
-                </View>
-              </View>
-              <Text style={styles.patreonDescription}>
-                Capybara, Dolphin, Jungle Cat, and Unicorn tier Patreon members
-                get 30% off with an exclusive coupon code. Check your Patreon messages
-                for your discount code.
+            {/* Restore Purchase */}
+            <TouchableOpacity style={styles.restoreLink}>
+              <Text style={styles.restoreLinkText}>Restore Purchase</Text>
+            </TouchableOpacity>
+
+            {/* A La Carte Section */}
+            <View style={[styles.sectionHeader, { marginTop: spacing.lg }]}>
+              <Text style={styles.sectionTitle}>A La Carte</Text>
+              <Text style={styles.sectionSubtitle}>
+                Buy individual tiers or packs
               </Text>
+            </View>
+            <GlassCard style={styles.alaCarteCard}>
+              {ALA_CARTE_ITEMS.map((item, index) => (
+                <View key={index} style={[styles.alaCarteRow, index < ALA_CARTE_ITEMS.length - 1 && styles.alaCarteBorder]}>
+                  <View style={styles.alaCarteLeft}>
+                    <Ionicons name={item.icon} size={20} color={colors.neon.cyan} />
+                    <Text style={styles.alaCarteName}>{item.name}</Text>
+                  </View>
+                  <Text style={styles.alaCartePrice}>{item.price}</Text>
+                </View>
+              ))}
             </GlassCard>
           </>
         )}
@@ -239,7 +255,7 @@ const SubscriptionScreen: React.FC = () => {
           <>
             {/* Premium Features List */}
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Your Premium Features</Text>
+              <Text style={styles.sectionTitle}>Your Jungle Pass Features</Text>
             </View>
 
             <GlassCard style={styles.featuresCard}>
@@ -480,36 +496,43 @@ const styles = StyleSheet.create({
     color: colors.text.muted,
     textAlign: 'center',
     lineHeight: 18,
+    marginBottom: spacing.sm,
+  },
+  restoreLink: {
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+    marginBottom: spacing.md,
+  },
+  restoreLinkText: {
+    ...typography.styles.caption,
+    color: colors.text.muted,
+    textDecorationLine: 'underline',
+  },
+  alaCarteCard: {
     marginBottom: spacing.lg,
   },
-  patreonCard: {
-    marginBottom: spacing.lg,
-  },
-  patreonHeader: {
+  alaCarteRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: spacing.sm,
+    paddingVertical: spacing.sm,
   },
-  patreonTitle: {
-    ...typography.styles.h5,
+  alaCarteBorder: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.glass.border,
+  },
+  alaCarteLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  alaCarteName: {
+    ...typography.styles.body,
+    color: colors.text.primary,
+  },
+  alaCartePrice: {
+    ...typography.styles.label,
     color: colors.neon.cyan,
-  },
-  discountBadge: {
-    backgroundColor: colors.neon.cyan,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: borderRadius.sm,
-  },
-  discountText: {
-    ...typography.styles.caption,
-    color: colors.background.primary,
-    fontWeight: '700',
-  },
-  patreonDescription: {
-    ...typography.styles.bodySm,
-    color: colors.text.secondary,
-    lineHeight: 20,
   },
   featuresCard: {
     marginBottom: spacing.lg,
